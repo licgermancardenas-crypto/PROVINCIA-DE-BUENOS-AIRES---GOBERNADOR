@@ -1,0 +1,34 @@
+# ---------------------------------------------------------------------------
+# Atlas PBA · qué NO entra al control de versiones, y por qué
+# ---------------------------------------------------------------------------
+
+# --- 1 · el dato crudo -------------------------------------------------------
+# Los escrutinios nacionales de la DINE pesan 300 MB-1 GB por elección y varios
+# superan los 100 MB, que es el límite duro de GitHub. Todo es público y se
+# rebaja con `python 02_SCRIPTS/etl/00_descargar_fuentes.py` (ver FUENTES.md).
+01_DATOS/raw/*
+!01_DATOS/raw/.gitkeep
+
+# Intermedios. Los parquets de mesas SÍ se versionan: 57 MB en total, ninguno pasa
+# de 10 MB, y evitan rehacer 15 minutos de filtrado de la DINE.
+01_DATOS/interim/
+
+# --- 2 · material del cliente y datos personales -----------------------------
+ENCUESTAS/
+Contrato*/
+07_PEDIDOS_INFO/solicitante.json
+07_PEDIDOS_INFO/PDF/
+
+# --- 3 · cachés y temporales -------------------------------------------------
+**/__pycache__/
+*.pyc
+_cache_*.json
+_tmp_*
+*.bak
+
+# --- 4 · basura del sistema --------------------------------------------------
+Thumbs.db
+desktop.ini
+.DS_Store
+~$*
+.claude/settings.local.json

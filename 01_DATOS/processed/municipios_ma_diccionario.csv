@@ -1,0 +1,53 @@
+variable,nombre,unidad,formula
+pob,Población,habitantes,
+pob26,Población estimada 2026,habitantes (proyección),
+km2,Superficie,km²,
+dens,Densidad,habitantes por km²,población 2022 ÷ superficie
+agua,Hogares con agua de red,% de los hogares,hogares con agua de red pública ÷ total de hogares × 100
+cloaca,Hogares con cloacas,% de los hogares,hogares con desagüe a red cloacal ÷ total de hogares × 100
+gas,Hogares con gas de red,% de los hogares,hogares con gas de red ÷ total de hogares × 100
+nbi,Hogares con necesidades básicas insatisfechas,% de los hogares,
+tr,Transferencias de la Provincia,pesos corrientes en el año,suma de los 12 meses publicados
+trh,Transferencias de la Provincia por habitante,pesos corrientes por habitante,transferencias provinciales del año ÷ población estimada del mismo año
+cop,Coparticipación sobre el total transferido,% de las transferencias,coparticipación bruta ÷ transferencias provinciales totales × 100
+ffe,Fondo Educativo sobre el total transferido,% de las transferencias,Fondo de Financiamiento Educativo ÷ transferencias provinciales totales × 100
+gtot,Gasto total devengado,pesos corrientes en el año,
+gph,Gasto por habitante,pesos corrientes por habitante,gasto total devengado ÷ población estimada del mismo año
+per,Gasto en personal,% del gasto total,gasto en personal devengado ÷ gasto total devengado × 100
+hcd,Gasto del Concejo Deliberante,% del gasto total,gasto del Honorable Concejo Deliberante devengado ÷ gasto total devengado × 100
+bu,Inversión en bienes de uso (obras y equipamiento),% del gasto total,gasto en bienes de uso devengado ÷ gasto total devengado × 100
+pub,Gasto en publicidad,pesos corrientes en el año,
+deu,Deuda consolidada,pesos corrientes (saldo),
+flo,Deuda flotante,pesos corrientes (saldo),
+res,Resultado financiero,% de los ingresos totales,resultado financiero ÷ ingresos totales × 100
+rpro,Recursos de origen municipal,% de los recursos percibidos,recursos de origen municipal ÷ suma de recursos por origen × 100
+asap,Índice de Transparencia Fiscal (ASAP),puntos de 0 a 100,
+tpun,Semáforo de transparencia (relevamiento propio),puntos de 0 a 100,"promedio de 10 criterios (sí = 1, parcial = 0,5, no = 0) × 100"
+tsem,Semáforo de transparencia,categoría,
+hte,Fallo del Tribunal de Cuentas sobre la rendición,resultado del último ejercicio con fallo,
+htcg,Cargos formulados por el Tribunal de Cuentas,pesos corrientes del fallo (último ejercicio con fallo),
+htm,Multas aplicadas por el Tribunal de Cuentas,pesos corrientes del fallo (último ejercicio con fallo),
+xacu,Transferencias provinciales acumuladas 2010-2022,pesos constantes,Suma 2010-2022 de pba_total_transferencias anual × IPC(mes base) / deflactor(año); deflactor = IPC INDEC promedio anual (2017-2022) empalmado hacia atrás con precios implícitos del PIB (2010-2016).
+xapc,Transferencias acumuladas 2010-2022 por habitante,pesos constantes por habitante,ix_transf_acum_2010_2022_const / promedio de la población censal 2010 y 2022 (solo 2022 si no hay 2010).
+xsin,Hogares sin servicios por millón de pesos recibido,"hogares por millón (promedio cloaca, agua y gas)","Promedio de ix_hog_sin_cloaca_por_millon, ix_hog_sin_agua_por_millon e ix_hog_sin_gas_por_millon."
+xsc,Hogares sin cloaca por millón recibido,hogares por millón de pesos constantes,(hogares 2022 − hogares con desagüe a red cloacal 2022) / (ix_transf_acum_2010_2022_const / 1.000.000).
+xsa,Hogares sin agua de red por millón recibido,hogares por millón de pesos constantes,(hogares 2022 − hogares con agua de red pública 2022) / (ix_transf_acum_2010_2022_const / 1.000.000).
+xsg,Hogares sin gas de red por millón recibido,hogares por millón de pesos constantes,(hogares 2022 − hogares con gas de red para cocinar 2022) / (ix_transf_acum_2010_2022_const / 1.000.000).
+xvc,"Variación de cobertura 2010-2022 (promedio cloaca, agua y gas)",puntos porcentuales,Promedio de las tres variaciones.
+xvt,Variación de cobertura por millón recibido por habitante,puntos por millón de pesos por habitante,ix_var_cob_prom_2010_2022 / (ix_transf_acum_2010_2022_pc_const / 1.000.000).
+xcb,Cierre de la brecha de cobertura por millón recibido por habitante,% de la brecha por millón de pesos por habitante,"Promedio de [variación / (100 − cobertura 2010) × 100] de cloaca, agua y gas / (ix_transf_acum_2010_2022_pc_const / 1.000.000). Corrige el techo: quien ya tenía 98% no puede subir 20 puntos."
+xbu,Obra y equipamiento (bienes de uso),% del gasto total,gasto_bienes_uso_devengado / gasto_total_devengado × 100.
+xbuk,Obra y equipamiento en pesos constantes,pesos constantes,gasto_bienes_uso_devengado × IPC(mes base) / IPC promedio del año.
+xej,Ejecución del gasto sobre el presupuesto vigente,% de lo presupuestado,"gasto_total_devengado / gasto_total_vigente × 100. La base no tiene el presupuesto vigente de bienes de uso, así que la ejecución de obra contra lo presupuestado no se puede calcular partida por partida."
+xpol,"Gasto político (Concejo, conducción ejecutiva y publicidad publicada)",% del gasto total,ix_gasto_politico / gasto_total_devengado × 100.
+xpolk,Gasto político en pesos constantes,pesos constantes,ix_gasto_politico × IPC(mes base) / IPC promedio del año.
+xpolh,Gasto político por habitante,pesos constantes por habitante,ix_gasto_politico_const / poblacion_estimada del año.
+xper,Gasto en personal,% del gasto total,gasto_personal_devengado / gasto_total_devengado × 100.
+xcrp,Crecimiento real del gasto en personal,% frente al año anterior,"(gasto_personal año / gasto_personal año anterior) × (IPC promedio año anterior / IPC promedio año) − 1, × 100."
+xgk,Gasto total en pesos constantes,pesos constantes,gasto_total_devengado × IPC(mes base) / IPC promedio del año.
+xflo,Deuda flotante en pesos constantes,pesos constantes (saldo),deuda_flotante_stock × IPC(mes base) / IPC del mes del saldo.
+xflv,Variación real de la deuda flotante,% en un año,"deuda flotante constante del último saldo / deuda flotante constante del saldo 12 meses antes (o el más cercano entre 9 y 15 meses antes) − 1, × 100."
+xhcg,Cargos del Tribunal de Cuentas por habitante (ejercicios 2020-2024),pesos constantes por habitante,"Suma de htc_cargos_monto de los ejercicios de la ventana, cada uno × IPC(mes base) / deflactor del año del acuerdo del fallo, / poblacion_total 2022."
+xhm,Multas del Tribunal de Cuentas por habitante (ejercicios 2020-2024),pesos constantes por habitante,"Suma de htc_multas_monto de los ejercicios de la ventana, cada uno × IPC(mes base) / deflactor del año del acuerdo del fallo, / poblacion_total 2022."
+xhej,Ejercicios 2020-2024 con fallo publicado,ejercicios,Cantidad de ejercicios de la ventana con htc_estado_rendicion.
+xtrk,Transferencias provinciales 2025 en pesos constantes,pesos constantes,pba_total_transferencias 2025 × IPC(mes base) / IPC promedio 2025.

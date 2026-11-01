@@ -1,0 +1,136 @@
+cod_indec,municipio_nombre,seccion_electoral,conurbano,seccion_id_dine,nombre_dine
+06007,Adolfo Alsina,6,False,1,Adolfo Alsina
+06014,Adolfo Gonzales Chaves,6,False,56,Gonzales Chaves
+06021,Alberti,4,False,2,Alberti
+06028,Almirante Brown,3,True,3,Almirante Brown
+06035,Avellaneda,3,True,4,Avellaneda
+06042,Ayacucho,5,False,5,Ayacucho
+06049,Azul,7,False,6,Azul
+06056,Bahía Blanca,6,False,7,Bahía Blanca
+06063,Balcarce,5,False,8,Balcarce
+06070,Baradero,2,False,9,Baradero
+06077,Arrecifes,2,False,10,Arrecifes
+06084,Benito Juárez,6,False,59,Juárez
+06091,Berazategui,3,False,11,Berazategui
+06098,Berisso,3,False,12,Berisso
+06105,Bolívar,7,False,13,Bolívar
+06112,Bragado,4,False,14,Bragado
+06119,Brandsen,3,False,15,Brandsen
+06126,Campana,1,False,16,Campana
+06134,Cañuelas,3,False,17,Cañuelas
+06140,Capitán Sarmiento,2,False,18,Capitán Sarmiento
+06147,Carlos Casares,4,False,19,Carlos Casares
+06154,Carlos Tejedor,4,False,20,Carlos Tejedor
+06161,Carmen de Areco,2,False,21,Carmen de Areco
+06168,Castelli,5,False,23,Castelli
+06175,Colón,2,False,24,Colón
+06182,Coronel Rosales,6,False,27,Coronel Rosales
+06189,Coronel Dorrego,6,False,25,Coronel Dorrego
+06196,Coronel Pringles,6,False,26,Coronel Pringles
+06203,Coronel Suárez,6,False,28,Coronel Suárez
+06210,Chacabuco,4,False,29,Chacabuco
+06218,Chascomús,5,False,30,Chascomús
+06224,Chivilcoy,4,False,31,Chivilcoy
+06231,Daireaux,6,False,32,Daireaux
+06238,Dolores,5,False,33,Dolores
+06245,Ensenada,3,False,34,Ensenada
+06252,Escobar,1,False,35,Escobar
+06260,Esteban Echeverría,3,True,36,Esteban Echeverría
+06266,Exaltación de la Cruz,2,False,37,Exaltación de la Cruz
+06270,Ezeiza,3,True,132,Ezeiza
+06274,Florencio Varela,3,True,38,Florencio Varela
+06277,Florentino Ameghino,4,False,127,F. Ameghino
+06280,General Alvarado,5,False,39,General Alvarado
+06287,General Alvear,7,False,40,General Alvear
+06294,General Arenales,4,False,41,General Arenales
+06301,General Belgrano,5,False,42,General Belgrano
+06308,General Guido,5,False,43,General Guido
+06315,General Madariaga,5,False,47,General Madariaga
+06322,General La Madrid,6,False,44,General Lamadrid
+06329,General Las Heras,1,False,45,Las Heras
+06336,General Lavalle,5,False,46,General Lavalle
+06343,General Paz,5,False,48,General Paz
+06351,General Pinto,4,False,49,General Pinto
+06357,General Pueyrredón,5,False,50,General Pueyrredón
+06364,General Rodríguez,1,False,51,General Rodríguez
+06371,General San Martín,1,True,52,General San Martín
+06385,General Viamonte,4,False,54,General Viamonte
+06392,General Villegas,4,False,55,General Villegas
+06399,Guaminí,6,False,57,Guamini
+06406,Hipólito Yrigoyen,4,False,58,Hipólito Yrigoyen
+06408,Hurlingham,1,True,134,Hurlingham
+06410,Ituzaingó,1,True,133,Ituzaingo
+06412,José C. Paz,1,True,129,J. C. Paz
+06413,Junín,4,False,60,Junín
+06420,La Costa,5,False,119,La Costa
+06427,La Matanza,3,True,61,Matanza
+06434,Lanús,3,True,62,Lanús
+06441,La Plata,8,False,63,La Plata
+06448,Laprida,6,False,64,Laprida
+06455,Las Flores,5,False,65,Las Flores
+06462,Leandro N. Alem,4,False,66,Leandro N. Alem
+06466,Lezama,5,False,135,Lezama
+06469,Lincoln,4,False,67,Lincoln
+06476,Lobería,5,False,68,Loberia
+06483,Lobos,3,False,69,Lobos
+06490,Lomas de Zamora,3,True,70,Lomas de Zamora
+06497,Luján,1,False,71,Luján
+06505,Magdalena,3,False,72,Magdalena
+06511,Maipú,5,False,73,Maipú
+06515,Malvinas Argentinas,1,True,130,Malvinas Argentinas
+06518,Mar Chiquita,5,False,74,Mar Chiquita
+06525,Marcos Paz,1,False,75,Marcos Paz
+06532,Mercedes,1,False,76,Mercedes
+06539,Merlo,1,True,77,Merlo
+06547,Monte,5,False,78,Monte
+06553,Monte Hermoso,6,False,120,Monte Hermoso
+06560,Moreno,1,True,79,Moreno
+06568,Morón,1,True,80,Morón
+06574,Navarro,1,False,81,Navarro
+06581,Necochea,5,False,82,Necochea
+06588,Nueve de Julio,4,False,83,Nueve de Julio
+06595,Olavarría,7,False,84,Olavarría
+06602,Patagones,6,False,22,Patagones
+06609,Pehuajó,4,False,85,Pehuajó
+06616,Pellegrini,6,False,86,Pellegrini
+06623,Pergamino,2,False,87,Pergamino
+06630,Pila,5,False,88,Pila
+06638,Pilar,1,False,89,Pilar
+06644,Pinamar,5,False,90,Pinamar
+06648,Presidente Perón,3,False,128,Presidente Perón
+06651,Puan,6,False,91,Puan
+06655,Punta Indio,3,False,131,Punta Indio
+06658,Quilmes,3,True,92,Quilmes
+06665,Ramallo,2,False,93,Ramallo
+06672,Rauch,5,False,94,Rauch
+06679,Rivadavia,4,False,95,Rivadavia
+06686,Rojas,2,False,96,Rojas
+06693,Roque Pérez,7,False,97,Roque Pérez
+06700,Saavedra,6,False,98,Saavedra
+06707,Saladillo,7,False,99,Saladillo
+06714,Salto,2,False,101,Salto
+06721,Salliqueló,6,False,100,Salliqueló
+06728,San Andrés de Giles,2,False,102,San Andrés de Giles
+06735,San Antonio de Areco,2,False,103,San Antonio de Areco
+06742,San Cayetano,5,False,104,San Cayetano
+06749,San Fernando,1,True,105,San Fernando
+06756,San Isidro,1,True,106,San Isidro
+06760,San Miguel,1,True,53,San Miguel
+06763,San Nicolás,2,False,107,San Nicolás
+06770,San Pedro,2,False,108,San Pedro
+06778,San Vicente,3,True,109,San Vicente
+06784,Suipacha,1,False,110,Suipacha
+06791,Tandil,5,False,111,Tandil
+06798,Tapalqué,7,False,112,Tapalqué
+06805,Tigre,1,True,113,Tigre
+06812,Tordillo,5,False,116,Tordillo
+06819,Tornquist,6,False,114,Tornquist
+06826,Trenque Lauquen,4,False,115,Trenque Lauquén
+06833,Tres Arroyos,6,False,117,Tres Arroyos
+06840,Tres de Febrero,1,True,118,Tres de Febrero
+06847,Tres Lomas,6,False,126,Tres Lomas
+06854,Veinticinco de Mayo,7,False,121,Veinticinco de Mayo
+06861,Vicente López,1,True,122,Vicente López
+06868,Villa Gesell,5,False,123,Villa Gesell
+06875,Villarino,6,False,124,Villarino
+06882,Zárate,2,False,125,Zárate
