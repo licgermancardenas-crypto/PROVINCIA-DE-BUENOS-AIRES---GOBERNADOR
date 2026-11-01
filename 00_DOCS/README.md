@@ -156,3 +156,67 @@ mediana 3.259 habitantes por circuito, máximo 211.487. **Con `log(pob)` siempre
 **Definiciones a cuidar:** «hacinamiento crítico» es más de 3 personas por cuarto (2,0 % de
 los hogares en el circuito mediano, igual que el componente de NBI). Más de 2 queda como
 `pct_hog_hacinamiento` (13,7 %).
+
+---
+
+## 01-11-2026 · Censos 1991, 2001 y 2010 → circuito (`etl/07`)
+
+**Método.** Cada censo se reparte sobre **sus propios radios** con la misma función que el 2022
+(`repartir`, en `etl/06`): área, entero si ≥ 95 %. No se usan las tablas de conversión del
+INDEC: un solo método para los cuatro censos y ninguna cadena de conversiones que acumule
+error.
+
+**Qué publica el INDEC por radio, y qué no.** 2010 trae sólo el cuestionario básico (37
+variables: sin cobertura de salud, jubilación ni aportes, que fueron por muestra). 2001 trae 81
+y 1991, 24. De ahí sale un juego de **19 indicadores comparables**; lo que cambió de pregunta
+queda NA en ese censo en vez de forzarse:
+
+| Indicador | 1991 | 2001 | 2010 | 2022 |
+|---|---|---|---|---|
+| Población, sexo, edad (0-14, 15-29, 30-44, 45-64, 65+) | ✅ | ✅ | ✅ | ✅ |
+| Cloaca, propietarios | ✅ | ✅ | ✅ | ✅ |
+| Nacidos en otro país | ✅* | — | ✅ | ✅ |
+| Llegó a la universidad, NBI, hacinamiento crítico, computadora, materiales | — | ✅ | ✅ | ✅ |
+| Desocupación | — | ✅** | ✅ | ✅ |
+| Agua de red, gas de red | — | — | ✅ | ✅ |
+| Vivienda rural | — | ✅ | ✅ | ✅ |
+| Villa de emergencia | ✅ | — | — | — |
+
+\* 1991 trae lugar de nacimiento con códigos 1-4 sin etiqueta; 3 y 4 se leen como otro país
+(6,3 %, coherente con 6,0 % en 2010). \*\* Ver trampa 3.
+
+**Controles.**
+- Población: las tablas cierran **exacto** con el total oficial de cada censo (12.594.974 /
+  13.827.203 / 15.625.084). Por partido, contra cifras oficiales: La Matanza 1991 da 1.120.247
+  (oficial 1.121.298), Pilar 2001 232.456 (232.463), Morón 2001 310.295 (309.380). Y los
+  partidos creados en 1994 (José C. Paz, Malvinas Argentinas, San Miguel, Ezeiza, Presidente
+  Perón, Hurlingham, Ituzaingó) **reciben su población de 1991** por geometría.
+- NBI provincial: 13,0 % (2001), 8,2 % (2010), 6,4 % (2022), como lo publicado.
+- Estabilidad: la población de un circuito entre censos consecutivos correlaciona 0,986 /
+  0,994 / 0,991 (circuitos de 500+), y casi ninguno se triplica o cae a un tercio.
+
+**Trampas.**
+1. **En 1991 Buenos Aires es la 02 en las tablas y la 06 en los polígonos.**
+2. **2001 no tiene país de nacimiento por radio**: la variable que el diccionario llama «lugar
+   de nacimiento» (P7) da 5.899 nacidos en otro país en toda la provincia; no es esa pregunta.
+3. **La desocupación del censo 2001 es 32,9 %** en PBA: ese censo la medía muy por encima de la
+   EPH. Sirve para ordenar circuitos dentro de 2001, no para medir el cambio: no se calculan
+   diferencias desde 2001 para ese indicador.
+4. **La población de 1991-2010 incluye viviendas colectivas y la de 2022 por radio no** (ver
+   `etl/06`). El crecimiento 2010-2022 de los partidos con cárceles sale subestimado.
+5. **Capa de radios 2010 corrida.** Comparando el mismo código de radio en 2010 y 2022, la
+   mediana provincial se mueve 97 m, pero en cinco partidos más de 1 km: Tres Lomas (4,9 km),
+   Exaltación de la Cruz (2,7 km), General Rodríguez, Salliqueló y General Alvear. Sus 16
+   circuitos quedan no confiables para 2010-2022. (Con 2001 la prueba no sirve: el INDEC
+   renumeró los radios del Conurbano entre 2001 y 2022.)
+6. **Junín rural en 2010**: las tablas dejan vacíos radios rurales (0701, 0702) y cargan la
+   gente en otros códigos; un circuito rural «tenía» 89,8 % de cloaca en 2010 y 5 % en 2022.
+   Los polígonos coinciden con 2022: es error de la fuente.
+7. **Circuitos chicos inventan cambios.** Con 0 a 200 habitantes, el reparto por área da
+   crecimientos de hasta +25.892 %. Los cambios se anulan con menos de 200 habitantes en
+   alguno de los dos censos, y `cambio_confiable_*` exige 500+: quedan **801 circuitos
+   confiables para 2010-2022, con el 98,3 % de la población**.
+
+Las caídas grandes de cobertura que sobreviven a esos filtros son reales: circuitos que
+crecieron mucho y diluyeron la cobertura con barrios nuevos (La Plata 0463: +84 % de
+población, cloaca de 99 % a 82 %).

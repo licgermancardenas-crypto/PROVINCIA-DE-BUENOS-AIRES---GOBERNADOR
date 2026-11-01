@@ -261,7 +261,13 @@ def control_padron(circ: pd.DataFrame) -> pd.DataFrame:
 # --- 2 · radio -> circuito ---------------------------------------------------------------------
 def reparto_radios() -> tuple[pd.DataFrame, gpd.GeoDataFrame]:
     r = gpd.read_file(f"zip://{RAW / 'geo' / 'radios_2022_pba.zip'}!radios-censales.geojson")
-    r = r.rename(columns={"LINK": "codigo"})[["codigo", "geometry"]].to_crs(AEA)
+    return repartir(r.rename(columns={"LINK": "codigo"})[["codigo", "geometry"]])
+
+
+def repartir(r: gpd.GeoDataFrame) -> tuple[pd.DataFrame, gpd.GeoDataFrame]:
+    """Reparte radios (columna `codigo` + geometría, cualquier censo) entre los circuitos
+    actuales. Lo usan el 06 (2022) y el 07 (2010, 2001, 1991): mismo método para todos."""
+    r = r.to_crs(AEA)
     r["geometry"] = r.geometry.make_valid()
     r = r.dissolve(by="codigo").reset_index()
     r["area_radio"] = r.area
