@@ -27,8 +27,8 @@ desdoblada de septiembre 2025 y la nacional de octubre 2025.
 
 | | Qué | Estado |
 |---|---|---|
-| 2.1 | Censo 2022 por radio (INDEC) → circuito. **Crudo bajado**: 76 variables en conteos por radio | ⬜ ← próximo |
-| 2.2 | Censos 2010, 2001 y 1991 por radio, con las tablas de conversión de radios. **Crudo bajado** | ⬜ |
+| 2.1 | Censo 2022 por radio (INDEC) → circuito: 43 indicadores, validado contra INDEC y padrón | ✅ `etl/06` |
+| 2.2 | Censos 2010, 2001 y 1991 por radio, con las tablas de conversión de radios. **Crudo bajado** | ⬜ ← próximo |
 | 2.3 | Indicadores por municipio de MunicipiosArgentinos.net (fiscal, servicios, control, intendente) | ✅ `etl/03` |
 | 2.4 | RENABAP: barrios populares → circuito (en PBA son ~1.900) | ⬜ |
 | 2.5 | Escuelas (padrón DGCyE) y salud (establecimientos públicos 2025, **bajado**) → circuito | ⬜ |

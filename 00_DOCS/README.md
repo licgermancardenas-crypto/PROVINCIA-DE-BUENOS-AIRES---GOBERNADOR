@@ -113,3 +113,46 @@ radio), más las tablas de conversión de radios entre censos. Para inventariar 
 
 Trampa: el catálogo de Nación publica para 2010 y 2001 la URL `…-2022.zip`, que da 404; el
 archivo real termina en `-2010` / `-2001`. Y en el censo 1991 Buenos Aires es la **02**.
+
+---
+
+## 01-11-2026 · Censo 2022 → circuito (`etl/06`)
+
+**Qué se hizo.** Las tablas del INDEC vienen por radio, en formato largo (radio × variable ×
+categoría × cantidad): 4,4 M de filas para las 32 variables elegidas. DuckDB las agrega sin
+cargar el archivo de personas (540 MB) en memoria. Los 23.901 radios se reparten entre los
+1.146 circuitos por superposición de área: un radio con 95 % o más de su área en un circuito va
+entero; si no, se reparte por área. Resultado: 116 columnas por circuito, 43 indicadores con
+su numerador y denominador en conteos (se pueden volver a sumar a cualquier escala).
+
+**Cuatro controles, los cuatro pasan:**
+
+1. **Claves.** Todos los radios con tabla tienen polígono (21 polígonos sin tabla, vacíos).
+   Población que cae en un circuito de otro partido: 7.809 personas, 0,045 %.
+2. **Contra las cifras publicadas por partido.** Agregados a partido, agua, gas, cloaca y NBI
+   coinciden con los valores del INDEC (correlación 1,000; diferencia máxima 0,63 pp en agua,
+   0,07 pp en NBI). Para cloaca hubo que usar el total de hogares como denominador, como la
+   cifra oficial: la pregunta del desagüe (H18) sólo se hace a hogares con inodoro.
+3. **Contra la población total.** La suma de radios da 0,66 % menos que el INDEC. **Las
+   tablas por radio son sólo viviendas particulares** (`VIVIENDA_TIPOVIVG` tiene una sola
+   categoría): faltan cárceles, geriátricos y cuarteles. Por eso General Alvear da −19,6 % y
+   Magdalena −14,9 % (unidades penales), y Marcos Paz y Olavarría (Sierra Chica), −3 %.
+4. **Contra el padrón — el que importa.** Población de 16+ del censo contra electores nativos
+   de la DINE por circuito. En 2025: razón total 1,005, correlación de logaritmos 0,98, y
+   **98,5 % del padrón en circuitos con razón entre 0,6 y 1,5**. En 2023, 97,0 %. Los que se
+   salen vienen de a pares vecinos (Almirante Brown 0019 con 2,08 y 0020 con 0,55 en 2023): el
+   votante anotado del otro lado del límite. Y circuitos rurales chicos con razón baja, donde
+   la gente del campo vota en el pueblo. Queda una marca por circuito, `calidad_cruce`:
+   886 `ok`, 160 `revisar`, 100 `sin_padron` (circuitos de la capa sin mesas en 2025; 31.604
+   habitantes en total).
+
+**Límites que hay que tener presentes.** El 6,6 % de la población vive en radios partidos
+entre circuitos y se reparte por área, que en el campo es una aproximación (el pueblo puede
+estar todo de un lado). Las tablas son univariadas: «universitarios» es sobre todo el universo
+de la pregunta, no sobre los de 25+, así que la educación queda confundida con la edad del
+circuito y en los modelos la edad va como control. Y la distribución es muy despareja:
+mediana 3.259 habitantes por circuito, máximo 211.487. **Con `log(pob)` siempre.**
+
+**Definiciones a cuidar:** «hacinamiento crítico» es más de 3 personas por cuarto (2,0 % de
+los hogares en el circuito mediano, igual que el componente de NBI). Más de 2 queda como
+`pct_hog_hacinamiento` (13,7 %).

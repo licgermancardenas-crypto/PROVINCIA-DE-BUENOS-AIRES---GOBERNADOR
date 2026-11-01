@@ -31,6 +31,7 @@ python 02_SCRIPTS/etl/02_geo_base.py                     # partidos, secciones, 
 python 02_SCRIPTS/etl/03_municipios_argentinos.py        # indicadores por municipio (secundaria)
 python 02_SCRIPTS/etl/04_inventario_catalogos.py         # inventario de los catálogos CKAN
 python 02_SCRIPTS/etl/05_jep_definitivo_2025.py          # provincial 7-09-2025 por municipio
+python 02_SCRIPTS/etl/06_censo2022_circuitos.py          # censo 2022: radio -> circuito
 ```
 
 `01_DATOS/raw/` **no se versiona** (750 MB: escrutinios de la DINE, cuatro censos por radio).
@@ -46,6 +47,9 @@ Lo derivado sí se versiona, incluidos los parquets de mesas (57 MB).
 | `03_OUTPUTS/tablas/control_dine_pba.csv` | Totales por elección y categoría: mesas, electores, mesas de extranjeros, circuitos |
 | `01_DATOS/processed/jep_2025_municipio*.csv` | Provincial 7-09-2025, definitivo por municipio |
 | `01_DATOS/processed/geo/*.gpkg` | 135 partidos, 8 secciones, 1.146 circuitos |
+| `01_DATOS/processed/censo2022_circuito.csv` | **Censo 2022 por circuito**: 43 indicadores (edad, educación, empleo, salud, migración, NBI, privación, servicios, hacinamiento, conectividad, tenencia) con sus conteos, y `calidad_cruce` contra el padrón |
+| `01_DATOS/processed/censo2022_radio.csv` · `radio_circuito_2022.csv` | Lo mismo por radio, y el reparto radio → circuito con su peso |
+| `01_DATOS/processed/censo2022_radio_conteos.parquet` | Las 32 variables en conteos por radio y categoría, para armar indicadores nuevos |
 | `01_DATOS/processed/municipios_claves.csv` | Código INDEC ↔ `seccion_id` DINE ↔ distrito de la Junta, sección y Conurbano |
 | `01_DATOS/processed/municipios_ma.csv` | 135 municipios × 186 columnas: fiscal, servicios, control, intendente |
 | `01_DATOS/inventario_catalogos.csv` | Todo lo publicado en los catálogos CKAN de PBA y Nación |
