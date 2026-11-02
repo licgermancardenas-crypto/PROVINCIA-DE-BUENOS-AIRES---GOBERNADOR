@@ -76,6 +76,7 @@ entran como parámetro. Legislatura por sección electoral con cociente.
 ## Etapa 5 · Productos
 
 - ✅ Primeras láminas estáticas: `mapas/m01` (5 mapas en `03_OUTPUTS/laminas/`).
+- ✅ Informe 01 de hallazgos, estilo de casa Atlas Analytics: `reportes/r01` (`05_ENTREGABLES/ATLAS_PBA_Hallazgos_2027.pdf`, 11 hojas).
 - ✅ Simulador interactivo 2027: `productos/p01`-`p03` (`03_OUTPUTS/simulador/simulador_2027.html`): el motor `106`-`108` en JavaScript, validado contra Python.
 
 Plataforma web, simulador, informes. Se definen cuando haya resultados.

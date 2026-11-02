@@ -1244,3 +1244,15 @@ composición de las dos cámaras 2027-2029.
 - `p03_armar_simulador.py`: incrusta datos y motor en `simulador_plantilla.html`.
 
 No incluye la movilización diferencial (`109`), aunque el motor JS ya la soporta.
+
+---
+
+## 02-11-2026 · Informe 01 de hallazgos (`reportes/r01`)
+
+`05_ENTREGABLES/ATLAS_PBA_Hallazgos_2027.pdf`, 11 hojas apaisadas con el estilo de casa de Atlas
+Analytics (`reportes/_estilo.py`, copiado del Atlas CABA sin tocar aquel repositorio). Portada, una hoja
+de resumen, método, Conurbano e intendentes, 2023-2025, territorio y voto, el motor (con el gráfico de
+margen por escenario), la lámina de escenarios, Legislatura, lo que no se sostuvo y limitaciones.
+Escenarios y bancas se leen de las tablas del motor; el resto sigue a `HALLAZGOS.md`. El PDF se
+renderiza con Chrome headless desde %TEMP% (la lámina va incrustada) y el script controla que el PDF
+tenga tantas páginas como hojas el HTML.
