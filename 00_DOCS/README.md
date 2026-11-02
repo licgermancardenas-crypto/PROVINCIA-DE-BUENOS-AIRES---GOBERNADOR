@@ -1281,6 +1281,5 @@ foto, logo, situación y enlaces; KPIs y gráficos que filtran el mapa. Revisado
 **Power BI (`p06`).** Proyecto PBIP: modelo TMDL (7 tablas desde los CSV con un parámetro de
 carpeta, 7 relaciones, 30 medidas DAX) y reporte PBIR de 4 páginas y 75 visuales con navegación
 por botones, tema Atlas Analytics, tablas con foto y logo, hipervínculos y mapas de formas sobre un
-TopoJSON propio de los 135 municipios. Los 84 JSON del reporte validan contra los esquemas públicos
-de Microsoft; el TMDL no tiene validador público. Pendiente: abrirlo en Power BI Desktop y cargar el
-TopoJSON en cada mapa de formas (`03_OUTPUTS/powerbi/LEEME_POWERBI.md`).
+TopoJSON propio de los 135 municipios, incrustado en el reporte. Los 85 JSON del reporte validan contra los esquemas públicos
+de Microsoft; el TMDL no tiene validador público. Pendiente: abrirlo en Power BI Desktop para confirmar (`03_OUTPUTS/powerbi/LEEME_POWERBI.md`).

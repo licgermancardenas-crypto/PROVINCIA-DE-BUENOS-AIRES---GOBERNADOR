@@ -36,6 +36,7 @@ NOMBRE = "Atlas_PBA"
 SIMULADOR = "https://claude.ai/artifact/3HHPCqam3Q8GVwhqM8xeRo"
 TABLERO_WEB = "https://claude.ai/artifact/VJCzzRwMbPm95QyWSaX3c9"
 REPO = "https://github.com/licgermancardenas-crypto/PROVINCIA-DE-BUENOS-AIRES---GOBERNADOR"
+MAPA = "pba_municipios.json"  # TopoJSON incrustado en el reporte como recurso ShapeMap
 SCHEMA = "https://developer.microsoft.com/json-schemas/fabric/item/report/definition"
 
 COLOR_ESPACIO = {"PERONISMO": "#29A3F0", "LLA": "#9B4DFF", "LLA_PRO": "#7E57FF", "PRO_JXC": "#F5C518",
@@ -140,7 +141,8 @@ def topojson(dim: pd.DataFrame) -> None:
                 arcs.append(ring)
                 rings.append([len(arcs) - 1])
             out.append(rings)
-        geoms.append({"type": "MultiPolygon", "arcs": out, "properties": {"cod_indec": cod, "municipio": m.municipio_nombre.get(cod, cod)}})
+        geoms.append({"type": "MultiPolygon", "id": cod, "arcs": out,
+                      "properties": {"cod_indec": cod, "municipio": m.municipio_nombre.get(cod, cod)}})
     topo = {"type": "Topology", "objects": {"municipios": {"type": "GeometryCollection", "geometries": geoms}}, "arcs": arcs}
     (DATOS / "pba_municipios.topojson").write_text(json.dumps(topo, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
@@ -419,9 +421,16 @@ def mapa(p: Pagina, nombre, x, y, w, h, leyenda: dict, pares: list[tuple[str, st
     p.add(nombre, "shapeMap", x, y, w, h,
           roles={"Category": [col("dim_municipio", "cod_indec")], "Series": [leyenda],
                  "Tooltips": [col("dim_municipio", "municipio"), col("dim_municipio", "intendente")]},
-          objetos={"dataPoint": colores_por(leyenda, pares),
+          objetos={"shape": [{"properties": {
+                       "map": {"geoJson": {"type": lit("packaged"), "name": lit(MAPA),
+                                           "content": {"expr": {"ResourcePackageItem": {"PackageName": "RegisteredResources",
+                                                                                         "PackageType": 1, "ItemName": MAPA}}}}},
+                       "projectionEnum": lit("mercator")}}],
+                   "zoom": [{"properties": {"autoZoom": lit(True), "selectionZoom": lit(True), "manualZoom": lit(True)}}],
+                   "dataPoint": colores_por(leyenda, pares),
                    "legend": [{"properties": {"show": lit(True), "position": lit("Bottom"), "labelColor": color("#DCD2EA")}}],
-                   "defaultColors": [{"properties": {"borderColor": color("#0E0324")}}]},
+                   "defaultColors": [{"properties": {"defaultShow": lit(True), "defaultColor": color("#2A1D4A"),
+                                                     "borderColor": color("#0E0324"), "borderThickness": lit(1)}}]},
           contenedor=titulo(tit))
 
 
@@ -467,6 +476,7 @@ def construir_reporte(esquemas: Path | None) -> None:
                             "labels": [{"color": {"solid": {"color": "#F2EBFA"}}}]}},
                 "slicer": {"*": {"items": [{"fontColor": {"solid": {"color": "#F2EBFA"}}, "background": {"solid": {"color": "#220E4A"}}}]}}}}
     (rep / "StaticResources" / "RegisteredResources" / "AtlasAnalytics.json").write_text(json.dumps(tema, indent=2, ensure_ascii=False), encoding="utf-8")
+    shutil.copy2(DATOS / "pba_municipios.topojson", rep / "StaticResources" / "RegisteredResources" / MAPA)
 
     pags = []
     fz_col = col("dim_fuerza", "fuerza_intendente")
@@ -605,7 +615,8 @@ def construir_reporte(esquemas: Path | None) -> None:
         "themeCollection": {"customTheme": {"name": "AtlasAnalytics.json", "reportVersionAtImport": "5.55", "type": "RegisteredResources"}},
         "layoutOptimization": "None",
         "resourcePackages": [{"name": "RegisteredResources", "type": "RegisteredResources",
-                              "items": [{"name": "AtlasAnalytics.json", "path": "AtlasAnalytics.json", "type": "CustomTheme"}]}],
+                              "items": [{"name": "AtlasAnalytics.json", "path": "AtlasAnalytics.json", "type": "CustomTheme"},
+                                        {"name": MAPA, "path": MAPA, "type": "ShapeMap"}]}],
         "settings": {"useStylableVisualContainerHeader": True, "defaultDrillFilterOtherVisuals": True, "allowChangeFilterTypes": True,
                      "useEnhancedTooltips": True}}, indent=2), encoding="utf-8")
     (rep / "definition.pbir").write_text(json.dumps({
@@ -661,17 +672,17 @@ PBIP: modelo en TMDL y reporte en PBIR, todo texto y versionable).
 4. **Actualizar** (Inicio > Actualizar). Los CSV se regeneran con `python 02_SCRIPTS/productos/p04_tablero_datos.py`
    y `p06_powerbi.py`.
 
-## El mapa (una vez por mapa)
+## El mapa
 
-El mapa de municipios usa el visual **Mapa de formas** (Shape map) con un archivo propio, porque
-los mapas de Bing fueron retirados. En cada uno de los tres mapas (páginas Territorio político,
-Elecciones y Escenarios 2027):
+Los tres mapas (Territorio político, Elecciones y Escenarios 2027) usan el visual **Mapa de formas**
+(Shape map), porque los mapas de Bing fueron retirados. El contorno de los 135 municipios ya viene
+**incrustado en el reporte** (`StaticResources/RegisteredResources/pba_municipios.json`, TopoJSON) y
+cada mapa lo usa con la clave `cod_indec`: no hay que cargar nada.
 
-*Formato > Forma del mapa > + Agregar mapa* → elegir `datos/pba_municipios.topojson` → en
-*Ver tipos de mapa* asociar la clave **cod_indec**.
-
-Si el visual no aparece, activar *Opciones > Características en versión preliminar > Objeto visual
-de mapa de formas*.
+- Si el visual aparece en blanco con un aviso, activar *Archivo > Opciones > Características en
+  versión preliminar > Objeto visual de mapa de formas* y reabrir.
+- Si algún mapa no muestra los municipios, cargarlo a mano una vez: *Formato > Forma del mapa >
+  + Agregar mapa* → `datos/pba_municipios.topojson`.
 
 ## Qué tiene
 

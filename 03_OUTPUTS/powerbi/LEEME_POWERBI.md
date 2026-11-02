@@ -14,17 +14,17 @@ PBIP: modelo en TMDL y reporte en PBIR, todo texto y versionable).
 4. **Actualizar** (Inicio > Actualizar). Los CSV se regeneran con `python 02_SCRIPTS/productos/p04_tablero_datos.py`
    y `p06_powerbi.py`.
 
-## El mapa (una vez por mapa)
+## El mapa
 
-El mapa de municipios usa el visual **Mapa de formas** (Shape map) con un archivo propio, porque
-los mapas de Bing fueron retirados. En cada uno de los tres mapas (páginas Territorio político,
-Elecciones y Escenarios 2027):
+Los tres mapas (Territorio político, Elecciones y Escenarios 2027) usan el visual **Mapa de formas**
+(Shape map), porque los mapas de Bing fueron retirados. El contorno de los 135 municipios ya viene
+**incrustado en el reporte** (`StaticResources/RegisteredResources/pba_municipios.json`, TopoJSON) y
+cada mapa lo usa con la clave `cod_indec`: no hay que cargar nada.
 
-*Formato > Forma del mapa > + Agregar mapa* → elegir `datos/pba_municipios.topojson` → en
-*Ver tipos de mapa* asociar la clave **cod_indec**.
-
-Si el visual no aparece, activar *Opciones > Características en versión preliminar > Objeto visual
-de mapa de formas*.
+- Si el visual aparece en blanco con un aviso, activar *Archivo > Opciones > Características en
+  versión preliminar > Objeto visual de mapa de formas* y reabrir.
+- Si algún mapa no muestra los municipios, cargarlo a mano una vez: *Formato > Forma del mapa >
+  + Agregar mapa* → `datos/pba_municipios.topojson`.
 
 ## Qué tiene
 
