@@ -1142,3 +1142,46 @@ Plata, escala, fuente y proyección al pie.
 En la lámina 3 «municipios con 50 % o más» cuenta los municipios donde el peronismo gana en la
 mayoría de las simulaciones (36 si se repite octubre); la mediana de municipios ganados por
 simulación es otra medida (39).
+
+---
+
+## 02-11-2026 · Barrios populares, escuelas y salud por circuito (`etl/11`)
+
+**Fuentes.** RENABAP (info pública 12/2023, ya bajada): 2.065 barrios en PBA con familias y
+viviendas aproximadas, década de creación y servicios. Padrón de establecimientos educativos de la
+DGCyE (catálogo PBA, publicación del 26/10/2026, agregado a `etl/00`): 21.592 registros con
+coordenadas, matrícula, nivel, sector y edificio (CUI). Establecimientos de salud públicos 2025
+(catálogo PBA): 3.052 con coordenadas, dependencia y modalidad.
+
+**Cómo.** Escuelas y salud → circuito por ubicación, con control contra el municipio que declara
+cada registro (los que caen en otro se reubican en el circuito más cercano de su municipio).
+Barrios populares → circuito por superposición de áreas, como el censo. Todo en conteos, agregado
+también por circuito estable (2019-2025 y 2023-2025), con los circuitos absorbidos asignados al que
+los absorbió.
+
+**Controles.**
+
+| | |
+|---|---|
+| Familias RENABAP asignadas | 588.775 de 588.779 |
+| Escuelas en el municipio que declaran | 21.557 de 21.592 (35 reubicadas) |
+| Salud en el municipio que declaran | 2.969 de 3.052 (80 en otro municipio, 3 fuera de la provincia: reubicadas) |
+| Matrícula total | 4,88 M |
+| % hogares en barrios populares contra NBI 2022 (Spearman, por circuito) | +0,63 |
+
+**Primeros números.** El 9,7 % de los hogares de la provincia vive en barrios populares (familias
+RENABAP sobre hogares del censo 2022). Los municipios con más: Presidente Perón 34 %, Berisso
+22 %, Lomas de Zamora 22 %, Esteban Echeverría 21 %, San Vicente 19 %, Moreno 19 %. El 77 % de las
+familias de barrios populares no tiene conexión formal o regular a la red de agua y el 96 % no
+tiene cloaca formal.
+
+**Una trampa evitada.** En la categoría de agua de RENABAP «Conexión irregular a la red» contiene el
+texto «regular»: buscar «regular» marcaba a los irregulares como conectados.
+
+### Locales de votación: no hay fuente abierta
+
+Ni los archivos por mesa de la DINE (ningún año trae el establecimiento) ni los catálogos de PBA o
+de Nación publican el listado de locales de votación de la provincia con domicilio. Con ese
+listado, el padrón escolar ya georreferenciado alcanza para ubicarlos (casi todos son escuelas) y
+bajar el análisis de circuito a escuela. Queda redactado el pedido de acceso a la información a la
+Junta Electoral PBA (Ley 12.475) y a la DINE (Ley 27.275): `07_PEDIDOS_INFO/001_locales_de_votacion.md`.

@@ -36,6 +36,7 @@ python 02_SCRIPTS/etl/07_censos_historicos_circuitos.py  # censos 1991, 2001, 20
 python 02_SCRIPTS/etl/08_mapeo_espacios.py              # lista -> espacio político (config/reglas_mapeo.yaml)
 python 02_SCRIPTS/etl/09_panel_armonizado.py             # panel por circuito y por municipio
 python 02_SCRIPTS/etl/10_circuitos_estables.py           # equivalencias de circuitos 2011-2025
+python 02_SCRIPTS/etl/11_capas_territoriales.py         # barrios populares, escuelas y salud -> circuito
 ```
 
 `01_DATOS/raw/` **no se versiona** (750 MB: escrutinios de la DINE, cuatro censos por radio).
@@ -51,6 +52,7 @@ Lo derivado sí se versiona, incluidos los parquets de mesas (57 MB).
 | `01_DATOS/processed/panel_municipio.parquet` | Lo mismo por municipio, con el definitivo de la Provincia (2005-2023, incluye Gobernador 2007) y la Junta 2025 |
 | `01_DATOS/processed/circuitos_equivalencias.csv` · `circuitos_estables_serie.csv` | **Circuitos estables**: cada código de circuito → su CE en cuatro ventanas (2011, 2015, 2019 y 2023 a 2025), y el padrón por CE y año. Polígonos en `geo/circuitos_estables.gpkg` |
 | `03_OUTPUTS/tablas/motor_2027_*.csv` | **Motor 2027**: escenarios de Gobernador con Monte Carlo, por sección, municipio y circuito, y la grilla de margen (`analisis/106`) |
+| `01_DATOS/processed/capas_circuito.csv` · `capas_ce.csv` | **Barrios populares, escuelas y salud** por circuito y circuito estable: % de hogares en barrios populares, matrícula, establecimientos de salud (`etl/11`) |
 | `03_OUTPUTS/laminas/*.png` | **Mapas**: voto 2023, cambio 2023-2025, escenarios 2027 por municipio, secciones 2027 y desdoblamiento (`mapas/m01`) |
 | `00_DOCS/HALLAZGOS.md` | Los hallazgos de los análisis, con estado, script y tabla |
 | `config/mapeo_espacios.csv` · `00_DOCS/mapeo_espacios.md` | Cada lista con su espacio, y las decisiones validadas |

@@ -51,6 +51,7 @@ DINE que ya estén, en lugar de rebajarlos. Sólo lee esa carpeta.
 | `presupuesto/transferencias_municipios_mensual.csv` | Catálogo PBA · Transferencias a municipios | Mensual 2010-07/2026, por fondo |
 | `presupuesto/tributos_descentralizados_anual.csv` | ídem | 2003-2025 |
 | `servicios/salud_establecimientos_2025.csv` | Catálogo PBA · Establecimientos de salud | Públicos, 2025 |
+| `servicios/establecimientos_educativos.csv` | Catálogo PBA · Establecimientos educativos (DGCyE) | 21.592 con coordenadas, matrícula, nivel y sector (publicación 26/10/2026) |
 
 ## Censos (INDEC vía datos.gob.ar)
 

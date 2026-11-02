@@ -30,8 +30,9 @@ desdoblada de septiembre 2025 y la nacional de octubre 2025.
 | 2.1 | Censo 2022 por radio (INDEC) → circuito: 43 indicadores, validado contra INDEC y padrón | ✅ `etl/06` |
 | 2.2 | Censos 2010, 2001 y 1991 → circuitos actuales: 19 indicadores comparables, cambios entre censos con marca de confiabilidad | ✅ `etl/07` |
 | 2.3 | Indicadores por municipio de MunicipiosArgentinos.net (fiscal, servicios, control, intendente) | ✅ `etl/03` |
-| 2.4 | RENABAP: barrios populares → circuito (en PBA son ~1.900) | ⬜ |
-| 2.5 | Escuelas (padrón DGCyE) y salud (establecimientos públicos 2025, **bajado**) → circuito | ⬜ |
+| 2.4 | RENABAP: barrios populares → circuito (2.065 en PBA, 588.779 familias) | ✅ `etl/11` |
+| 2.5 | Escuelas (padrón DGCyE, 21.592 con coordenadas) y salud (3.052 públicos 2025) → circuito | ✅ `etl/11` |
+| 2.5b | Locales de votación geolocalizados (mesa → escuela → radio censal) | ⬜ falta el listado: pedido `07_PEDIDOS_INFO/001` |
 | 2.6 | Presupuesto: transferencias provinciales a municipios por fondo 2010-2026 (**bajado**), tributos descentralizados, PBG por partido (**bajado**) | ⬜ |
 | 2.7 | Delito por partido (SNIC, **bajado**), empleo y salario registrado por partido (SIPA, **bajado**), AUH/planes | ⬜ |
 | 2.8 | Proyecciones de población y padrón 2027 | ⬜ |
