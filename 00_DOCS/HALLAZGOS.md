@@ -47,3 +47,18 @@ estables. Entre paréntesis, intervalo 5-95 por remuestreo de municipios.
 | El voto de LLA-PRO es más JxC que LLA | 54 % viene de Santilli y 45 % de Píparo | DESCRIPTIVO | `102` | ídem |
 | El votante de Píparo fue el que más se abstuvo | 22 % (15-29) no fue a votar, contra 13 % de Kicillof y 3 % de Santilli | PROBADO (ídem) | `102` | ídem |
 | Provincias Unidas es una escisión de JxC | 83 % de su voto viene de Santilli | DESCRIPTIVO | `102` | ídem |
+
+## 4 · El desdoblamiento de 2025
+
+Septiembre (provincial) contra octubre (nacional), 135 municipios. Septiembre llevado a «sólo
+nativos» descontando la parte extranjera estimada.
+
+| Hallazgo | Magnitud | Estado | Script | Tabla |
+|---|---|---|---|---|
+| El padrón extranjero no explica la diferencia | Sacarlo baja a Fuerza Patria de 47,4 % a 46,9 % en septiembre; la brecha con LLA-PRO pasa de 13,6 a 13,3 pp | DESCRIPTIVO | `103` | `desdoblamiento_resumen.csv` |
+| El cambio fue LLA-PRO creciendo, no Fuerza Patria cayendo | LLA-PRO +957.000 votos (2,65 M → 3,61 M); Fuerza Patria −140.000 (3,70 M → 3,56 M); fueron a votar 540.000 nativos más | DESCRIPTIVO | `103` | ídem |
+| LLA-PRO creció con los que en septiembre votaron a terceros | 64 % (56-69) de Provincias Unidas, 51 % (43-56) de otros y 49 % (41-59) de blanco y nulo fueron a LLA-PRO; además 10 % (7-14) de Fuerza Patria | PROBADO (fuera de muestra: 0,90 pp contra 2,07 de la ingenua) | `103` | `desdoblamiento_matriz.csv` |
+| Fuerza Patria cayó donde gobierna un intendente peronista | Cambio en su voto: −1,8 pp del padrón con intendente peronista, +1,2 sin él. Spearman parcial −0,34 controlando composición y zona | PROBADO (q < 0,001, sobrevive sacando los 3 más influyentes) | `103` | `desdoblamiento_correlatos.csv` |
+| LLA-PRO creció más en el interior | Spearman parcial −0,49 con Conurbano (+5,3 pp del padrón en el Conurbano, +9 a +11 en el interior) | PROBADO | `103` | ídem |
+| Donde había voto vecinal en septiembre, en octubre ganaron los dos grandes | Spearman parcial +0,23 (LLA-PRO) y +0,32 (Fuerza Patria) con el voto vecinal a concejales | PROBADO | `103` | ídem |
+| La mayor participación de octubre no fue a LLA-PRO | Cambio de participación contra cambio de LLA-PRO: −0,09 (no pasa); contra Fuerza Patria: +0,31 | PROBADO (la segunda); REFUTADO («los que no votaron en septiembre fueron a Milei») | `103` | ídem |

@@ -1,0 +1,50 @@
+origen,destino,pct_fila,votos,p05,p95
+Fuerza Patria,Fuerza Patria,67.88,2511067.28,62.98,73.51
+Fuerza Patria,LLA-PRO,10.4,384845.76,7.07,13.67
+Fuerza Patria,Provincias Unidas,0.62,23046.19,0.14,1.21
+Fuerza Patria,Izquierda,4.93,182445.26,3.5,6.33
+Fuerza Patria,Otros,6.82,252182.66,4.48,9.33
+Fuerza Patria,Blanco y nulo,2.06,76237.66,0.74,3.03
+Fuerza Patria,No votó,7.29,269551.65,4.01,11.07
+LLA-PRO,Fuerza Patria,0.0,0.0,0.0,0.0
+LLA-PRO,LLA-PRO,87.43,2315757.52,81.08,92.11
+LLA-PRO,Provincias Unidas,5.07,134349.82,3.35,6.06
+LLA-PRO,Izquierda,3.2,84715.65,0.76,5.67
+LLA-PRO,Otros,2.26,59751.91,0.0,5.16
+LLA-PRO,Blanco y nulo,0.53,14160.42,0.0,1.9
+LLA-PRO,No votó,1.51,39879.73,0.0,6.0
+Provincias Unidas,Fuerza Patria,5.62,23987.59,0.0,14.94
+Provincias Unidas,LLA-PRO,64.17,274075.91,56.44,68.58
+Provincias Unidas,Provincias Unidas,3.7,15808.58,1.19,6.89
+Provincias Unidas,Izquierda,0.0,0.0,0.0,0.23
+Provincias Unidas,Otros,5.58,23834.06,1.91,11.57
+Provincias Unidas,Blanco y nulo,7.07,30204.81,5.29,8.29
+Provincias Unidas,No votó,13.86,59187.04,8.69,21.02
+Izquierda,Fuerza Patria,77.66,336310.93,54.18,89.26
+Izquierda,LLA-PRO,0.0,0.0,0.0,0.0
+Izquierda,Provincias Unidas,0.0,0.0,0.0,0.0
+Izquierda,Izquierda,22.34,96741.02,9.0,30.13
+Izquierda,Otros,0.0,0.0,0.0,24.38
+Izquierda,Blanco y nulo,0.0,0.0,0.0,0.0
+Izquierda,No votó,0.0,0.0,0.0,0.0
+Otros,Fuerza Patria,18.38,123394.01,12.75,27.13
+Otros,LLA-PRO,51.1,343042.48,43.18,55.79
+Otros,Provincias Unidas,3.71,24927.01,2.03,4.47
+Otros,Izquierda,2.94,19769.88,0.0,4.58
+Otros,Otros,12.5,83926.99,10.31,17.06
+Otros,Blanco y nulo,6.17,41402.01,4.97,8.36
+Otros,No votó,5.2,34900.62,1.33,10.05
+Blanco y nulo,Fuerza Patria,12.21,72383.73,0.9,20.18
+Blanco y nulo,LLA-PRO,48.91,290085.49,40.7,58.51
+Blanco y nulo,Provincias Unidas,2.41,14280.48,0.6,4.47
+Blanco y nulo,Izquierda,1.94,11487.87,0.0,4.17
+Blanco y nulo,Otros,11.06,65579.03,6.81,19.83
+Blanco y nulo,Blanco y nulo,6.72,39875.96,4.26,8.73
+Blanco y nulo,No votó,16.76,99369.24,8.58,24.17
+No votó,Fuerza Patria,10.14,494270.68,4.7,15.64
+No votó,LLA-PRO,0.0,0.0,0.0,3.2
+No votó,Provincias Unidas,0.0,0.0,0.0,0.32
+No votó,Izquierda,2.96,144372.44,1.18,5.01
+No votó,Otros,5.99,292285.8,2.78,7.95
+No votó,Blanco y nulo,2.33,113640.6,0.78,3.99
+No votó,No votó,78.58,3831878.2,74.11,82.02

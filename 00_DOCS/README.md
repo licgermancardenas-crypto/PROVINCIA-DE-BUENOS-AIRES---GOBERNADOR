@@ -587,3 +587,90 @@ zonas (7,5 % y 28,9 %), dentro del ruido de esa celda.
   proporciones de cada padrón.
 - Octubre, no septiembre: en la provincial de septiembre Fuerza Patria le ganó a LLA-PRO por unos 13 puntos. Eso es
   el análisis de desdoblamiento.
+
+---
+
+## 02-11-2026 · El desdoblamiento: septiembre contra octubre 2025 (`analisis/103`)
+
+**Qué se compara.** La provincial del 7 de septiembre (legisladores; cada municipio vota diputados
+o senadores según su sección) contra Diputados Nacionales del 26 de octubre, **por municipio**:
+septiembre no está por mesa.
+
+**Los dos padrones.** En septiembre votan los extranjeros: 14,38 M de electores contra 13,35 M en
+octubre. La parte extranjera se estimó por municipio: electores = padrón de septiembre − padrón de
+octubre (1,03 M); votantes y reparto = los de las mesas de extranjeros de Gobernador 2023 en ese
+municipio (≈302.000 votantes). Sacándola queda un septiembre «sólo nativos».
+
+### Los resultados
+
+| | Participación | Fuerza Patria | LLA-PRO | Prov. Unidas | Izquierda | Otros |
+|---|---|---|---|---|---|---|
+| Septiembre, bruto | 61,0 | 47,4 | 33,8 | 5,2 | 5,4 | 8,2 |
+| Septiembre, sólo nativos | 63,5 | 46,9 | 33,6 | 5,4 | 5,5 | 8,5 |
+| Octubre | 67,5 | 40,9 | 41,5 | 2,4 | 6,2 | 9,0 |
+
+(% de los positivos; participación sobre el padrón.) **El padrón extranjero no es la explicación**:
+mueve a Fuerza Patria medio punto. En votos (nativos): **LLA-PRO pasó de 2,65 M a 3,61 M
+(+957.000); Fuerza Patria, de 3,70 M a 3,56 M (−140.000)**; votaron 540.000 más. Por zona, LLA-PRO
+ganó 5,4 puntos de los positivos en el Conurbano y 11,3 en el interior.
+
+### La matriz septiembre → octubre (sólo nativos, % de cada origen)
+
+| Sept. → Oct. | Fuerza Patria | LLA-PRO | Prov. Unidas | Izquierda | Otros | Blanco/nulo | No votó |
+|---|---|---|---|---|---|---|---|
+| Fuerza Patria | **67,9** (63-74) | **10,4** (7-14) | 0,6 | 4,9 | 6,8 | 2,1 | 7,3 |
+| LLA-PRO | 0 | **87,4** (81-92) | 5,1 | 3,2 | 2,3 | 0,5 | 1,5 |
+| Provincias Unidas | 5,6 | **64,2** (56-69) | 3,7 | 0 | 5,6 | 7,1 | 13,9 |
+| Izquierda | 77,7 (54-89) | 0 | 0 | 22,3 | 0 | 0 | 0 |
+| Otros | 18,4 | **51,1** (43-56) | 3,7 | 2,9 | 12,5 | 6,2 | 5,2 |
+| Blanco y nulo | 12,2 | **48,9** (41-59) | 2,4 | 1,9 | 11,1 | 6,7 | 16,8 |
+| No votó | 10,1 (5-16) | 0 (0-3) | 0 | 3,0 | 6,0 | 2,3 | 78,6 |
+
+Intervalos: percentiles 5-95 de 300 remuestreos de municipios. Controles: reconstrucción 0,08 %;
+fuera de muestra (5 grupos de municipios) 0,90 pp por categoría contra 2,07 de la predicción
+ingenua, y 6,3 % de votos mal ubicados contra 14,5 %. Las cotas de Duncan-Davis no informan con 135
+municipios (0 a 73-100 %).
+
+**Lectura.** LLA-PRO creció recogiendo lo que en septiembre se había dispersado: dos tercios de
+Provincias Unidas, la mitad de «otros» (vecinales y chicos) y la mitad del blanco, más uno de cada
+diez votantes de Fuerza Patria. Los que se sumaron a votar en octubre no fueron a LLA-PRO. **Celdas
+a tomar con cuidado:** Izquierda → Fuerza Patria (78 %) y No votó → Fuerza Patria (10 %) tienen
+intervalos anchos y pueden estar compensando la pérdida de Fuerza Patria hacia LLA-PRO; con 135
+unidades la matriz no separa bien esos flujos cruzados.
+
+### Dónde cambió (cambio en % del padrón, Spearman parcial descontando universitarios, NBI, mayores de 65 y log población / electores)
+
+| Variable | Cambio LLA-PRO | Cambio Fuerza Patria |
+|---|---|---|
+| Conurbano | **−0,49** | −0,05 |
+| Intendente peronista (2023) | **−0,25** | **−0,34** |
+| Voto vecinal a concejales en septiembre | **+0,23** | **+0,32** |
+| Cambio de participación | −0,09 | **+0,31** |
+| Nacidos en otro país / extranjeros en el padrón | **−0,42 / −0,41** | 0,0 |
+| Universitarios, NBI, mayores de 65 | no pasan | no pasan |
+
+En negrita lo que pasa los tres filtros (Benjamini-Hochberg sobre las 18 pruebas, y mismo signo y
+|ρ| ≥ 0,1 sacando el municipio más influyente y los tres más influyentes).
+
+- **El intendente peronista.** Con la zona también controlada el efecto sigue (−0,34 en Fuerza
+  Patria, −0,22 en LLA-PRO). Con intendente peronista Fuerza Patria perdió 1,8 pp del padrón de
+  septiembre a octubre; sin él, ganó 1,2. **En septiembre, con concejales en la boleta, el aparato
+  municipal le sumó a Fuerza Patria; en octubre no estuvo.** No contradice al `100`: ahí la
+  intendencia no arrastra en la elección *siguiente*; acá el intendente pesa cuando su lista está
+  en la misma boleta.
+- **El vecinalismo.** Donde había listas vecinales fuertes a concejal, ese voto se repartió en
+  octubre entre los dos grandes.
+- **Los extranjeros** van con el Conurbano: con la zona controlada su efecto es el de la zona.
+
+### Lo que no dice
+
+- 135 unidades, todo ecológico; la parte extranjera de septiembre es una estimación (la de 2023
+  aplicada al padrón de 2025).
+- Las categorías no son iguales: legisladores provinciales contra diputados nacionales, con
+  candidatos distintos.
+
+**Para el motor 2027:** la elección de Gobernador lleva intendentes y concejales en la misma
+boleta, como septiembre y no como octubre. La diferencia entre municipios con y sin intendente
+peronista (unos 3 pp del padrón entre una elección y otra) es una medida del peso del aparato
+municipal cuando está en la boleta; es correlacional, no causal, y entra en el motor como
+parámetro con rango, no como dato.

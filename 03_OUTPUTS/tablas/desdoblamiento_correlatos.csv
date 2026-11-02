@@ -1,0 +1,19 @@
+resultado,variable,n,spearman,spearman_parcial,p,sin_1,sin_3,q_bh,pasa
+Cambio LLA-PRO sep -> oct (pp del padrón),Cambio de participación (pp),135,-0.179,-0.087,0.322,-0.067,-0.064,0.446,False
+Cambio LLA-PRO sep -> oct (pp del padrón),Conurbano,135,-0.534,-0.495,0.0,-0.472,-0.465,0.0,True
+Cambio LLA-PRO sep -> oct (pp del padrón),Intendente peronista (2023),135,-0.33,-0.249,0.004,-0.226,-0.222,0.011,True
+Cambio LLA-PRO sep -> oct (pp del padrón),Voto vecinal en concejales de septiembre (%),135,0.216,0.232,0.008,0.206,0.155,0.017,True
+Cambio LLA-PRO sep -> oct (pp del padrón),Universitarios (%),135,-0.004,-0.13,0.136,-0.112,-0.074,0.222,False
+Cambio LLA-PRO sep -> oct (pp del padrón),Hogares con NBI (%),135,-0.307,-0.139,0.111,-0.165,-0.124,0.2,False
+Cambio LLA-PRO sep -> oct (pp del padrón),Mayores de 65 (%),135,0.311,0.156,0.075,0.117,0.066,0.15,False
+Cambio LLA-PRO sep -> oct (pp del padrón),Nacidos en otro país (%),135,-0.508,-0.423,0.0,-0.468,-0.474,0.0,True
+Cambio LLA-PRO sep -> oct (pp del padrón),Extranjeros en el padrón de septiembre (%),135,-0.521,-0.413,0.0,-0.458,-0.406,0.0,True
+Cambio Fuerza Patria sep -> oct (pp del padrón),Cambio de participación (pp),135,0.259,0.307,0.0,0.331,0.378,0.001,True
+Cambio Fuerza Patria sep -> oct (pp del padrón),Conurbano,135,-0.057,-0.049,0.575,-0.026,0.025,0.69,False
+Cambio Fuerza Patria sep -> oct (pp del padrón),Intendente peronista (2023),135,-0.333,-0.338,0.0,-0.361,-0.4,0.0,True
+Cambio Fuerza Patria sep -> oct (pp del padrón),Voto vecinal en concejales de septiembre (%),135,0.33,0.323,0.0,0.347,0.31,0.001,True
+Cambio Fuerza Patria sep -> oct (pp del padrón),Universitarios (%),135,-0.013,-0.029,0.738,-0.053,-0.052,0.781,False
+Cambio Fuerza Patria sep -> oct (pp del padrón),Hogares con NBI (%),135,-0.074,-0.126,0.15,-0.156,-0.102,0.225,False
+Cambio Fuerza Patria sep -> oct (pp del padrón),Mayores de 65 (%),135,0.004,-0.064,0.467,-0.034,-0.031,0.6,False
+Cambio Fuerza Patria sep -> oct (pp del padrón),Nacidos en otro país (%),135,-0.062,-0.014,0.872,0.011,0.01,0.872,False
+Cambio Fuerza Patria sep -> oct (pp del padrón),Extranjeros en el padrón de septiembre (%),135,-0.017,0.031,0.727,0.008,0.006,0.781,False

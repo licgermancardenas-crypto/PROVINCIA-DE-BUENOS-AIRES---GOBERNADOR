@@ -48,8 +48,10 @@ Cada pregunta con su batería, los tres filtros y su tabla. Primeras candidatas:
   provinciales y parejos).
 - ✅ **Retención y transferencia 2023 → 2025** (`analisis/102`): Kicillof → Fuerza Patria 82 %
   (79-84), Santilli → LLA-PRO 77 % (75-79), Píparo → no votó 22 % (15-29).
-- **Desdoblamiento** ← próximo: septiembre contra octubre 2025, mismo año, dos padrones, dos resultados.
-- **Lo que el territorio predice y lo que no**: nivel contra cambio, como en CABA.
+- ✅ **Desdoblamiento** (`analisis/103`): de septiembre a octubre LLA-PRO sumó 957.000 votos y
+  Fuerza Patria perdió 140.000. No es el padrón extranjero (0,5 pp). Fuerza Patria cayó donde
+  gobierna un intendente peronista; LLA-PRO creció en el interior y donde había voto vecinal.
+- **Lo que el territorio predice y lo que no** ← próximo: nivel contra cambio, como en CABA.
 
 ## Etapa 4 · El motor 2027
 
