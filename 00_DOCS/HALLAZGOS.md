@@ -78,3 +78,16 @@ por municipio.
 | 2011-2023: el peronismo cayó más donde más se extendieron el gas y el agua de red | Spearman parcial −0,24 (gas) y −0,18 (agua) en Gobernador, con el nivel de 2011 y la composición de 2010 controlados | PROBADO | `104` | ídem |
 | 2023-2025: la caída de la participación fue rural y de baja educación | Densidad +0,38, viviendas rurales −0,34, secundario incompleto −0,30 (con la participación de 2023 controlada) | PROBADO | `104` | ídem |
 | 2023-2025: LLA-PRO avanzó relativamente en barrios populares con migrantes; el peronismo resistió en lo rural y entre jubilados | Captura de LLA-PRO: NBI de vivienda +0,17, hogares migrantes +0,16, jubilados −0,15. Peronismo: rural +0,17, jubilados +0,15 | PROBADO (efectos chicos) | `104` | ídem |
+
+## 6 · El motor 2027
+
+| Hallazgo | Magnitud | Estado | Script | Tabla |
+|---|---|---|---|---|
+| Dado el nivel provincial, el mapa se reproduce bien | Error medio por municipio 2,7 pp con la regla mezcla, contra 12,4 sin traslado; 89 % de ganadores municipales y 97 % de secciones | PROBADO (13 pares, 2011-2025) | `105` | `motor_backtest.csv` |
+| El ruido territorial depende del tamaño del municipio y de si entra una fuerza nueva | Desvío del cociente peronismo/derecha: 0,22 en un municipio de 10.000 votos, 0,07 en uno de 500.000; con oferta nueva, ~0,28 en todos | PROBADO (calibración dejando un par afuera: 52/79/90/95 % de cobertura para 50/80/90/95 %) | `105` | `motor_ruido_modelo.csv`, `motor_calibracion.csv` |
+| El nivel provincial de 2027 no se puede anticipar con el pasado | De la legislativa a la de Gobernador siguiente el margen se movió +19,8 pp (2017→2019) y +2,5 (2021→2023) | DESCRIPTIVO | `105` | — |
+| Si se repite octubre 2025, es un empate | Peronismo 41,5, derecha 41,3; margen +0,3 (−2,0 a +2,5); el peronismo gana el 57 % de las simulaciones y 39 municipios | DESCRIPTIVO (escenario) | `106` | `motor_2027_escenarios.csv` |
+| Si se repite septiembre 2025, el peronismo gana cómodo | Margen +13,4 (+11,1 a +15,6), 100 municipios | DESCRIPTIVO (escenario) | `106` | ídem |
+| Padrón 2027 y extranjeros le suman al peronismo menos de un punto | El padrón 2027 con los extranjeros lleva el margen de octubre de −0,6 a +0,3; extranjeros al 45 % en vez de 29 %: +0,2 | DESCRIPTIVO | `106` | ídem |
+| La participación, sola, casi no mueve el margen | De 64 % a 80 % con el mismo patrón territorial: ±0,1 pp | DESCRIPTIVO (sin movilización diferencial) | `106` | ídem |
+| Con empate provincial, el peronismo gana 40 de 135 municipios | Necesita +4 de margen para ganar la mitad de los municipios y +12 para 78; la sección 3 la gana siempre, la 1 se da vuelta en el empate, la 8 cerca de +4 y las del interior recién arriba de +10 | DESCRIPTIVO | `106` | `motor_2027_grilla.csv` |

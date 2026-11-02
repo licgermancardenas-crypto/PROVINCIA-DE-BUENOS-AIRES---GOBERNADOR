@@ -1,0 +1,9 @@
+escenario,base,participacion_nativos,participacion_extranjeros,meta_PERONISMO,pct_PERONISMO,meta_DERECHA,pct_DERECHA,meta_TERCERA,pct_TERCERA,meta_IZQUIERDA,pct_IZQUIERDA,meta_RESTO,pct_RESTO,margen_p10,margen_p50,margen_p90,p_gana_peronismo,municipios_peronismo_p10,municipios_peronismo_p50,municipios_peronismo_p90,secciones_peronismo_media
+A · Octubre 2025 se repite,octubre,0.76,2023,40.921,41.531,41.452,41.3,3.246,3.119,6.219,6.093,8.162,7.957,-2.005,0.303,2.486,0.569,32.0,39.0,45.0,1.709
+B · Septiembre 2025 se repite,septiembre,0.76,2023,46.743,47.2,33.871,33.875,5.41,5.31,5.472,5.349,8.504,8.266,11.091,13.397,15.579,1.0,93.0,100.0,106.0,5.967
+C · Punto medio entre septiembre y octubre,octubre,0.76,2023,43.832,44.36,37.661,37.623,4.328,4.163,5.845,5.731,8.333,8.123,4.502,6.809,8.991,0.996,50.0,58.0,66.0,2.807
+"D · Tercera vía fuerte (12 %, 2/3 de la derecha)",octubre,0.76,2023,38.003,38.707,35.616,35.657,12.0,11.579,6.219,6.096,8.162,7.96,0.814,3.122,5.302,0.951,38.0,46.0,54.0,2.283
+"A1 · Octubre, participación baja (64 %, como septiembre)",octubre,0.64,2023,40.921,41.633,41.452,41.282,3.246,3.104,6.219,6.072,8.162,7.91,-1.88,0.423,2.597,0.608,32.0,39.0,45.0,1.714
+"A2 · Octubre, participación alta (80 %)",octubre,0.8,2023,40.921,41.503,41.452,41.306,3.246,3.122,6.219,6.099,8.162,7.97,-2.039,0.269,2.452,0.56,32.0,38.0,45.0,1.707
+"A3 · Octubre, extranjeros votan al 45 %",octubre,0.76,0.45,40.921,41.741,41.452,41.311,3.246,3.072,6.219,6.039,8.162,7.837,-1.773,0.501,2.651,0.624,32.0,39.0,45.0,1.732
+"B1 · Septiembre, participación baja (64 %)",septiembre,0.64,2023,46.743,47.288,33.871,33.871,5.41,5.288,5.472,5.332,8.504,8.221,11.188,13.489,15.662,1.0,93.0,100.0,106.0,5.972

@@ -752,3 +752,100 @@ Cook (sin el circuito más influyente y sin los tres).
 - **Ajuste territorial:** chico, con el censo; sirve sobre todo para la participación.
 - **La participación** se modela aparte: depende del tipo de elección y del desdoblamiento (`103`),
   y es lo que más varía entre territorios.
+
+---
+
+## 02-11-2026 · El motor 2027 (`analisis/105` y `106`)
+
+### Qué hace y qué no
+
+Gobernador se gana por **simple pluralidad provincial**, sin balotaje. El nivel provincial de
+cada fuerza en 2027 es un **parámetro del escenario**, no algo que el motor adivine: de la
+legislativa a la de Gobernador siguiente el margen peronismo − derecha se movió +19,8 puntos
+(2017 → 2019) y +2,5 (2021 → 2023). Lo que el motor sí hace es lo que se puede examinar contra el
+pasado: **bajar ese nivel al territorio** y contar lo que es aritmética (padrón 2027, extranjeros,
+participación), con una incertidumbre calibrada.
+
+### Paso 1: el backtest (`105`)
+
+Dado el resultado provincial **real** de la elección t1, ¿qué regla reproduce mejor el mapa
+partiendo de t0? 13 pares 2011-2025 (Gobernador → Gobernador, Diputados → Diputados y los
+**análogos a 2027**: de la legislativa a la de Gobernador, 2013→2015, 2017→2019, 2021→2023).
+Bloques: peronismo, derecha (PRO/JxC + LLA + LLA-PRO), tercera (tercera vía + centro/UCR),
+izquierda, resto.
+
+| Regla | Error medio por municipio (pp) | Error del margen (pp) | Acierta ganador municipal | Acierta ganador de sección |
+|---|---|---|---|---|
+| Sin cambio | 12,4 | 21,7 | 55 % | 61 % |
+| Uniforme | 2,9 | 4,8 | 88 % | 96 % |
+| Proporcional | 2,7 | 5,0 | 90 % | 96 % |
+| **Mezcla (mitad y mitad)** | **2,7** | **4,8** | **89 %** | **97 %** |
+
+La proporcional gana en error medio y la uniforme en el margen; en 2023, cuando entró LLA, la
+uniforme anduvo mejor. La mezcla queda cerca de la mejor en todo: es la que usa el motor. Los
+peores pares son los de 2013-2015 (entra el Frente Renovador): 5-6 pp por municipio.
+
+**El ruido.** Residuo por municipio de la mezcla, en cociente logarítmico peronismo / derecha.
+Calibrarlo enseñó tres cosas, en este orden:
+
+1. Un único desvío mezcla regímenes: con oferta estable es 0,09-0,15; cuando entra una fuerza
+   grande nueva, 0,21-0,34. Se separan.
+2. Aun separado, el intervalo del 80 % cubría 69 %. La causa: **el error depende del tamaño del
+   municipio** (0,30 en los más chicos, 0,09 en los más grandes), y se estaba midiendo con
+   cuantiles dominados por los grandes y cobertura dominada por los chicos. Se modela
+   σ ∝ votos^−0,29.
+3. Con eso y una t de 5 grados (oferta estable) o normal (oferta nueva), la calibración dejando un
+   par afuera da **52 / 79 / 90 / 95 %** de cobertura para intervalos de 50 / 80 / 90 / 95 %
+   (oferta estable) y 54 / 80 / 89 / 94 % (oferta nueva).
+
+### Paso 2: el motor (`106`)
+
+- **Bases.** Octubre 2025 por circuito (nativos): peronismo 40,9, derecha 41,5. Septiembre 2025
+  sólo nativos (el `103`), bajado a circuito con el patrón de octubre dentro de cada municipio:
+  46,7 y 33,9.
+- **Padrón 2027:** el de 2025 crecido al ritmo de 2023-2025 de cada circuito: 13,60 M de nativos.
+  Extranjeros: 1,05 M, con la participación y el reparto de sus mesas de Gobernador 2023 en cada
+  municipio (votan Gobernador).
+- **Participación:** parámetro provincial; cada circuito conserva su distancia al promedio
+  (escala del odds), con el patrón de Gobernador 2023. Por defecto 76 %.
+- **Monte Carlo** (1.000 simulaciones): shock provincial en el margen, t de 5 grados con desvío de
+  2 pp (confianza en el nivel del escenario, no pronóstico); ruido municipal del `105`; el ruido
+  se reajusta para no cambiar el nivel provincial.
+
+**Control:** sin ruido, el escenario octubre da 39 municipios peronistas (reales: 36) y el de
+septiembre 100 (reales: 104). La diferencia es el padrón 2027 y el voto extranjero.
+
+### Escenarios
+
+| Escenario | Peronismo | Derecha | Margen (p10 a p90) | P(gana el peronismo) | Municipios peronistas |
+|---|---|---|---|---|---|
+| A · Octubre 2025 se repite | 41,5 | 41,3 | +0,3 (−2,0 a +2,5) | 57 % | 39 |
+| B · Septiembre 2025 se repite | 47,2 | 33,9 | +13,4 (+11,1 a +15,6) | 100 % | 100 |
+| C · Punto medio | 44,4 | 37,6 | +6,8 (+4,5 a +9,0) | 100 % | 58 |
+| D · Tercera vía fuerte (12 %, 2/3 de la derecha) | 38,7 | 35,7 | +3,1 (+0,8 a +5,3) | 95 % | 46 |
+| A1 · Octubre, participación 64 % | 41,6 | 41,3 | +0,4 | 61 % | 39 |
+| A2 · Octubre, participación 80 % | 41,5 | 41,3 | +0,3 | 56 % | 38 |
+| A3 · Octubre, extranjeros al 45 % | 41,7 | 41,3 | +0,5 | 62 % | 39 |
+
+(% de los votos positivos, con nativos y extranjeros y el padrón 2027.)
+
+**Lecturas:**
+
+- **La elección la decide la preferencia, no el padrón.** El padrón 2027 con los extranjeros le
+  suma al peronismo menos de un punto de margen; que los extranjeros voten al 45 % en vez de al
+  29 %, 0,2; subir o bajar la participación con el mismo patrón territorial, 0,1. Lo que mueve
+  13 puntos es que el votante se comporte como en septiembre o como en octubre (`103`).
+- **La tercera vía le saca a la derecha.** Con Provincias Unidas en 12 % (dos tercios desde la
+  derecha), el peronismo gana con 38,7 %.
+- **El mapa.** Con empate provincial el peronismo gana 40 de 135 municipios: su voto está
+  concentrado. Necesita +4 de margen para ganar la mitad y +12 para 78. Por sección: la 3ª la
+  gana siempre, la 1ª se da vuelta en el empate, la 8ª (La Plata) cerca de +4 y las del interior
+  (2ª, 4ª, 5ª, 6ª, 7ª) recién arriba de +10 (`motor_2027_grilla.csv`).
+
+### Lo que falta (PLAN 4.3-4.5)
+
+- **Derecha dividida**: LLA y PRO por separado, con el patrón de 2023.
+- **Legislatura** por sección con cociente.
+- **Movilización diferencial**: hoy la participación sube o baja pareja respecto del patrón; el
+  `103` y el `104` muestran que quién va a votar cambia según la elección. Eso es lo que separa
+  septiembre de octubre, y el motor todavía no lo modela: lo trata como preferencia.

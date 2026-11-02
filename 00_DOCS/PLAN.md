@@ -55,12 +55,20 @@ Cada pregunta con su batería, los tres filtros y su tabla. Primeras candidatas:
   inercia (R² 0,90-0,96) y el censo casi no agrega; el cambio es sobre todo proporcional al nivel
   de partida, y el censo agrega poco (+0,03 a +0,14).
 
-## Etapa 4 · El motor 2027 ← próximo
+## Etapa 4 · El motor 2027
 
 Mismo diseño que CABA, adaptado: backtest sobre los pares de elecciones de Gobernador y
 legislativas, shock provincial con colas pesadas, ruido por sección / municipio / circuito,
 Monte Carlo por escenario. **Simple pluralidad, sin balotaje.** El nivel provincial y la oferta
 entran como parámetro. Legislatura por sección electoral con cociente.
+
+| | Qué | Estado |
+|---|---|---|
+| 4.1 | Backtest de la regla de traslado (13 pares 2011-2025) y calibración del ruido | ✅ `analisis/105` |
+| 4.2 | Motor de escenarios con Monte Carlo: base octubre o septiembre 2025, padrón 2027, extranjeros, participación | ✅ `analisis/106` |
+| 4.3 | Derecha dividida (LLA y PRO por separado, patrón de 2023) | ⬜ ← próximo |
+| 4.4 | Legislatura 2027 por sección (cociente y renovación por mitades) | ⬜ |
+| 4.5 | Movilización diferencial: quién va a votar, no sólo cuántos (el `103` y el `104` dicen que la participación tiene patrón territorial propio) | ⬜ |
 
 ## Etapa 5 · Productos
 

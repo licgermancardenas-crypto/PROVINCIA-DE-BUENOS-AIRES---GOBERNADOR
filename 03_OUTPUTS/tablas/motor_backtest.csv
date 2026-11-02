@@ -1,0 +1,157 @@
+par,tipo,regimen,regla,escala,mae_pp,mae_margen_pp,acierto_ganador,unidades
+Gob 2011 → Gob 2015,gobernador,oferta nueva,sin cambio,circuito,33.0764,66.1463,0.2247,899
+Gob 2011 → Gob 2015,gobernador,oferta nueva,sin cambio,municipio,33.0731,66.1463,0.1704,135
+Gob 2011 → Gob 2015,gobernador,oferta nueva,sin cambio,sección,33.0731,66.1463,0.125,8
+Gob 2011 → Gob 2015,gobernador,oferta nueva,uniforme,circuito,7.3349,9.5052,0.6274,899
+Gob 2011 → Gob 2015,gobernador,oferta nueva,uniforme,municipio,5.9153,7.9364,0.8444,135
+Gob 2011 → Gob 2015,gobernador,oferta nueva,uniforme,sección,2.9952,4.4535,1.0,8
+Gob 2011 → Gob 2015,gobernador,oferta nueva,proporcional,circuito,7.2622,13.0915,0.7853,899
+Gob 2011 → Gob 2015,gobernador,oferta nueva,proporcional,municipio,5.8167,10.41,0.8963,135
+Gob 2011 → Gob 2015,gobernador,oferta nueva,proporcional,sección,3.4673,6.0773,0.875,8
+Gob 2011 → Gob 2015,gobernador,oferta nueva,mezcla,circuito,7.0572,11.2411,0.7019,899
+Gob 2011 → Gob 2015,gobernador,oferta nueva,mezcla,municipio,5.7169,9.137,0.8667,135
+Gob 2011 → Gob 2015,gobernador,oferta nueva,mezcla,sección,3.213,5.2654,1.0,8
+Gob 2015 → Gob 2019,gobernador,oferta estable,sin cambio,circuito,9.7797,17.4107,0.7514,909
+Gob 2015 → Gob 2019,gobernador,oferta estable,sin cambio,municipio,9.6686,17.288,0.6815,135
+Gob 2015 → Gob 2019,gobernador,oferta estable,sin cambio,sección,9.1221,17.242,0.75,8
+Gob 2015 → Gob 2019,gobernador,oferta estable,uniforme,circuito,2.9659,4.7808,0.8229,909
+Gob 2015 → Gob 2019,gobernador,oferta estable,uniforme,municipio,2.6052,4.0527,0.8074,135
+Gob 2015 → Gob 2019,gobernador,oferta estable,uniforme,sección,1.8042,3.0221,0.75,8
+Gob 2015 → Gob 2019,gobernador,oferta estable,proporcional,circuito,2.2037,4.1563,0.8218,909
+Gob 2015 → Gob 2019,gobernador,oferta estable,proporcional,municipio,1.7677,3.2754,0.8222,135
+Gob 2015 → Gob 2019,gobernador,oferta estable,proporcional,sección,0.9587,1.9174,0.875,8
+Gob 2015 → Gob 2019,gobernador,oferta estable,mezcla,circuito,2.3904,4.1187,0.8218,909
+Gob 2015 → Gob 2019,gobernador,oferta estable,mezcla,municipio,2.0491,3.372,0.8148,135
+Gob 2015 → Gob 2019,gobernador,oferta estable,mezcla,sección,1.3633,2.461,0.875,8
+Gob 2019 → Gob 2023,gobernador,oferta estable,sin cambio,circuito,10.4321,20.8194,0.728,956
+Gob 2019 → Gob 2023,gobernador,oferta estable,sin cambio,municipio,10.4025,20.8,0.6519,135
+Gob 2019 → Gob 2023,gobernador,oferta estable,sin cambio,sección,10.3998,20.7996,0.75,8
+Gob 2019 → Gob 2023,gobernador,oferta estable,uniforme,circuito,3.0088,5.967,0.9341,956
+Gob 2019 → Gob 2023,gobernador,oferta estable,uniforme,municipio,2.3568,4.6809,0.963,135
+Gob 2019 → Gob 2023,gobernador,oferta estable,uniforme,sección,0.8486,1.5589,1.0,8
+Gob 2019 → Gob 2023,gobernador,oferta estable,proporcional,circuito,3.751,7.497,0.932,956
+Gob 2019 → Gob 2023,gobernador,oferta estable,proporcional,municipio,3.0038,6.0073,0.963,135
+Gob 2019 → Gob 2023,gobernador,oferta estable,proporcional,sección,1.2402,2.4804,1.0,8
+Gob 2019 → Gob 2023,gobernador,oferta estable,mezcla,circuito,3.3447,6.6635,0.9331,956
+Gob 2019 → Gob 2023,gobernador,oferta estable,mezcla,municipio,2.6561,5.3003,0.963,135
+Gob 2019 → Gob 2023,gobernador,oferta estable,mezcla,sección,0.9974,1.9795,1.0,8
+Dip 2013 → Gob 2015,análogo 2027,oferta nueva,sin cambio,circuito,21.6815,36.2471,0.0694,894
+Dip 2013 → Gob 2015,análogo 2027,oferta nueva,sin cambio,municipio,21.5958,36.2432,0.0148,135
+Dip 2013 → Gob 2015,análogo 2027,oferta nueva,sin cambio,sección,21.1817,36.2432,0.0,8
+Dip 2013 → Gob 2015,análogo 2027,oferta nueva,uniforme,circuito,6.8488,12.119,0.7472,894
+Dip 2013 → Gob 2015,análogo 2027,oferta nueva,uniforme,municipio,5.6054,9.8,0.8148,135
+Dip 2013 → Gob 2015,análogo 2027,oferta nueva,uniforme,sección,3.5514,5.9893,1.0,8
+Dip 2013 → Gob 2015,análogo 2027,oferta nueva,proporcional,circuito,6.0602,11.4921,0.8445,894
+Dip 2013 → Gob 2015,análogo 2027,oferta nueva,proporcional,municipio,5.0144,9.4306,0.8519,135
+Dip 2013 → Gob 2015,análogo 2027,oferta nueva,proporcional,sección,2.9593,5.752,1.0,8
+Dip 2013 → Gob 2015,análogo 2027,oferta nueva,mezcla,circuito,6.4072,11.7934,0.8378,894
+Dip 2013 → Gob 2015,análogo 2027,oferta nueva,mezcla,municipio,5.2742,9.6032,0.8593,135
+Dip 2013 → Gob 2015,análogo 2027,oferta nueva,mezcla,sección,3.2554,5.8707,1.0,8
+Dip 2017 → Gob 2019,análogo 2027,oferta estable,sin cambio,circuito,9.995,19.7465,0.7245,911
+Dip 2017 → Gob 2019,análogo 2027,oferta estable,sin cambio,municipio,9.9574,19.744,0.637,135
+Dip 2017 → Gob 2019,análogo 2027,oferta estable,sin cambio,sección,9.872,19.744,0.75,8
+Dip 2017 → Gob 2019,análogo 2027,oferta estable,uniforme,circuito,1.9184,3.0028,0.9023,911
+Dip 2017 → Gob 2019,análogo 2027,oferta estable,uniforme,municipio,1.6358,2.2732,0.8667,135
+Dip 2017 → Gob 2019,análogo 2027,oferta estable,uniforme,sección,0.6201,0.8913,1.0,8
+Dip 2017 → Gob 2019,análogo 2027,oferta estable,proporcional,circuito,1.5509,2.8248,0.9023,911
+Dip 2017 → Gob 2019,análogo 2027,oferta estable,proporcional,municipio,1.3141,2.3261,0.8741,135
+Dip 2017 → Gob 2019,análogo 2027,oferta estable,proporcional,sección,0.6458,1.1946,1.0,8
+Dip 2017 → Gob 2019,análogo 2027,oferta estable,mezcla,circuito,1.5563,2.6288,0.9045,911
+Dip 2017 → Gob 2019,análogo 2027,oferta estable,mezcla,municipio,1.3589,2.126,0.8667,135
+Dip 2017 → Gob 2019,análogo 2027,oferta estable,mezcla,sección,0.5666,0.5589,1.0,8
+Dip 2021 → Gob 2023,análogo 2027,oferta estable,sin cambio,circuito,5.3605,4.4843,0.9337,950
+Dip 2021 → Gob 2023,análogo 2027,oferta estable,sin cambio,municipio,5.2115,3.5825,0.9481,135
+Dip 2021 → Gob 2023,análogo 2027,oferta estable,sin cambio,sección,5.1365,1.9862,1.0,8
+Dip 2021 → Gob 2023,análogo 2027,oferta estable,uniforme,circuito,2.2074,4.0066,0.9368,950
+Dip 2021 → Gob 2023,análogo 2027,oferta estable,uniforme,municipio,1.7407,3.0887,0.9481,135
+Dip 2021 → Gob 2023,análogo 2027,oferta estable,uniforme,sección,0.8142,1.2835,1.0,8
+Dip 2021 → Gob 2023,análogo 2027,oferta estable,proporcional,circuito,2.8664,5.7087,0.9358,950
+Dip 2021 → Gob 2023,análogo 2027,oferta estable,proporcional,municipio,2.1804,4.3364,0.9481,135
+Dip 2021 → Gob 2023,análogo 2027,oferta estable,proporcional,sección,0.7957,1.5914,1.0,8
+Dip 2021 → Gob 2023,análogo 2027,oferta estable,mezcla,circuito,2.4512,4.7697,0.9368,950
+Dip 2021 → Gob 2023,análogo 2027,oferta estable,mezcla,municipio,1.8611,3.6326,0.9481,135
+Dip 2021 → Gob 2023,análogo 2027,oferta estable,mezcla,sección,0.6455,1.2567,1.0,8
+Dip 2011 → Dip 2013,diputados,oferta nueva,sin cambio,circuito,12.3902,24.7804,0.4565,896
+Dip 2011 → Dip 2013,diputados,oferta nueva,sin cambio,municipio,12.3902,24.7803,0.2296,135
+Dip 2011 → Dip 2013,diputados,oferta nueva,sin cambio,sección,12.3902,24.7803,0.125,8
+Dip 2011 → Dip 2013,diputados,oferta nueva,uniforme,circuito,2.8697,5.7394,0.9275,896
+Dip 2011 → Dip 2013,diputados,oferta nueva,uniforme,municipio,2.49,4.9801,0.963,135
+Dip 2011 → Dip 2013,diputados,oferta nueva,uniforme,sección,1.3219,2.6439,1.0,8
+Dip 2011 → Dip 2013,diputados,oferta nueva,proporcional,circuito,2.402,4.8039,0.9342,896
+Dip 2011 → Dip 2013,diputados,oferta nueva,proporcional,municipio,2.1189,4.2378,0.963,135
+Dip 2011 → Dip 2013,diputados,oferta nueva,proporcional,sección,1.3116,2.6231,1.0,8
+Dip 2011 → Dip 2013,diputados,oferta nueva,mezcla,circuito,2.6219,5.2438,0.9308,896
+Dip 2011 → Dip 2013,diputados,oferta nueva,mezcla,municipio,2.2997,4.5995,0.963,135
+Dip 2011 → Dip 2013,diputados,oferta nueva,mezcla,sección,1.3168,2.6335,1.0,8
+Dip 2013 → Dip 2015,diputados,oferta nueva,sin cambio,circuito,19.5906,28.9226,0.0793,895
+Dip 2013 → Dip 2015,diputados,oferta nueva,sin cambio,municipio,19.5642,28.8376,0.0296,135
+Dip 2013 → Dip 2015,diputados,oferta nueva,sin cambio,sección,19.3637,28.8376,0.0,8
+Dip 2013 → Dip 2015,diputados,oferta nueva,uniforme,circuito,6.5681,11.719,0.5296,895
+Dip 2013 → Dip 2015,diputados,oferta nueva,uniforme,municipio,5.3129,9.2729,0.5481,135
+Dip 2013 → Dip 2015,diputados,oferta nueva,uniforme,sección,3.3899,5.755,0.75,8
+Dip 2013 → Dip 2015,diputados,oferta nueva,proporcional,circuito,5.8718,11.0397,0.752,895
+Dip 2013 → Dip 2015,diputados,oferta nueva,proporcional,municipio,4.7926,8.873,0.6741,135
+Dip 2013 → Dip 2015,diputados,oferta nueva,proporcional,sección,2.871,5.5311,0.75,8
+Dip 2013 → Dip 2015,diputados,oferta nueva,mezcla,circuito,6.1907,11.3689,0.6413,895
+Dip 2013 → Dip 2015,diputados,oferta nueva,mezcla,municipio,5.0135,9.0701,0.6074,135
+Dip 2013 → Dip 2015,diputados,oferta nueva,mezcla,sección,3.1293,5.6431,0.75,8
+Dip 2015 → Dip 2017,diputados,oferta estable,sin cambio,circuito,5.4726,9.7903,0.8033,910
+Dip 2015 → Dip 2017,diputados,oferta estable,sin cambio,municipio,5.4081,9.781,0.7333,135
+Dip 2015 → Dip 2017,diputados,oferta estable,sin cambio,sección,5.121,9.7644,0.875,8
+Dip 2015 → Dip 2017,diputados,oferta estable,uniforme,circuito,2.2464,3.4943,0.9187,910
+Dip 2015 → Dip 2017,diputados,oferta estable,uniforme,municipio,2.0423,3.1799,0.9185,135
+Dip 2015 → Dip 2017,diputados,oferta estable,uniforme,sección,1.5547,2.4177,1.0,8
+Dip 2015 → Dip 2017,diputados,oferta estable,proporcional,circuito,2.0559,3.5576,0.9242,910
+Dip 2015 → Dip 2017,diputados,oferta estable,proporcional,municipio,1.8161,3.0988,0.9259,135
+Dip 2015 → Dip 2017,diputados,oferta estable,proporcional,sección,1.0913,1.6194,1.0,8
+Dip 2015 → Dip 2017,diputados,oferta estable,mezcla,circuito,2.0466,3.3365,0.9231,910
+Dip 2015 → Dip 2017,diputados,oferta estable,mezcla,municipio,1.8533,3.0332,0.9259,135
+Dip 2015 → Dip 2017,diputados,oferta estable,mezcla,sección,1.3094,1.9687,1.0,8
+Dip 2017 → Dip 2019,diputados,oferta estable,sin cambio,circuito,10.4491,20.7589,0.7124,911
+Dip 2017 → Dip 2019,diputados,oferta estable,sin cambio,municipio,10.4283,20.7566,0.6,135
+Dip 2017 → Dip 2019,diputados,oferta estable,sin cambio,sección,10.3783,20.7566,0.75,8
+Dip 2017 → Dip 2019,diputados,oferta estable,uniforme,circuito,1.9868,3.0918,0.9078,911
+Dip 2017 → Dip 2019,diputados,oferta estable,uniforme,municipio,1.6998,2.3609,0.9037,135
+Dip 2017 → Dip 2019,diputados,oferta estable,uniforme,sección,0.5948,0.821,1.0,8
+Dip 2017 → Dip 2019,diputados,oferta estable,proporcional,circuito,1.4435,2.5232,0.9089,911
+Dip 2017 → Dip 2019,diputados,oferta estable,proporcional,municipio,1.2438,2.0705,0.8889,135
+Dip 2017 → Dip 2019,diputados,oferta estable,proporcional,sección,0.5281,0.8559,1.0,8
+Dip 2017 → Dip 2019,diputados,oferta estable,mezcla,circuito,1.5433,2.5342,0.9133,911
+Dip 2017 → Dip 2019,diputados,oferta estable,mezcla,municipio,1.33,1.9893,0.9037,135
+Dip 2017 → Dip 2019,diputados,oferta estable,mezcla,sección,0.4692,0.4288,1.0,8
+Dip 2019 → Dip 2021,diputados,oferta estable,sin cambio,circuito,11.83,23.6552,0.7127,964
+Dip 2019 → Dip 2021,diputados,oferta estable,sin cambio,municipio,11.8222,23.6438,0.5926,135
+Dip 2019 → Dip 2021,diputados,oferta estable,sin cambio,sección,11.8219,23.6438,0.75,8
+Dip 2019 → Dip 2021,diputados,oferta estable,uniforme,circuito,2.5111,4.6148,0.9346,964
+Dip 2019 → Dip 2021,diputados,oferta estable,uniforme,municipio,2.0797,3.9672,0.9778,135
+Dip 2019 → Dip 2021,diputados,oferta estable,uniforme,sección,0.7481,1.4963,1.0,8
+Dip 2019 → Dip 2021,diputados,oferta estable,proporcional,circuito,2.3597,4.2784,0.9326,964
+Dip 2019 → Dip 2021,diputados,oferta estable,proporcional,municipio,2.0801,3.8837,0.9778,135
+Dip 2019 → Dip 2021,diputados,oferta estable,proporcional,sección,0.7164,1.3939,1.0,8
+Dip 2019 → Dip 2021,diputados,oferta estable,mezcla,circuito,2.3857,4.4169,0.9315,964
+Dip 2019 → Dip 2021,diputados,oferta estable,mezcla,municipio,2.0553,3.912,0.9778,135
+Dip 2019 → Dip 2021,diputados,oferta estable,mezcla,sección,0.7268,1.4451,1.0,8
+Dip 2021 → Dip 2023,diputados,oferta estable,sin cambio,circuito,5.0993,3.9842,0.9431,949
+Dip 2021 → Dip 2023,diputados,oferta estable,sin cambio,municipio,5.0231,3.0268,0.963,135
+Dip 2021 → Dip 2023,diputados,oferta estable,sin cambio,sección,4.9127,0.8029,1.0,8
+Dip 2021 → Dip 2023,diputados,oferta estable,uniforme,circuito,2.1651,3.8512,0.941,949
+Dip 2021 → Dip 2023,diputados,oferta estable,uniforme,municipio,1.804,3.0188,0.9704,135
+Dip 2021 → Dip 2023,diputados,oferta estable,uniforme,sección,0.7507,1.0117,1.0,8
+Dip 2021 → Dip 2023,diputados,oferta estable,proporcional,circuito,2.6947,5.3522,0.9378,949
+Dip 2021 → Dip 2023,diputados,oferta estable,proporcional,municipio,2.1095,4.2059,0.9704,135
+Dip 2021 → Dip 2023,diputados,oferta estable,proporcional,sección,0.548,1.096,1.0,8
+Dip 2021 → Dip 2023,diputados,oferta estable,mezcla,circuito,2.3402,4.5244,0.9399,949
+Dip 2021 → Dip 2023,diputados,oferta estable,mezcla,municipio,1.8154,3.5224,0.963,135
+Dip 2021 → Dip 2023,diputados,oferta estable,mezcla,sección,0.5001,0.9513,1.0,8
+Dip 2023 → Dip 2025,diputados,oferta estable,sin cambio,circuito,6.5955,7.9164,0.8649,962
+Dip 2023 → Dip 2025,diputados,oferta estable,sin cambio,municipio,6.5099,7.6714,0.8815,135
+Dip 2023 → Dip 2025,diputados,oferta estable,sin cambio,sección,6.3977,7.4241,1.0,8
+Dip 2023 → Dip 2025,diputados,oferta estable,uniforme,circuito,2.1867,4.0056,0.9044,962
+Dip 2023 → Dip 2025,diputados,oferta estable,uniforme,municipio,1.8328,3.2305,0.9037,135
+Dip 2023 → Dip 2025,diputados,oferta estable,uniforme,sección,1.1129,1.8589,1.0,8
+Dip 2023 → Dip 2025,diputados,oferta estable,proporcional,circuito,1.5536,2.7005,0.9064,962
+Dip 2023 → Dip 2025,diputados,oferta estable,proporcional,municipio,1.3386,2.2903,0.9037,135
+Dip 2023 → Dip 2025,diputados,oferta estable,proporcional,sección,0.536,0.5471,1.0,8
+Dip 2023 → Dip 2025,diputados,oferta estable,mezcla,circuito,1.8124,3.2205,0.9064,962
+Dip 2023 → Dip 2025,diputados,oferta estable,mezcla,municipio,1.5235,2.6451,0.9037,135
+Dip 2023 → Dip 2025,diputados,oferta estable,mezcla,sección,0.7947,1.1954,1.0,8
