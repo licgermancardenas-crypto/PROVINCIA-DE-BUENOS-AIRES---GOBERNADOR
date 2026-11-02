@@ -121,6 +121,14 @@ def procesar(zpath: Path) -> dict:
     return {"anio": anio, "tipo": tipo, "destino": destino}
 
 
+def es_extranjera(d: pd.DataFrame) -> pd.Series:
+    """Mesa de extranjeros. La marca `mesa_tipo` falla en varios archivos (2011 y 2013 generales,
+    2017 PASO y generales: viene vacía, en singular o como NATIVOS en concejales). Las mesas de
+    extranjeros se numeran desde 9000 y las de nativos, por municipio, nunca llegan a ese número."""
+    marca = d.mesa_tipo.fillna("").str.upper().str.startswith("EXTRANJ")
+    return marca | (pd.to_numeric(d.mesa_id, errors="coerce") >= 9000)
+
+
 def control(destino: Path, anio: str, tipo: str) -> pd.DataFrame:
     d = pd.read_parquet(destino, columns=["cargo_nombre", "seccion_id", "circuito_id", "mesa_id",
                                           "mesa_electores", "votos_tipo", "votos_cantidad", "mesa_tipo"])
@@ -130,7 +138,7 @@ def control(destino: Path, anio: str, tipo: str) -> pd.DataFrame:
     mm = mesas.groupby("cargo_nombre").agg(mesas=("mesa_id", "size"), electores=("mesa_electores", "sum"),
                                            municipios=("seccion_id", "nunique"))
     circ = d.drop_duplicates(["cargo_nombre", "seccion_id", "circuito_id"]).groupby("cargo_nombre").size().rename("circuitos")
-    ext = mesas[mesas.mesa_tipo.str.upper().str.startswith("EXTRANJ")].groupby("cargo_nombre").size().rename("mesas_extranjeros")
+    ext = mesas[es_extranjera(mesas)].groupby("cargo_nombre").size().rename("mesas_extranjeros")
     out = (tot.join(pos, on="cargo_nombre").join(mm, on="cargo_nombre").join(circ, on="cargo_nombre")
            .join(ext, on="cargo_nombre"))
     out["mesas_extranjeros"] = out["mesas_extranjeros"].fillna(0).astype(int)

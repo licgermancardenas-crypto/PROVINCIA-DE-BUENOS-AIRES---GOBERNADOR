@@ -298,5 +298,78 @@ Gobernador 2007 y el definitivo oficial.
 tienen participación de más de 100 % o de menos de 30 %: circuitos de ~80 electores con el
 padrón mal cargado en el provisorio. Quedan marcados en `participacion_anomala`, no borrados.
 
-**Lo que todavía no permite:** seguir un circuito en el tiempo. Los circuitos cambian entre
-años (1.064 con voto en 2011, 1.047 en 2023) y falta la tabla de equivalencias (etapa 1.9).
+**Lo que todavía no permitía:** seguir un circuito en el tiempo. Resuelto en la etapa 1.9
+(entrada siguiente).
+
+---
+
+## 01-11-2026 · Circuitos estables 2011-2025 (`etl/10`) y la marca de extranjeros
+
+### Primero, un error de la DINE que estaba en el panel
+
+En cinco archivos la marca de mesa de extranjeros (`mesa_tipo`) falla: 2011 y 2013 generales
+la traen como NATIVOS, 2017 generales la trae en singular y, en concejales, todas las mesas como
+NATIVOS; 2017 PASO la trae vacía. Resultado: en esos años los extranjeros se sumaban al padrón de
+nativos, y en las categorías nacionales de 2013, 2015 y 2017 (donde la DINE lista las mesas de
+extranjeros con padrón y casi sin votos) inflaban el padrón nacional.
+
+**Las mesas de extranjeros se numeran desde 9000** y las de nativos, que se numeran por
+municipio, nunca llegan (máximo 9280 en 2023, todas de extranjeros). Ahora una mesa es de
+extranjeros si tiene la marca **o** número 9000 o más (`es_extranjera` en `etl/01`, mismo
+criterio en `etl/09`). Ejemplo: Gobernador 2011 pasa de 0 a 878 mesas de extranjeros. Los votos
+por espacio no cambian; cambian electores y votantes nativos de esos años.
+
+### La tabla de equivalencias
+
+Los códigos de circuito son únicos en la provincia, pero cambian: se subdividen (0022 →
+0022A/B/C), los rurales chicos se absorben en un vecino y a veces se pasa padrón de un código a
+otro (Almirante Brown 2025: 0019 pierde 35 mil electores que ganan 0020 y 0022). La capa de
+polígonos es una sola partición de una fecha intermedia (1.146 códigos, sin superposiciones) y no
+guarda la historia. Así que las equivalencias salen del padrón:
+
+- Entre dos elecciones consecutivas, en cada municipio, se mide el **exceso** de electores de cada
+  circuito respecto de lo que habría tenido creciendo como su municipio.
+- Cada circuito que **pierde** (más de 150 electores y más de 15 %, o desaparece) se une con los
+  que **ganan** siendo sus vecinos en el mapa o de su familia de código (mismo número). Si gana uno
+  de una familia, se suman todos los de esa familia que ganan.
+- Un código sin polígono usa los vecinos de su familia; uno que desaparece sin polígono ni familia
+  va al que más ganó en su municipio.
+- Un bajón o pico de un solo año que se revierte en la elección siguiente **no es un cambio de
+  límites**: son mesas que faltan en el provisorio. No une nada y queda marcado
+  `padron_incompleto` en la serie.
+- Las uniones se acumulan en la ventana: cada grupo es un **circuito estable (CE)**.
+
+| Ventana | CE | De un solo código | Con fusión | Máx. códigos | Años-CE con padrón incompleto | Saltos sostenidos |
+|---|---|---|---|---|---|---|
+| 2011-2025 | 919 | 816 | 103 | 21 | 77 | 8 |
+| 2015-2025 | 933 | 832 | 101 | 21 | 60 | 11 |
+| 2019-2025 | 998 | 906 | 92 | 17 | 36 | 12 |
+| 2023-2025 | 1.033 | 1.024 | 9 | 8 | 0 | 0 |
+
+En todas las ventanas el 100 % del padrón 2025 queda en CE presentes en todos los años. Los
+saltos sostenidos que quedan (0,3 % del padrón en la ventana larga) se revisaron uno por uno: son
+barrios que crecen elección tras elección (Pilar 0107, Ensenada 0445-0446, Gral. Rodríguez 0575,
+0915, 0926, Mar del Plata 0369) y un circuito de Chascomús que se despuebla (0203). Ninguno es una
+equivalencia mal resuelta.
+
+**Usar la ventana más corta que alcance.** Las subdivisiones encadenadas obligan a fusionar: en
+2011-2025 Pilar 0768-0772 es un solo CE de 21 códigos y 288 mil electores, y Mar del Plata
+0364-0368 uno de 17. Para 2023 → 2025 la ventana 2023-2025 casi no fusiona (9 grupos).
+
+**Control externo contra el censo 2022.** Si los grupos están bien, la población de 16 años y
+más de cada CE tiene que acompañar a su padrón. Porcentaje del padrón en unidades donde la razón
+padrón / población cae fuera de 0,6-1,5:
+
+| Padrón de | Por código | Por CE 2011-2025 |
+|---|---|---|
+| 2011 | 16,6 % | 10,2 % |
+| 2019 | 8,0 % | 2,0 % |
+| 2023 | 3,0 % | 1,2 % |
+
+Lo que queda en 2011 es crecimiento real entre 2011 y 2022.
+
+**Salidas:** `01_DATOS/processed/circuitos_equivalencias.csv` (ventana, código → `ce_id`),
+`circuitos_estables_serie.csv` (padrón por CE y año, con `padron_incompleto`),
+`geo/circuitos_estables.gpkg` (una capa por ventana; 7 códigos sin polígono quedan dentro del CE
+pero no en el mapa), `03_OUTPUTS/tablas/circuitos_uniones_motivos.csv` (cada unión con su motivo)
+y `control_circuitos_estables.csv`.

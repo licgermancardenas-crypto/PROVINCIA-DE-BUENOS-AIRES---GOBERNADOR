@@ -66,7 +66,9 @@ def panel_dine(mapeo: pd.DataFrame, claves: pd.DataFrame) -> tuple[pd.DataFrame,
             raise ValueError(f"{f.name}: {len(sin)} filas sin espacio en el mapeo, p. ej. "
                              f"{sin[['cargo', 'agrupacion']].drop_duplicates().head(3).values.tolist()}")
         d["circuito"] = d.circuito_id.map(geo.norm_circuito)
-        d["extranjeros"] = d.mesa_tipo.fillna("").str.upper().str.startswith("EXTRANJ")
+        # Marca o numeración 9000+: ver es_extranjera en 01_mesas_dine_pba.py
+        d["extranjeros"] = (d.mesa_tipo.fillna("").str.upper().str.startswith("EXTRANJ")
+                            | (pd.to_numeric(d.mesa_id, errors="coerce") >= 9000))
 
         clave_mesa = ["anio", "tipo", "cargo", "seccion_id", "circuito", "mesa_id", "extranjeros"]
         mesas = d.groupby(clave_mesa).agg(electores=("mesa_electores", "first"), votantes=("votos_cantidad", "sum")).reset_index()

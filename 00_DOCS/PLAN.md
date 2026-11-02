@@ -17,7 +17,7 @@ Orden pensado para que cada etapa deje algo usable aunque la siguiente no llegue
 | 1.6 | Panel armonizado circuito × elección × categoría × espacio, y por municipio con todas las fuentes | `etl/09` | ✅ |
 | 1.7 | **Septiembre 2025, provincial desdoblada**: definitivo por municipio ✅ (`etl/05`); por mesa ⬜ (portal dado de baja, buscar en Wayback) | `etl/05` | 🔶 |
 | 1.8 | Gobernador 2007 (anterior a la serie por mesa de la DINE) por municipio | `etl/09` | ✅ en `panel_municipio` |
-| 1.9 | Circuitos estables en el tiempo: tabla de equivalencias 2011-2025 (1.064 circuitos con voto en 2011, 1.047 en 2023) | — | ⬜ ← próximo |
+| 1.9 | Circuitos estables en el tiempo: tabla de equivalencias 2011-2025, en cuatro ventanas (919 CE en 2011-2025, 1.033 en 2023-2025) | `etl/10` | ✅ |
 
 Las elecciones a Gobernador con dato por mesa: **2011, 2015, 2019, 2023** (simultáneas con la
 nacional, vienen en el archivo de la DINE). Más las legislativas 2013, 2017, 2021, la provincial

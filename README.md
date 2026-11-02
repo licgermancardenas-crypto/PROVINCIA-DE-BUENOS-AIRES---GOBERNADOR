@@ -35,6 +35,7 @@ python 02_SCRIPTS/etl/06_censo2022_circuitos.py          # censo 2022: radio -> 
 python 02_SCRIPTS/etl/07_censos_historicos_circuitos.py  # censos 1991, 2001, 2010 -> circuitos actuales
 python 02_SCRIPTS/etl/08_mapeo_espacios.py              # lista -> espacio político (config/reglas_mapeo.yaml)
 python 02_SCRIPTS/etl/09_panel_armonizado.py             # panel por circuito y por municipio
+python 02_SCRIPTS/etl/10_circuitos_estables.py           # equivalencias de circuitos 2011-2025
 ```
 
 `01_DATOS/raw/` **no se versiona** (750 MB: escrutinios de la DINE, cuatro censos por radio).
@@ -48,6 +49,7 @@ Lo derivado sí se versiona, incluidos los parquets de mesas (57 MB).
 |---|---|
 | `01_DATOS/processed/panel_circuito.parquet` | **El panel**: voto por espacio político, circuito × elección × categoría, 2011-2025, con electores y votantes nativos y extranjeros |
 | `01_DATOS/processed/panel_municipio.parquet` | Lo mismo por municipio, con el definitivo de la Provincia (2005-2023, incluye Gobernador 2007) y la Junta 2025 |
+| `01_DATOS/processed/circuitos_equivalencias.csv` · `circuitos_estables_serie.csv` | **Circuitos estables**: cada código de circuito → su CE en cuatro ventanas (2011, 2015, 2019 y 2023 a 2025), y el padrón por CE y año. Polígonos en `geo/circuitos_estables.gpkg` |
 | `config/mapeo_espacios.csv` · `00_DOCS/mapeo_espacios.md` | Cada lista con su espacio, y las decisiones validadas |
 | `01_DATOS/processed/mesas_dine_pba_<año>_<tipo>.parquet` | 15 elecciones por mesa, 2011-2025: Gobernador 2011-2023, Intendente, Legislatura, nacionales |
 | `03_OUTPUTS/tablas/control_dine_pba.csv` | Totales por elección y categoría: mesas, electores, mesas de extranjeros, circuitos |
