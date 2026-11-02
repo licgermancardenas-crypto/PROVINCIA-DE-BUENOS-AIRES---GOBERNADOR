@@ -458,3 +458,68 @@ ganó un espacio distinto; en 2015 fueron 51.
 
 **Para el motor 2027:** el arrastre de la intendencia no entra como parámetro; sí la brecha
 intendente-gobernador, que depende de la fuerza relativa del candidato provincial.
+
+---
+
+## 02-11-2026 · Conurbano contra interior (`analisis/101`)
+
+La pregunta, en forma de prueba: **¿un circuito del Conurbano vota como un circuito del interior
+con la misma composición social?** Unidad: los 997 circuitos estables 2019-2025 (222 del
+Conurbano), con el censo 2022 recalculado desde los conteos. Voto: Diputados Nacionales
+2019-2025 (única categoría presente los cuatro años) y Gobernador 2019 y 2023; bloques
+peronismo y derecha (PRO/JxC + LLA + LLA-PRO). Regresión ponderada por electores con error
+agrupado por municipio, y dos juegos de controles: **composición** (educación, edad, NBI,
+privación, obra social, desocupación, migración, inquilinos, cuentapropismo, log población /
+electores) y **+ urbanización** (densidad, rural, cloaca, gas).
+
+### En el nivel, son dos electorados
+
+Brecha Conurbano − interior en el voto peronista (pp):
+
+| | Bruta | Con composición | + urbanización | Sin el municipio que más pesa (rango) |
+|---|---|---|---|---|
+| Diputados 2019 | +10,2 | +6,0 | +4,2 | +5,2 a +6,8 |
+| Diputados 2021 | +8,4 | +5,9 | +4,1 | +5,3 a +6,7 |
+| Diputados 2023 | +9,8 | +6,6 | +4,9 | +6,1 a +7,4 |
+| Diputados 2025 | +8,0 | +5,6 | +4,0 | +5,1 a +6,4 |
+| Gobernador 2019 | +10,0 | +5,9 | +4,3 | +5,3 a +6,8 |
+| Gobernador 2023 | +9,1 | +6,2 | +4,7 | +5,7 a +7,0 |
+
+La derecha, espejo: −9 a −12 bruta, −6 a −7 con composición. Todas pasan Benjamini-Hochberg
+(q ≤ 0,02) y la prueba de fragilidad (sacar cada municipio, y los tres que más mueven el
+coeficiente). La composición explica cerca de un tercio de la brecha y la urbanización otro
+quinto; quedan **4 a 6 puntos que son del lugar**: sindicatos, redes territoriales, historia, o
+composición que el censo no mide. No es causal.
+
+### Pero el perfil censal ya sabe dónde está el circuito
+
+Validación agrupada por municipio (el modelo predice municipios que no vio): R² de 0,60 a 0,86 en
+los niveles. Sumar la zona mejora el lineal en 0,01-0,03 y no mejora nada a los árboles: un
+modelo no lineal con el censo reproduce el «efecto Conurbano» sin que se le diga la zona (el
+residuo medio del Conurbano queda en ~1 pp). **Para el motor: modelar por tipo de circuito con el
+censo; la etiqueta de zona sobra.**
+
+### En el cambio, es una sola elección
+
+| Cambio en el voto peronista | Bruta | Con composición | + urbanización | Media Conurbano / interior |
+|---|---|---|---|---|
+| Gobernador 2019 → 2023 | −0,8 | +0,4 | +0,4 | −8,1 / −7,3 |
+| Diputados 2021 → 2025 | −0,4 | −0,2 | −0,1 | +2,0 / +2,4 |
+| Diputados 2023 → 2025 | −1,7 | −1,0 | −0,9 | −3,3 / −1,6 |
+
+Ninguna pasa Benjamini-Hochberg (q > 0,2). La única diferencia en la derecha (2023 → 2025, +1,2
+con composición, q = 0,02) desaparece con urbanización (+0,6, q = 0,29). Y el cambio es mucho más
+parejo que el nivel: el voto peronista varía 10 pp entre circuitos, su cambio entre elecciones
+3-4 pp.
+
+**Lectura:** el Conurbano tiene un piso peronista más alto que el que le corresponde por
+composición, pero no tiene una dinámica propia. Las olas son provinciales. Para el motor 2027:
+**niveles por circuito (dependen del lugar), cambios con un movimiento común** ajustado por
+composición, no por zona.
+
+### Lo que no dice
+
+- Ecológico: habla de circuitos, no de votantes.
+- El censo es de 2022 y se usa también para 2019 y 2021.
+- Los 4-6 puntos «del lugar» no tienen explicación acá: son lo que la composición medida no
+  alcanza a explicar.

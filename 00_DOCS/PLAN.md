@@ -43,8 +43,10 @@ Cada pregunta con su batería, los tres filtros y su tabla. Primeras candidatas:
 - ✅ **Arrastre del intendente** (`analisis/100`): ganar la intendencia no mueve el voto a
   Gobernador siguiente (efecto 0, IC ±4 pp) aunque sí el de Intendente (+7 pp). El arrastre va
   de arriba hacia abajo. Ver bitácora y `HALLAZGOS.md`.
-- **Conurbano contra interior**: ¿es una sola elección o dos? ← próximo
-- **Retención y transferencia 2023 → 2025** (Kicillof → Fuerza Patria; JxC → LLA), con
+- ✅ **Conurbano contra interior** (`analisis/101`): dos electorados en el nivel (+4 a +6 pp
+  peronistas con la misma composición), una sola elección en el cambio (los movimientos son
+  provinciales y parejos).
+- **Retención y transferencia 2023 → 2025** ← próximo (Kicillof → Fuerza Patria; JxC → LLA), con
   inferencia ecológica por circuito.
 - **Desdoblamiento**: septiembre contra octubre 2025, mismo año, dos padrones, dos resultados.
 - **Lo que el territorio predice y lo que no**: nivel contra cambio, como en CABA.

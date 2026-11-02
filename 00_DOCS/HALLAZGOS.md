@@ -23,3 +23,13 @@ produjo y la tabla donde está el número.
 | El intendente que gana casi siempre saca más que su gobernador, y cada vez más | 87 % de los ganadores en 2023 (mediana +6,9 pp), contra 54 % en 2011 | DESCRIPTIVO | `100` | `arrastre_brecha_resumen.csv` |
 | El corte de boleta es un fenómeno del interior | Corte pareado mediano 2023: interior 8,8, Conurbano 3,1. En el Conurbano bajó todas las elecciones (6,2 → 5,5 → 3,7 → 3,1) | DESCRIPTIVO (es un piso) | `100` | `corte_boleta_resumen.csv` |
 | En uno de cada cinco municipios, Intendente y Gobernador los gana un espacio distinto | 25 en 2023, 31 en 2019, 51 en 2015 | DESCRIPTIVO | `100` | `arrastre_brecha_resumen.csv` |
+
+## 2 · Conurbano e interior
+
+| Hallazgo | Magnitud | Estado | Script | Tabla |
+|---|---|---|---|---|
+| Con la misma composición social, el Conurbano vota más peronista | +5,6 a +6,6 pp según la elección (brecha bruta +8,0 a +10,2); +4,0 a +4,9 controlando además la urbanización. Sacando cualquier municipio, nunca baja de +5,1 | PROBADO (6 elecciones, q < 0,01, fragilidad) | `101` | `conurbano_interior_brecha.csv` |
+| La composición explica cerca de un tercio de la brecha; la urbanización, otro quinto | De +10,2 a +6,0 y a +4,2 pp (Diputados 2019) | DESCRIPTIVO | `101` | ídem |
+| Para predecir, la zona casi no agrega si se tiene el perfil censal | R² fuera de muestra (por municipio) 0,60-0,86; sumar la zona lo mejora 0,01-0,03 con modelo lineal y nada con árboles | PROBADO (GroupKFold) | `101` | `conurbano_interior_oos.csv` |
+| Los cambios de voto son provinciales: el Conurbano y el interior se mueven igual | Con composición controlada, ninguna brecha en el cambio pasa Benjamini-Hochberg con urbanización (máximo 0,9 pp) | REFUTADO (la «dinámica propia» del Conurbano) | `101` | `conurbano_interior_brecha.csv` |
+| El cambio es mucho más parejo que el nivel | Peronismo: dispersión entre circuitos de 10 pp en el nivel y de 3-4 pp en el cambio. 2019→2023: −8,1 Conurbano, −7,3 interior | DESCRIPTIVO | `101` | `conurbano_interior_base.csv` |
