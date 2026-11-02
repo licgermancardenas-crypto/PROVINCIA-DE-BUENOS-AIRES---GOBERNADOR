@@ -953,7 +953,7 @@ electos 2027. Mayoría: 47 diputados, 24 senadores.
 
 - **Diputados es estructuralmente adverso al peronismo en 2027.** Renuevan la 1ª (disputada) y la
   4ª, 5ª y 7ª (interior, donde la derecha es fuerte). Ni con el resultado de septiembre llega a
-  47: queda en 44.
+  47: queda en 44 (sólo lo alcanza sumando una movilización peronista fuerte, ver `109`).
 - **El Senado es estructuralmente favorable.** Renueva la 3ª, que el peronismo gana siempre. Sólo
   si se repite octubre queda en 23 de 46: empate, que desempata el vicegobernador, es decir, quien
   gane la Gobernación.
@@ -968,3 +968,74 @@ electos 2027. Mayoría: 47 diputados, 24 senadores.
   senadores (cociente 20 %) y podría sacar uno. La base de octubre no lo tiene (fue una elección
   nacional sin listas vecinales).
 - Las bancas se reparten por lista: si un espacio va en dos listas, la regla cambia el resultado.
+
+---
+
+## 02-11-2026 · Movilización diferencial (`analisis/109`)
+
+**El problema.** El motor subía o bajaba la participación pareja: cada circuito votaba igual, sólo
+más o menos gente, y así la participación movía ±0,1 pp. Pero entre octubre 2025 (67,5 % de los
+nativos) y una general de Gobernador (~76 %) se suman más de un millón de votantes, y **el votante
+marginal no tiene por qué votar como el promedio**.
+
+### Quién es el votante marginal
+
+Por circuito estable, dentro de cada municipio, entre dos elecciones de Diputados Nacionales
+(nativos): cuánto cambia el voto de cada bloque, sobre el padrón, por punto de participación. Es
+la composición de los que entran o salen **si** el cambio de preferencias no va con el cambio de
+participación.
+
+| Par | Cambio de participación | Peronismo | Derecha | Otros | Blanco | Separable |
+|---|---|---|---|---|---|---|
+| 2017 → 2019 | +3,4 pp | 0,53 | 0,31 | −0,05 | 0,21 | sí |
+| 2019 → 2021 | −9,5 pp | 1,34 | 0,08 | −0,67 | 0,25 | **no** (más de 100 %: conversión y abstención mezcladas) |
+| 2021 → 2023 | +4,6 pp | 0,28 | 0,66 | −0,14 | 0,21 | sí |
+| 2023 → 2025 | −9,9 pp | 0,57 | 0,12 | 0,11 | 0,20 | sí |
+
+Y la **matriz del `102`** dice otra cosa para 2023 → 2025: de los que votaron en 2023 y no fueron
+en octubre 2025, 30 % había votado a Kicillof, 33 % a Santilli o Píparo y 37 % en blanco. Las dos
+mediciones no coinciden y los pares no se parecen: **quién se moviliza depende de la elección**
+(en 2023 se movilizó el voto de LLA, en 2019 el peronista). No hay un votante marginal estable que
+el motor pueda dar por sabido.
+
+### El motor con perfil de movilización
+
+Los votantes de la elección base votan con las preferencias del escenario, con la participación
+de esa elección en cada circuito; los que se suman hasta el 76 % votan según un **perfil** (los
+negativos chicos se llevan a cero). Perfiles: parejo (como el promedio provincial), retorno 2023
+(matriz del `102`) y los tres pares separables.
+
+| Base | Perfil de los que se suman | Margen (derecha unida) | P(gana el peronismo) | Margen (derecha dividida, PRO 25 %) | Diputados / senadores peronistas (unida) |
+|---|---|---|---|---|---|
+| Octubre | Parejo | +0,2 | 57 % | +10,3 | 41 / 23 |
+| Octubre | Retorno 2023 | −0,1 | 47 % | +10,2 | 41 / 23 |
+| Octubre | Como 2017 → 2019 | +2,7 | 93 % | +12,7 | 42 / 23 |
+| Octubre | Como 2021 → 2023 | −3,6 | 3 % | +7,2 | 39 / 23 |
+| Octubre | Como 2023 → 2025 (vuelven) | +5,5 | 99 % | +15,0 | 44 / 25 |
+| Septiembre | Parejo | +13,3 | 100 % | +21,5 | 45 / 27 |
+| Septiembre | Como 2021 → 2023 | +5,7 | 99 % | +15,3 | 42 / 25 |
+| Septiembre | Como 2023 → 2025 (vuelven) | +19,3 | 100 % | +26,9 | 47 / 27 |
+
+(Septiembre parte de 63,5 % de participación: se suman 12,5 puntos, por eso el perfil pesa más.)
+
+**Lecturas.**
+
+- **Quién se moviliza vale 9 puntos de margen.** Desde octubre, de −3,6 a +5,5 según el perfil;
+  la probabilidad de que gane el peronismo va de 3 % a 99 %. Sin contar la preferencia misma y la
+  unidad de la derecha, es la palanca más grande del motor: diez veces más que padrón, extranjeros
+  y participación pareja juntos.
+- **Que vuelvan los abstencionistas de 2025 con su voto de 2023 es neutro** (−0,1): volverían
+  tantos votantes de Kicillof como de Santilli y Píparo.
+- **Desde septiembre ningún perfil da vuelta la elección**, y con una movilización peronista fuerte
+  el peronismo llegaría a 47 diputados.
+- **La derecha dividida domina todo**: dividida, ningún perfil le alcanza (margen peronista de +7 a
+  +27).
+
+### Lo que no dice
+
+- Las pendientes son ecológicas y asumen que la conversión no va con el cambio de participación;
+  2019 → 2021 muestra que a veces sí va.
+- El perfil es único para toda la provincia; el votante marginal del Conurbano puede no ser el del
+  interior.
+- Es la palanca menos medible: es un parámetro de campaña, no un dato. La encuesta con recuerdo de
+  voto y probabilidad de ir a votar es lo que la puede acotar.

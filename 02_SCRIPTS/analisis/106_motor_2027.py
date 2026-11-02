@@ -101,6 +101,16 @@ def participacion_2023(ce_index) -> pd.Series:
     return ((g.electores - g.NO_VOTO) / g.electores).reindex(ce_index)
 
 
+def participacion_octubre(ce_index) -> pd.Series:
+    eq = pd.read_csv(PROC / "circuitos_equivalencias.csv", dtype=str)
+    eq = eq[eq.ventana == "2023_2025"][["circuito", "ce_id"]]
+    p = pd.read_parquet(PROC / "panel_circuito.parquet",
+                        columns=["anio", "tipo", "cargo", "circuito", "electores_nativos", "votantes_nativos"])
+    x = p[(p.anio == 2025) & (p.tipo == "GENERALES") & (p.cargo == "DIPUTADOS NACIONALES")].drop_duplicates("circuito")
+    x = x.merge(eq, on="circuito").groupby("ce_id")[["electores_nativos", "votantes_nativos"]].sum().astype(float)
+    return (x.votantes_nativos / x.electores_nativos).reindex(ce_index)
+
+
 def septiembre_municipio() -> pd.DataFrame:
     """Septiembre 2025 sólo nativos por municipio, en bloques (el `103`)."""
     pm = pd.read_parquet(PROC / "panel_municipio.parquet")
@@ -155,6 +165,8 @@ class Motor:
         crec = (self.info.electores_2025 / self.info.electores_2023).clip(0.8, 1.3).fillna(1.0)
         self.el27 = (self.info.electores_2025 * crec).to_numpy()
         self.p23 = p23[ok].to_numpy()
+        p25 = participacion_octubre(self.ce)
+        self.p25 = p25.fillna(p25.median()).to_numpy()
         claves = pd.read_csv(PROC / "municipios_claves.csv", dtype=str).set_index("cod_indec")
         self.seccion = self.muni.map(claves.seccion_electoral).to_numpy()
         self.nombre_muni = claves.municipio_nombre
@@ -195,7 +207,8 @@ class Motor:
 
     def simular(self, base: str, metas: dict | None, part: float = 0.76, part_ext: float | None = None,
                 sd_provincial: float = 0.02, regimen: str = "oferta estable", n: int = N_SIM, semilla: int = 0,
-                pi_prov: float | None = None, sd_pi_provincial: float = 0.0) -> dict:
+                pi_prov: float | None = None, sd_pi_provincial: float = 0.0,
+                perfil_marginal: dict | None = None, part_base: float | None = None) -> dict:
         """`pi_prov`: si no es None, la derecha va dividida y `pi_prov` es la parte del PRO dentro de
         ella en la provincia (el resto es LLA). `sd_pi_provincial`: incertidumbre de ese reparto."""
         rng = np.random.default_rng(semilla)
@@ -208,6 +221,15 @@ class Motor:
         # Lo que no depende de la simulación: participación por circuito y voto extranjero.
         q = escalar_participacion(self.p23, self.el27, part)
         votantes = self.el27 * q * 0.95  # ~5 % de blanco y nulo
+        if perfil_marginal is not None:
+            # Movilización diferencial: los votantes de la elección base (con su participación por
+            # circuito, llevada a `part_base`) votan con las preferencias del escenario; los que se
+            # suman (o se restan) hasta `part` lo hacen con el perfil dado, no como su circuito.
+            q_base = escalar_participacion(self.p25, self.el27, part_base)
+            q_new = escalar_participacion(self.p25, self.el27, part)
+            v_base = self.el27 * q_base * 0.95
+            d_v = self.el27 * (q_new - q_base)
+            m = np.array([perfil_marginal.get(b, 0.0) for b in BLOQUES])  # el resto del perfil es blanco
         pe = self.ext_part if part_ext is None else pd.Series(part_ext, index=self.ext_el.index)
         ext = self.ext_rep.mul(self.ext_el * pe * 0.95, axis=0).reindex(self.munis).fillna(0).to_numpy(float)
         codigo = {m: k for k, m in enumerate(self.munis)}
@@ -236,11 +258,14 @@ class Motor:
             s /= s.sum(axis=1, keepdims=True)
             s = bt.proporcional(s, self.w, S, iters=40)  # el ruido no cambia el nivel provincial
             ext_k = ext
+            nat5 = s * votantes[:, None]
+            if perfil_marginal is not None:
+                nat5 = np.clip(s * v_base[:, None] + m[None, :] * d_v[:, None], 0, None)
             if pi_prov is not None:
                 # Reparto PRO / LLA: patrón 2023 + ruido municipal, corrido para dar `pi_prov`.
                 objetivo = np.clip(pi_prov + rng.standard_normal() * sd_pi_provincial, 0.01, 0.99)
                 lgi = lg + (rng.standard_t(GL, len(self.munis)) * np.sqrt((GL - 2) / GL) * sig_pi)[cm]
-                der = s[:, 1] * votantes
+                der = nat5[:, 1]
                 lo, hi = -10.0, 10.0
                 for _ in range(40):
                     mid = (lo + hi) / 2
@@ -249,10 +274,10 @@ class Motor:
                     else:
                         hi = mid
                 pi = 1 / (1 + np.exp(-(lgi + mid)))
-                s = np.column_stack([s[:, 0], s[:, 1] * (1 - pi), s[:, 1] * pi, s[:, 2:]])
+                nat5 = np.column_stack([nat5[:, 0], der * (1 - pi), der * pi, nat5[:, 2:]])
                 pim = np.bincount(cm, weights=der * pi) / np.maximum(np.bincount(cm, weights=der), 1)
                 ext_k = np.column_stack([ext[:, 0], ext[:, 1] * (1 - pim), ext[:, 1] * pim, ext[:, 2:]])
-            nat = s * votantes[:, None]
+            nat = nat5
             vm = np.stack([np.bincount(cm, weights=nat[:, b], minlength=len(self.munis)) for b in range(K)], axis=1) + ext_k
             tot = vm.sum(axis=0)
             res.append(tot / tot.sum())
