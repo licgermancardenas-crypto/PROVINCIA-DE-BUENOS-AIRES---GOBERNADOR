@@ -220,3 +220,83 @@ queda NA en ese censo en vez de forzarse:
 Las caídas grandes de cobertura que sobreviven a esos filtros son reales: circuitos que
 crecieron mucho y diluyeron la cobertura con barrios nuevos (La Plata 0463: +84 % de
 población, cloaca de 99 % a 82 %).
+
+---
+
+## 01-11-2026 · Mapeo de espacios políticos (`etl/08`)
+
+**Validado por Germán el 01-11-2026 (D1-D9).** Inventario de todas las listas que compitieron en PBA entre 2005 y 2025, en
+todas las fuentes y categorías: DINE por mesa (2011-2025), definitivo de la Provincia por
+municipio (generales 2005-2023 y PASO 2011-2021: es la única fuente de Gobernador 2007) y
+Junta Electoral 2025. Son 3.607 filas y 688 nombres distintos. Las reglas
+(`config/reglas_mapeo.yaml`) llevan cada una a uno de nueve espacios; el detalle y las nueve
+decisiones abiertas, con su peso, en [`mapeo_espacios.md`](mapeo_espacios.md).
+
+**El espacio nuevo es `TERCERA_VIA`**: el peronismo no K y sus alianzas de centro (Massa,
+Duhalde, De Narváez, Randazzo, Lavagna, Schiaretti, Somos). En PBA ganó en 2013 con 43,5 %.
+
+**Trampa 1 · la DINE puso el año equivocado.** El ZIP de 2013 trae los Diputados provinciales
+de 2013 con «2017» en la columna año (169.361 filas). En el inventario aparecían un Frente
+para la Victoria y un Frente Renovador de 1,6 millones de votos cada uno en 2017. `etl/01`
+ahora toma el año del nombre del archivo y guarda el original en `anio_dato`; se reprocesaron
+las 15 elecciones.
+
+**Trampa 2 · «Unión Celeste y Blanco» no es voto en blanco.** El catálogo de la Provincia
+trae los blancos y nulos como si fueran listas; detectarlos buscando la palabra «BLANCO» se
+comía al Partido Unión Celeste y Blanco (2,5 % en 2021). Se detectan por nombre completo.
+
+**Trampa 3 · cinco maneras de escribir la misma lista.** «ALIANZA JUNTOS» / «JUNTOS»,
+«NUEVO ENCUENTRO (NE)», «FTE DE IZQ. Y DE TRABAJADORES-UNIDAD», «GOBERNADOR/A»,
+«GENERAL» / «GENERALES». La normalización saca el prefijo ALIANZA y las siglas entre
+paréntesis, y expande FTE e IZQ.
+
+**Control.** El mismo mapeo aplicado al provisorio de la DINE y al definitivo de la Provincia
+da los mismos porcentajes por espacio (ver la tabla al final de esta entrada): las reglas no
+dependen de la fuente.
+
+**Resultado del control, con los archivos reprocesados.** Diferencia máxima por espacio entre
+el provisorio DINE y el definitivo de la Provincia, en puntos:
+
+| | Gobernador | Diputados prov. | Senadores prov. |
+|---|---|---|---|
+| 2011 | 0,12 | 0,17 | 0,10 |
+| 2013 | — | 0,06 | 0,08 |
+| 2015 | 0,11 | 0,08 | 0,14 |
+| 2017 | — | 0,04 | 0,02 |
+| 2019 | 0,11 | 0,12 | 0,11 |
+| 2021 | — | 0,08 | 0,08 |
+| 2023 | 0,08 | 0,09 | 0,04 |
+
+Cobertura: 0,08 % de los votos positivos queda sin regla.
+
+---
+
+## 01-11-2026 · Panel armonizado (`etl/09`)
+
+`panel_circuito.parquet`: 433.636 filas, circuito × elección × categoría × espacio, 71
+elecciones × categorías de 2011 a 2025, con electores y votantes **separados en nativos y
+extranjeros**. Suma exactamente lo mismo que el ETL 01 (0 votos de diferencia), y en cada
+circuito los votos por espacio suman los votantes.
+
+`panel_municipio.parquet`: 91.781 filas, las tres fuentes con la columna `fuente`: DINE
+agregada, definitivo de la Provincia (2005-2023, PASO 2011-2021) y Junta 2025. Es donde vive
+Gobernador 2007 y el definitivo oficial.
+
+**Gobernador, definitivo de la Provincia, % de los positivos:**
+
+| | Peronismo | Tercera vía | PRO/JxC | LLA | Centro/UCR | Izquierda | Participación |
+|---|---|---|---|---|---|---|---|
+| 2007 | 48,2 | — | 15,9 | — | 21,6 | 4,5 | 77,3 |
+| 2011 | 61,7* | 21,8 | — | — | 13,5 | 3,1 | 80,8 |
+| 2015 | 35,3 | 19,3 | 39,4 | — | 2,4 | 3,7 | 80,5 |
+| 2019 | 52,4 | 5,1 | 38,3 | — | — | 2,8 | 80,0 |
+| 2023 | 45,0 | — | 26,6 | 24,6 | — | 3,9 | 75,5 |
+
+\* Scioli 55,1 % + Nuevo Encuentro 6,5 % (D8).
+
+**Marca de calidad.** 711 de 63.698 circuito-elección-categoría (0,02 % de los votantes)
+tienen participación de más de 100 % o de menos de 30 %: circuitos de ~80 electores con el
+padrón mal cargado en el provisorio. Quedan marcados en `participacion_anomala`, no borrados.
+
+**Lo que todavía no permite:** seguir un circuito en el tiempo. Los circuitos cambian entre
+años (1.064 con voto en 2011, 1.047 en 2023) y falta la tabla de equivalencias (etapa 1.9).

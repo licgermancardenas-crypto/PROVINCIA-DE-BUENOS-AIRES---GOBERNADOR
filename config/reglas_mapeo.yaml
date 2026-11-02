@@ -1,0 +1,103 @@
+# Reglas agrupación -> espacio político · Atlas PBA
+#
+# VALIDADAS por Germán el 01-11-2026: acepta las recomendaciones D1-D9 de 00_DOCS/mapeo_espacios.md
+#   D1 Alianza LLA 2025 -> LLA_PRO (espacio aparte)      D2 Somos / Provincias Unidas -> TERCERA_VIA
+#   D3 libertarios por fuera 2025 -> LLA                  D4 listas 2025 sin verificar -> OTROS (verificar Propuesta Federal)
+#   D5 PJ / Frente Justicialista 2005 -> TERCERA_VIA      D6 UDESO 2011 por categoría
+#   D7 Concertación UNA 2007 -> CENTRO_UCR                D8 Nuevo Encuentro 2011 -> PERONISMO
+#   D9 UCeDe 2005-2007 -> OTROS
+#
+# Espacios
+#   PERONISMO     el frente peronista principal (FPV, Unidad Ciudadana, Frente de Todos, UxP, Fuerza Patria)
+#                 y sus aliados que compiten aparte (Nuevo Encuentro 2011)
+#   TERCERA_VIA   peronismo no kirchnerista y sus alianzas de centro: Duhalde, Rodríguez Saá, De Narváez,
+#                 Massa (2013-2017), Randazzo, Lavagna, Schiaretti, Somos / Provincias Unidas
+#   PRO_JXC       PRO, Cambiemos, Juntos por el Cambio, Juntos
+#   LLA           libertarios: Espert (2019), Avanza Libertad (2021), LLA (2023) y listas libertarias por fuera
+#   LLA_PRO       la alianza LLA + PRO de 2025 (provincial y nacional): el voto PRO está adentro y no se separa
+#   CENTRO_UCR    UCR sola, Coalición Cívica, progresismo no peronista (FAP, Stolbizer, GEN, socialismo)
+#   IZQUIERDA     FIT y la izquierda trotskista; centroizquierda no peronista menor (Proyecto Sur, Libres del Sur)
+#   VECINAL       partidos de un solo municipio (o casi): ver la regla de datos al final
+#   OTROS         el resto (derecha confesional, nacionalistas, listas chicas sin identificar)
+#   No positivos: BLANCO · NULO
+#
+# Cómo se aplica (02_SCRIPTS/etl/08_mapeo_espacios.py):
+#   - `patron`: regex sobre el nombre normalizado (MAYÚSCULAS, sin acentos ni signos, espacios simples).
+#   - `anios` [desde, hasta] y `cargos` (regex sobre el cargo normalizado) son filtros opcionales.
+#   - Gana la PRIMERA regla que matchea: el orden importa (lo específico arriba).
+#   - `ambiguo: true` va a la lista de decisiones; `alternativas` son los otros destinos razonables.
+#   - Sin regla: si la lista es municipal (intendente/concejales/consejeros) o aparece en <= 2
+#     municipios, VECINAL; si no, SIN_REGLA (y se reporta).
+
+reglas:
+
+  # ============ no positivos (el catálogo PBA los trae como «lista») ===========================
+  - {patron: "^VOTOS? EN BLANCO$|^EN BLANCO$|^BLANCO$", espacio: BLANCO}
+  - {patron: "^VOTOS? NULOS?$|^NULOS?$|RECURRID|IMPUGNAD", espacio: NULO}
+
+  # ============ 2025 =============================================================================
+  - {patron: "^(ALIANZA )?LA LIBERTAD AVANZA$", anios: [2025, 2025], espacio: LLA_PRO, ambiguo: true,
+     alternativas: [LLA, PRO_JXC], motivo: "D1 · 2025: alianza LLA+PRO en PBA, provincial y nacional. No se puede separar el voto PRO"}
+  - {patron: "^(ALIANZA )?FUERZA PATRIA$", espacio: PERONISMO}
+  - {patron: "^(ALIANZA )?SOMOS BUENOS AIRES$", espacio: TERCERA_VIA, ambiguo: true, alternativas: [CENTRO_UCR],
+     motivo: "D2 · Somos: UCR, GEN, CC e intendentes peronistas no K. Mitad radical, mitad tercera vía"}
+  - {patron: "^(ALIANZA )?PROVINCIAS UNIDAS$", espacio: TERCERA_VIA, ambiguo: true, alternativas: [CENTRO_UCR],
+     motivo: "D2 · Oct-2025 nacional: la marca nacional de Somos"}
+  - {patron: "^(ALIANZA )?UNION Y LIBERTAD$|^(PARTIDO )?LIBERTARIO$|^(ALIANZA )?UNION LIBERAL$", anios: [2025, 2025],
+     espacio: LLA, ambiguo: true, alternativas: [OTROS], motivo: "D3 · Libertarios por fuera de la alianza LLA+PRO"}
+  - {patron: "^ESP ABIERTO PARA EL DES", espacio: VECINAL, motivo: "Espacio Abierto (San Nicolás): ganó el distrito en 2025 con 50,9 %"}
+  - {patron: "^(MOVIMIENTO POLITICO SOCIAL Y CULTURAL )?PROYECTO SUR$|^(ALIANZA )?PROYECTO SUR$", espacio: IZQUIERDA,
+     ambiguo: true, alternativas: [OTROS], motivo: "Centroizquierda no peronista (Solanas)"}
+  - {patron: "^PROPUESTA FEDERAL PARA EL CAMBIO$|^(ALIANZA )?POTENCIA$|^(ALIANZA )?NUEVOS AIRES$|^PARTIDO NUEVO BUENOS AIRES$|^(ALIANZA )?UNION FEDERAL$|^(ALIANZA )?ES CON VOS ES CON NOSOTROS$",
+     anios: [2025, 2025], espacio: OTROS, ambiguo: true, alternativas: [TERCERA_VIA, LLA, PRO_JXC],
+     motivo: "D4 · Listas 2025 entre 0,3 % y 2,8 % sin composición verificada"}
+
+  # ============ izquierda (todas las épocas) ======================================================
+  - {patron: "FRENTE DE IZQUIERDA|FTE DE IZQUIERDA|IZQUIERDA AL FRENTE|FRENTE IZQ|UNIDAD DE LA IZQ", espacio: IZQUIERDA}
+  - {patron: "\\bPTS\\b|IZQUIERDA SOCIALISTA", espacio: IZQUIERDA}
+  - {patron: "MOVIMIENTO AL SOCIALISMO|MOVIM AL SOCIALISMO|AVANZADA SOCIALISTA|POLITICA OBRERA|PARTIDO OBRERO|^OBRERO$|SOCIALISTA DE LOS TRABAJADORES|MOV SOCIALISTA|SOCIALISTA AUTENTICO|FRENTE SOCIALISTA Y POPULAR|COMUNISTA|NUEVO MAS|LIGA SOCIALISTA|TRABAJADORES POR EL SOCIALISMO|CONVERGENCIA SOCIALISTA",
+     espacio: IZQUIERDA}
+  - {patron: "LIBRES DEL SUR|PATRIA GRANDE", espacio: IZQUIERDA, ambiguo: true, alternativas: [PERONISMO, OTROS],
+     motivo: "Centroizquierda / movimientos sociales; según el año, aliados del peronismo"}
+
+  # ============ peronismo ========================================================================
+  - {patron: "^PARTIDO JUSTICIALISTA$|^FRENTE JUSTICIALISTA$", anios: [2005, 2005], espacio: TERCERA_VIA, ambiguo: true,
+     alternativas: [PERONISMO], motivo: "D5 · 2005: el PJ de Duhalde (Chiche) contra el FPV de Cristina"}
+  - {patron: "^FRENTE JUSTICIALISTA$", anios: [2017, 2017], espacio: TERCERA_VIA, motivo: "2017: Randazzo"}
+  - {patron: "FRENTE PARA LA VICTORIA|FRENTE DE TODOS|UNION POR LA PATRIA|UNIDAD CIUDADANA|^PARTIDO JUSTICIALISTA$|^PARTIDO DE LA VICTORIA$|^FRENTE JUSTICIALISTA$",
+     espacio: PERONISMO}
+  - {patron: "^NUEVO ENCUENTRO$", anios: [2011, 2011], espacio: PERONISMO, ambiguo: true, alternativas: [IZQUIERDA],
+     motivo: "Sabbatella 2011: lista propia a gobernador, colectora de Cristina a presidente"}
+
+  # ============ tercera vía =======================================================================
+  - {patron: "UNION PARA EL DESARROLLO SOCIAL", cargos: "GOBERNADOR|DIPUTADO.*PROVINCIAL|SENADOR.*PROVINCIAL", espacio: TERCERA_VIA,
+     ambiguo: true, alternativas: [CENTRO_UCR], motivo: "D6 · UDESO 2011: De Narváez a gobernador, Alfonsín (UCR) a presidente"}
+  - {patron: "UNION PARA EL DESARROLLO SOCIAL", espacio: CENTRO_UCR, ambiguo: true, alternativas: [TERCERA_VIA],
+     motivo: "D6 · UDESO 2011 en categorías nacionales: la encabeza la UCR"}
+  - {patron: "FRENTE RENOVADOR|UNIDOS POR UNA NUEVA ALTERNATIVA|^1 ?PAIS$|CONSENSO FEDERAL|HACEMOS POR NUESTRO PAIS|VAMOS CON VOS|COMPROMISO FEDERAL|^(ALIANZA )?FRENTE POPULAR$|UNIDOS POR LA LIBERTAD Y EL TRABAJO|PARTIDO RENOVADOR FEDERAL|^RENOVADOR FEDERAL$",
+     espacio: TERCERA_VIA}
+
+  # ============ PRO / Cambiemos / JxC =============================================================
+  - {patron: "^(ALIANZA )?CAMBIEMOS( BUENOS AIRES)?$|^JUNTOS POR EL CAMBIO$|^JUNTOS$|^UNION ?PRO$|PROPUESTA REPUBLICANA", espacio: PRO_JXC}
+  - {patron: "RECREAR", espacio: PRO_JXC, ambiguo: true, alternativas: [OTROS], motivo: "López Murphy 2007: después confluyó en el PRO"}
+
+  # ============ libertarios =======================================================================
+  - {patron: "^LA LIBERTAD AVANZA$|^AVANZA LIBERTAD$|UNITE POR LA LIBERTAD|DESPERTAR", espacio: LLA}
+  - {patron: "UNION DE CENTRO DEMOCRATICO|^UCEDE$", espacio: OTROS, ambiguo: true, alternativas: [LLA, PRO_JXC],
+     motivo: "UCeDe 2005-2007: liberal, anterior al ciclo libertario"}
+
+  # ============ centro / UCR / progresismo no peronista ===========================================
+  - {patron: "UNION CIVICA RADICAL|FRENTE AMPLIO PROGRESISTA|FRENTE PROGRESISTA CIVICO Y SOCIAL|^(ALIANZA )?PROGRESISTAS$|COALICION CIVICA|AFIRMACION PARA UNA REPUBLICA|^ARI$|^GEN$|GENERACION PARA UN ENCUENTRO|^PARTIDO SOCIALISTA$",
+     espacio: CENTRO_UCR}
+  - {patron: "CONCERTACION UNA", espacio: CENTRO_UCR, ambiguo: true, alternativas: [TERCERA_VIA],
+     motivo: "D7 · 2007: Lavagna con la UCR"}
+
+  # ============ otros con nombre propio ===========================================================
+  - {patron: "FRENTE NOS|^\\+? ?VALORES$|UNION CON FE|CELESTE|PROVIDA|UNIDAD FEDERALISTA|PAUFE|FRENTE PATRIOTA|BANDERA VECINAL|CONSERVADOR|HUMANISTA|^VERDE$|VOCACION SOCIAL|REPUBLICANO FEDERAL|UNION POR EL FUTURO|UNION POR TODOS|^FEDERAL$|TODOS POR BUENOS AIRES|^CREO$|FRENTE POPULAR DEMOCRATICO Y SOCIAL|GENTE EN ACCION|^POPULAR$|SOCIEDAD JUSTA|PROGRESO SOCIAL|PROYECTO JUSTO|UNION FEDERAL|ENCUENTRO AMPLIO|BONAERENSE AUTONOMISTA|INTEGRACION Y DESARROLLO|^(PARTIDO )?FEDERAL$|RECONSTRUCCION|VALORES REPUBLICANOS|CONSTRUYENDO PORVENIR|TIEMPO DE TODOS",
+     espacio: OTROS}
+
+  - {patron: "^VAMOS$", anios: [2007, 2007], espacio: OTROS, ambiguo: true, alternativas: [],
+     motivo: "Lista «Vamos» 2007 (1,3 % a gobernador): sin identificar"}
+
+  # ============ vecinalismo por nombre ============================================================
+  - {patron: "VECINAL|VECINOS|ACCION MARPLATENSE|NUEVO MORON|ACCION COMUNAL|MOVIMIENTO H A C E R", espacio: VECINAL}

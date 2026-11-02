@@ -12,12 +12,12 @@ Orden pensado para que cada etapa deje algo usable aunque la siguiente no llegue
 | 1.1 | Bajar los escrutinios por mesa de la DINE 2011-2025 y el catálogo PBA | `etl/00` | ✅ (falta PASO 2015) |
 | 1.2 | Filtrar PBA por mesa, un parquet por elección, con control de totales | `etl/01` | ✅ 15 elecciones |
 | 1.3 | Geometrías: partidos, secciones electorales, circuitos + claves DINE↔INDEC | `etl/02` | ✅ |
-| 1.4 | Validar el provisorio contra el definitivo por municipio (catálogo PBA 2005-2023) | `etl/06` | ⬜ |
-| 1.5 | Mapeo agrupación → espacio político, 2007-2025 (`config/reglas_mapeo.yaml`) | `etl/07` | ⬜ |
-| 1.6 | Panel armonizado circuito × elección × categoría × espacio | `etl/08` | ⬜ |
+| 1.4 | Validar el provisorio contra el definitivo por municipio: ≤ 0,17 pp por espacio en todas las categorías provinciales | `etl/08` | ✅ |
+| 1.5 | Mapeo agrupación → espacio político, 2005-2025, validado (D1-D9) | `etl/08` | ✅ |
+| 1.6 | Panel armonizado circuito × elección × categoría × espacio, y por municipio con todas las fuentes | `etl/09` | ✅ |
 | 1.7 | **Septiembre 2025, provincial desdoblada**: definitivo por municipio ✅ (`etl/05`); por mesa ⬜ (portal dado de baja, buscar en Wayback) | `etl/05` | 🔶 |
-| 1.8 | Gobernador 2007 (anterior a la serie por mesa de la DINE) por municipio | — | ⬜ |
-| 1.9 | Circuitos estables en el tiempo: tabla de equivalencias 2011-2025 (1.047 circuitos en 2023, 934 en 2011) | — | ⬜ |
+| 1.8 | Gobernador 2007 (anterior a la serie por mesa de la DINE) por municipio | `etl/09` | ✅ en `panel_municipio` |
+| 1.9 | Circuitos estables en el tiempo: tabla de equivalencias 2011-2025 (1.064 circuitos con voto en 2011, 1.047 en 2023) | — | ⬜ ← próximo |
 
 Las elecciones a Gobernador con dato por mesa: **2011, 2015, 2019, 2023** (simultáneas con la
 nacional, vienen en el archivo de la DINE). Más las legislativas 2013, 2017, 2021, la provincial

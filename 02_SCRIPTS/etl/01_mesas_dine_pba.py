@@ -19,6 +19,9 @@ Qué supone:
 - La máquina tiene poca RAM y el CSV de 2023 pesa 1 GB descomprimido: se filtra en streaming y
   se escribe en bloques. Nunca se carga el país entero.
 
+- El año de cada fila es el del archivo. La columna año de la DINE no es confiable: el ZIP de 2013
+  trae los Diputados provinciales con 2017. Queda el original en `anio_dato`.
+
 Qué no puede afirmar: es el **provisorio**. Faltan mesas (telegramas no transmitidos) y los
 totales no coinciden al voto con el definitivo; el control lo cuantifica. En elecciones con
 Gobernador, la categoría provincial va en el mismo archivo con el mismo `mesa_id`.
@@ -68,13 +71,16 @@ def normalizar_nombre(c: str) -> str:
     return "anio" if c.startswith("a") and c.endswith("o") and 3 <= len(c) <= 4 else c
 
 
-def a_tabla(filas: list[list[str]]) -> pa.Table:
+def a_tabla(filas: list[list[str]], anio_archivo: int) -> pa.Table:
     df = pd.DataFrame(filas, columns=COLS)
     for c in df.columns:
         df[c] = df[c].str.strip()
     for c in ENTEROS:
         df[c] = pd.to_numeric(df[c], errors="coerce").astype("Int64")
-    df["anio"] = pd.to_numeric(df["anio"], errors="coerce").astype("Int16")
+    # El año sale del archivo, no de la columna: el ZIP de 2013 trae los Diputados provinciales
+    # con «2017» en la columna año (169.361 filas en PBA). El original queda en `anio_dato`.
+    df["anio_dato"] = pd.to_numeric(df["anio"], errors="coerce").astype("Int16")
+    df["anio"] = pd.Series(anio_archivo, index=df.index, dtype="Int16")
     return pa.Table.from_pandas(df, preserve_index=False)
 
 
@@ -101,12 +107,12 @@ def procesar(zpath: Path) -> dict:
             filas.append([fila[i] for i in orden])
             n_pba += 1
             if len(filas) >= BLOQUE:
-                t = a_tabla(filas)
+                t = a_tabla(filas, int(anio))
                 escritor = escritor or pq.ParquetWriter(destino, t.schema, compression="zstd")
                 escritor.write_table(t.cast(escritor.schema))
                 filas = []
     if filas:
-        t = a_tabla(filas)
+        t = a_tabla(filas, int(anio))
         escritor = escritor or pq.ParquetWriter(destino, t.schema, compression="zstd")
         escritor.write_table(t.cast(escritor.schema))
     if escritor:
