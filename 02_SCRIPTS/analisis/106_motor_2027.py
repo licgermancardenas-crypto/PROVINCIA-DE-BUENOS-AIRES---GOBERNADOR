@@ -218,7 +218,7 @@ class Motor:
         sig_m = r.escala * np.exp(r.a + r.b * np.log(w_m))
         sig_pi = RUIDO_PI["escala"] * np.exp(RUIDO_PI["a"] + RUIDO_PI["b"] * np.log(w_m))
         lg = np.log(self.pi23 / (1 - self.pi23))
-        res, primero_m, sh_m, primero_s, sh_s = [], [], [], [], []
+        res, primero_m, sh_m, primero_s, sh_s, sec_votos = [], [], [], [], [], []
         for _ in range(n):
             # Shock provincial: se mueve el margen peronismo − derecha.
             d = rng.standard_t(GL) * np.sqrt((GL - 2) / GL) * sd_provincial
@@ -260,6 +260,7 @@ class Motor:
             sh_m.append(vm / vm.sum(axis=1, keepdims=True))
             vs = np.stack([np.bincount(sec_de_muni, weights=vm[:, b], minlength=len(sec_ids)) for b in range(K)], axis=1)
             primero_s.append(vs.argmax(axis=1))
+            sec_votos.append(vs)
             sh_s.append(vs / vs.sum(axis=1, keepdims=True))
         R = np.array(res) * 100
         PM, PS = np.array(primero_m), np.array(primero_s)
@@ -273,7 +274,7 @@ class Motor:
                 "muni_sh": np.array(sh_m).mean(axis=0)[:, 0] * 100, "muni_sh_k": np.array(sh_m).mean(axis=0) * 100,
                 "sec_p": (PS == 0).mean(axis=0), "sec_p_k": np.stack([(PS == k).mean(axis=0) for k in range(K)], axis=1),
                 "sec_sh": np.array(sh_s).mean(axis=0)[:, 0] * 100, "sec_sh_k": np.array(sh_s).mean(axis=0) * 100,
-                "sec_ids": sec_ids, "S_esc": S_esc * 100, "s_esc": s_esc}
+                "sec_ids": sec_ids, "sec_votos": np.array(sec_votos), "S_esc": S_esc * 100, "s_esc": s_esc}
 
 
 def main() -> None:

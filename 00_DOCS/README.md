@@ -915,3 +915,56 @@ peronismo por el padrón 2027 y los extranjeros.
 - No hay voto útil ni transferencias hacia otros espacios al dividirse: la derecha dividida suma lo
   mismo que unida. Si al dividirse pierde votos hacia la tercera vía o la abstención, el resultado
   es todavía mejor para el peronismo.
+
+---
+
+## 02-11-2026 · La Legislatura 2027 (`analisis/108`)
+
+**La regla** (Ley 5.109, texto ordenado, arts. 115 y 116, leído del texto de la Cámara de
+Diputados bonaerense): en cada sección, cociente = votos positivos / bancas; cada lista recibe
+tantas bancas como veces contiene el cociente; **las listas que no llegan al cociente quedan
+afuera**; lo que falta va a los mayores residuos entre las que entraron; si ninguna llega, el piso
+baja a la mitad. El art. 13 del texto ordenado conserva las bancas viejas (84 y 42); se usan las
+vigentes, 92 y 46, que cierran con los totales renovados en 2023 y 2025.
+
+**Qué se elige en 2027** (como en 2023, al revés que en 2025): diputados en la 1ª (15), 4ª (14),
+5ª (11) y 7ª (6); senadores en la 2ª (5), 3ª (9), 6ª (6) y 8ª (3). Siguen hasta 2029 los electos
+en 2025.
+
+**Validación.** La regla aplicada a los votos por lista de 2025 da Diputados: Fuerza Patria 21,
+LLA 18, Espacio Abierto 3, Somos 2, FIT 2; Senado: Fuerza Patria 13, LLA 8, Somos 2. Coincide con
+el escrutinio publicado (21 / 18 / 2 y 13 / 8). En 2023: Diputados UxP 18, JxC 15, LLA 13; Senado
+UxP 11, JxC 7, LLA 5.
+
+### 2027 (500 simulaciones del motor por escenario)
+
+| Escenario | Diputados 2027 (de 46) | Senadores 2027 (de 23) | Peronismo en Diputados (de 92) | Peronismo en el Senado (de 46) |
+|---|---|---|---|---|
+| A · Octubre, derecha unida | Per 19, Der 27 | Per 10, Der 13 | 40 (mayoría: 0 %) | 23 (mayoría: 15 %) |
+| B · Septiembre, derecha unida | Per 23, Der 18, Ter 4 | Per 14, Der 9 | 44 (0 %) | 27 (100 %) |
+| C · Punto medio | Per 22, Der 23, Ter 1 | Per 12, Der 11 | 43 (0 %) | 25 (99 %) |
+| A · Octubre, dividida (PRO 25 %) | Per 20, LLA 19, PRO 6 | Per 14, LLA 9 | 41 (0 %) | 27 (100 %) |
+| A · Octubre, dividida (PRO 52 %) | Per 20, LLA 12, PRO 14 | Per 12, LLA 5, PRO 6 | 41 (0 %) | 25 (100 %) |
+
+Medianas. Composición de cada cámara = electos 2025 (peronismo: 21 diputados y 13 senadores) +
+electos 2027. Mayoría: 47 diputados, 24 senadores.
+
+**Lecturas.**
+
+- **Diputados es estructuralmente adverso al peronismo en 2027.** Renuevan la 1ª (disputada) y la
+  4ª, 5ª y 7ª (interior, donde la derecha es fuerte). Ni con el resultado de septiembre llega a
+  47: queda en 44.
+- **El Senado es estructuralmente favorable.** Renueva la 3ª, que el peronismo gana siempre. Sólo
+  si se repite octubre queda en 23 de 46: empate, que desempata el vicegobernador, es decir, quien
+  gane la Gobernación.
+- **La derecha dividida no cambia Diputados** (el peronismo pasa de 40 a 41) pero le da el Senado
+  al peronismo (25 a 27 senadores, contra 23 con la derecha unida): partida, cada mitad de la
+  derecha saca menos bancas por residuo.
+
+### Lo que no dice
+
+- El «resto» (listas chicas y vecinales) se supone fragmentado y sin bancas. **Excepción a revisar:**
+  en la 2ª, Espacio Abierto (San Nicolás) sacó 24 % en 2025 y 3 diputados; en 2027 la 2ª elige 5
+  senadores (cociente 20 %) y podría sacar uno. La base de octubre no lo tiene (fue una elección
+  nacional sin listas vecinales).
+- Las bancas se reparten por lista: si un espacio va en dos listas, la regla cambia el resultado.
