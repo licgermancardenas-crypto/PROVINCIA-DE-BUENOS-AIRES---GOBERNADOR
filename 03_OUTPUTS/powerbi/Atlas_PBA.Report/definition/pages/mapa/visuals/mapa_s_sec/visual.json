@@ -3,11 +3,11 @@
   "name": "mapa_s_sec",
   "position": {
     "x": 10,
-    "y": 520,
-    "z": 1130,
+    "y": 252,
+    "z": 1150,
     "width": 232,
-    "height": 92,
-    "tabOrder": 1130
+    "height": 112,
+    "tabOrder": 1150
   },
   "visual": {
     "visualType": "slicer",

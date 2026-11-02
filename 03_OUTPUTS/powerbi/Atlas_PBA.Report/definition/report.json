@@ -17,6 +17,11 @@
           "name": "AtlasAnalytics.json",
           "path": "AtlasAnalytics.json",
           "type": "CustomTheme"
+        },
+        {
+          "name": "pba_municipios.json",
+          "path": "pba_municipios.json",
+          "type": "ShapeMap"
         }
       ]
     }

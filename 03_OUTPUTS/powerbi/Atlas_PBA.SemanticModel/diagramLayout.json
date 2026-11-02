@@ -111,6 +111,58 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1485.4754882024768,
+            "y": 339.12457044209197
+          },
+          "nodeIndex": "capa_mapa",
+          "nodeLineageTag": "2ce72288-ec7b-5ec7-a16b-c2ccadf5bbf8",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1769.4754882024768,
+            "y": 303.12457044209197
+          },
+          "nodeIndex": "escenarios_2027",
+          "nodeLineageTag": "852980c3-eb13-5f54-8589-9b3898d42241",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2053.4754882024768,
+            "y": 291.12457044209197
+          },
+          "nodeIndex": "noticias",
+          "nodeLineageTag": "60a01016-5562-54df-95e8-feeeb4e05c18",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2337.4754882024768,
+            "y": 277.12457044209197
+          },
+          "nodeIndex": "prospectos",
+          "nodeLineageTag": "927f6a20-00ec-52db-b1f8-abf0191c8311",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Todas las tablas",

@@ -475,6 +475,7 @@ def construir(t: dict, esquemas: Path | None) -> None:
                                    "categoryLabels": [{"color": {"solid": {"color": "#A08FC2"}}, "fontSize": 8}],
                                    "card": [{"barShow": True, "barColor": {"solid": {"color": "#C40BFF"}}}]}}}}))
     (rep / "StaticResources" / "RegisteredResources" / "AtlasAnalytics.json").write_text(json.dumps(tema, indent=2, ensure_ascii=False), encoding="utf-8")
+    shutil.copy2(DATOS / "pba_municipios.topojson", rep / "StaticResources" / "RegisteredResources" / b.MAPA)
 
     P = []
     fz = col("dim_fuerza", "fuerza_intendente")
@@ -490,7 +491,7 @@ def construir(t: dict, esquemas: Path | None) -> None:
           ("Zona gris", "Zona gris (judicial)"), ("Prospectos", "Prospectos"), ("Rivales", "Rivales"), ("Prioridad alta", "Prioridad alta")]
     for i, (mm, et) in enumerate(ks):
         tarjeta(p, f"inicio_k{i}", 24 + i * 154, 166, 148, 82, mm, et, ["#F2EBFA", "#F2EBFA", "#FF8A3D", "#3DDC97", "#FFD54F", "#F2EBFA", "#E94F4F", "#C40BFF"][i])
-    menu = [("dashboard", "DASHBOARD · tablero con filtros, tarjetas y gráficos", "#3D6FD9"), ("mapa", "MAPA · quién gobierna, 2027, 2025 y 7 capas más", "#F28C28"),
+    menu = [("dashboard", "DASHBOARD · tablero con filtros, tarjetas y gráficos", "#3D6FD9"), ("mapa", "MAPAS · político, 2027, 2025, motor y 10 capas", "#F28C28"),
             ("ficha", "FICHA · todo de un municipio en una página", "#1F3A6E"), ("prospectos", "PROSPECTOS · CRM de 980 personas", "#C62828"),
             ("noticias", "NOTICIAS · 856 titulares con enlace", "#5A5A6E"), ("elecciones", "ELECCIONES · 2007-2025, animado", "#7B2FBE"),
             ("analisis", "ANÁLISIS 2027 · motor de escenarios y hallazgos", "#C40BFF")]
@@ -536,19 +537,59 @@ def construir(t: dict, esquemas: Path | None) -> None:
                          ("dim_municipio.nivel_oportunidad", "Color oportunidad")])
     P.append(p)
 
-    # ------------------------------------------------------------ Mapa
-    p = Pagina("mapa", "Mapa")
+    # ------------------------------------------------------------ Mapas interactivos (mapa de formas) + mapa de capas (SVG)
+    SUBMAPAS = [("mapa", "POLÍTICO"), ("mapa_2027", "2027"), ("mapa_2025", "2025"), ("mapa_motor", "MOTOR 2027"), ("mapa_capas", "10 CAPAS")]
+
+    def submenu(p, activa):
+        for i, (k, txt) in enumerate(SUBMAPAS):
+            on = k == activa
+            boton(p, f"{p.nombre}_sub_{k}", 10, 56 + i * 38, 232, 34, txt, destino=k, relleno="#C40BFF" if on else "#2B3F7A",
+                  tinta="#12042E" if on else "#F2EBFA", tam=9)
+
+    def pagina_mapa(clave, visible, leyenda, pares, tit, extra=None):
+        p = Pagina(clave, visible)
+        encabezado(p, "mapa")
+        submenu(p, clave)
+        slicer(p, f"{clave}_s_sec", 10, 252, 232, 112, DM("seccion"), "Sección", horizontal=True)
+        slicer(p, f"{clave}_s_tam", 10, 368, 232, 92, tam, "Tamaño", horizontal=True)
+        if extra:
+            extra(p)
+        b.mapa(p, f"{clave}_mapa", 250, 56, 640, 656, leyenda, pares, tit + " · clic en un municipio para filtrar")
+        p.visuales[-1]["visual"]["visualContainerObjects"] |= tooltip_pagina()
+        tarjeta(p, f"{clave}_k1", 898, 56, 182, 70, "Municipios", "Municipios")
+        tarjeta(p, f"{clave}_k2", 1086, 56, 182, 70, "Población", "Población")
+        p.add(f"{clave}_ficha", "multiRowCard", 898, 132, 370, 200,
+              roles={"Values": [DM("municipio"), DM("en_ejercicio"), esp26, esc27, conc]}, contenedor=titulo("Selección"))
+        for prj, n in zip(p.visuales[-1]["visual"]["query"]["queryState"]["Values"]["projections"],
+                          ["Municipio", "En ejercicio", "Espacio 2026", "Escenario 2027", "Concejales 2025"]):
+            prj["displayName"] = n
+        tabla_v(p, f"{clave}_tabla", 898, 338, 370, 374, [DM("municipio"), leyenda, DM("pob")], "Municipios",
+                orden=(DM("pob"), "Descending"), nombres=["Municipio", None, "Población"], tam=8)
+        return p
+
+    P.append(pagina_mapa("mapa", "Mapa político", esp26, C_ESPACIO26, "Espacio que gobierna cada municipio (2026)",
+                         lambda p: slicer(p, "mapa_s_esp", 10, 464, 232, 112, esp26, "Espacio 2026", horizontal=True)))
+    P.append(pagina_mapa("mapa_2027", "Mapa 2027", esc27, C_ESCENARIO, "¿El intendente puede reelegir en 2027?",
+                         lambda p: slicer(p, "mapa_2027_s_esc", 10, 464, 232, 92, esc27, "Escenario 2027", horizontal=True)))
+    P.append(pagina_mapa("mapa_2025", "Mapa 2025", conc, C_CONCEJALES, "Fuerza que ganó concejales (7/9/2025)",
+                         lambda p: slicer(p, "mapa_2025_s_conc", 10, 464, 232, 132, conc, "Ganó concejales 2025", horizontal=True)))
+    P.append(pagina_mapa("mapa_motor", "Mapa motor 2027", col("fact_motor_2027", "rango_p"), b.RANGOS_P,
+                         "Motor 2027: quién gana cada municipio (1.000 simulaciones)",
+                         lambda p: slicer(p, "mapa_motor_s_esc", 10, 464, 232, 112, col("fact_motor_2027", "escenario"), "Escenario del motor",
+                                          unico=True)))
+
+    p = Pagina("mapa_capas", "Mapa de capas")
     encabezado(p, "mapa")
-    slicer(p, "mapa_s_capa", 10, 56, 232, 330, col("capa_mapa", "capa"), "Capa del mapa", unico=True)
-    slicer(p, "mapa_s_el", 10, 392, 232, 58, col("dim_eleccion", "rotulo"), "Elección (capas de voto)", modo="Dropdown", unico=True)
-    slicer(p, "mapa_s_mot", 10, 456, 232, 58, col("fact_motor_2027", "escenario"), "Escenario del motor 2027", modo="Dropdown", unico=True)
-    slicer(p, "mapa_s_sec", 10, 520, 232, 92, DM("seccion"), "Sección", horizontal=True)
-    slicer(p, "mapa_s_esc", 10, 616, 232, 96, esc27, "Escenario 2027", horizontal=True)
-    tarjeta(p, "mapa_tit", 250, 56, 1018, 44, "Título mapa", "Capa", "#E9B6FF", 13)
-    imagen_svg(p, "mapa_prov", 250, 106, 420, 606, "Mapa Provincia", 590)
-    imagen_svg(p, "mapa_conu", 678, 106, 330, 300, "Mapa Conurbano", 285)
-    imagen_svg(p, "mapa_ley", 678, 412, 330, 300, "Leyenda mapa", 230)
-    tabla_v(p, "mapa_tabla", 1016, 106, 252, 606, [DM("municipio"), esp26, esc27], "Clic para resaltar en el mapa",
+    submenu(p, "mapa_capas")
+    slicer(p, "capas_s_capa", 10, 252, 232, 250, col("capa_mapa", "capa"), "Capa del mapa", unico=True)
+    slicer(p, "capas_s_el", 10, 506, 232, 58, col("dim_eleccion", "rotulo"), "Elección (capas de voto)", modo="Dropdown", unico=True)
+    slicer(p, "capas_s_mot", 10, 568, 232, 58, col("fact_motor_2027", "escenario"), "Escenario del motor 2027", modo="Dropdown", unico=True)
+    slicer(p, "capas_s_sec", 10, 630, 232, 82, DM("seccion"), "Sección", horizontal=True)
+    tarjeta(p, "capas_tit", 250, 56, 1018, 44, "Título mapa", "Capa", "#E9B6FF", 13)
+    imagen_svg(p, "capas_prov", 250, 106, 420, 606, "Mapa Provincia", 590)
+    imagen_svg(p, "capas_conu", 678, 106, 330, 300, "Mapa Conurbano", 285)
+    imagen_svg(p, "capas_ley", 678, 412, 330, 300, "Leyenda mapa", 230)
+    tabla_v(p, "capas_tabla", 1016, 106, 252, 606, [DM("municipio"), esp26, esc27], "Clic para resaltar en el mapa",
             nombres=["Municipio", "Espacio", "Escenario"], formato_col=[("dim_municipio.espacio_2026", "Color espacio 2026"), ("dim_municipio.escenario_2027", "Color escenario")], tam=8)
     P.append(p)
 
@@ -724,7 +765,8 @@ def escribir_paginas(rep: Path, P: list) -> None:
         "themeCollection": {"customTheme": {"name": "AtlasAnalytics.json", "reportVersionAtImport": "5.55", "type": "RegisteredResources"}},
         "layoutOptimization": "None",
         "resourcePackages": [{"name": "RegisteredResources", "type": "RegisteredResources",
-                              "items": [{"name": "AtlasAnalytics.json", "path": "AtlasAnalytics.json", "type": "CustomTheme"}]}],
+                              "items": [{"name": "AtlasAnalytics.json", "path": "AtlasAnalytics.json", "type": "CustomTheme"},
+                                        {"name": b.MAPA, "path": b.MAPA, "type": "ShapeMap"}]}],
         "settings": {"useStylableVisualContainerHeader": True, "defaultDrillFilterOtherVisuals": True, "allowChangeFilterTypes": True,
                      "useEnhancedTooltips": True}}, indent=2), encoding="utf-8")
     (rep / "definition.pbir").write_text(json.dumps({
@@ -743,6 +785,7 @@ def main() -> None:
     priv = datos_privados()
     for n, df in priv.items():
         df.to_csv(PRIV / f"{n}.csv", index=False, encoding="utf-8")
+    b.topojson(t["dim_municipio"])
     escribir_modelo(t, priv)
     construir(t, esq)
     print("modelo:", sorted(x.name for x in (PBI / f"{NOMBRE}.SemanticModel" / "definition" / "tables").iterdir()))

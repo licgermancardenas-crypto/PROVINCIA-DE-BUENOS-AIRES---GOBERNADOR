@@ -28,12 +28,14 @@ electoral de Atlas PBA (elecciones 2007-2025, censo, motor de escenarios 2027).
 | Análisis 2027 | Hallazgos, margen por escenario del motor, municipios por probabilidad |
 | Información emergente | Al pasar el mouse sobre un municipio en tablas y gráficos: foto y datos clave |
 
-## El mapa
+## Los mapas
 
-No usa el visual de mapa de formas (en versión preliminar, por eso no aparecía): lo dibuja la
-medida **Mapa Provincia** (y **Mapa Conurbano**) como una imagen SVG que se recalcula con cada
-filtro. Se muestra en una tabla de una celda; si se ve chico, *Formato > Cuadrícula > Alto de la
-imagen*.
+- **Interactivos** (Mapa político, 2027, 2025, Motor 2027): visual **Mapa de formas** con el contorno
+  de los 135 municipios incrustado. Clic en un municipio filtra la página; al pasar el mouse aparece
+  la ficha rápida con foto. Requiere activar una vez *Archivo > Opciones y configuración > Opciones >
+  Características en versión preliminar > Objeto visual de mapa de formas* y reiniciar Power BI.
+- **10 capas** (imagen): la medida **Mapa Provincia** / **Mapa Conurbano** dibuja un SVG que se
+  recalcula con cada filtro; no es clicable, se maneja con la capa, los filtros y la tabla.
 
 ## Privacidad
 
