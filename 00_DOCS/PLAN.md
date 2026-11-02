@@ -66,8 +66,8 @@ entran como parámetro. Legislatura por sección electoral con cociente.
 |---|---|---|
 | 4.1 | Backtest de la regla de traslado (13 pares 2011-2025) y calibración del ruido | ✅ `analisis/105` |
 | 4.2 | Motor de escenarios con Monte Carlo: base octubre o septiembre 2025, padrón 2027, extranjeros, participación | ✅ `analisis/106` |
-| 4.3 | Derecha dividida (LLA y PRO por separado, patrón de 2023) | ⬜ ← próximo |
-| 4.4 | Legislatura 2027 por sección (cociente y renovación por mitades) | ⬜ |
+| 4.3 | Derecha dividida (LLA y PRO por separado, patrón de 2023) | ✅ `analisis/107` |
+| 4.4 | Legislatura 2027 por sección (cociente y renovación por mitades) | ⬜ ← próximo |
 | 4.5 | Movilización diferencial: quién va a votar, no sólo cuántos (el `103` y el `104` dicen que la participación tiene patrón territorial propio) | ⬜ |
 
 ## Etapa 5 · Productos

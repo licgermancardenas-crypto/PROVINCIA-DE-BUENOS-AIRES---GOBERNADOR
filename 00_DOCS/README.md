@@ -812,15 +812,16 @@ Calibrarlo enseñó tres cosas, en este orden:
   2 pp (confianza en el nivel del escenario, no pronóstico); ruido municipal del `105`; el ruido
   se reajusta para no cambiar el nivel provincial.
 
-**Control:** sin ruido, el escenario octubre da 39 municipios peronistas (reales: 36) y el de
-septiembre 100 (reales: 104). La diferencia es el padrón 2027 y el voto extranjero.
+**Control:** sin ruido, el escenario octubre da 39 municipios donde el peronismo le gana a la
+derecha (reales: 36) y el de septiembre 100 (reales: 104). Contando el primer puesto entre todas
+las fuerzas, septiembre da 95: en 4 municipios sale primera la tercera vía. La diferencia es el padrón 2027 y el voto extranjero.
 
 ### Escenarios
 
 | Escenario | Peronismo | Derecha | Margen (p10 a p90) | P(gana el peronismo) | Municipios peronistas |
 |---|---|---|---|---|---|
 | A · Octubre 2025 se repite | 41,5 | 41,3 | +0,3 (−2,0 a +2,5) | 57 % | 39 |
-| B · Septiembre 2025 se repite | 47,2 | 33,9 | +13,4 (+11,1 a +15,6) | 100 % | 100 |
+| B · Septiembre 2025 se repite | 47,2 | 33,9 | +13,4 (+11,1 a +15,6) | 100 % | 95 |
 | C · Punto medio | 44,4 | 37,6 | +6,8 (+4,5 a +9,0) | 100 % | 58 |
 | D · Tercera vía fuerte (12 %, 2/3 de la derecha) | 38,7 | 35,7 | +3,1 (+0,8 a +5,3) | 95 % | 46 |
 | A1 · Octubre, participación 64 % | 41,6 | 41,3 | +0,4 | 61 % | 39 |
@@ -849,3 +850,68 @@ septiembre 100 (reales: 104). La diferencia es el padrón 2027 y el voto extranj
 - **Movilización diferencial**: hoy la participación sube o baja pareja respecto del patrón; el
   `103` y el `104` muestran que quién va a votar cambia según la elección. Eso es lo que separa
   septiembre de octubre, y el motor todavía no lo modela: lo trata como preferencia.
+
+---
+
+## 02-11-2026 · La derecha dividida (`analisis/107`)
+
+**La pregunta.** En 2025 LLA y el PRO fueron juntos. Si en 2027 van separados, con simple
+pluralidad y sin balotaje el peronismo gana con menos votos. La pregunta útil es cuánto.
+
+**Cómo.** El motor (`106`) se generalizó: en cada simulación el bloque de la derecha de cada
+circuito se parte entre LLA y el PRO con el patrón de **Gobernador 2023** (Píparo contra Santilli,
+sólo nativos), corrido para dar el reparto provincial del escenario (más una incertidumbre de 3
+pp en ese reparto). Ruido municipal del reparto: calibrado con el único par con las dos fuerzas,
+Diputados 2021 → Gobernador 2023, que tiene error medio de 5 pp por municipio y correlación 0,72 (el
+reparto PRO / LLA es tres veces más ruidoso que el de peronismo / derecha; en 2019 no hubo lista
+libertaria a diputados en PBA). Los extranjeros se reparten con el patrón de su municipio. **No se
+modela el voto útil**: concentrarse en el que mejor mide equivale a un reparto más desparejo, y la
+grilla lo cubre.
+
+### Escenarios (% de los positivos, padrón 2027 con extranjeros)
+
+| Base | Derecha | Peronismo | LLA | PRO | P(gana el peronismo) | Municipios peronismo / LLA / PRO |
+|---|---|---|---|---|---|---|
+| Octubre 2025 | unida | 41,5 | 41,3 (juntos) | — | 57 % | 39 / 96 (juntos) |
+| Octubre 2025 | PRO 52 % (como 2023) | 41,6 | 19,9 | 21,4 | 100 % | 102 / 7 / 26 |
+| Octubre 2025 | PRO 35 % | 41,6 | 26,9 | 14,4 | 100 % | 99 / 31 / 5 |
+| Octubre 2025 | PRO 25 % | 41,6 | 31,0 | 10,2 | 100 % | 82 / 52 / 1 |
+| Octubre 2025 | PRO 15 % | 41,6 | 35,2 | 6,1 | 99 % | 63 / 72 / 0 |
+| Punto medio | PRO 25 % | 44,4 | 28,3 | 9,3 | 100 % | 103 / 32 / 0 |
+| Septiembre 2025 | PRO 25 % | 47,2 | 25,5 | 8,4 | 100 % | 111 / 13 / 0 |
+
+### La grilla: cuánto puede perder el peronismo contra la derecha unida
+
+Probabilidad de que el peronismo salga primero, según su margen sobre la derecha **unida** (base
+octubre) y la parte del PRO dentro de la derecha:
+
+| Margen sobre la derecha unida | PRO 10 % | 20 % | 30 % | 40 % | 50 % |
+|---|---|---|---|---|---|
+| −20 | 0 | 0 | 0,01 | 0,81 | 1 |
+| −16 | 0 | 0 | 0,41 | 0,95 | 1 |
+| −12 | 0 | 0,35 | 0,96 | 1 | 1 |
+| −8 | 0,10 | 0,76 | 1 | 1 | 1 |
+| −4 | 0,76 | 1 | 1 | 1 | 1 |
+| 0 | 1 | 1 | 1 | 1 | 1 |
+
+Coincide con la cuenta a mano (el peronismo gana si su margen sobre la derecha unida supera
+−T·p/(2−p), con T la suma de los dos y p la parte del PRO), corrida ~1 punto a favor del
+peronismo por el padrón 2027 y los extranjeros.
+
+**Lecturas.**
+
+- **La división de la derecha vale más que cualquier palanca de padrón.** Con el PRO en un 20 % de
+  la derecha, el peronismo puede perder por ~10 puntos contra la derecha unida y seguir primero.
+  La participación y los extranjeros juntos mueven menos de un punto (`106`).
+- **Para la derecha, la unidad decide la elección**; dividida, sólo gana si el PRO queda reducido
+  a menos del ~10 % de su espacio y la derecha unida le ganaría al peronismo por más de 4 puntos.
+- **El mapa.** Dividida, la derecha pierde también los municipios: con un reparto como el de 2023
+  el PRO conserva 26 municipios del interior y LLA casi ninguno.
+
+### Lo que no dice
+
+- El patrón PRO / LLA de 2023 puede no ser el de 2027 (en 2023 LLA recién llegaba); por eso su ruido
+  es grande.
+- No hay voto útil ni transferencias hacia otros espacios al dividirse: la derecha dividida suma lo
+  mismo que unida. Si al dividirse pierde votos hacia la tercera vía o la abstención, el resultado
+  es todavía mejor para el peronismo.

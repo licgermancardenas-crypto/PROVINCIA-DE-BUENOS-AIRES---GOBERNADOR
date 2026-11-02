@@ -69,6 +69,10 @@ A_BLOQUE = {"PERONISMO": "PERONISMO", "LLA_PRO": "DERECHA", "PRO_JXC": "DERECHA"
             "CENTRO_UCR": "TERCERA", "IZQUIERDA": "IZQUIERDA"}
 NO_POS = {"BLANCO", "NULO", "RECURRIDO", "IMPUGNADO", "COMANDO"}
 N_SIM = 1000
+# Derecha dividida: reparto PRO / LLA de cada circuito con el patrón de Gobernador 2023, llevado al
+# reparto provincial del escenario (corrimiento del logit). Ruido municipal del reparto calibrado con
+# Diputados 2021 -> Gobernador 2023 (el único par con las dos fuerzas): log|e| = A + B·log(votos).
+RUIDO_PI = {"a": 1.833, "b": -0.338, "escala": 1.649}
 GL = 5
 
 
@@ -169,6 +173,13 @@ class Motor:
         m_idx = self.muni.groupby(self.muni.to_numpy()).indices
         self.m_idx = m_idx
         self.munis = list(m_idx)
+        eq = pd.read_csv(PROC / "circuitos_equivalencias.csv", dtype=str)
+        eq = eq[eq.ventana == "2023_2025"].set_index("circuito")
+        g = tr.gobernador_2023_nativos().groupby(eq.ce_id).sum().reindex(self.ce)
+        pm = (g.PRO_JXC.groupby(self.muni).transform("sum") /
+              (g.PRO_JXC + g.LLA).groupby(self.muni).transform("sum"))
+        pi = (g.PRO_JXC / (g.PRO_JXC + g.LLA)).where((g.PRO_JXC + g.LLA) >= 30, pm)
+        self.pi23 = pi.fillna(pi.mean()).clip(0.01, 0.99).to_numpy()
 
     def provincia(self, s: np.ndarray, w: np.ndarray | None = None) -> np.ndarray:
         w = self.w if w is None else w
@@ -183,12 +194,17 @@ class Motor:
         return bt.mezcla(s0, self.w, S1)
 
     def simular(self, base: str, metas: dict | None, part: float = 0.76, part_ext: float | None = None,
-                sd_provincial: float = 0.02, regimen: str = "oferta estable", n: int = N_SIM, semilla: int = 0) -> dict:
+                sd_provincial: float = 0.02, regimen: str = "oferta estable", n: int = N_SIM, semilla: int = 0,
+                pi_prov: float | None = None, sd_pi_provincial: float = 0.0) -> dict:
+        """`pi_prov`: si no es None, la derecha va dividida y `pi_prov` es la parte del PRO dentro de
+        ella en la provincia (el resto es LLA). `sd_pi_provincial`: incertidumbre de ese reparto."""
         rng = np.random.default_rng(semilla)
         s_esc = self.escenario(base, metas)
         S_esc = self.provincia(s_esc)
         r = self.ruido.loc[regimen]
         gl = None if pd.isna(r.gl_t) else int(r.gl_t)
+        nombres = BLOQUES if pi_prov is None else ["PERONISMO", "LLA", "PRO", "TERCERA", "IZQUIERDA", "RESTO"]
+        K = len(nombres)
         # Lo que no depende de la simulación: participación por circuito y voto extranjero.
         q = escalar_participacion(self.p23, self.el27, part)
         votantes = self.el27 * q * 0.95  # ~5 % de blanco y nulo
@@ -200,7 +216,9 @@ class Motor:
         sec_de_muni = np.array([sec_ids.index(self.seccion[self.m_idx[m][0]]) for m in self.munis])
         w_m = np.bincount(cm, weights=self.w)
         sig_m = r.escala * np.exp(r.a + r.b * np.log(w_m))
-        res, muni_gana, muni_sh, sec_gana, sec_sh = [], [], [], [], []
+        sig_pi = RUIDO_PI["escala"] * np.exp(RUIDO_PI["a"] + RUIDO_PI["b"] * np.log(w_m))
+        lg = np.log(self.pi23 / (1 - self.pi23))
+        res, primero_m, sh_m, primero_s, sh_s = [], [], [], [], []
         for _ in range(n):
             # Shock provincial: se mueve el margen peronismo − derecha.
             d = rng.standard_t(GL) * np.sqrt((GL - 2) / GL) * sd_provincial
@@ -217,22 +235,44 @@ class Motor:
             s[:, 1] *= np.exp(-fac / 2)
             s /= s.sum(axis=1, keepdims=True)
             s = bt.proporcional(s, self.w, S, iters=40)  # el ruido no cambia el nivel provincial
+            ext_k = ext
+            if pi_prov is not None:
+                # Reparto PRO / LLA: patrón 2023 + ruido municipal, corrido para dar `pi_prov`.
+                objetivo = np.clip(pi_prov + rng.standard_normal() * sd_pi_provincial, 0.01, 0.99)
+                lgi = lg + (rng.standard_t(GL, len(self.munis)) * np.sqrt((GL - 2) / GL) * sig_pi)[cm]
+                der = s[:, 1] * votantes
+                lo, hi = -10.0, 10.0
+                for _ in range(40):
+                    mid = (lo + hi) / 2
+                    if (der / (1 + np.exp(-(lgi + mid)))).sum() / der.sum() < objetivo:
+                        lo = mid
+                    else:
+                        hi = mid
+                pi = 1 / (1 + np.exp(-(lgi + mid)))
+                s = np.column_stack([s[:, 0], s[:, 1] * (1 - pi), s[:, 1] * pi, s[:, 2:]])
+                pim = np.bincount(cm, weights=der * pi) / np.maximum(np.bincount(cm, weights=der), 1)
+                ext_k = np.column_stack([ext[:, 0], ext[:, 1] * (1 - pim), ext[:, 1] * pim, ext[:, 2:]])
             nat = s * votantes[:, None]
-            vm = np.stack([np.bincount(cm, weights=nat[:, b], minlength=len(self.munis)) for b in range(len(BLOQUES))], axis=1) + ext
+            vm = np.stack([np.bincount(cm, weights=nat[:, b], minlength=len(self.munis)) for b in range(K)], axis=1) + ext_k
             tot = vm.sum(axis=0)
             res.append(tot / tot.sum())
-            muni_gana.append(vm[:, 0] > vm[:, 1])
-            muni_sh.append(vm[:, 0] / vm.sum(axis=1))
-            vs = np.stack([np.bincount(sec_de_muni, weights=vm[:, b], minlength=len(sec_ids)) for b in range(len(BLOQUES))], axis=1)
-            sec_gana.append(vs[:, 0] > vs[:, 1])
-            sec_sh.append(vs[:, 0] / vs.sum(axis=1))
+            primero_m.append(vm.argmax(axis=1))
+            sh_m.append(vm / vm.sum(axis=1, keepdims=True))
+            vs = np.stack([np.bincount(sec_de_muni, weights=vm[:, b], minlength=len(sec_ids)) for b in range(K)], axis=1)
+            primero_s.append(vs.argmax(axis=1))
+            sh_s.append(vs / vs.sum(axis=1, keepdims=True))
         R = np.array(res) * 100
-        margen = R[:, 0] - R[:, 1]
-        gana_per = (R[:, 0] == R.max(axis=1))
-        MG = np.array(muni_gana)
-        return {"R": R, "margen": margen, "p_gana_peronismo": gana_per.mean(), "munis_per": MG.sum(axis=1),
-                "muni_p": MG.mean(axis=0), "muni_sh": np.array(muni_sh).mean(axis=0) * 100,
-                "sec_p": np.array(sec_gana).mean(axis=0), "sec_sh": np.array(sec_sh).mean(axis=0) * 100,
+        PM, PS = np.array(primero_m), np.array(primero_s)
+        rival = R[:, 1:].max(axis=1)
+        return {"nombres": nombres, "R": R, "margen": R[:, 0] - R[:, 1:2].ravel() if pi_prov is None else R[:, 0] - rival,
+                "p_primero": np.bincount(R.argmax(axis=1), minlength=K) / n,
+                "p_gana_peronismo": float(np.mean(R.argmax(axis=1) == 0)),
+                "munis_primero": np.stack([(PM == k).sum(axis=1) for k in range(K)], axis=1),
+                "munis_per": (PM == 0).sum(axis=1),
+                "muni_p": (PM == 0).mean(axis=0), "muni_p_k": np.stack([(PM == k).mean(axis=0) for k in range(K)], axis=1),
+                "muni_sh": np.array(sh_m).mean(axis=0)[:, 0] * 100, "muni_sh_k": np.array(sh_m).mean(axis=0) * 100,
+                "sec_p": (PS == 0).mean(axis=0), "sec_p_k": np.stack([(PS == k).mean(axis=0) for k in range(K)], axis=1),
+                "sec_sh": np.array(sh_s).mean(axis=0)[:, 0] * 100, "sec_sh_k": np.array(sh_s).mean(axis=0) * 100,
                 "sec_ids": sec_ids, "S_esc": S_esc * 100, "s_esc": s_esc}
 
 
