@@ -1221,3 +1221,26 @@ porque escuelas y salitas por habitante abundan en los pueblos chicos.
 
 Las tablas `territorio_bateria.csv` (columnas `fuente`, `parcial_con_densidad`, `pasa_con_densidad`) y
 `espacial_hallazgos.csv` (91 pruebas del `104`) quedaron actualizadas.
+
+---
+
+## 02-11-2026 · Simulador interactivo 2027 (`productos/p01`-`p03`)
+
+Una página (`03_OUTPUTS/simulador/simulador_2027.html`, 0,3 MB, abre sin internet salvo las
+tipografías) que corre el motor en el navegador. Perillas: escenario predefinido, mapa de partida
+(octubre o septiembre 2025), voto provincial de cada bloque, derecha unida o dividida (parte del
+PRO), participación de nativos y de extranjeros, incertidumbre provincial, régimen de ruido y
+cantidad de simulaciones. Muestra probabilidad de ganar, margen, municipios y secciones, el mapa
+de probabilidad por municipio (con recuadro del Conurbano), las bancas por sección y la
+composición de las dos cámaras 2027-2029.
+
+- `p01_simulador_datos.py`: exporta del `106` lo que el motor necesita (969 circuitos, 135
+  municipios con contorno simplificado, modelo de ruido, bancas y electos 2025) y 5 escenarios de
+  referencia corridos en Python.
+- `motor_2027.js`: traducción de `Motor.simular` (`106`) y del reparto por cociente (`108`).
+- `p02_validar_motor_js.js` (Node): con 1.000 simulaciones, la versión JS reproduce a la de Python
+  en los 5 escenarios: P(gana el peronismo) a ±0,02, margen mediano a ±0,1 pp, municipios a ±1,
+  diputados y senadores exactos, secciones a ±0,06 (`validacion_motor_js.json`).
+- `p03_armar_simulador.py`: incrusta datos y motor en `simulador_plantilla.html`.
+
+No incluye la movilización diferencial (`109`), aunque el motor JS ya la soporta.

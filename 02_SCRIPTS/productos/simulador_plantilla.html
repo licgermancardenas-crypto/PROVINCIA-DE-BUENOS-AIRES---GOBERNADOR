@@ -1,0 +1,510 @@
+<title>Simulador Gobernador PBA 2027</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: mesa de control a la izquierda (perillas del motor), tablero de escrutinio a la derecha. */
+:root {
+  --bg: #f3f5f7; --panel: #ffffff; --ink: #17202a; --muted: #5b6672; --line: #d9dee4; --soft: #e9edf1;
+  --per: #1f6fb2; --der: #7a3d9e; --lla: #7a3d9e; --pro: #c99a00; --ter: #2f8f7a; --izq: #c0392b; --resto: #9aa3ad;
+  --focus: #1f6fb2; --warn: #a15c00;
+  --m0: #5e2a80; --m1: #9a6fbd; --m2: #d3c0e3; --m3: #eef0f2; --m4: #b9d3ea; --m5: #5f9dd0; --m6: #16538a;
+  --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f151b; --panel: #161e26; --ink: #e6ebf0; --muted: #9aa6b2; --line: #2a3542; --soft: #1d2731;
+  --per: #5aa6e6; --der: #b183d1; --lla: #b183d1; --pro: #e2bb3a; --ter: #4fb89d; --izq: #e5675a; --resto: #7d8894;
+  --focus: #5aa6e6; --warn: #e3a04a;
+  --m0: #b183d1; --m1: #7d5a98; --m2: #463a55; --m3: #26303a; --m4: #2f4c66; --m5: #3f7cb2; --m6: #7fbdf0;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f151b; --panel: #161e26; --ink: #e6ebf0; --muted: #9aa6b2; --line: #2a3542; --soft: #1d2731;
+  --per: #5aa6e6; --der: #b183d1; --lla: #b183d1; --pro: #e2bb3a; --ter: #4fb89d; --izq: #e5675a; --resto: #7d8894;
+  --focus: #5aa6e6; --warn: #e3a04a;
+  --m0: #b183d1; --m1: #7d5a98; --m2: #463a55; --m3: #26303a; --m4: #2f4c66; --m5: #3f7cb2; --m6: #7fbdf0;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 14px; line-height: 1.45;
+  padding-block: 20px 40px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1320px; margin: 0 auto; display: grid; gap: 20px; }
+header h1 { font-family: var(--display); font-weight: 700; font-size: 34px; letter-spacing: .01em; margin: 0; text-wrap: balance; }
+header p { margin: 4px 0 0; color: var(--muted); max-width: 75ch; }
+.grid { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 900px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px; min-width: 0; }
+aside.panel { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); display: grid; gap: 16px; }
+@media (max-width: 900px) { aside.panel { position: static; } }
+.lab { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 8px; min-width: 0; }
+legend { padding: 0; margin-bottom: 6px; }
+select, button { font: inherit; color: var(--ink); }
+select { width: 100%; padding: 7px 8px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); }
+.seg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+.seg label { text-align: center; padding: 6px 4px; cursor: pointer; font-weight: 500; font-size: 13px; }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label:has(input:checked) { background: var(--ink); color: var(--panel); }
+.seg label:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: -2px; }
+.sl { display: grid; grid-template-columns: 92px minmax(0, 1fr) 48px; align-items: center; gap: 8px; }
+.sl span.n { font-variant-numeric: tabular-nums; text-align: right; font-weight: 600; }
+.sl label { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.dot { width: 9px; height: 9px; border-radius: 2px; flex: none; }
+input[type=range] { width: 100%; accent-color: var(--ink); }
+input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.nota { font-size: 12px; color: var(--muted); }
+.aviso { font-size: 12px; color: var(--warn); font-weight: 600; }
+.chk { display: flex; gap: 8px; align-items: center; font-size: 13px; cursor: pointer; }
+.btns { display: flex; gap: 8px; flex-wrap: wrap; }
+button.sec { background: transparent; border: 1px solid var(--line); border-radius: 4px; padding: 6px 10px; cursor: pointer; font-size: 13px; }
+button.sec:hover { border-color: var(--muted); }
+main { display: grid; gap: 20px; min-width: 0; }
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
+@media (max-width: 640px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 14px; } }
+.kpi { padding: 0 14px; border-left: 1px solid var(--line); min-width: 0; }
+.kpi:first-child { border-left: 0; padding-left: 0; }
+@media (max-width: 640px) { .kpi:nth-child(3) { border-left: 0; padding-left: 0; } }
+.kpi .v { font-family: var(--display); font-weight: 700; font-size: 44px; line-height: 1; font-variant-numeric: tabular-nums; margin-top: 4px; }
+.kpi .s { color: var(--muted); font-size: 12px; margin-top: 4px; font-variant-numeric: tabular-nums; }
+.estado { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); min-height: 18px; }
+.estado .pulso { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.estado.corriendo .pulso { background: var(--focus); animation: p 1s infinite alternate; }
+@keyframes p { from { opacity: .3 } to { opacity: 1 } }
+@media (prefers-reduced-motion: reduce) { .estado.corriendo .pulso { animation: none; } }
+h2 { font-family: var(--display); font-weight: 600; font-size: 22px; margin: 0 0 4px; letter-spacing: .01em; }
+.sub { color: var(--muted); font-size: 13px; margin: 0 0 12px; max-width: 80ch; }
+.barra { display: flex; height: 30px; border-radius: 3px; overflow: hidden; }
+.barra div { height: 100%; }
+.leyb { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 8px; font-size: 13px; }
+.leyb span { display: inline-flex; align-items: center; gap: 6px; font-variant-numeric: tabular-nums; }
+.dos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 1100px) { .dos { grid-template-columns: minmax(0, 1fr); } }
+svg text { fill: var(--muted); font-family: var(--body); font-size: 11px; }
+.mapas { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 12px; align-items: start; }
+@media (max-width: 640px) { .mapas { grid-template-columns: minmax(0, 1fr); } }
+.mapas svg { width: 100%; height: auto; display: block; }
+.mapas path.m { stroke: var(--panel); stroke-width: .5; cursor: pointer; vector-effect: non-scaling-stroke; }
+.mapas path.m:hover, .mapas path.m.sel { stroke: var(--ink); stroke-width: 2; }
+.mapas path.s { fill: none; stroke: var(--ink); stroke-width: 1.2; pointer-events: none; opacity: .55; vector-effect: non-scaling-stroke; }
+.ley { display: flex; flex-wrap: wrap; align-items: center; gap: 0; margin-top: 10px; font-size: 11px; color: var(--muted); }
+.ley .c { display: grid; gap: 3px; text-align: center; min-width: 44px; }
+.ley .c i { display: block; height: 10px; }
+.ficha { margin-top: 10px; font-size: 13px; min-height: 64px; border-top: 1px solid var(--line); padding-top: 8px; }
+.ficha b { font-weight: 600; }
+.tabla { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; }
+th, td { padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+.pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 11px; font-weight: 600; background: var(--soft); }
+.prob { display: inline-flex; align-items: center; gap: 6px; }
+.prob i { display: inline-block; width: 60px; height: 6px; background: var(--soft); border-radius: 3px; position: relative; overflow: hidden; }
+.prob i b { position: absolute; inset: 0 auto 0 0; background: var(--per); }
+.camaras { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 640px) { .camaras { grid-template-columns: minmax(0, 1fr); } }
+.hemi { display: flex; flex-wrap: wrap; gap: 3px; margin: 8px 0; }
+.hemi i { width: 12px; height: 12px; border-radius: 2px; display: block; }
+.hemi i.nuevo { outline: 1.5px solid var(--ink); outline-offset: -1.5px; }
+.metodo { font-size: 13px; color: var(--muted); display: grid; gap: 6px; max-width: 95ch; }
+.metodo p { margin: 0; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="lab">Atlas PBA · motor 2027</div>
+    <h1>Simulador Gobernador PBA 2027</h1>
+    <p>Elegí cuánto saca cada fuerza en la provincia y cuánta gente va a votar. El motor lo baja a cada circuito con la regla probada contra 13 elecciones, suma el voto extranjero, sortea el error territorial y reparte las bancas de la Legislatura. No es un pronóstico: el nivel provincial lo ponés vos.</p>
+  </header>
+
+  <div class="grid">
+    <aside class="panel" aria-label="Perillas del escenario">
+      <fieldset>
+        <legend class="lab">Escenario</legend>
+        <select id="preset">
+          <option value="octubre">Octubre 2025 se repite</option>
+          <option value="septiembre">Septiembre 2025 se repite</option>
+          <option value="medio">Punto medio entre septiembre y octubre</option>
+          <option value="empate">Empate peronismo – derecha</option>
+          <option value="tercera">Tercera vía fuerte (12 %)</option>
+          <option value="custom">Personalizado</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend class="lab">Mapa de partida</legend>
+        <div class="seg" role="radiogroup">
+          <label><input type="radio" name="base" id="base-oct" value="octubre" checked>Octubre 2025</label>
+          <label><input type="radio" name="base" id="base-sep" value="septiembre">Septiembre 2025</label>
+        </div>
+        <div class="nota">Qué elección da la forma territorial del voto: dónde es más fuerte cada uno.</div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="lab">Voto provincial (% de positivos, nativos)</legend>
+        <div id="sliders"></div>
+        <div class="sl"><label><span class="dot" style="background:var(--resto)"></span>Resto</label><span class="nota">listas chicas</span><span class="n" id="v-resto">–</span></div>
+        <div id="aviso-suma" class="aviso" hidden>Los cuatro suman más de 100: bajá alguno.</div>
+        <div class="btns"><button class="sec" id="volver">Volver al mapa de partida</button></div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="lab">Derecha</legend>
+        <label class="chk"><input type="checkbox" id="dividida">Va dividida: LLA y PRO por separado</label>
+        <div class="sl" id="fila-pro" hidden><label><span class="dot" style="background:var(--pro)"></span>PRO</label><input type="range" id="pro" min="5" max="70" step="1" value="25"><span class="n" id="v-pro">25 %</span></div>
+        <div class="nota" id="nota-pro" hidden>Parte del PRO dentro de la derecha. Su mapa sale de Gobernador 2023.</div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="lab">Participación</legend>
+        <div class="sl"><label>Nativos</label><input type="range" id="part" min="55" max="85" step="1" value="76"><span class="n" id="v-part">76 %</span></div>
+        <label class="chk"><input type="checkbox" id="ext-2023" checked>Extranjeros como en 2023</label>
+        <div class="sl" id="fila-ext" hidden><label>Extranjeros</label><input type="range" id="ext" min="15" max="70" step="1" value="35"><span class="n" id="v-ext">35 %</span></div>
+        <div class="nota">Octubre 2025 tuvo 72 %; septiembre, 64 %; Gobernador 2023, 76 %. Los extranjeros votan Gobernador y no Diputados nacionales.</div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="lab">Incertidumbre</legend>
+        <div class="sl"><label>Provincial</label><input type="range" id="sd" min="0" max="5" step="0.5" value="2"><span class="n" id="v-sd">±2 pp</span></div>
+        <div class="nota">Cuánto puede errar el nivel que pusiste (desvío del margen). 2 pp es un error típico de encuesta.</div>
+        <div class="seg" role="radiogroup">
+          <label><input type="radio" name="reg" id="reg-est" value="oferta estable" checked>Oferta estable</label>
+          <label><input type="radio" name="reg" id="reg-nue" value="oferta nueva">Oferta nueva</label>
+        </div>
+        <div class="nota">Con una fuerza nueva el voto se reacomoda más por municipio (calibrado con 2011-2015).</div>
+        <select id="nsim" aria-label="Cantidad de simulaciones">
+          <option value="500">500 simulaciones (rápido)</option>
+          <option value="1000" selected>1.000 simulaciones</option>
+          <option value="2000">2.000 simulaciones (preciso)</option>
+        </select>
+      </fieldset>
+    </aside>
+
+    <main>
+      <section class="panel" aria-live="polite">
+        <div class="estado" id="estado"><span class="pulso"></span><span id="estado-t">Preparando el motor…</span></div>
+        <div class="kpis" style="margin-top:10px">
+          <div class="kpi"><div class="lab">Gana el peronismo</div><div class="v" id="k-p">–</div><div class="s" id="k-p-s">de las simulaciones</div></div>
+          <div class="kpi"><div class="lab" id="k-m-l">Margen</div><div class="v" id="k-m">–</div><div class="s" id="k-m-s">–</div></div>
+          <div class="kpi"><div class="lab">Municipios peronistas</div><div class="v" id="k-mu">–</div><div class="s" id="k-mu-s">de 135</div></div>
+          <div class="kpi"><div class="lab">Secciones peronistas</div><div class="v" id="k-se">–</div><div class="s">de 8 (esperado)</div></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Resultado provincial</h2>
+        <p class="sub">Con el padrón y la participación de 2027 y el voto extranjero. Por eso no coincide exactamente con lo que pusiste en las perillas, que es el voto de los nativos.</p>
+        <div class="barra" id="barra"></div>
+        <div class="leyb" id="leyb"></div>
+        <div style="margin-top:18px" class="lab">Margen del peronismo en las simulaciones</div>
+        <svg id="hist" viewBox="0 0 640 150" role="img" aria-label="Distribución del margen" style="width:100%;height:auto;display:block"></svg>
+      </section>
+
+      <section class="panel">
+        <h2>Probabilidad de que gane el peronismo, por municipio</h2>
+        <p class="sub">Proporción de las simulaciones en que el peronismo sale primero en el partido. Tocá un municipio para ver el detalle.</p>
+        <div class="mapas">
+          <svg id="mapa" role="img" aria-label="Mapa de la provincia"></svg>
+          <div>
+            <div class="lab">Conurbano</div>
+            <svg id="conu" role="img" aria-label="Mapa del Conurbano"></svg>
+          </div>
+        </div>
+        <div class="ley" id="ley"></div>
+        <div class="ficha" id="ficha"><span class="nota">Elegí un municipio en el mapa.</span></div>
+      </section>
+
+      <section class="panel">
+        <h2>Secciones electorales</h2>
+        <p class="sub">En 2027 la 1ª, 4ª, 5ª y 7ª eligen diputados; la 2ª, 3ª, 6ª y 8ª, senadores. Bancas: promedio de las simulaciones con la regla del cociente (Ley 5.109); las listas que no llegan al cociente quedan afuera.</p>
+        <div class="tabla"><table id="t-sec"></table></div>
+      </section>
+
+      <section class="panel">
+        <h2>Legislatura 2027-2029</h2>
+        <p class="sub">Electos en 2027 (mediana de las simulaciones) más los electos en 2025, que siguen hasta 2029. Con borde: las bancas que se eligen en 2027.</p>
+        <div class="camaras" id="camaras"></div>
+      </section>
+
+      <section class="panel metodo">
+        <h2>Cómo funciona</h2>
+        <p>Es el motor del análisis 106 de Atlas PBA, en el navegador. El voto que ponés se baja a cada uno de los 969 circuitos estables con la <b>regla mezcla</b> (mitad proporcional, mitad uniforme), la que mejor anduvo en el backtest de 13 pares de elecciones 2011-2025. En cada simulación se sortea un error provincial, un shock común por sección y uno propio de cada municipio, con tamaño según los votos del municipio, todos calibrados contra esas elecciones. El error territorial redistribuye el voto sin mover el total provincial.</p>
+        <p>El padrón 2027 crece al ritmo de 2023-2025. La participación de cada circuito mantiene su distancia al promedio de Gobernador 2023. Los extranjeros votan con su participación y su reparto de 2023 en cada municipio. Con derecha dividida, el reparto PRO / LLA de cada circuito sigue el de Gobernador 2023.</p>
+        <p>Validación: con las mismas perillas, esta versión reproduce al motor en Python en 5 escenarios: probabilidad de ganar a ±0,02, margen a ±0,1 pp, municipios a ±1 y bancas exactas. Gobernador se gana por simple pluralidad, sin balotaje. El «resto» se supone repartido en listas chicas que no llegan al cociente.</p>
+        <p>Fuentes: DINE (escrutinio por mesa 2011-2025), Junta Electoral PBA (septiembre 2025), INDEC (censos 2010 y 2022). Repositorio: <a href="https://github.com/licgermancardenas-crypto/PROVINCIA-DE-BUENOS-AIRES---GOBERNADOR" style="color:var(--per)">PROVINCIA-DE-BUENOS-AIRES---GOBERNADOR</a>.</p>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script id="datos" type="application/json">__DATOS__</script>
+<script id="motor-src" type="text/plain">__MOTOR__</script>
+<script>
+(function () {
+  "use strict";
+  const D = JSON.parse(document.getElementById("datos").textContent);
+  const B = D.bloques; // PERONISMO, DERECHA, TERCERA, IZQUIERDA, RESTO
+  const NOMBRE = { PERONISMO: "Peronismo", DERECHA: "Derecha (LLA-PRO)", LLA: "LLA", PRO: "PRO", TERCERA: "Tercera vía", IZQUIERDA: "Izquierda", RESTO: "Resto" };
+  const CORTO = { PERONISMO: "Peronismo", DERECHA: "Derecha", LLA: "LLA", PRO: "PRO", TERCERA: "Tercera", IZQUIERDA: "Izquierda", RESTO: "Resto" };
+  const COLOR = { PERONISMO: "var(--per)", DERECHA: "var(--der)", LLA: "var(--lla)", PRO: "var(--pro)", TERCERA: "var(--ter)", IZQUIERDA: "var(--izq)", RESTO: "var(--resto)" };
+  const SEC = { "1": "1ª", "2": "2ª", "3": "3ª", "4": "4ª", "5": "5ª", "6": "6ª", "7": "7ª", "8": "8ª (Capital)" };
+  const $ = (id) => document.getElementById(id);
+  const f1 = (x) => x.toLocaleString("es-AR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const f0 = (x) => Math.round(x).toLocaleString("es-AR");
+  const sg = (x) => (x > 0 ? "+" : x < 0 ? "−" : "") + f1(Math.abs(x));
+  const pct = (p) => (p >= 0.995 ? ">99" : p <= 0.005 ? "<1" : f0(100 * p)) + " %";
+  const med = (a, p) => { const s = [...a].sort((x, y) => x - y); const h = (s.length - 1) * p / 100, lo = Math.floor(h); return s[lo] + (s[Math.min(lo + 1, s.length - 1)] - s[lo]) * (h - lo); };
+
+  // ------------------------------------------------------------ perillas
+  const META = ["PERONISMO", "DERECHA", "TERCERA", "IZQUIERDA"];
+  const cont = $("sliders");
+  META.forEach((b) => {
+    const d = document.createElement("div");
+    d.className = "sl";
+    d.innerHTML = `<label for="m-${b}"><span class="dot" style="background:${COLOR[b]}"></span>${CORTO[b]}</label>` +
+      `<input type="range" id="m-${b}" min="0" max="${b === "PERONISMO" || b === "DERECHA" ? 65 : 30}" step="0.1">` +
+      `<span class="n" id="v-${b}"></span>`;
+    cont.appendChild(d);
+  });
+  const base = () => document.querySelector("input[name=base]:checked").value;
+  const basePct = (b) => D.base_pct[b];
+  let tocado = false; // ¿las metas difieren del mapa de partida?
+
+  function ponerMetas(v) { META.forEach((b, i) => { $("m-" + b).value = v[i].toFixed(1); }); pintarMetas(); }
+  function leerMetas() { return META.map((b) => +$("m-" + b).value); }
+  function pintarMetas() {
+    const v = leerMetas();
+    META.forEach((b, i) => { $("v-" + b).textContent = f1(v[i]); });
+    const resto = 100 - v.reduce((a, x) => a + x, 0);
+    $("v-resto").textContent = f1(Math.max(resto, 0));
+    $("aviso-suma").hidden = resto >= 0;
+    return resto >= 0;
+  }
+  function preset(nombre) {
+    const o = basePct("octubre"), s = basePct("septiembre");
+    let b = "octubre", v = o.slice(0, 4), t = false;
+    if (nombre === "septiembre") { b = "septiembre"; v = s.slice(0, 4); }
+    if (nombre === "medio") { v = o.slice(0, 4).map((x, i) => (x + s[i]) / 2); t = true; }
+    if (nombre === "empate") { const m = (o[0] + o[1]) / 2; v = [m, m, o[2], o[3]]; t = true; }
+    if (nombre === "tercera") { const falta = 12 - o[2]; v = [o[0] - falta / 3, o[1] - falta * 2 / 3, 12, o[3]]; t = true; }
+    $(b === "octubre" ? "base-oct" : "base-sep").checked = true;
+    ponerMetas(v);
+    tocado = t;
+  }
+
+  // ------------------------------------------------------------ motor en segundo plano
+  const fuente = $("motor-src").textContent + `
+    let P = null;
+    self.onmessage = (ev) => {
+      const m = ev.data;
+      if (m.tipo === "datos") { P = self.Motor2027.preparar(m.D); self.postMessage({ tipo: "listo" }); return; }
+      const t0 = Date.now();
+      const r = self.Motor2027.simular(P, m.o);
+      r.seg = (Date.now() - t0) / 1000;
+      self.postMessage({ tipo: "res", id: m.id, r });
+    };`;
+  const url = URL.createObjectURL(new Blob([fuente], { type: "text/javascript" }));
+  let worker = null, listo = false, pedido = 0, pendiente = null;
+  function nuevoWorker() {
+    if (worker) worker.terminate();
+    listo = false;
+    worker = new Worker(url);
+    worker.onmessage = (ev) => {
+      if (ev.data.tipo === "listo") { listo = true; if (pendiente) { const p = pendiente; pendiente = null; enviar(p); } return; }
+      if (ev.data.id === pedido) mostrar(ev.data.r, ev.data.o);
+    };
+    worker.postMessage({ tipo: "datos", D });
+  }
+  let corriendo = false;
+  function enviar(o) {
+    if (!listo) { pendiente = o; return; }
+    corriendo = true;
+    worker.postMessage({ tipo: "sim", id: pedido, o });
+  }
+  let reloj = null;
+  function pedir() {
+    if (!pintarMetas()) { estado("Corregí las perillas: el voto suma más de 100.", false); return; }
+    $("v-part").textContent = $("part").value + " %";
+    $("v-ext").textContent = $("ext").value + " %";
+    $("v-pro").textContent = $("pro").value + " %";
+    $("v-sd").textContent = "±" + f1(+$("sd").value).replace(",0", "") + " pp";
+    $("fila-ext").hidden = $("ext-2023").checked;
+    const div = $("dividida").checked;
+    $("fila-pro").hidden = !div; $("nota-pro").hidden = !div;
+    clearTimeout(reloj);
+    reloj = setTimeout(() => {
+      pedido++;
+      if (corriendo) { nuevoWorker(); corriendo = false; }
+      const v = leerMetas();
+      const o = {
+        base: base(), metas: tocado ? [...v, Math.max(100 - v.reduce((a, x) => a + x, 0), 0)] : null,
+        part: +$("part").value / 100, partExt: $("ext-2023").checked ? null : +$("ext").value / 100,
+        sdProvincial: +$("sd").value / 100, regimen: document.querySelector("input[name=reg]:checked").value,
+        n: +$("nsim").value, semilla: 7, piProv: div ? +$("pro").value / 100 : null, sdPi: div ? 0.03 : 0,
+      };
+      estado(`Simulando ${f0(o.n)} elecciones…`, true);
+      enviar(o);
+    }, 250);
+  }
+  function estado(t, on) { $("estado-t").textContent = t; $("estado").classList.toggle("corriendo", !!on); }
+
+  // ------------------------------------------------------------ mapa
+  const M = D.municipios;
+  const NS = "http://www.w3.org/2000/svg";
+  const RAMPA = ["--m0", "--m1", "--m2", "--m3", "--m4", "--m5", "--m6"];
+  const CORTES = [0.05, 0.2, 0.4, 0.6, 0.8, 0.95];
+  const ETQ = ["<5", "5-20", "20-40", "40-60", "60-80", "80-95", ">95"];
+  const clase = (p) => { let k = 0; while (k < CORTES.length && p >= CORTES[k]) k++; return k; };
+  function dibujarMapa(svg, caja, grosor) {
+    svg.setAttribute("viewBox", caja.join(" "));
+    const g = document.createElementNS(NS, "g");
+    M.forEach((m, j) => {
+      if (!m.path) return;
+      const p = document.createElementNS(NS, "path");
+      p.setAttribute("d", m.path); p.setAttribute("class", "m"); p.dataset.j = j;
+      p.style.fill = "var(--m3)";
+      const t = document.createElementNS(NS, "title"); t.textContent = m.nombre; p.appendChild(t);
+      p.addEventListener("click", () => elegir(j));
+      g.appendChild(p);
+    });
+    Object.values(D.secciones_path).forEach((d) => {
+      const p = document.createElementNS(NS, "path"); p.setAttribute("d", d); p.setAttribute("class", "s");
+      g.appendChild(p);
+    });
+    svg.appendChild(g);
+  }
+  const C = D.caja.conurbano, pad = 2;
+  dibujarMapa($("mapa"), [-5, -5, D.caja.ancho + 10, D.caja.alto + 10], 0.6);
+  dibujarMapa($("conu"), [C[0] - pad, C[1] - pad, C[2] + 2 * pad, C[3] + 2 * pad], 0.12);
+  // Recuadro del Conurbano en el mapa grande.
+  const r = document.createElementNS(NS, "rect");
+  r.setAttribute("x", C[0] - pad); r.setAttribute("y", C[1] - pad); r.setAttribute("width", C[2] + 2 * pad); r.setAttribute("height", C[3] + 2 * pad);
+  r.setAttribute("fill", "none"); r.setAttribute("stroke", "var(--ink)"); r.setAttribute("stroke-width", "1.2"); r.setAttribute("stroke-dasharray", "4 3"); r.setAttribute("vector-effect", "non-scaling-stroke");
+  $("mapa").appendChild(r);
+  $("ley").innerHTML = ETQ.map((e, k) => `<div class="c"><i style="background:var(${RAMPA[k]})"></i>${e}</div>`).join("") +
+    `<span style="margin-left:10px">% de simulaciones en que gana el peronismo · violeta: gana otra fuerza</span>`;
+
+  let ultimo = null, elegido = null;
+  function elegir(j) {
+    elegido = j;
+    document.querySelectorAll("path.m").forEach((p) => p.classList.toggle("sel", +p.dataset.j === j));
+    ficha();
+  }
+  function ficha() {
+    if (elegido === null || !ultimo) return;
+    const r = ultimo, K = r.nombres.length, m = M[elegido];
+    const filas = r.nombres.map((n, k) => ({ n, sh: 100 * r.muniSh[elegido * K + k], p: r.muniPrimero[elegido * K + k] }))
+      .filter((x) => x.sh >= 0.5).sort((a, b) => b.sh - a.sh);
+    $("ficha").innerHTML = `<b>${m.nombre}</b> · sección ${SEC[m.seccion]}${m.conurbano ? " · Conurbano" : ""}<br>` +
+      filas.map((x) => `<span class="prob"><span class="dot" style="background:${COLOR[x.n]}"></span>${CORTO[x.n]} ${f1(x.sh)} % · gana en ${pct(x.p)}</span>`).join(" &nbsp; ");
+  }
+
+  // ------------------------------------------------------------ resultados
+  function mostrar(r) {
+    corriendo = false;
+    ultimo = r;
+    const K = r.nombres.length, per = 0, div = K === 6;
+    estado(`${f0(r.n)} simulaciones en ${f1(r.seg)} s`, false);
+    $("k-p").textContent = pct(r.pGana);
+    $("k-m-l").textContent = div ? "Margen sobre el segundo" : "Margen sobre la derecha";
+    $("k-m").textContent = sg(med(r.margen, 50));
+    $("k-m-s").textContent = `entre ${sg(med(r.margen, 10))} y ${sg(med(r.margen, 90))} (8 de cada 10)`;
+    $("k-mu").textContent = f0(med(r.munisPrimero, 50));
+    $("k-mu-s").textContent = `de 135 · entre ${f0(med(r.munisPrimero, 10))} y ${f0(med(r.munisPrimero, 90))}`;
+    let secs = 0; for (let k = 0; k < r.secIds.length; k++) secs += r.secPrimero[k * K];
+    $("k-se").textContent = f1(secs);
+
+    // Barra provincial
+    const media = r.nombres.map((_, k) => r.R.reduce((a, x) => a + x[k], 0) / r.n);
+    $("barra").innerHTML = r.nombres.map((n, k) => `<div title="${NOMBRE[n]} ${f1(media[k])} %" style="width:${media[k]}%;background:${COLOR[n]}"></div>`).join("");
+    $("leyb").innerHTML = r.nombres.map((n, k) => `<span><span class="dot" style="background:${COLOR[n]}"></span>${NOMBRE[n]} <b>${f1(media[k])} %</b></span>`).join("");
+
+    // Histograma del margen
+    const h = $("hist"), W = 640, H = 150, ml = 8, mr = 8, mt = 8, mb = 26;
+    let lo = Math.min(...r.margen), hi = Math.max(...r.margen);
+    lo = Math.floor(Math.min(lo, -1)); hi = Math.ceil(Math.max(hi, 1));
+    const nb = 40, ancho = (hi - lo) / nb, cnt = new Array(nb).fill(0);
+    r.margen.forEach((m) => { cnt[Math.min(nb - 1, Math.floor((m - lo) / ancho))]++; });
+    const cmax = Math.max(...cnt), x = (v) => ml + (v - lo) / (hi - lo) * (W - ml - mr), y = (c) => H - mb - c / cmax * (H - mt - mb);
+    let s = "";
+    cnt.forEach((c, i) => {
+      const v0 = lo + i * ancho, col = v0 + ancho / 2 >= 0 ? "var(--per)" : (div ? "var(--resto)" : "var(--der)");
+      s += `<rect x="${x(v0) + 0.5}" y="${y(c)}" width="${Math.max(x(v0 + ancho) - x(v0) - 1, 0.5)}" height="${H - mb - y(c)}" fill="${col}" opacity=".85"></rect>`;
+    });
+    s += `<line x1="${x(0)}" x2="${x(0)}" y1="${mt}" y2="${H - mb}" stroke="var(--ink)" stroke-width="1"></line>`;
+    s += `<line x1="${ml}" x2="${W - mr}" y1="${H - mb}" y2="${H - mb}" stroke="var(--line)"></line>`;
+    const paso = hi - lo > 24 ? 5 : hi - lo > 10 ? 2 : 1;
+    for (let t = Math.ceil(lo / paso) * paso; t <= hi; t += paso) s += `<text x="${x(t)}" y="${H - 8}" text-anchor="middle">${t > 0 ? "+" : ""}${t}</text>`;
+    s += `<text x="${W - mr}" y="${mt + 10}" text-anchor="end">pp · a la derecha de 0 gana el peronismo</text>`;
+    h.innerHTML = s;
+
+    // Mapa
+    document.querySelectorAll("path.m").forEach((p) => {
+      const j = +p.dataset.j, pr = r.muniPrimero[j * K + per];
+      p.style.fill = `var(${RAMPA[clase(pr)]})`;
+      p.querySelector("title").textContent = `${M[j].nombre}: gana el peronismo en ${pct(pr)}`;
+    });
+    ficha();
+
+    // Secciones
+    const L = D.legislatura;
+    const listas = r.nombres.filter((n) => n !== "RESTO");
+    let t = `<thead><tr><th>Sección</th><th>Elige</th><th>Gana el peronismo</th>${r.nombres.map((n) => `<th>${CORTO[n]} %</th>`).join("")}${listas.map((n) => `<th>Bancas ${CORTO[n]}</th>`).join("")}</tr></thead><tbody>`;
+    r.secIds.forEach((sid, k) => {
+      const cam = L.camara_2027[sid], nb = cam === "DIP" ? L.dip[sid] : L.sen[sid];
+      const p = r.secPrimero[k * K];
+      t += `<tr><td>${SEC[sid]}</td><td><span class="pill">${nb} ${cam === "DIP" ? "diputados" : "senadores"}</span></td>` +
+        `<td><span class="prob"><i><b style="width:${100 * p}%"></b></i>${pct(p)}</span></td>` +
+        r.nombres.map((n, b) => `<td>${f1(100 * r.secSh[k * K + b])}</td>`).join("") +
+        listas.map((n) => `<td>${f1(r.secBancas[k * K + r.nombres.indexOf(n)])}</td>`).join("") + `</tr>`;
+    });
+    $("t-sec").innerHTML = t + "</tbody>";
+
+    // Cámaras
+    const sigue = L.siguen_2025;
+    const grupo = (n) => (n === "LLA" || n === "PRO" ? "DERECHA" : n);
+    const camara = (cl, total, mayoria, titulo, arr) => {
+      const nuevos = {}, viejos = {};
+      r.nombres.forEach((n, k) => { if (n !== "RESTO") nuevos[n] = Math.round(med(arr.map((x) => x[k]), 50)); });
+      const g = ["PERONISMO", "DERECHA", "TERCERA", "IZQUIERDA", "OTROS"];
+      g.forEach((x) => { viejos[x] = sigue[cl][x] || 0; });
+      // Fila de bancas: por bloque, primero las que siguen y después las nuevas.
+      const orden = div ? ["PERONISMO", "LLA", "PRO", "TERCERA", "IZQUIERDA"] : ["PERONISMO", "DERECHA", "TERCERA", "IZQUIERDA"];
+      let cel = "", usadosDer = false, filas = "";
+      const totPer = (nuevos.PERONISMO || 0) + viejos.PERONISMO;
+      orden.forEach((n) => {
+        const v = grupo(n) === "DERECHA" ? (usadosDer ? 0 : viejos.DERECHA) : (viejos[n] || 0);
+        if (grupo(n) === "DERECHA") usadosDer = true;
+        const nu = nuevos[n] || 0;
+        cel += `<i style="background:${COLOR[n]}"></i>`.repeat(v) + `<i class="nuevo" style="background:${COLOR[n]}"></i>`.repeat(nu);
+        filas += `<tr><td><span class="dot" style="background:${COLOR[n]};display:inline-block;margin-right:6px"></span>${NOMBRE[n]}</td><td>${nu}</td><td>${v}</td><td><b>${nu + v}</b></td></tr>`;
+      });
+      if (viejos.OTROS) { cel += `<i style="background:var(--resto)"></i>`.repeat(viejos.OTROS); filas += `<tr><td>Otros (2025)</td><td>0</td><td>${viejos.OTROS}</td><td><b>${viejos.OTROS}</b></td></tr>`; }
+      const tp = arr.map((x) => x[0] + viejos.PERONISMO);
+      const pM = tp.filter((v) => v >= mayoria).length / tp.length;
+      return `<div><div class="lab">${titulo} · ${total} bancas · mayoría ${mayoria}</div><div class="hemi">${cel}</div>` +
+        `<div class="nota">Peronismo: <b style="color:var(--ink)">${totPer}</b> · mayoría propia en ${pct(pM)} de las simulaciones</div>` +
+        `<div class="tabla"><table><thead><tr><th>Bloque</th><th>2027</th><th>Siguen</th><th>Total</th></tr></thead><tbody>${filas}</tbody></table></div></div>`;
+    };
+    $("camaras").innerHTML = camara("DIP", 92, 47, "Diputados", r.dip) + camara("SEN", 46, 24, "Senado", r.sen);
+  }
+
+  // ------------------------------------------------------------ eventos
+  $("preset").addEventListener("change", (e) => { if (e.target.value !== "custom") { preset(e.target.value); pedir(); } });
+  META.forEach((b) => $("m-" + b).addEventListener("input", () => { tocado = true; $("preset").value = "custom"; pedir(); }));
+  document.querySelectorAll("input[name=base]").forEach((el) => el.addEventListener("change", () => {
+    if (!tocado) ponerMetas(basePct(base()).slice(0, 4));
+    $("preset").value = "custom"; pedir();
+  }));
+  $("volver").addEventListener("click", () => { ponerMetas(basePct(base()).slice(0, 4)); tocado = false; $("preset").value = "custom"; pedir(); });
+  ["part", "ext", "pro", "sd"].forEach((id) => $(id).addEventListener("input", pedir));
+  ["ext-2023", "dividida", "nsim"].forEach((id) => $(id).addEventListener("change", pedir));
+  document.querySelectorAll("input[name=reg]").forEach((el) => el.addEventListener("change", pedir));
+
+  nuevoWorker();
+  preset("octubre");
+  elegido = M.findIndex((m) => m.nombre === "La Matanza");
+  pedir();
+  setTimeout(() => elegir(elegido), 0);
+})();
+</script>

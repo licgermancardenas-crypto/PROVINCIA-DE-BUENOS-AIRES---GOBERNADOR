@@ -76,6 +76,7 @@ entran como parámetro. Legislatura por sección electoral con cociente.
 ## Etapa 5 · Productos
 
 - ✅ Primeras láminas estáticas: `mapas/m01` (5 mapas en `03_OUTPUTS/laminas/`).
+- ✅ Simulador interactivo 2027: `productos/p01`-`p03` (`03_OUTPUTS/simulador/simulador_2027.html`): el motor `106`-`108` en JavaScript, validado contra Python.
 
 Plataforma web, simulador, informes. Se definen cuando haya resultados.
 

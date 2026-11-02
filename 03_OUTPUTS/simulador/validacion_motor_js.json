@@ -1,0 +1,72 @@
+[
+ {
+  "caso": "Octubre se repite",
+  "P_py": 0.584,
+  "P_js": 0.57,
+  "margen_py": 0.32,
+  "margen_js": 0.24,
+  "munis": "39/38",
+  "dip": "19/19",
+  "sen": "10/10",
+  "max_dif_pct": 0.01,
+  "max_dif_seccion": 0.026,
+  "seg": 1.654,
+  "pasa": true
+ },
+ {
+  "caso": "Septiembre se repite",
+  "P_py": 1,
+  "P_js": 1,
+  "margen_py": 13.42,
+  "margen_js": 13.33,
+  "munis": "95/95",
+  "dip": "23/23",
+  "sen": "14/14",
+  "max_dif_pct": 0.01,
+  "max_dif_seccion": 0.011,
+  "seg": 1.503,
+  "pasa": true
+ },
+ {
+  "caso": "Octubre, participación 64 %",
+  "P_py": 0.617,
+  "P_js": 0.599,
+  "margen_py": 0.45,
+  "margen_js": 0.36,
+  "munis": "39/38",
+  "dip": "19/19",
+  "sen": "10/10",
+  "max_dif_pct": 0.01,
+  "max_dif_seccion": 0.024,
+  "seg": 1.237,
+  "pasa": true
+ },
+ {
+  "caso": "Octubre, derecha dividida (PRO 25 %)",
+  "P_py": 1,
+  "P_js": 1,
+  "margen_py": 10.5,
+  "margen_js": 10.61,
+  "munis": "81/82",
+  "dip": "20/20",
+  "sen": "14/14",
+  "max_dif_pct": 0.01,
+  "max_dif_seccion": 0.055,
+  "seg": 2.346,
+  "pasa": true
+ },
+ {
+  "caso": "Empate 40-40 desde octubre",
+  "P_py": 0.701,
+  "P_js": 0.691,
+  "margen_py": 0.84,
+  "margen_js": 0.75,
+  "munis": "40/40",
+  "dip": "20/20",
+  "sen": "10/10",
+  "max_dif_pct": 0.01,
+  "max_dif_seccion": 0.004,
+  "seg": 0.861,
+  "pasa": true
+ }
+]

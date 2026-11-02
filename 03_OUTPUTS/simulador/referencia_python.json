@@ -1,0 +1,177 @@
+[
+ {
+  "caso": "Octubre se repite",
+  "parametros": {
+   "base": "octubre",
+   "metas": null
+  },
+  "pct": {
+   "PERONISMO": 41.54,
+   "DERECHA": 41.29,
+   "TERCERA": 3.12,
+   "IZQUIERDA": 6.09,
+   "RESTO": 7.96
+  },
+  "margen_p10_p50_p90": [
+   -2.07,
+   0.32,
+   2.47
+  ],
+  "p_gana_peronismo": 0.584,
+  "municipios_peronismo_p50": 39.0,
+  "secciones_p_peronismo": {
+   "1": 0.571,
+   "2": 0.004,
+   "3": 1.0,
+   "4": 0.004,
+   "5": 0.001,
+   "6": 0.0,
+   "7": 0.001,
+   "8": 0.124
+  },
+  "diputados_2027_peronismo_p50": 19.0,
+  "senadores_2027_peronismo_p50": 10.0
+ },
+ {
+  "caso": "Septiembre se repite",
+  "parametros": {
+   "base": "septiembre",
+   "metas": null
+  },
+  "pct": {
+   "PERONISMO": 47.21,
+   "DERECHA": 33.86,
+   "TERCERA": 5.31,
+   "IZQUIERDA": 5.35,
+   "RESTO": 8.27
+  },
+  "margen_p10_p50_p90": [
+   11.02,
+   13.42,
+   15.56
+  ],
+  "p_gana_peronismo": 1.0,
+  "municipios_peronismo_p50": 95.0,
+  "secciones_p_peronismo": {
+   "1": 0.999,
+   "2": 0.952,
+   "3": 1.0,
+   "4": 0.992,
+   "5": 0.08,
+   "6": 0.031,
+   "7": 0.922,
+   "8": 0.977
+  },
+  "diputados_2027_peronismo_p50": 23.0,
+  "senadores_2027_peronismo_p50": 14.0
+ },
+ {
+  "caso": "Octubre, participación 64 %",
+  "parametros": {
+   "base": "octubre",
+   "metas": null,
+   "part": 0.64
+  },
+  "pct": {
+   "PERONISMO": 41.65,
+   "DERECHA": 41.27,
+   "TERCERA": 3.1,
+   "IZQUIERDA": 6.07,
+   "RESTO": 7.91
+  },
+  "margen_p10_p50_p90": [
+   -1.95,
+   0.45,
+   2.57
+  ],
+  "p_gana_peronismo": 0.617,
+  "municipios_peronismo_p50": 39.0,
+  "secciones_p_peronismo": {
+   "1": 0.576,
+   "2": 0.004,
+   "3": 1.0,
+   "4": 0.004,
+   "5": 0.001,
+   "6": 0.0,
+   "7": 0.001,
+   "8": 0.127
+  },
+  "diputados_2027_peronismo_p50": 19.0,
+  "senadores_2027_peronismo_p50": 10.0
+ },
+ {
+  "caso": "Octubre, derecha dividida (PRO 25 %)",
+  "parametros": {
+   "base": "octubre",
+   "metas": null,
+   "pi_prov": 0.25,
+   "sd_pi_provincial": 0.03
+  },
+  "pct": {
+   "PERONISMO": 41.54,
+   "LLA": 31.0,
+   "PRO": 10.29,
+   "TERCERA": 3.12,
+   "IZQUIERDA": 6.09,
+   "RESTO": 7.96
+  },
+  "margen_p10_p50_p90": [
+   8.11,
+   10.5,
+   13.1
+  ],
+  "p_gana_peronismo": 1.0,
+  "municipios_peronismo_p50": 81.0,
+  "secciones_p_peronismo": {
+   "1": 0.999,
+   "2": 0.532,
+   "3": 1.0,
+   "4": 0.551,
+   "5": 0.227,
+   "6": 0.005,
+   "7": 0.185,
+   "8": 0.993
+  },
+  "diputados_2027_peronismo_p50": 20.0,
+  "senadores_2027_peronismo_p50": 14.0
+ },
+ {
+  "caso": "Empate 40-40 desde octubre",
+  "parametros": {
+   "base": "octubre",
+   "metas": {
+    "PERONISMO": 40.0,
+    "DERECHA": 40.0,
+    "TERCERA": 3.2461192392351874,
+    "IZQUIERDA": 6.218796935412272,
+    "RESTO": 8.16248939101554
+   }
+  },
+  "pct": {
+   "PERONISMO": 41.59,
+   "DERECHA": 40.82,
+   "TERCERA": 3.19,
+   "IZQUIERDA": 6.24,
+   "RESTO": 8.15
+  },
+  "margen_p10_p50_p90": [
+   -1.56,
+   0.84,
+   2.98
+  ],
+  "p_gana_peronismo": 0.701,
+  "municipios_peronismo_p50": 40.0,
+  "secciones_p_peronismo": {
+   "1": 0.634,
+   "2": 0.007,
+   "3": 1.0,
+   "4": 0.004,
+   "5": 0.001,
+   "6": 0.0,
+   "7": 0.001,
+   "8": 0.147
+  },
+  "diputados_2027_peronismo_p50": 20.0,
+  "senadores_2027_peronismo_p50": 10.0
+ }
+]
