@@ -33,3 +33,17 @@ produjo y la tabla donde está el número.
 | Para predecir, la zona casi no agrega si se tiene el perfil censal | R² fuera de muestra (por municipio) 0,60-0,86; sumar la zona lo mejora 0,01-0,03 con modelo lineal y nada con árboles | PROBADO (GroupKFold) | `101` | `conurbano_interior_oos.csv` |
 | Los cambios de voto son provinciales: el Conurbano y el interior se mueven igual | Con composición controlada, ninguna brecha en el cambio pasa Benjamini-Hochberg con urbanización (máximo 0,9 pp) | REFUTADO (la «dinámica propia» del Conurbano) | `101` | `conurbano_interior_brecha.csv` |
 | El cambio es mucho más parejo que el nivel | Peronismo: dispersión entre circuitos de 10 pp en el nivel y de 3-4 pp en el cambio. 2019→2023: −8,1 Conurbano, −7,3 interior | DESCRIPTIVO | `101` | `conurbano_interior_base.csv` |
+
+## 3 · Transferencias 2023 → 2025
+
+Gobernador 2023 (sólo mesas de nativos) contra Diputados Nacionales octubre 2025, 997 circuitos
+estables. Entre paréntesis, intervalo 5-95 por remuestreo de municipios.
+
+| Hallazgo | Magnitud | Estado | Script | Tabla |
+|---|---|---|---|---|
+| Fuerza Patria es el votante de Kicillof que fue a votar | 82 % (79-84) de los votantes de Kicillof la votaron; son el 96 % de su voto | PROBADO (error fuera de muestra la mitad que la predicción ingenua; cota superior Duncan-Davis 85,5 %) | `102` | `transferencias_2023_2025_matriz.csv` |
+| La pérdida de Kicillof fue abstención, no pase a otro espacio | 12,6 % (10-16) no fue a votar: ~513.000 votos; a LLA-PRO, 0 | PROBADO (ídem) | `102` | ídem |
+| La alianza LLA-PRO retuvo a casi todo Santilli | 77 % (75-79) del voto de JxC 2023; 7 % (6-8) a Provincias Unidas y 6 % (2-8) a Fuerza Patria | PROBADO (ídem; Duncan-Davis: Santilli → Provincias Unidas ≤ 8,5 %) | `102` | ídem |
+| El voto de LLA-PRO es más JxC que LLA | 54 % viene de Santilli y 45 % de Píparo | DESCRIPTIVO | `102` | ídem |
+| El votante de Píparo fue el que más se abstuvo | 22 % (15-29) no fue a votar, contra 13 % de Kicillof y 3 % de Santilli | PROBADO (ídem) | `102` | ídem |
+| Provincias Unidas es una escisión de JxC | 83 % de su voto viene de Santilli | DESCRIPTIVO | `102` | ídem |

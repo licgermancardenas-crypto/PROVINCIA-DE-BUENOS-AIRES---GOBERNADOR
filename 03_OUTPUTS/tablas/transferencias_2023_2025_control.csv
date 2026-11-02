@@ -1,0 +1,4 @@
+ambito,circuitos,error_reconstruccion_pct,error_circuito_pp_matriz,error_municipio_pct_matriz,error_peronismo_municipio_pp_matriz,error_circuito_pp_ingenua,error_municipio_pct_ingenua,error_peronismo_municipio_pp_ingenua
+Provincia,997,0.077,0.916,4.963,1.176,1.843,9.764,1.608
+Conurbano,226,0.073,,,,,,
+Interior,771,0.056,,,,,,

@@ -523,3 +523,67 @@ composición, no por zona.
 - El censo es de 2022 y se usa también para 2019 y 2021.
 - Los 4-6 puntos «del lugar» no tienen explicación acá: son lo que la composición medida no
   alcanza a explicar.
+
+---
+
+## 02-11-2026 · Retención y transferencia 2023 → 2025 (`analisis/102`)
+
+**Qué se compara.** Gobernador 2023 (generales) contra Diputados Nacionales octubre 2025, por
+circuito estable (ventana 2023-2025). Es el único par con dato por circuito: la provincial de
+septiembre sólo está por municipio. **Mismo padrón en las dos puntas**: Gobernador 2023 se arma
+sólo con mesas de nativos (13,12 M de electores; 2025: 13,35 M). «No votó» es una categoría más.
+Se descartan 36 circuitos de menos de 50 electores (1.309 electores).
+
+**Estimador.** El de CABA, portado a `analisis/_inferencia.py`: una sola regresión no negativa
+con la restricción de filas adentro. Para la provincia y por zona.
+
+### La matriz (% de cada origen 2023)
+
+| 2023 → 2025 | Fuerza Patria | LLA-PRO | Prov. Unidas | Izquierda | Otros | Blanco/nulo | No votó |
+|---|---|---|---|---|---|---|---|
+| Kicillof (UxP) | **82,2** (79-84) | 0 | 0 | 2,4 | 2,8 | 0 | **12,6** (10-16) |
+| Santilli (JxC) | 5,8 (2-8) | **77,4** (75-79) | 7,1 (6-8) | 2,2 | 2,6 | 2,0 | 3,0 |
+| Píparo (LLA) | 0 | **70,2** (63-74) | 0 | 0 | 8,0 | 0 | **21,7** (15-29) |
+| Izquierda | 0 | 0 | 0 | 73,4 (55-89) | 26,6 | 0 | 0 |
+| Blanco y nulo | 0 | 0 | 3,6 | 0,1 | 15,4 | 17,7 | 63,2 |
+| No votó | 0 | 1,8 | 0 | 3,8 | 5,2 | 2,9 | 86,2 |
+
+Entre paréntesis, percentiles 5-95 de 200 remuestreos de municipios.
+
+**En votos:** de 4,08 M de Kicillof, 3,36 M votaron Fuerza Patria y 513.000 no fueron. De 2,46 M de
+Santilli, 1,90 M fueron a LLA-PRO, 174.000 a Provincias Unidas y 143.000 a Fuerza Patria. De
+2,27 M de Píparo, 1,59 M a LLA-PRO y 494.000 no fueron. El voto de LLA-PRO es 54 % Santilli y
+45 % Píparo; el de Provincias Unidas, 83 % Santilli; el de Fuerza Patria, 96 % Kicillof.
+
+**Lectura.** Nadie cruzó la grieta en cantidad: el peronismo no perdió votos hacia LLA-PRO, los
+perdió hacia la abstención. La alianza LLA-PRO funcionó como suma: retuvo tres de cada cuatro
+votantes de JxC. El que más se desmovilizó fue el votante de Píparo (uno de cada cinco).
+
+### Controles
+
+| | Matriz | Ingenua (cada circuito se mueve como la provincia) |
+|---|---|---|
+| Error de reconstrucción (dentro de muestra) | 0,08 % | — |
+| Fuera de muestra, por circuito (pp por categoría) | 0,92 | 1,84 |
+| Fuera de muestra, por municipio (% de votos mal ubicados) | 5,0 % | 9,8 % |
+| Fuera de muestra, peronismo por municipio (mediana, pp) | 1,18 | 1,61 |
+
+Fuera de muestra = estimada con 4/5 de los municipios, aplicada a los que quedaron afuera. La
+matriz le gana a la predicción ingenua por la mitad.
+
+**Cotas de Duncan-Davis** (sin supuestos): Kicillof → Fuerza Patria como mucho 85,5 %;
+Santilli → Provincias Unidas como mucho 8,5 %. El resto de las cotas no informa (0 a ~95 %):
+el dato agregado sólo identifica esas celdas con ayuda del supuesto de la matriz común.
+
+**Por zona** las matrices se parecen: Kicillof → Fuerza Patria 81,7 % en el Conurbano y 84,0 %
+en el interior; Santilli → LLA-PRO 79,3 % y 72,0 %. La abstención de Píparo varía mucho entre
+zonas (7,5 % y 28,9 %), dentro del ruido de esa celda.
+
+### Lo que no dice
+
+- Ecológico: supone que la matriz es la misma en todos los circuitos de un ámbito.
+- Los ceros son el borde de la estimación (no negativa), no la certeza de cero.
+- El padrón cambia entre 2023 y 2025 (entran jóvenes, salen fallecidos): se trabaja con
+  proporciones de cada padrón.
+- Octubre, no septiembre: en la provincial de septiembre Fuerza Patria le ganó a LLA-PRO por unos 13 puntos. Eso es
+  el análisis de desdoblamiento.
