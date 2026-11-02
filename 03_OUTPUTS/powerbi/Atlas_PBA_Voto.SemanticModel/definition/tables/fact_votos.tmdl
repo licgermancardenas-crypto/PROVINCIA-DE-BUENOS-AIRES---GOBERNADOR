@@ -1,0 +1,59 @@
+table fact_votos
+	lineageTag: 02eb3aab-eb1b-5239-a88f-4d90f7107736
+
+	column eleccion
+		dataType: string
+		isHidden
+		lineageTag: 62c5feef-2027-5231-a4cb-58aab184600c
+		summarizeBy: none
+		sourceColumn: eleccion
+
+		annotation SummarizationSetBy = Automatic
+
+	column cod_indec
+		dataType: string
+		isHidden
+		lineageTag: 01900da3-070b-5ee5-ae00-b334dd84a7ee
+		summarizeBy: none
+		sourceColumn: cod_indec
+
+		annotation SummarizationSetBy = Automatic
+
+	column espacio
+		dataType: string
+		isHidden
+		lineageTag: ce04e823-ab83-52ca-bce9-7f441834f52a
+		summarizeBy: none
+		sourceColumn: espacio
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 5ebcb8a6-f98b-5f17-b589-aa127c92a6ef
+		summarizeBy: none
+		sourceColumn: pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column votos
+		dataType: double
+		formatString: #,0.0
+		lineageTag: e2e6958e-ac5a-5371-9ce3-4bd5048e87f3
+		summarizeBy: sum
+		sourceColumn: votos
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_votos = m
+		mode: import
+		source =
+				let
+				    Origen_fact_votos = Csv.Document(File.Contents(CarpetaDatos & "fact_votos.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Enc_fact_votos = Table.PromoteHeaders(Origen_fact_votos, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Enc_fact_votos, {{"eleccion", type text}, {"cod_indec", type text}, {"espacio", type text}, {"pct", type number}, {"votos", type number}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

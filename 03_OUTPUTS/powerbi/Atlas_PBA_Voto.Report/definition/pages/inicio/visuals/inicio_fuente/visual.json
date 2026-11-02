@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.3.0/schema.json",
+  "name": "inicio_fuente",
+  "position": {
+    "x": 24,
+    "y": 580,
+    "z": 1210,
+    "width": 800,
+    "height": 60,
+    "tabOrder": 1210
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Cómo usar: elegí la elección arriba; los botones llevan a cada página. En los mapas, clic en un municipio filtra todo; pasá el mouse para ver el detalle; clic derecho > Obtener detalles > Ficha.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#DCD2EA"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Fuentes: DINE, Junta Electoral PBA, INDEC (censo 2022), RENABAP. Elaboración: Atlas Analytics.",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#8A7AAB"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

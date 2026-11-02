@@ -1,0 +1,4 @@
+expression CarpetaDatos = "E:\PROVINCIA DE BUENOS AIRES ELECCIONES\03_OUTPUTS\powerbi\datos\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 6782d53e-7600-5725-8a04-5c53ddb65a35
+
+	annotation PBI_ResultType = Text

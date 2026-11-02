@@ -1,0 +1,27 @@
+relationship 090f9a54-a82e-5d6e-9443-60fe5f08a332
+	fromColumn: fact_votos.cod_indec
+	toColumn: dim_municipio.cod_indec
+
+relationship ddd354ee-cfb3-5ecb-b47f-4f5d2e1045da
+	fromColumn: fact_votos.eleccion
+	toColumn: dim_eleccion.eleccion
+
+relationship 147c0e08-62c4-5169-be8a-03384bdae271
+	fromColumn: fact_votos.espacio
+	toColumn: dim_espacio.espacio
+
+relationship 9d4a721f-e556-5c75-b9f9-81c02507cb55
+	fromColumn: fact_participacion.cod_indec
+	toColumn: dim_municipio.cod_indec
+
+relationship ab117b78-0eb9-5ce0-817f-ea0d61d94b33
+	fromColumn: fact_participacion.eleccion
+	toColumn: dim_eleccion.eleccion
+
+relationship a5496a7b-37a9-59be-8713-96953b511689
+	fromColumn: fact_motor_2027.cod_indec
+	toColumn: dim_municipio.cod_indec
+
+relationship b989b808-47e7-5322-8a42-c6f5c1348097
+	fromColumn: dim_municipio.fuerza_intendente
+	toColumn: dim_fuerza.fuerza_intendente

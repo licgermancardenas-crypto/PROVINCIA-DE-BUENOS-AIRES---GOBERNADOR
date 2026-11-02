@@ -40,3 +40,16 @@ electoral de Atlas PBA (elecciones 2007-2025, censo, motor de escenarios 2027).
 ## Privacidad
 
 `datos_privados/` (CRM, oportunidad, noticias) no se sube a GitHub: está en `.gitignore`.
+
+## Tablero «Voto PBA» (`Atlas_PBA_Voto.pbip`)
+
+Proyecto aparte, sólo con datos públicos de votación (sin CRM): se puede publicar en Power BI Service.
+Se genera con `python 02_SCRIPTS/productos/p08_powerbi_voto.py`.
+
+Páginas: Inicio · Mapas (ganador, % peronismo, participación, motor 2027) · Secciones · Evolución
+(animación 2007-2025) · Territorio (voto y censo) · Ficha del municipio (clic derecho > Obtener
+detalles) · información emergente al pasar el mouse.
+
+Antes de abrirlo, una sola vez: *Archivo > Opciones y configuración > Opciones > Características en
+versión preliminar > «Objeto visual de mapa de formas»*, y reiniciar Power BI. Al abrirlo, *Inicio >
+Actualizar* para cargar los datos.

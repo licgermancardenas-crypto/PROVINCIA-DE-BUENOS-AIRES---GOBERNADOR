@@ -1,0 +1,158 @@
+table fact_participacion
+	lineageTag: 8ef5d123-316d-59b2-99b7-c6749767b34e
+
+	column eleccion
+		dataType: string
+		isHidden
+		lineageTag: b7b0e7df-3934-5dc9-9069-324318ef6a56
+		summarizeBy: none
+		sourceColumn: eleccion
+
+		annotation SummarizationSetBy = Automatic
+
+	column cod_indec
+		dataType: string
+		isHidden
+		lineageTag: 10b6ecae-729e-5bd1-bac7-517a0ab6bed2
+		summarizeBy: none
+		sourceColumn: cod_indec
+
+		annotation SummarizationSetBy = Automatic
+
+	column votos_positivos
+		dataType: int64
+		formatString: #,0
+		lineageTag: 6a8ff48c-ea9b-5184-a159-24055898e543
+		summarizeBy: sum
+		sourceColumn: votos_positivos
+
+		annotation SummarizationSetBy = Automatic
+
+	column electores
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 9e0d4ac4-5b1b-56bc-b44c-15dd2879d735
+		summarizeBy: sum
+		sourceColumn: electores
+
+		annotation SummarizationSetBy = Automatic
+
+	column participacion
+		dataType: double
+		formatString: #,0.0
+		lineageTag: b8c8c3b3-5449-581a-a59a-283b4825c48e
+		summarizeBy: none
+		sourceColumn: participacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column ganador
+		dataType: string
+		isHidden
+		lineageTag: e3ce9588-406d-5ece-acf0-d53541024702
+		summarizeBy: none
+		sourceColumn: ganador
+
+		annotation SummarizationSetBy = Automatic
+
+	column margen
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 28e94a4e-11ee-5151-ac1c-9b350f40587a
+		summarizeBy: none
+		sourceColumn: margen
+
+		annotation SummarizationSetBy = Automatic
+
+	column ganador_nombre
+		dataType: string
+		lineageTag: 1fe797e4-dea1-5a3c-a902-44491cf4dea1
+		summarizeBy: none
+		sourceColumn: ganador_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_peronismo
+		dataType: double
+		formatString: #,0.0
+		lineageTag: b3565dd9-e92e-5d86-ac84-b50bb0d049ac
+		summarizeBy: none
+		sourceColumn: pct_peronismo
+
+		annotation SummarizationSetBy = Automatic
+
+	column rango_peronismo
+		dataType: string
+		lineageTag: fa3d5037-a47e-5a68-8c98-2e02244c796e
+		summarizeBy: none
+		sourceColumn: rango_peronismo
+		sortByColumn: orden_rango_peronismo
+
+		annotation SummarizationSetBy = Automatic
+
+	column rango_participacion
+		dataType: string
+		lineageTag: 7c965349-8d15-571c-ade1-29f2869da9c9
+		summarizeBy: none
+		sourceColumn: rango_participacion
+		sortByColumn: orden_rango_participacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column competencia
+		dataType: string
+		lineageTag: f13dfeda-bc52-5c3c-af02-44cf295243c9
+		summarizeBy: none
+		sourceColumn: competencia
+		sortByColumn: orden_competencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column orden_rango_peronismo
+		dataType: int64
+		isHidden
+		lineageTag: 107117c4-b5de-5648-b21f-80eee0fd4e4c
+		summarizeBy: none
+		sourceColumn: orden_rango_peronismo
+
+		annotation SummarizationSetBy = Automatic
+
+	column orden_rango_participacion
+		dataType: double
+		formatString: #,0.0
+		isHidden
+		lineageTag: 74146643-0232-528b-9b5d-d08094169d45
+		summarizeBy: none
+		sourceColumn: orden_rango_participacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column orden_competencia
+		dataType: int64
+		isHidden
+		lineageTag: aa4b39d6-fa27-5207-bb9c-d83bfa5d6540
+		summarizeBy: none
+		sourceColumn: orden_competencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column clave
+		dataType: string
+		isHidden
+		lineageTag: 6165eece-0597-53b3-989e-b72abb877acb
+		summarizeBy: none
+		sourceColumn: clave
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_participacion = m
+		mode: import
+		source =
+				let
+				    Origen_voto_resultados = Csv.Document(File.Contents(CarpetaDatos & "voto_resultados.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Enc_voto_resultados = Table.PromoteHeaders(Origen_voto_resultados, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Enc_voto_resultados, {{"eleccion", type text}, {"cod_indec", type text}, {"votos_positivos", Int64.Type}, {"electores", type number}, {"participacion", type number}, {"ganador", type text}, {"margen", type number}, {"ganador_nombre", type text}, {"pct_peronismo", type number}, {"rango_peronismo", type text}, {"rango_participacion", type text}, {"competencia", type text}, {"orden_rango_peronismo", Int64.Type}, {"orden_rango_participacion", type number}, {"orden_competencia", Int64.Type}, {"clave", type text}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

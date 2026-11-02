@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.0.0/schema.json",
+  "pageOrder": [
+    "inicio",
+    "mapa",
+    "mapa_peronismo",
+    "mapa_participacion",
+    "mapa_2027",
+    "secciones",
+    "evolucion",
+    "territorio",
+    "ficha",
+    "tooltip_voto"
+  ],
+  "activePageName": "inicio"
+}

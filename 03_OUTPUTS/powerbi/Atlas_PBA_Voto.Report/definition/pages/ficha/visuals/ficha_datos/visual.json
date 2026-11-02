@@ -1,0 +1,157 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.3.0/schema.json",
+  "name": "ficha_datos",
+  "position": {
+    "x": 10,
+    "y": 386,
+    "z": 1120,
+    "width": 232,
+    "height": 326,
+    "tabOrder": 1120
+  },
+  "visual": {
+    "visualType": "multiRowCard",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "intendente"
+                }
+              },
+              "queryRef": "dim_municipio.intendente",
+              "nativeQueryRef": "intendente",
+              "displayName": "Intendente"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "fuerza_intendente"
+                }
+              },
+              "queryRef": "dim_municipio.fuerza_intendente",
+              "nativeQueryRef": "fuerza_intendente",
+              "displayName": "Fuerza"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "pob"
+                }
+              },
+              "queryRef": "dim_municipio.pob",
+              "nativeQueryRef": "pob",
+              "displayName": "Población 2022"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "hogares"
+                }
+              },
+              "queryRef": "dim_municipio.hogares",
+              "nativeQueryRef": "hogares",
+              "displayName": "Hogares"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "nbi"
+                }
+              },
+              "queryRef": "dim_municipio.nbi",
+              "nativeQueryRef": "nbi",
+              "displayName": "Hogares con NBI %"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "pct_univ"
+                }
+              },
+              "queryRef": "dim_municipio.pct_univ",
+              "nativeQueryRef": "pct_univ",
+              "displayName": "Universitarios %"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "pct_65"
+                }
+              },
+              "queryRef": "dim_municipio.pct_65",
+              "nativeQueryRef": "pct_65",
+              "displayName": "Mayores de 65 %"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Datos del municipio'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

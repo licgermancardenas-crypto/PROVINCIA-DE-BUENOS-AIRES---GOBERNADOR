@@ -1,0 +1,76 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.3.0/schema.json",
+  "name": "sec_nota",
+  "position": {
+    "x": 10,
+    "y": 276,
+    "z": 1100,
+    "width": 232,
+    "height": 200,
+    "tabOrder": 1100
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Las 8 secciones",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "fontWeight": "bold",
+                      "color": "#E9B6FF"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "La 1.ª (norte y oeste del Conurbano) y la 3.ª (sur del Conurbano) concentran casi dos tercios de los electores; la 3.ª es el bastión peronista y la 1.ª define la elección. El interior (2.ª, 4.ª, 5.ª, 6.ª, 7.ª) suele votar distinto; la 8.ª es La Plata.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#DCD2EA"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
