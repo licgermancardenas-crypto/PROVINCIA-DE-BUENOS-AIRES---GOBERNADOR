@@ -1106,3 +1106,39 @@ verosimilitud). Benjamini-Hochberg sobre las 92 pruebas.
 Movilización (`109`) con el ruido nuevo: desde octubre y derecha unida, de −3,7 (como 2021 → 2023)
 a +5,4 (vuelven los que se fueron en 2023 → 2025); retorno 2023, −0,2. Diferencias de ±0,2 con la
 corrida anterior.
+
+---
+
+## 02-11-2026 · Las primeras láminas (`mapas/m01`)
+
+Cinco mapas estáticos (PNG, 300 dpi) en `03_OUTPUTS/laminas/`, en la proyección del proyecto
+(cónica equivalente de Albers: las superficies se comparan bien), con recuadro del Conurbano y La
+Plata, escala, fuente y proyección al pie.
+
+| Lámina | Qué muestra | Escala |
+|---|---|---|
+| `01_peronismo_gobernador_2023` | Voto a Kicillof, % de los positivos | circuito estable |
+| `02_cambio_peronismo_2023_2025` | Cambio del voto peronista a Diputados 2023 → 2025, pp | circuito estable |
+| `03_escenarios_2027_municipio` | P(gana el peronismo) en tres escenarios del motor | municipio |
+| `04_secciones_2027` | Qué cámara elige cada sección y P(gana el peronismo) si se repite octubre | sección |
+| `05_desdoblamiento_lla_pro` | Crecimiento de LLA-PRO de septiembre a octubre, pp del padrón | municipio |
+
+**Decisiones.**
+
+- **Cortes manuales y fijos** (no Jenks): legibles (30-40-50-60 %, ±4-8 pp) y comparables entre
+  paneles; en la lámina 3 los tres escenarios comparten cortes.
+- **Escalas aptas para daltonismo**: YlGnBu (secuencial) y PuOr (divergente) con el centro en 0 pp
+  o en 50 % de probabilidad. Sin dato en gris, con su entrada en la leyenda.
+- **Toda la provincia cubierta.** La capa de circuitos estables 2023-2025 no tenía 96 polígonos de
+  circuitos rurales absorbidos antes de 2023 (el 15 % de la superficie): se asignan al circuito que
+  los absorbió según `circuitos_uniones_motivos.csv` (y, si no figura, al vecino del mismo
+  municipio con más borde compartido). Sin dato: menos de 20 votos positivos.
+- **Sesgo de superficie, a tener en cuenta al leer.** En los mapas por circuito los rurales grandes
+  y poco poblados (y el Delta) pesan visualmente mucho más que sus votos; por eso el recuadro del
+  Conurbano.
+- **Control**: tres valores pintados contra la tabla (La Matanza +3,8, General Pueyrredón +6,0,
+  Balcarce +14,4 pp en la lámina 5).
+
+En la lámina 3 «municipios con 50 % o más» cuenta los municipios donde el peronismo gana en la
+mayoría de las simulaciones (36 si se repite octubre); la mediana de municipios ganados por
+simulación es otra medida (39).

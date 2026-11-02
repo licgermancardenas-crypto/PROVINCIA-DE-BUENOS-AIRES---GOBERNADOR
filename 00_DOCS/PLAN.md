@@ -73,6 +73,8 @@ entran como parámetro. Legislatura por sección electoral con cociente.
 
 ## Etapa 5 · Productos
 
+- ✅ Primeras láminas estáticas: `mapas/m01` (5 mapas en `03_OUTPUTS/laminas/`).
+
 Plataforma web, simulador, informes. Se definen cuando haya resultados.
 
 ---
