@@ -18,7 +18,7 @@ CÓMO
 - Barrios populares -> circuito por superposición de áreas (proyección de áreas iguales del
   proyecto): familias y viviendas se reparten por la fracción de superficie del barrio en cada
   circuito, como el censo en el `etl/06`.
-- Todo se agrega también por circuito estable (ventanas 2019-2025 y 2023-2025), con los circuitos
+- Todo se agrega también por circuito estable (ventanas 2011-2025, 2019-2025 y 2023-2025), con los circuitos
   absorbidos asignados al que los absorbió (como en las láminas).
 
 INDICADORES
@@ -31,7 +31,7 @@ red formal y sin cloaca. Escuelas: establecimientos, edificios, matrícula total
 
 Salidas (01_DATOS/processed/)
 - capas_circuito.csv     : un circuito electoral por fila (1.146 polígonos)
-- capas_ce.csv           : por circuito estable, ventanas 2019_2025 y 2023_2025
+- capas_ce.csv           : por circuito estable, ventanas 2011_2025, 2019_2025 y 2023_2025
 - escuelas_puntos.csv, salud_puntos.csv : cada punto con su circuito y su control
 - 03_OUTPUTS/tablas/control_capas.csv
 """
@@ -188,6 +188,7 @@ def main() -> None:
     def indicadores(x: pd.DataFrame) -> pd.DataFrame:
         x = x.copy()
         x["pct_hogares_barrio_popular"] = 100 * x.familias_bp / x.hogares.where(x.hogares > 0)
+        x["pct_hogares_bp_desde_2010"] = 100 * x.familias_bp_desde_2010 / x.hogares.where(x.hogares > 0)
         x["pct_familias_bp_desde_2010"] = 100 * x.familias_bp_desde_2010 / x.familias_bp.where(x.familias_bp > 0)
         x["pct_familias_bp_sin_agua"] = 100 * x.familias_bp_sin_agua / x.familias_bp.where(x.familias_bp > 0)
         x["pct_familias_bp_sin_cloaca"] = 100 * x.familias_bp_sin_cloaca / x.familias_bp.where(x.familias_bp > 0)
@@ -199,7 +200,7 @@ def main() -> None:
 
     indicadores(d).to_csv(PROC / "capas_circuito.csv", encoding="utf-8")
     ces = []
-    for v in ("2019_2025", "2023_2025"):
+    for v in ("2011_2025", "2019_2025", "2023_2025"):
         m = a_ce(d, v, circ)
         x = d.drop(columns="cod_indec").groupby(m.reindex(d.index)).sum(min_count=1)
         x.index.name = "ce_id"

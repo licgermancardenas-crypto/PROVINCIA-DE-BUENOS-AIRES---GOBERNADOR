@@ -24,6 +24,9 @@ MÉTODO
 - Predicción fuera de muestra: GroupKFold por municipio (5 grupos), ponderado por electores.
   Modelos: media, inercia (el mismo resultado en la elección anterior), censo (elastic net y
   árboles) y censo + inercia.
+- Capas territoriales (`etl/11`: barrios populares RENABAP, escuelas, salud) entran sólo en la
+  batería, en el mismo Benjamini-Hochberg, y con una prueba más: el parcial sumando la densidad a
+  los controles (escuelas y salud por habitante abundan en los pueblos chicos).
 - Batería sobre los **cambios**: Spearman parcial de cada indicador descontando NBI,
   universitarios, los dos tramos de edad, log(población / electores) y **el nivel de partida**
   (si no, lo que aparece es el cambio proporcional al nivel); Benjamini-Hochberg sobre
@@ -64,6 +67,11 @@ ALBERS = "+proj=aea +lat_1=-34 +lat_2=-39 +lat_0=-36.5 +lon_0=-60"
 NO_ESPACIO = {"BLANCO", "NULO", "RECURRIDO", "IMPUGNADO", "COMANDO", "SIN_REGLA"}
 DERECHA = {"PRO_JXC", "LLA", "LLA_PRO"}
 CONTROL_22 = ["pct_hog_nbi", "pct_univ_completo", "pct_18_29", "pct_65_mas", "log_pob_electores"]
+# Capas territoriales (etl/11): barrios populares (RENABAP), escuelas y salud. No entran en la
+# predicción (son de 2023-2025 y medirían el nivel con datos posteriores), sólo en la batería.
+CAPAS_RECIENTE = ["pct_hogares_barrio_popular", "pct_matricula_estatal", "matricula_por_1000_hab",
+                  "salud_por_10000_hab", "caps_por_10000_hab"]
+CAPAS_LARGO = ["pct_hogares_barrio_popular", "pct_hogares_bp_desde_2010"]
 CONTROL_10 = ["pct_hog_nbi_2010", "pct_llego_universidad_2010", "pct_15_29_2010", "pct_65_mas_2010", "log_pob_electores"]
 
 
@@ -90,6 +98,11 @@ def voto_ce(ventana: str, elecciones: list[tuple[int, str]]) -> pd.DataFrame:
     return d.join(info)
 
 
+def capas_ce(ventana: str, columnas: list[str]) -> pd.DataFrame:
+    c = pd.read_csv(PROC / "capas_ce.csv", dtype={"ce_id": str})
+    return c[c.ventana == ventana].set_index("ce_id")[columnas]
+
+
 def area_ce(ventana: str) -> pd.Series:
     eq = pd.read_csv(PROC / "circuitos_equivalencias.csv", dtype=str)
     eq = eq[eq.ventana == ventana][["circuito", "ce_id"]]
@@ -112,6 +125,7 @@ def base_reciente() -> tuple[pd.DataFrame, list[str]]:
     ce["log_densidad"] = np.log((ce.pob / area_ce("2019_2025")).clip(lower=0.1))
     d = v.join(ce[rasgos + ["pob", "log_densidad"]], how="inner")
     d["log_pob_electores"] = np.log(d.pob / d.electores_dip_2025)
+    d = d.join(capas_ce("2019_2025", CAPAS_RECIENTE))
     d = d.replace([np.inf, -np.inf], np.nan)
     return d, rasgos + ["log_densidad", "log_pob_electores"]
 
@@ -139,6 +153,8 @@ def base_larga() -> tuple[pd.DataFrame, list[str]]:
     ce.loc[ce.pob_2010 < 200, "crec_pob_10_22"] = np.nan
     d = v.join(ce, how="inner")
     d["log_pob_electores"] = np.log(d.pob_2022 / d.electores_dip_2023)
+    d["log_densidad_2010"] = np.log((d.pob_2010 / area_ce("2011_2025")).clip(lower=0.1))
+    d = d.join(capas_ce("2011_2025", CAPAS_LARGO))
     d = d.replace([np.inf, -np.inf], np.nan)
     niveles = [f"{k}_2010" for k in censo_hist.COMUNES if f"d_{k}" in cambios]
     return d, niveles + cambios + ["crec_pob_10_22", "log_pob_electores"]
@@ -230,7 +246,25 @@ def bateria(d: pd.DataFrame, objetivos: dict[str, tuple[str, str]], rasgos: list
             r3, _ = parcial(a[keep3], b[keep3], Z[keep3])
             filas.append({"objetivo": rot, "variable": v, "n": len(x), "spearman": stats.spearmanr(a, b)[0],
                           "spearman_parcial": r, "p": p, "sin_1": r1, "sin_3": r3})
-    t = pd.DataFrame(filas)
+    return pd.DataFrame(filas)
+
+
+def con_densidad(t: pd.DataFrame, d: pd.DataFrame, columnas: dict[str, str], control: list[str], dens: str) -> pd.DataFrame:
+    """Segunda prueba para las capas: el mismo Spearman parcial sumando la densidad a los controles. Escuelas
+    y centros de salud por habitante son más en pueblos chicos; sin esto miden ruralidad."""
+    t = t.copy()
+    for i, row in t.iterrows():
+        y, nivel = columnas[row.objetivo]
+        Z = list(control) + [nivel, dens]
+        x = d.dropna(subset=[y, row.variable] + Z)
+        t.loc[i, ["parcial_con_densidad", "p_con_densidad"]] = parcial(
+            x[row.variable].to_numpy(float), x[y].to_numpy(float), x[Z].to_numpy(float))
+    return t
+
+
+def filtrar(t: pd.DataFrame) -> pd.DataFrame:
+    """Benjamini-Hochberg sobre toda la batería y las dos pruebas de fragilidad."""
+    t = t.copy()
     t["q_bh"] = multipletests(t.p, method="fdr_bh")[1]
     t["pasa"] = (t.q_bh < 0.05) & (np.sign(t.sin_1) == np.sign(t.spearman_parcial)) & \
                 (np.sign(t.sin_3) == np.sign(t.spearman_parcial)) & (t.sin_3.abs() >= 0.1)
@@ -287,7 +321,21 @@ def main() -> None:
     b2 = bateria(dl, {"cambio_peronismo_gob_2011_2023": ("Cambio peronismo · Gobernador 2011-2023", "peronismo_gob_2011"),
                       "cambio_peronismo_dip_2011_2023": ("Cambio peronismo · Diputados 2011-2023", "peronismo_dip_2011")},
                  [r for r in rasgos_l if r.startswith(("d_", "crec"))], CONTROL_10)
-    b = pd.concat([b1.assign(bloque="reciente"), b2.assign(bloque="largo")])
+    # Capas territoriales: mismos objetivos y controles, misma corrección (entran en el mismo BH).
+    obj_r = {o[0]: (o[3], niveles[o[0]]) for o in objetivos if o[4] == "cambio"}
+    obj_l = {"cambio_peronismo_gob_2011_2023": ("Cambio peronismo · Gobernador 2011-2023", "peronismo_gob_2011"),
+             "cambio_peronismo_dip_2011_2023": ("Cambio peronismo · Diputados 2011-2023", "peronismo_dip_2011")}
+    b3 = con_densidad(bateria(d, obj_r, CAPAS_RECIENTE, CONTROL_22), d,
+                      {rot: (y, n) for y, (rot, n) in obj_r.items()}, CONTROL_22, "log_densidad")
+    b4 = con_densidad(bateria(dl, obj_l, CAPAS_LARGO, CONTROL_10), dl,
+                      {rot: (y, n) for y, (rot, n) in obj_l.items()}, CONTROL_10, "log_densidad_2010")
+    b = filtrar(pd.concat([b1.assign(bloque="reciente"), b2.assign(bloque="largo"),
+                           b3.assign(bloque="reciente", fuente="capas"), b4.assign(bloque="largo", fuente="capas")]))
+    b["fuente"] = b.fuente.fillna("censo")
+    # Las capas, además, tienen que sobrevivir a la densidad (misma regla: BH dentro de las capas, |ρ| ≥ 0,1).
+    capas = b.fuente == "capas"
+    b.loc[capas, "q_con_densidad"] = multipletests(b.loc[capas, "p_con_densidad"], method="fdr_bh")[1]
+    b.loc[capas, "pasa_con_densidad"] = b.loc[capas, "pasa"] & (b.loc[capas, "q_con_densidad"] < 0.05) &         (np.sign(b.loc[capas, "parcial_con_densidad"]) == np.sign(b.loc[capas, "spearman_parcial"])) &         (b.loc[capas, "parcial_con_densidad"].abs() >= 0.1)
     b.round(4).to_csv(TABLAS / "territorio_bateria.csv", index=False, encoding="utf-8")
     pd.set_option("display.width", 250)
     print(f"\nbatería: {len(b)} pruebas, pasan {int(b.pasa.sum())}")

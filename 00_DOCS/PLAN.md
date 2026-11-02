@@ -71,6 +71,7 @@ entran como parámetro. Legislatura por sección electoral con cociente.
 | 4.4 | Legislatura 2027 por sección (cociente y renovación por mitades) | ✅ `analisis/108` |
 | 4.5 | Movilización diferencial: quién va a votar, no sólo cuántos (perfil del votante marginal como parámetro) | ✅ `analisis/109` |
 | 4.6 | Autocorrelación espacial: ruido por sección en el motor y hallazgos con modelo de error espacial | ✅ `analisis/110` |
+| 4.7 | Capas territoriales (barrios populares, escuelas, salud) en la batería del cambio de voto | ✅ `analisis/104` |
 
 ## Etapa 5 · Productos
 

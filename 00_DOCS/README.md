@@ -1185,3 +1185,39 @@ de Nación publican el listado de locales de votación de la provincia con domic
 listado, el padrón escolar ya georreferenciado alcanza para ubicarlos (casi todos son escuelas) y
 bajar el análisis de circuito a escuela. Queda redactado el pedido de acceso a la información a la
 Junta Electoral PBA (Ley 12.475) y a la DINE (Ley 27.275): `07_PEDIDOS_INFO/001_locales_de_votacion.md`.
+
+---
+
+## 02-11-2026 · Barrios populares, escuelas y salud en la batería (`analisis/104`)
+
+**La pregunta.** El `104` encontró que LLA-PRO avanzó relativamente en circuitos con NBI de vivienda
+y hogares migrantes. Con las capas del `etl/11`, ¿el dato directo de RENABAP sostiene la lectura?
+¿La oferta escolar y sanitaria dice algo del cambio de voto?
+
+**Método.** Las mismas pruebas del `104` (Spearman parcial con NBI, universitarios, dos tramos de
+edad, población/electores y el nivel de partida; fragilidad de Cook), en el **mismo
+Benjamini-Hochberg** que la batería del censo (226 pruebas; las 81 que pasaban siguen pasando).
+Cinco capas para lo reciente (% de hogares en barrios populares, % de matrícula estatal, matrícula
+por 1.000 habitantes, establecimientos de salud y salas sin internación por 10.000) y dos para
+2011-2023 (% de hogares en barrios populares y en barrios creados desde 2010; el `etl/11` suma la
+ventana 2011-2025). Prueba adicional: **el mismo parcial con la densidad entre los controles**,
+porque escuelas y salitas por habitante abundan en los pueblos chicos.
+
+**Resultados.** Pasan la batería 10 de 24; con la densidad quedan 2:
+
+| | Parcial | Con densidad | Error espacial (`110`) |
+|---|---|---|---|
+| Barrios populares → captura de LLA-PRO 2023-2025 | +0,12 | +0,11 | sobrevive |
+| Barrios populares → cambio del peronismo 2023-2025 | −0,16 | −0,11 | sobrevive |
+| Barrios populares → participación 2023-2025 | +0,19 | +0,01 | (densidad) |
+| Barrios populares → peronismo 2011-2023 | +0,15 / +0,16 | +0,04 | no sobrevive |
+| Matrícula estatal, salud por habitante (6 pruebas) | ±0,10 a 0,22 | < 0,06 | — |
+
+- **Se confirma** el avance relativo de LLA-PRO (y el retroceso del peronismo) en barrios populares
+  entre 2023 y 2025, con un dato que no sale del censo y más allá del NBI. Efecto chico: del orden
+  de un décimo de desvío.
+- **Escuelas y salud no agregan nada propio**: todo lo que mostraban era ruralidad.
+- Los barrios creados desde 2010 no se asocian con el cambio 2011-2023.
+
+Las tablas `territorio_bateria.csv` (columnas `fuente`, `parcial_con_densidad`, `pasa_con_densidad`) y
+`espacial_hallazgos.csv` (91 pruebas del `104`) quedaron actualizadas.
