@@ -674,3 +674,81 @@ boleta, como septiembre y no como octubre. La diferencia entre municipios con y 
 peronista (unos 3 pp del padrón entre una elección y otra) es una medida del peso del aparato
 municipal cuando está en la boleta; es correlacional, no causal, y entra en el motor como
 parámetro con rango, no como dato.
+
+---
+
+## 02-11-2026 · Lo que el territorio predice y lo que no (`analisis/104`)
+
+**Por qué antes del motor.** En CABA el censo predecía muy bien el **nivel** de voto y nada el
+**cambio**. Si en PBA es igual, el motor modela niveles con el territorio y cambios con un
+movimiento común. Dos preguntas que en CABA no estaban: si el censo le gana a la **inercia** (el
+mismo resultado en la elección anterior), y si el **cambio social 2010-2022** predice el cambio de
+voto 2011-2023.
+
+**Método.** Circuitos estables (997 para 2019-2025, 918 para 2011-2025). Voto en porcentajes,
+nunca razones (la trampa del denominador de CABA). Fuera de muestra: GroupKFold por municipio,
+ponderado por electores. Modelos: media, inercia, censo (elastic net y árboles), censo + inercia
+y, para los cambios, **el nivel de partida solo** y censo + nivel de partida.
+
+### R² fuera de muestra
+
+| Objetivo | Inercia | Censo | Censo + inercia | Nivel de partida | Censo + nivel |
+|---|---|---|---|---|---|
+| Peronismo, Diputados 2025 | 0,89 | 0,62 / 0,68 | 0,90 | — | — |
+| LLA-PRO, Diputados 2025 | 0,96 | 0,76 / 0,80 | 0,96 | — | — |
+| Peronismo, Gobernador 2023 | 0,93 | 0,75 / 0,78 | 0,95 | — | — |
+| Participación 2025 | 0,28 | 0,38 / 0,37 | 0,54 | — | — |
+| Cambio peronismo, Gobernador 2019-2023 | 0,56 | 0,58 / 0,47 | 0,70 | 0,45 | 0,59 |
+| Cambio peronismo, Diputados 2023-2025 | −0,08 | 0,18 / −0,06 | 0,18 | 0,16 | 0,19 |
+| Captura de LLA-PRO, 2023-2025 | 0,05 | 0,38 / 0,42 | 0,39 | 0,50 | 0,56 |
+| Cambio participación 2023-2025 | 0,45 | 0,28 / 0,11 | 0,62 | 0,02 | 0,39 |
+| Cambio peronismo, Gobernador 2011-2023 | — | 0,28 / 0,33 | — | 0,26 | 0,34 |
+| Cambio peronismo, Diputados 2011-2023 | — | 0,41 / 0,46 | — | 0,30 | 0,40 |
+
+Censo: elastic net / árboles. Inercia en los cambios = el cambio de la elección anterior.
+
+**Tres lecturas:**
+
+1. **El nivel es inercia.** La elección anterior predice 0,89-0,96 del nivel de cada circuito; el
+   censo agrega entre medio punto y punto y medio de R². Para el motor, el punto de partida de
+   cada circuito es su último resultado, no su perfil censal.
+2. **El cambio es proporcional.** Casi todo lo que «se predice» del cambio es que los circuitos
+   con más voto de una fuerza pierden (o ganan) más puntos: es el nivel de partida (0,16 a 0,50
+   solo). El censo agrega encima entre 0,03 y 0,14. **Diferencia con CABA**: allá el cambio era
+   impredecible; acá es predecible en la medida en que es proporcional. El motor tiene que aplicar
+   el movimiento común en forma **proporcional**, no uniforme (mismos puntos en todos lados).
+3. **La participación es otra cosa.** La inercia la predice mal (0,28: se pasa de una presidencial
+   a una de medio término) y el censo ayuda de verdad (0,54 juntos). Su cambio tiene la señal
+   territorial más fuerte de todo el análisis.
+
+### La batería sobre los cambios
+
+Spearman parcial descontando NBI, universitarios, dos tramos de edad, log(población / electores)
+**y el nivel de partida** (sin él, la batería redescubre el cambio proporcional: en la primera
+corrida pasaban 98 pruebas, con él 81). Benjamini-Hochberg sobre las 202 pruebas y fragilidad por
+Cook (sin el circuito más influyente y sin los tres).
+
+| Cambio | Pasan | Lo más fuerte (Spearman parcial) |
+|---|---|---|
+| Participación 2023-2025 | 26 de 41 | densidad +0,38, viviendas rurales −0,34, mujeres +0,32, secundario incompleto −0,30 |
+| Peronismo, Gobernador 2019-2023 | 16 de 41 | patrones −0,20, servicio doméstico −0,17, densidad +0,16, nacidos en otro país +0,16 |
+| Peronismo, Diputados 2023-2025 | 12 de 41 | rural +0,17, cuentapropia −0,17, densidad −0,15, jubilados +0,15 |
+| Captura de LLA-PRO 2023-2025 | 8 de 41 | NBI de vivienda +0,17, hogares migrantes +0,16, jubilados −0,15, nacidos en otro país +0,15 |
+| Peronismo, Gobernador 2011-2023 | 10 de 19 | cambio en gas de red −0,24, en agua de red −0,18, en ruralidad +0,17 |
+| Peronismo, Diputados 2011-2023 | 9 de 19 | cambio en gas de red −0,28, en ruralidad +0,21, en agua de red −0,17 |
+
+- **Efectos chicos.** En el voto, nada pasa de |ρ| = 0,28. Pasan muchos porque con ~1.000
+  circuitos hay potencia; la magnitud es lo que importa.
+- **2011-2023:** el peronismo cayó más donde más se extendieron el gas y el agua de red, y menos
+  donde aumentaron la ruralidad, el hacinamiento y los materiales precarios. Es ecológico: el gas
+  nuevo marca barrios que se consolidaron y cambiaron de composición, no un efecto del gas.
+- **2023-2025:** el peronismo resistió en lo rural y entre jubilados; LLA-PRO avanzó relativamente
+  en barrios populares con migrantes; la participación cayó más en lo rural y de baja educación.
+
+### Para el motor 2027
+
+- **Nivel:** el último resultado de cada circuito.
+- **Movimiento:** común a toda la provincia (`101`) y **proporcional** al nivel de cada fuerza.
+- **Ajuste territorial:** chico, con el censo; sirve sobre todo para la participación.
+- **La participación** se modela aparte: depende del tipo de elección y del desdoblamiento (`103`),
+  y es lo que más varía entre territorios.

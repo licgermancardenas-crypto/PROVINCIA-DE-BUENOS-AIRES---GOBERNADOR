@@ -1,0 +1,11 @@
+objetivo,tipo,inercia_usada,n,r2_media,rmse_media,r2_inercia,rmse_inercia,r2_censo_lineal,rmse_censo_lineal,r2_censo_arboles,rmse_censo_arboles,r2_censo_mas_inercia,rmse_censo_mas_inercia,r2_nivel_inicial,r2_censo_mas_nivel,rmse_nivel_inicial,rmse_censo_mas_nivel
+Peronismo · Diputados 2025,nivel,peronismo_dip_2023,989,-0.02,9.793,0.895,3.144,0.622,5.962,0.682,5.466,0.899,3.077,,,,
+LLA-PRO · Diputados 2025,nivel,derecha_dip_2023,989,-0.049,9.648,0.957,1.944,0.756,4.656,0.801,4.208,0.962,1.825,,,,
+Participación 2025,nivel,participacion_dip_2023,997,-0.029,3.866,0.283,3.227,0.382,2.996,0.373,3.016,0.538,2.589,,,,
+Peronismo · Gobernador 2023,nivel,peronismo_gob_2019,991,-0.05,10.935,0.934,2.749,0.747,5.373,0.783,4.968,0.95,2.397,,,,
+Cambio peronismo · Gobernador 2019-2023,cambio,cambio_peronismo_dip_2019_2021,991,-0.058,3.825,0.562,2.46,0.585,2.396,0.473,2.7,0.699,2.039,0.453,0.594,2.749,2.369
+Cambio peronismo · Diputados 2023-2025,cambio,cambio_peronismo_dip_2021_2023,989,-0.083,3.566,-0.084,3.569,0.175,3.112,-0.058,3.525,0.176,3.11,0.159,0.192,3.144,3.081
+Captura de LLA-PRO · Diputados 2023-2025,cambio,cambio_derecha_dip_2021_2023,989,-0.013,2.761,0.054,2.668,0.384,2.152,0.42,2.09,0.387,2.147,0.498,0.558,1.944,1.824
+Cambio participación 2023-2025,cambio,cambio_participacion_dip_2021_2023,997,-0.016,3.294,0.445,2.434,0.283,2.767,0.11,3.083,0.621,2.011,0.025,0.389,3.227,2.555
+Cambio peronismo · Gobernador 2011-2023,cambio largo,,909,-0.013,6.347,,,0.281,5.345,0.328,5.169,,,0.264,0.335,5.409,5.141
+Cambio peronismo · Diputados 2011-2023,cambio largo,,909,-0.02,6.525,,,0.406,4.98,0.456,4.765,,,0.305,0.399,5.385,5.007

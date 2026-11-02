@@ -62,3 +62,19 @@ nativos» descontando la parte extranjera estimada.
 | LLA-PRO creció más en el interior | Spearman parcial −0,49 con Conurbano (+5,3 pp del padrón en el Conurbano, +9 a +11 en el interior) | PROBADO | `103` | ídem |
 | Donde había voto vecinal en septiembre, en octubre ganaron los dos grandes | Spearman parcial +0,23 (LLA-PRO) y +0,32 (Fuerza Patria) con el voto vecinal a concejales | PROBADO | `103` | ídem |
 | La mayor participación de octubre no fue a LLA-PRO | Cambio de participación contra cambio de LLA-PRO: −0,09 (no pasa); contra Fuerza Patria: +0,31 | PROBADO (la segunda); REFUTADO («los que no votaron en septiembre fueron a Milei») | `103` | ídem |
+
+## 5 · Lo que el territorio predice y lo que no
+
+Circuitos estables (997 recientes, 918 de largo plazo). R² fuera de muestra con validación agrupada
+por municipio.
+
+| Hallazgo | Magnitud | Estado | Script | Tabla |
+|---|---|---|---|---|
+| El nivel de voto lo predice la elección anterior; el censo casi no agrega | Inercia 0,89-0,96; censo solo 0,62-0,80; censo + inercia 0,90-0,96 (+0,005 a +0,016) | PROBADO (GroupKFold) | `104` | `territorio_prediccion.csv` |
+| La participación es la excepción | Inercia 0,28 (de una presidencial a una de medio término); censo + inercia 0,54 | PROBADO | `104` | ídem |
+| El cambio de voto es sobre todo proporcional al nivel de partida | Peronismo 2023-2025: nivel inicial 0,16, + censo 0,19. Captura de LLA-PRO: 0,50 y 0,56. Gobernador 2019-2023: 0,45 y 0,59 | PROBADO | `104` | ídem |
+| A diferencia de CABA, el cambio no es impredecible: es proporcional | En CABA la retención del PRO dio R² validado negativo; acá el nivel de partida solo explica entre 0,16 y 0,50 | DESCRIPTIVO (comparación entre proyectos) | `104` | ídem |
+| Más allá del nivel, el territorio dice poco del cambio de voto | 81 de 202 pruebas pasan los tres filtros, pero en los cambios de voto ninguna supera \|ρ\| = 0,28 | PROBADO | `104` | `territorio_bateria.csv` |
+| 2011-2023: el peronismo cayó más donde más se extendieron el gas y el agua de red | Spearman parcial −0,24 (gas) y −0,18 (agua) en Gobernador, con el nivel de 2011 y la composición de 2010 controlados | PROBADO | `104` | ídem |
+| 2023-2025: la caída de la participación fue rural y de baja educación | Densidad +0,38, viviendas rurales −0,34, secundario incompleto −0,30 (con la participación de 2023 controlada) | PROBADO | `104` | ídem |
+| 2023-2025: LLA-PRO avanzó relativamente en barrios populares con migrantes; el peronismo resistió en lo rural y entre jubilados | Captura de LLA-PRO: NBI de vivienda +0,17, hogares migrantes +0,16, jubilados −0,15. Peronismo: rural +0,17, jubilados +0,15 | PROBADO (efectos chicos) | `104` | ídem |

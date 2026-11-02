@@ -51,9 +51,11 @@ Cada pregunta con su batería, los tres filtros y su tabla. Primeras candidatas:
 - ✅ **Desdoblamiento** (`analisis/103`): de septiembre a octubre LLA-PRO sumó 957.000 votos y
   Fuerza Patria perdió 140.000. No es el padrón extranjero (0,5 pp). Fuerza Patria cayó donde
   gobierna un intendente peronista; LLA-PRO creció en el interior y donde había voto vecinal.
-- **Lo que el territorio predice y lo que no** ← próximo: nivel contra cambio, como en CABA.
+- ✅ **Lo que el territorio predice y lo que no** (`analisis/104`): el nivel lo predice la
+  inercia (R² 0,90-0,96) y el censo casi no agrega; el cambio es sobre todo proporcional al nivel
+  de partida, y el censo agrega poco (+0,03 a +0,14).
 
-## Etapa 4 · El motor 2027
+## Etapa 4 · El motor 2027 ← próximo
 
 Mismo diseño que CABA, adaptado: backtest sobre los pares de elecciones de Gobernador y
 legislativas, shock provincial con colas pesadas, ruido por sección / municipio / circuito,
