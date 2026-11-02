@@ -1,9 +1,9 @@
 table dim_fuerza
-	lineageTag: 6165eece-0597-53b3-989e-b72abb877acb
+	lineageTag: 77b53d7a-175c-5ccd-8bbe-0ec87984a320
 
 	column fuerza_intendente
 		dataType: string
-		lineageTag: 107117c4-b5de-5648-b21f-80eee0fd4e4c
+		lineageTag: b7da83c9-40c8-5359-a575-562011ad6388
 		summarizeBy: none
 		sourceColumn: fuerza_intendente
 		sortByColumn: orden
@@ -13,7 +13,7 @@ table dim_fuerza
 	column color
 		dataType: string
 		isHidden
-		lineageTag: 74146643-0232-528b-9b5d-d08094169d45
+		lineageTag: 88677444-eaec-5c24-8734-5959a4e37740
 		summarizeBy: none
 		sourceColumn: color
 
@@ -22,7 +22,7 @@ table dim_fuerza
 	column orden
 		dataType: int64
 		isHidden
-		lineageTag: aa4b39d6-fa27-5207-bb9c-d83bfa5d6540
+		lineageTag: 7421148f-e178-5b53-8828-0cbea36648e2
 		summarizeBy: none
 		sourceColumn: orden
 
@@ -32,9 +32,9 @@ table dim_fuerza
 		mode: import
 		source =
 				let
-				    Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_fuerza.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
-				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
-				    Tipos = Table.TransformColumnTypes(Encabezados, {{"fuerza_intendente", type text}, {"color", type text}, {"orden", Int64.Type}}, "en-US")
+				    Origen_dim_fuerza = Csv.Document(File.Contents(CarpetaDatos & "dim_fuerza.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Enc_dim_fuerza = Table.PromoteHeaders(Origen_dim_fuerza, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Enc_dim_fuerza, {{"fuerza_intendente", type text}, {"color", type text}, {"orden", Int64.Type}}, "en-US")
 				in
 				    Tipos
 

@@ -1,0 +1,381 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.3.0/schema.json",
+  "name": "pro_tabla",
+  "position": {
+    "x": 250,
+    "y": 368,
+    "z": 1230,
+    "width": 1018,
+    "height": 344,
+    "tabOrder": 1230
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "prospectos"
+                    }
+                  },
+                  "Property": "municipio"
+                }
+              },
+              "queryRef": "prospectos.municipio",
+              "nativeQueryRef": "municipio",
+              "displayName": "Municipio"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "prospectos"
+                    }
+                  },
+                  "Property": "nombre"
+                }
+              },
+              "queryRef": "prospectos.nombre",
+              "nativeQueryRef": "nombre",
+              "displayName": "Nombre"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "prospectos"
+                    }
+                  },
+                  "Property": "espacio"
+                }
+              },
+              "queryRef": "prospectos.espacio",
+              "nativeQueryRef": "espacio",
+              "displayName": "Espacio"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "prospectos"
+                    }
+                  },
+                  "Property": "rol"
+                }
+              },
+              "queryRef": "prospectos.rol",
+              "nativeQueryRef": "rol",
+              "displayName": "Rol"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "prospectos"
+                    }
+                  },
+                  "Property": "por_que"
+                }
+              },
+              "queryRef": "prospectos.por_que",
+              "nativeQueryRef": "por_que",
+              "displayName": "Por qué"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "prospectos"
+                    }
+                  },
+                  "Property": "detalle"
+                }
+              },
+              "queryRef": "prospectos.detalle",
+              "nativeQueryRef": "detalle",
+              "displayName": "Detalle"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "prospectos"
+                    }
+                  },
+                  "Property": "prioridad"
+                }
+              },
+              "queryRef": "prospectos.prioridad",
+              "nativeQueryRef": "prioridad",
+              "displayName": "Prioridad"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "prospectos"
+                    }
+                  },
+                  "Property": "estado"
+                }
+              },
+              "queryRef": "prospectos.estado",
+              "nativeQueryRef": "estado",
+              "displayName": "Estado"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "prospectos"
+                    }
+                  },
+                  "Property": "proximo_paso"
+                }
+              },
+              "queryRef": "prospectos.proximo_paso",
+              "nativeQueryRef": "proximo_paso",
+              "displayName": "Próximo paso"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "prospectos"
+                    }
+                  },
+                  "Property": "fuente"
+                }
+              },
+              "queryRef": "prospectos.fuente",
+              "nativeQueryRef": "fuente",
+              "displayName": "Fuente"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "prospectos"
+                  }
+                },
+                "Property": "prioridad"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": false
+      }
+    },
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "fontColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#F2EBFA'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1B0A3D'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColorSecondary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#220E4A'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Medidas"
+                        }
+                      },
+                      "Property": "Color prioridad"
+                    }
+                  }
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#12042E'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "prospectos.prioridad"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E9B6FF'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#12042E'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "gridHorizontalColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#2E1A57'"
+                    }
+                  }
+                }
+              }
+            },
+            "rowPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "3D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'CRM · prospectos'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

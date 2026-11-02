@@ -1283,3 +1283,32 @@ carpeta, 7 relaciones, 30 medidas DAX) y reporte PBIR de 4 páginas y 75 visuale
 por botones, tema Atlas Analytics, tablas con foto y logo, hipervínculos y mapas de formas sobre un
 TopoJSON propio de los 135 municipios, incrustado en el reporte. Los 85 JSON del reporte validan contra los esquemas públicos
 de Microsoft; el TMDL no tiene validador público. Pendiente: abrirlo en Power BI Desktop para confirmar (`03_OUTPUTS/powerbi/LEEME_POWERBI.md`).
+
+---
+
+## 02-11-2026 · Power BI «Intendencias PBA 2027» (`etl/13`, `productos/p07`, `svg_mapa`)
+
+El mapa de formas no aparecía en Power BI Desktop (es un visual en versión preliminar). Se rehízo el
+reporte siguiendo el Super Excel de Intendencias de Atlas Analytics:
+- Inicio con menú, Dashboard, Mapa, Ficha, Prospectos, Noticias, Elecciones y Análisis 2027.
+- Más una página de información emergente con foto.
+
+`etl/13` importa del Excel 135 municipios, 980 prospectos y 856 noticias con su enlace real, a
+`03_OUTPUTS/powerbi/datos_privados/`. Esa carpeta está fuera del repo, porque el repo es público y el
+CRM es comercial.
+
+**Mapa.** Lo dibuja una medida DAX como imagen SVG. Los contornos salen de `svg_mapa.py`:
+- provincia simplificada a 900 m y recuadro del Conurbano a 90 m;
+- la imagen ocupa ~19.000 caracteres, debajo del límite de 32.000 de los visuales;
+- tiene 10 capas, apaga lo que queda fuera de los filtros y resalta el municipio elegido.
+
+La lógica se verificó simulando la medida en Python y dibujándola.
+
+**Funciones de Power BI usadas:**
+- obtención de detalles hacia la Ficha y página de información emergente;
+- dispersión con eje de reproducción (animación 2007-2025);
+- formato condicional con medidas y títulos dinámicos;
+- filtros en botones y navegación con estados al pasar el mouse.
+
+**Verificación.** 190 archivos PBIR validados contra los esquemas de Microsoft. Pendiente: abrirlo en
+Desktop.

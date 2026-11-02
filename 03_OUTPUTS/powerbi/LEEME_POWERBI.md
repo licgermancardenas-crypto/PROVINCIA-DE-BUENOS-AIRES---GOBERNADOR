@@ -1,53 +1,40 @@
-# Atlas PBA · proyecto de Power BI
+# Intendencias PBA 2027 · Power BI
 
-Tablero electoral de la Provincia de Buenos Aires para **Power BI Desktop** (formato de proyecto
-PBIP: modelo en TMDL y reporte en PBIR, todo texto y versionable).
+El «Super Excel» de Intendencias PBA 2027 de Atlas Analytics llevado a Power BI, más el análisis
+electoral de Atlas PBA (elecciones 2007-2025, censo, motor de escenarios 2027).
 
 ## Abrir
 
-1. Power BI Desktop (2024 o posterior). Si es anterior a 2025, activar en *Archivo > Opciones >
-   Características en versión preliminar* «Formato de proyecto de Power BI (.pbip)» y «Almacenar
-   informes con el formato de metadatos mejorado (PBIR)».
-2. Abrir `Atlas_PBA.pbip`.
-3. Si los datos no están en `E:\PROVINCIA DE BUENOS AIRES ELECCIONES\03_OUTPUTS\powerbi\datos`, cambiar el parámetro **CarpetaDatos** (*Transformar datos >
-   Administrar parámetros*) a la carpeta `03_OUTPUTS/powerbi/datos/` con la barra final.
-4. **Actualizar** (Inicio > Actualizar). Los CSV se regeneran con `python 02_SCRIPTS/productos/p04_tablero_datos.py`
-   y `p06_powerbi.py`.
+1. Correr una vez, en este orden (desde la raíz del repo):
+   `python 02_SCRIPTS/etl/13_super_excel_intendencias.py` (lee el Excel de `E:\INTENDENTES 2027 PBA`)
+   y `python 02_SCRIPTS/productos/p07_powerbi_intendencias.py`.
+2. Abrir `Atlas_PBA.pbip` con Power BI Desktop (2024 o posterior; si es anterior a 2025, activar en
+   *Opciones > Características en versión preliminar* «Formato de proyecto (.pbip)» y «PBIR»).
+3. **Actualizar**. Si los datos están en otra carpeta: *Transformar datos > Administrar parámetros*
+   → `CarpetaDatos` (03_OUTPUTS/powerbi/datos/) y `CarpetaPrivada` (03_OUTPUTS/powerbi/datos_privados/),
+   las dos con barra final.
+
+## Páginas
+
+| Página | Qué tiene |
+|---|---|
+| Inicio | Menú con botones a cada página, 8 tarjetas de resumen, accesos al simulador y al tablero web |
+| Dashboard | Filtros en botones (sección, espacio 2026, escenario 2027, tamaño, concejales 2025, oportunidad), tarjetas, barras, dona y tabla con colores por espacio, escenario y oportunidad |
+| Mapa | Mapa de la Provincia y del Conurbano con **10 capas**: espacio 2026, escenario 2027, concejales 2025, fuerza del intendente, oportunidad, ganador de cualquier elección 2007-2025, % peronismo, motor 2027, NBI, barrios populares. Lo filtrado se apaga y el municipio elegido se resalta |
+| Ficha | Página de **obtención de detalles** (clic derecho en un municipio > Obtener detalles > Ficha) o con su propio selector: foto, datos, enlaces (mapa, noticias, perfil PDF, Wikipedia), prospectos, noticias y evolución del voto |
+| Prospectos | CRM de 980 personas: filtros por rol, prioridad, fuerza, estado; tarjetas y tabla |
+| Noticias | 856 titulares con enlace; filtro de fechas, medios y municipios |
+| Elecciones | **Dispersión animada** 2007-2025 (eje de reproducción: ▶), % por fuerza y evolución |
+| Análisis 2027 | Hallazgos, margen por escenario del motor, municipios por probabilidad |
+| Información emergente | Al pasar el mouse sobre un municipio en tablas y gráficos: foto y datos clave |
 
 ## El mapa
 
-Los tres mapas (Territorio político, Elecciones y Escenarios 2027) usan el visual **Mapa de formas**
-(Shape map), porque los mapas de Bing fueron retirados. El contorno de los 135 municipios ya viene
-**incrustado en el reporte** (`StaticResources/RegisteredResources/pba_municipios.json`, TopoJSON) y
-cada mapa lo usa con la clave `cod_indec`: no hay que cargar nada.
+No usa el visual de mapa de formas (en versión preliminar, por eso no aparecía): lo dibuja la
+medida **Mapa Provincia** (y **Mapa Conurbano**) como una imagen SVG que se recalcula con cada
+filtro. Se muestra en una tabla de una celda; si se ve chico, *Formato > Cuadrícula > Alto de la
+imagen*.
 
-- Si el visual aparece en blanco con un aviso, activar *Archivo > Opciones > Características en
-  versión preliminar > Objeto visual de mapa de formas* y reabrir.
-- Si algún mapa no muestra los municipios, cargarlo a mano una vez: *Formato > Forma del mapa >
-  + Agregar mapa* → `datos/pba_municipios.topojson`.
+## Privacidad
 
-## Qué tiene
-
-| Página | Contenido |
-|---|---|
-| Territorio político | Filtros (municipio, sección, zona, fuerza), tarjetas (municipios, población, electores, participación), mapa por fuerza del intendente, tabla con foto, logo y enlace a Wikipedia, dona de población gobernada, columnas por sección |
-| Elecciones | 17 elecciones 2007-2025: ganador, % del ganador, margen, participación; mapa del ganador por municipio; % por fuerza; evolución histórica (no se filtra por la elección elegida); tabla de municipios |
-| Censo y gestión | NBI, barrios populares, universitarios, escuelas, transferencias; dispersión NBI × voto peronista; ranking con indicadores de servicios, gestión fiscal y seguridad |
-| Escenarios 2027 | Motor de Atlas PBA: municipios peronistas esperados, municipios en disputa, mapa por categoría de probabilidad, tabla; botones al simulador y a la metodología |
-
-Navegación con botones en el encabezado de cada página. Las fotos son de Wikimedia Commons (licencia
-libre) y se cargan desde internet; sólo están cuando el intendente en ejercicio es el electo en 2023.
-
-## Medidas principales (tabla Medidas)
-
-`Votos`, `% Voto`, `% Peronismo`, `% Derecha`, `Ganador`, `% Ganador`, `Margen (pts)`, `Electores`,
-`Participación`, `Municipios`, `Población`, `Hogares con NBI %`, `Hogares en barrios populares %`,
-`Universitarios %`, `Transferencias por habitante`, `P(peronismo) 2027`, `Municipios peronistas
-esperados`, `Municipios en disputa`. Si no hay una elección elegida, las de votación usan
-Diputados nacionales 2025.
-
-## Verificación
-
-El reporte se validó contra los esquemas públicos de PBIR de Microsoft. El modelo TMDL no tiene
-validador público: si Desktop marca un error al abrir, el mensaje indica archivo y línea en
-`Atlas_PBA.SemanticModel/definition/`.
+`datos_privados/` (CRM, oportunidad, noticias) no se sube a GitHub: está en `.gitignore`.

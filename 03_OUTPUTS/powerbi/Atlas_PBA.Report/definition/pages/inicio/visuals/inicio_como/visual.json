@@ -1,0 +1,98 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.3.0/schema.json",
+  "name": "inicio_como",
+  "position": {
+    "x": 840,
+    "y": 264,
+    "z": 1260,
+    "width": 416,
+    "height": 300,
+    "tabOrder": 1260
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Cómo usar",
+                    "textStyle": {
+                      "fontSize": "12pt",
+                      "fontWeight": "bold",
+                      "color": "#E9B6FF"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Los botones de arriba llevan a cada página. Los filtros en botones cruzan todo el tablero. Pasá el mouse sobre un municipio en cualquier tabla o gráfico para ver su ficha rápida con foto; clic derecho > Obtener detalles > Ficha para abrir la ficha completa.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#DCD2EA"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Mapa: elegí la capa (espacio 2026, escenario 2027, concejales 2025, oportunidad, ganador de cada elección, motor 2027, NBI, barrios populares). Lo que queda fuera de los filtros se apaga; el municipio elegido se resalta.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#DCD2EA"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Fuentes: Super Excel Intendencias PBA 2027 (Atlas Analytics), DINE, Junta Electoral PBA, INDEC, RENABAP, Municipios Argentinos.",
+                    "textStyle": {
+                      "fontSize": "8pt",
+                      "color": "#8A7AAB"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

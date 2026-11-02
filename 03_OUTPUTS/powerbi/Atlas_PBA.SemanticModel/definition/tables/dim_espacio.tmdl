@@ -1,9 +1,9 @@
 table dim_espacio
-	lineageTag: fa1a0fa8-db56-5eb4-9bd9-61f8e29225da
+	lineageTag: 1fe797e4-dea1-5a3c-a902-44491cf4dea1
 
 	column espacio
 		dataType: string
-		lineageTag: cdb54236-976f-5b18-ad11-01b631295d07
+		lineageTag: 6a8ff48c-ea9b-5184-a159-24055898e543
 		summarizeBy: none
 		sourceColumn: espacio
 
@@ -11,7 +11,7 @@ table dim_espacio
 
 	column espacio_nombre
 		dataType: string
-		lineageTag: b20358ca-4ecb-582c-b4b5-2a15b8fb5337
+		lineageTag: 9e0d4ac4-5b1b-56bc-b44c-15dd2879d735
 		summarizeBy: none
 		sourceColumn: espacio_nombre
 		sortByColumn: orden
@@ -21,7 +21,7 @@ table dim_espacio
 	column color
 		dataType: string
 		isHidden
-		lineageTag: 1c7ee4fd-6284-58c2-881c-b5d31936a773
+		lineageTag: b8c8c3b3-5449-581a-a59a-283b4825c48e
 		summarizeBy: none
 		sourceColumn: color
 
@@ -30,7 +30,7 @@ table dim_espacio
 	column logo_url
 		dataType: string
 		dataCategory: ImageUrl
-		lineageTag: fd7acff5-2806-5007-bad1-34c539e3b511
+		lineageTag: e3ce9588-406d-5ece-acf0-d53541024702
 		summarizeBy: none
 		sourceColumn: logo_url
 
@@ -39,7 +39,7 @@ table dim_espacio
 	column orden
 		dataType: int64
 		isHidden
-		lineageTag: 6f0e8e29-af43-5c26-9cc5-1c70a9abc674
+		lineageTag: 28e94a4e-11ee-5151-ac1c-9b350f40587a
 		summarizeBy: none
 		sourceColumn: orden
 
@@ -49,9 +49,9 @@ table dim_espacio
 		mode: import
 		source =
 				let
-				    Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_espacio.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
-				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
-				    Tipos = Table.TransformColumnTypes(Encabezados, {{"espacio", type text}, {"espacio_nombre", type text}, {"color", type text}, {"logo_url", type text}, {"orden", Int64.Type}}, "en-US")
+				    Origen_dim_espacio = Csv.Document(File.Contents(CarpetaDatos & "dim_espacio.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Enc_dim_espacio = Table.PromoteHeaders(Origen_dim_espacio, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Enc_dim_espacio, {{"espacio", type text}, {"espacio_nombre", type text}, {"color", type text}, {"logo_url", type text}, {"orden", Int64.Type}}, "en-US")
 				in
 				    Tipos
 

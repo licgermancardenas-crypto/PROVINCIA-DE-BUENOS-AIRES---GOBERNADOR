@@ -1,9 +1,9 @@
 table fact_motor_2027
-	lineageTag: f13dfeda-bc52-5c3c-af02-44cf295243c9
+	lineageTag: f9e85380-8251-58c8-961d-ae6863287f01
 
 	column escenario
 		dataType: string
-		lineageTag: e3ce9588-406d-5ece-acf0-d53541024702
+		lineageTag: fc5383c3-a58f-5583-8adb-cb33b9aabe23
 		summarizeBy: none
 		sourceColumn: escenario
 
@@ -11,7 +11,7 @@ table fact_motor_2027
 
 	column escenario_clave
 		dataType: string
-		lineageTag: 28e94a4e-11ee-5151-ac1c-9b350f40587a
+		lineageTag: 40473281-3b82-5d5a-9054-2200e196e473
 		summarizeBy: none
 		sourceColumn: escenario_clave
 
@@ -20,7 +20,7 @@ table fact_motor_2027
 	column cod_indec
 		dataType: string
 		isHidden
-		lineageTag: 1fe797e4-dea1-5a3c-a902-44491cf4dea1
+		lineageTag: 92cdd26a-24e2-5289-ad6e-698a60ed75ea
 		summarizeBy: none
 		sourceColumn: cod_indec
 
@@ -29,7 +29,7 @@ table fact_motor_2027
 	column pct_peronismo
 		dataType: double
 		formatString: #,0.0
-		lineageTag: b3565dd9-e92e-5d86-ac84-b50bb0d049ac
+		lineageTag: 88ccc316-eaf2-5ee7-8889-64bd2849928f
 		summarizeBy: none
 		sourceColumn: pct_peronismo
 
@@ -38,7 +38,7 @@ table fact_motor_2027
 	column p_gana_peronismo
 		dataType: double
 		formatString: #,0.0
-		lineageTag: fa3d5037-a47e-5a68-8c98-2e02244c796e
+		lineageTag: a1841fca-d70f-5967-a56b-f4e60d98846c
 		summarizeBy: none
 		sourceColumn: p_gana_peronismo
 
@@ -46,7 +46,7 @@ table fact_motor_2027
 
 	column rango_p
 		dataType: string
-		lineageTag: 7c965349-8d15-571c-ade1-29f2869da9c9
+		lineageTag: 0c523856-36c4-5c21-a317-97d8708359fd
 		summarizeBy: none
 		sourceColumn: rango_p
 
@@ -56,9 +56,9 @@ table fact_motor_2027
 		mode: import
 		source =
 				let
-				    Origen = Csv.Document(File.Contents(CarpetaDatos & "fact_motor_2027.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
-				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
-				    Tipos = Table.TransformColumnTypes(Encabezados, {{"escenario", type text}, {"escenario_clave", type text}, {"cod_indec", type text}, {"pct_peronismo", type number}, {"p_gana_peronismo", type number}, {"rango_p", type text}}, "en-US")
+				    Origen_fact_motor_2027 = Csv.Document(File.Contents(CarpetaDatos & "fact_motor_2027.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Enc_fact_motor_2027 = Table.PromoteHeaders(Origen_fact_motor_2027, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Enc_fact_motor_2027, {{"escenario", type text}, {"escenario_clave", type text}, {"cod_indec", type text}, {"pct_peronismo", type number}, {"p_gana_peronismo", type number}, {"rango_p", type text}}, "en-US")
 				in
 				    Tipos
 

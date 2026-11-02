@@ -6,15 +6,19 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["CarpetaDatos", "dim_municipio", "dim_espacio", "dim_eleccion", "fact_votos", "fact_participacion", "fact_motor_2027", "dim_fuerza", "Medidas"]
+annotation PBI_QueryOrder = ["CarpetaDatos", "CarpetaPrivada", "dim_municipio", "dim_espacio", "dim_eleccion", "dim_fuerza", "fact_votos", "fact_participacion", "fact_motor_2027", "capa_mapa", "escenarios_2027", "prospectos", "noticias", "Medidas"]
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
 ref table dim_municipio
 ref table dim_espacio
 ref table dim_eleccion
+ref table dim_fuerza
 ref table fact_votos
 ref table fact_participacion
 ref table fact_motor_2027
-ref table dim_fuerza
+ref table capa_mapa
+ref table escenarios_2027
+ref table prospectos
+ref table noticias
 ref table Medidas

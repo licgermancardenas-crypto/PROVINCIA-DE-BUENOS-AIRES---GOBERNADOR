@@ -1,0 +1,75 @@
+table escenarios_2027
+	lineageTag: 852980c3-eb13-5f54-8589-9b3898d42241
+
+	column escenario
+		dataType: string
+		lineageTag: a68012e6-273e-5390-956d-42f3c5c4144c
+		summarizeBy: none
+		sourceColumn: escenario
+
+		annotation SummarizationSetBy = Automatic
+
+	column grupo
+		dataType: string
+		lineageTag: 095d15ab-f6b5-5c95-9af6-29c5dbe2c4b2
+		summarizeBy: none
+		sourceColumn: grupo
+
+		annotation SummarizationSetBy = Automatic
+
+	column margen_p10
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 94624c33-df39-536f-8d92-daca8eec8d0f
+		summarizeBy: none
+		sourceColumn: margen_p10
+
+		annotation SummarizationSetBy = Automatic
+
+	column margen
+		dataType: double
+		formatString: #,0.0
+		lineageTag: daaaf93d-501f-5239-9cb1-2426ff8f9c59
+		summarizeBy: none
+		sourceColumn: margen
+
+		annotation SummarizationSetBy = Automatic
+
+	column margen_p90
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 945597bb-bc11-5da9-a6ec-3ece232c5f69
+		summarizeBy: none
+		sourceColumn: margen_p90
+
+		annotation SummarizationSetBy = Automatic
+
+	column p_gana_peronismo
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 27975199-7bc1-5b17-888a-d21102d09c5b
+		summarizeBy: none
+		sourceColumn: p_gana_peronismo
+
+		annotation SummarizationSetBy = Automatic
+
+	column municipios_peronistas
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 92fc16c2-53c2-57c3-a9fc-8f4f7a8d57a9
+		summarizeBy: none
+		sourceColumn: municipios_peronistas
+
+		annotation SummarizationSetBy = Automatic
+
+	partition escenarios_2027 = m
+		mode: import
+		source =
+				let
+				    Origen_escenarios_2027 = Csv.Document(File.Contents(CarpetaDatos & "escenarios_2027.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Enc_escenarios_2027 = Table.PromoteHeaders(Origen_escenarios_2027, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Enc_escenarios_2027, {{"escenario", type text}, {"grupo", type text}, {"margen_p10", type number}, {"margen", type number}, {"margen_p90", type number}, {"p_gana_peronismo", type number}, {"municipios_peronistas", type number}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

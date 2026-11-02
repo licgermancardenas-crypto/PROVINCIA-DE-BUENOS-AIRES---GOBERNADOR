@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.3.0/schema.json",
   "name": "elecciones_marca",
   "position": {
-    "x": 16,
-    "y": 8,
+    "x": 10,
+    "y": 4,
     "z": 1010,
-    "width": 520,
+    "width": 220,
     "height": 50,
     "tabOrder": 1010
   },
@@ -21,7 +21,7 @@
                   {
                     "value": "ATLAS ANALYTICS",
                     "textStyle": {
-                      "fontSize": "9pt",
+                      "fontSize": "8pt",
                       "fontWeight": "bold",
                       "color": "#C40BFF"
                     }
@@ -31,9 +31,9 @@
               {
                 "textRuns": [
                   {
-                    "value": "Provincia de Buenos Aires · Elecciones",
+                    "value": "Intendencias PBA 2027",
                     "textStyle": {
-                      "fontSize": "16pt",
+                      "fontSize": "15pt",
                       "fontWeight": "bold",
                       "color": "#F2EBFA"
                     }

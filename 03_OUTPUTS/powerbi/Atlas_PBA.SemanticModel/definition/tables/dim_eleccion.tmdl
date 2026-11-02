@@ -1,9 +1,9 @@
 table dim_eleccion
-	lineageTag: 0b8d2aec-fb65-50bf-961a-c8eb9eae507f
+	lineageTag: 37391657-73a0-5170-b2f2-9dfc207ae534
 
 	column eleccion
 		dataType: string
-		lineageTag: 27032e29-4f5c-544b-bbf0-f64ced0c8971
+		lineageTag: b3565dd9-e92e-5d86-ac84-b50bb0d049ac
 		summarizeBy: none
 		sourceColumn: eleccion
 
@@ -11,7 +11,7 @@ table dim_eleccion
 
 	column rotulo
 		dataType: string
-		lineageTag: d58a10c5-f6fc-5218-ab12-d91ceeb3a0d1
+		lineageTag: fa3d5037-a47e-5a68-8c98-2e02244c796e
 		summarizeBy: none
 		sourceColumn: rotulo
 		sortByColumn: orden
@@ -20,7 +20,7 @@ table dim_eleccion
 
 	column anio
 		dataType: int64
-		lineageTag: 41aa680b-b993-5cee-9454-3c3f34fbceb3
+		lineageTag: 7c965349-8d15-571c-ade1-29f2869da9c9
 		summarizeBy: none
 		sourceColumn: anio
 
@@ -28,7 +28,7 @@ table dim_eleccion
 
 	column tipo
 		dataType: string
-		lineageTag: 90ff3cf1-0a59-5092-af50-339fd0a11b38
+		lineageTag: f13dfeda-bc52-5c3c-af02-44cf295243c9
 		summarizeBy: none
 		sourceColumn: tipo
 
@@ -36,7 +36,7 @@ table dim_eleccion
 
 	column cargo
 		dataType: string
-		lineageTag: ab7eda55-8198-5a42-b1e1-00ba7bd2c7eb
+		lineageTag: 107117c4-b5de-5648-b21f-80eee0fd4e4c
 		summarizeBy: none
 		sourceColumn: cargo
 
@@ -44,7 +44,7 @@ table dim_eleccion
 
 	column fuente
 		dataType: string
-		lineageTag: d8c39ce8-8ac7-5b45-a250-3da975964ed1
+		lineageTag: 74146643-0232-528b-9b5d-d08094169d45
 		summarizeBy: none
 		sourceColumn: fuente
 
@@ -52,7 +52,7 @@ table dim_eleccion
 
 	column grupo
 		dataType: string
-		lineageTag: 996a837a-5c4c-57d7-81a7-c80eb62adea7
+		lineageTag: aa4b39d6-fa27-5207-bb9c-d83bfa5d6540
 		summarizeBy: none
 		sourceColumn: grupo
 
@@ -60,7 +60,7 @@ table dim_eleccion
 
 	column etiqueta
 		dataType: string
-		lineageTag: f9fc9f82-873d-507f-86d5-eed33e03cea2
+		lineageTag: 6165eece-0597-53b3-989e-b72abb877acb
 		summarizeBy: none
 		sourceColumn: etiqueta
 		sortByColumn: orden
@@ -70,7 +70,7 @@ table dim_eleccion
 	column orden
 		dataType: int64
 		isHidden
-		lineageTag: 1435ad11-18f2-50e7-91b2-805ab9e930bf
+		lineageTag: 8ef5d123-316d-59b2-99b7-c6749767b34e
 		summarizeBy: none
 		sourceColumn: orden
 
@@ -80,9 +80,9 @@ table dim_eleccion
 		mode: import
 		source =
 				let
-				    Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_eleccion.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
-				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
-				    Tipos = Table.TransformColumnTypes(Encabezados, {{"eleccion", type text}, {"rotulo", type text}, {"anio", Int64.Type}, {"tipo", type text}, {"cargo", type text}, {"fuente", type text}, {"grupo", type text}, {"etiqueta", type text}, {"orden", Int64.Type}}, "en-US")
+				    Origen_dim_eleccion = Csv.Document(File.Contents(CarpetaDatos & "dim_eleccion.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Enc_dim_eleccion = Table.PromoteHeaders(Origen_dim_eleccion, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Enc_dim_eleccion, {{"eleccion", type text}, {"rotulo", type text}, {"anio", Int64.Type}, {"tipo", type text}, {"cargo", type text}, {"fuente", type text}, {"grupo", type text}, {"etiqueta", type text}, {"orden", Int64.Type}}, "en-US")
 				in
 				    Tipos
 

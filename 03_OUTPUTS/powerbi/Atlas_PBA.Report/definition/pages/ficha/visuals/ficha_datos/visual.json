@@ -1,0 +1,262 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.3.0/schema.json",
+  "name": "ficha_datos",
+  "position": {
+    "x": 250,
+    "y": 106,
+    "z": 1140,
+    "width": 500,
+    "height": 400,
+    "tabOrder": 1140
+  },
+  "visual": {
+    "visualType": "multiRowCard",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "en_ejercicio"
+                }
+              },
+              "queryRef": "dim_municipio.en_ejercicio",
+              "nativeQueryRef": "en_ejercicio",
+              "displayName": "En ejercicio hoy"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "electo_2023"
+                }
+              },
+              "queryRef": "dim_municipio.electo_2023",
+              "nativeQueryRef": "electo_2023",
+              "displayName": "Electo 2023"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "espacio_2026"
+                }
+              },
+              "queryRef": "dim_municipio.espacio_2026",
+              "nativeQueryRef": "espacio_2026",
+              "displayName": "Espacio 2026"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "escenario_2027"
+                }
+              },
+              "queryRef": "dim_municipio.escenario_2027",
+              "nativeQueryRef": "escenario_2027",
+              "displayName": "Escenario 2027"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "pct_ganador_2023"
+                }
+              },
+              "queryRef": "dim_municipio.pct_ganador_2023",
+              "nativeQueryRef": "pct_ganador_2023",
+              "displayName": "% ganador 2023"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "segundo_2023"
+                }
+              },
+              "queryRef": "dim_municipio.segundo_2023",
+              "nativeQueryRef": "segundo_2023",
+              "displayName": "Segundo 2023"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "gano_concejales_2025"
+                }
+              },
+              "queryRef": "dim_municipio.gano_concejales_2025",
+              "nativeQueryRef": "gano_concejales_2025",
+              "displayName": "Ganó concejales 2025"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "bancas_2025"
+                }
+              },
+              "queryRef": "dim_municipio.bancas_2025",
+              "nativeQueryRef": "bancas_2025",
+              "displayName": "Bancas 2025"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "eleccion_2025_pareja"
+                }
+              },
+              "queryRef": "dim_municipio.eleccion_2025_pareja",
+              "nativeQueryRef": "eleccion_2025_pareja",
+              "displayName": "Elección 2025 pareja"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "oposicion_esperable"
+                }
+              },
+              "queryRef": "dim_municipio.oposicion_esperable",
+              "nativeQueryRef": "oposicion_esperable",
+              "displayName": "Oposición esperable"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "principales_opositores"
+                }
+              },
+              "queryRef": "dim_municipio.principales_opositores",
+              "nativeQueryRef": "principales_opositores",
+              "displayName": "Principales opositores"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "tamano"
+                }
+              },
+              "queryRef": "dim_municipio.tamano",
+              "nativeQueryRef": "tamano",
+              "displayName": "Tamaño"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "pob"
+                }
+              },
+              "queryRef": "dim_municipio.pob",
+              "nativeQueryRef": "pob",
+              "displayName": "Población 2022"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "nivel_oportunidad"
+                }
+              },
+              "queryRef": "dim_municipio.nivel_oportunidad",
+              "nativeQueryRef": "nivel_oportunidad",
+              "displayName": "Oportunidad"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Datos del municipio'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

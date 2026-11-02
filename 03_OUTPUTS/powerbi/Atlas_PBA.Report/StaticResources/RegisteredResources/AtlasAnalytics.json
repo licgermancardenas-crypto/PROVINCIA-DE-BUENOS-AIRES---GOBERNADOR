@@ -1,5 +1,5 @@
 {
-  "name": "Atlas Analytics",
+  "name": "Atlas Analytics Intendencias",
   "dataColors": [
     "#29A3F0",
     "#9B4DFF",
@@ -8,41 +8,30 @@
     "#F5C518",
     "#E94F4F",
     "#C40BFF",
+    "#FF8A3D",
     "#7E57FF",
-    "#C2185B",
-    "#8D86A6",
+    "#3DDC97",
     "#FFB547",
     "#4DD0E1"
   ],
   "background": "#12042E",
   "foreground": "#F2EBFA",
   "tableAccent": "#C40BFF",
-  "good": "#3DDC97",
-  "bad": "#E94F4F",
-  "neutral": "#A08FC2",
-  "maximum": "#C40BFF",
-  "center": "#3A2A66",
-  "minimum": "#1B0A3D",
   "textClasses": {
     "title": {
       "fontFace": "Segoe UI Semibold",
       "color": "#F2EBFA",
-      "fontSize": 12
+      "fontSize": 11
     },
     "label": {
       "fontFace": "Segoe UI",
       "color": "#DCD2EA",
-      "fontSize": 10
+      "fontSize": 9
     },
     "callout": {
       "fontFace": "Segoe UI Semibold",
       "color": "#F2EBFA",
-      "fontSize": 24
-    },
-    "header": {
-      "fontFace": "Segoe UI Semibold",
-      "color": "#F2EBFA",
-      "fontSize": 12
+      "fontSize": 22
     }
   },
   "visualStyles": {
@@ -62,7 +51,7 @@
           {
             "color": {
               "solid": {
-                "color": "#0E0324"
+                "color": "#0B0220"
               }
             },
             "transparency": 0
@@ -91,7 +80,19 @@
                 "color": "#2E1A57"
               }
             },
-            "radius": 10
+            "radius": 12
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#000000"
+              }
+            },
+            "transparency": 70,
+            "position": "Outer"
           }
         ],
         "title": [
@@ -154,30 +155,37 @@
               }
             }
           }
-        ],
-        "labels": [
+        ]
+      }
+    },
+    "multiRowCard": {
+      "*": {
+        "dataLabels": [
           {
             "color": {
               "solid": {
                 "color": "#F2EBFA"
               }
-            }
+            },
+            "fontSize": 11
           }
-        ]
-      }
-    },
-    "slicer": {
-      "*": {
-        "items": [
+        ],
+        "categoryLabels": [
           {
-            "fontColor": {
+            "color": {
               "solid": {
-                "color": "#F2EBFA"
+                "color": "#A08FC2"
               }
             },
-            "background": {
+            "fontSize": 8
+          }
+        ],
+        "card": [
+          {
+            "barShow": true,
+            "barColor": {
               "solid": {
-                "color": "#220E4A"
+                "color": "#C40BFF"
               }
             }
           }

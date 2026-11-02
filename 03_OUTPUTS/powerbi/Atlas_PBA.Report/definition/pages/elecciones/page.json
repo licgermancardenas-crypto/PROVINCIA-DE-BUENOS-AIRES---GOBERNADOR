@@ -7,8 +7,13 @@
   "width": 1280,
   "visualInteractions": [
     {
-      "source": "elecciones_s_el",
-      "target": "elecciones_linea",
+      "source": "el_s_el",
+      "target": "el_linea",
+      "type": "NoFilter"
+    },
+    {
+      "source": "el_s_el",
+      "target": "el_anim",
       "type": "NoFilter"
     }
   ]

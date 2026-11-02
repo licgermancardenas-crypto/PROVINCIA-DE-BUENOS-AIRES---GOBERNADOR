@@ -32,3 +32,6 @@ desktop.ini
 .DS_Store
 ~$*
 .claude/settings.local.json
+
+# --- CRM y material comercial de Atlas Analytics (repo público) ---
+03_OUTPUTS/powerbi/datos_privados/

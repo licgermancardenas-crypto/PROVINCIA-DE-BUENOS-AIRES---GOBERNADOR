@@ -1,10 +1,10 @@
 table fact_participacion
-	lineageTag: b8c8c3b3-5449-581a-a59a-283b4825c48e
+	lineageTag: a5a055ef-a6f3-52ae-8f08-0d05664635c4
 
 	column eleccion
 		dataType: string
 		isHidden
-		lineageTag: ce04e823-ab83-52ca-bce9-7f441834f52a
+		lineageTag: 8e8e890c-fa44-5a31-97e4-7cc1c587011c
 		summarizeBy: none
 		sourceColumn: eleccion
 
@@ -13,7 +13,7 @@ table fact_participacion
 	column cod_indec
 		dataType: string
 		isHidden
-		lineageTag: 5ebcb8a6-f98b-5f17-b589-aa127c92a6ef
+		lineageTag: a84c6c21-7bf7-5d67-9724-2f2a45c46942
 		summarizeBy: none
 		sourceColumn: cod_indec
 
@@ -22,7 +22,7 @@ table fact_participacion
 	column votos_positivos
 		dataType: int64
 		formatString: #,0
-		lineageTag: e2e6958e-ac5a-5371-9ce3-4bd5048e87f3
+		lineageTag: e64c17fa-4280-5dc6-82d4-2778a9adfd3f
 		summarizeBy: sum
 		sourceColumn: votos_positivos
 
@@ -31,7 +31,7 @@ table fact_participacion
 	column electores
 		dataType: double
 		formatString: #,0.0
-		lineageTag: 02eb3aab-eb1b-5239-a88f-4d90f7107736
+		lineageTag: 85884f00-fc4d-57f7-92c4-107a0d49ab12
 		summarizeBy: sum
 		sourceColumn: electores
 
@@ -40,7 +40,7 @@ table fact_participacion
 	column participacion
 		dataType: double
 		formatString: #,0.0
-		lineageTag: b7b0e7df-3934-5dc9-9069-324318ef6a56
+		lineageTag: 5d2dfa60-9e31-5092-9b83-c1259a2e5a3d
 		summarizeBy: none
 		sourceColumn: participacion
 
@@ -48,7 +48,7 @@ table fact_participacion
 
 	column ganador
 		dataType: string
-		lineageTag: 10b6ecae-729e-5bd1-bac7-517a0ab6bed2
+		lineageTag: df1ae403-6d0b-5da9-ba93-68ed2a5f569a
 		summarizeBy: none
 		sourceColumn: ganador
 
@@ -57,7 +57,7 @@ table fact_participacion
 	column margen
 		dataType: double
 		formatString: #,0.0
-		lineageTag: 6a8ff48c-ea9b-5184-a159-24055898e543
+		lineageTag: 5675338c-04f5-5a94-bad0-291ce5711d8a
 		summarizeBy: none
 		sourceColumn: margen
 
@@ -65,7 +65,7 @@ table fact_participacion
 
 	column ganador_nombre
 		dataType: string
-		lineageTag: 9e0d4ac4-5b1b-56bc-b44c-15dd2879d735
+		lineageTag: ff410eeb-12e7-5b51-b9fc-85a4ca1208e9
 		summarizeBy: none
 		sourceColumn: ganador_nombre
 
@@ -75,9 +75,9 @@ table fact_participacion
 		mode: import
 		source =
 				let
-				    Origen = Csv.Document(File.Contents(CarpetaDatos & "fact_participacion.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
-				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
-				    Tipos = Table.TransformColumnTypes(Encabezados, {{"eleccion", type text}, {"cod_indec", type text}, {"votos_positivos", Int64.Type}, {"electores", type number}, {"participacion", type number}, {"ganador", type text}, {"margen", type number}, {"ganador_nombre", type text}}, "en-US")
+				    Origen_fact_participacion = Csv.Document(File.Contents(CarpetaDatos & "fact_participacion.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Enc_fact_participacion = Table.PromoteHeaders(Origen_fact_participacion, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Enc_fact_participacion, {{"eleccion", type text}, {"cod_indec", type text}, {"votos_positivos", Int64.Type}, {"electores", type number}, {"participacion", type number}, {"ganador", type text}, {"margen", type number}, {"ganador_nombre", type text}}, "en-US")
 				in
 				    Tipos
 

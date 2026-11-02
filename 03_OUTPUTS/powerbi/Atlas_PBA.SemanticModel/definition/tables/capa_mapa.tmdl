@@ -1,0 +1,50 @@
+table capa_mapa
+	lineageTag: 2ce72288-ec7b-5ec7-a16b-c2ccadf5bbf8
+
+	column capa
+		dataType: string
+		lineageTag: b4b440ac-cffd-5027-a646-24eb1feb27f1
+		summarizeBy: none
+		sourceColumn: capa
+		sortByColumn: orden
+
+		annotation SummarizationSetBy = Automatic
+
+	column orden
+		dataType: int64
+		isHidden
+		lineageTag: 078bfece-a165-5c9c-aec5-3e2c5e8155cc
+		summarizeBy: none
+		sourceColumn: orden
+
+		annotation SummarizationSetBy = Automatic
+
+	column descripcion
+		dataType: string
+		lineageTag: c663432b-2b65-5887-876c-a19c40b726f1
+		summarizeBy: none
+		sourceColumn: descripcion
+
+		annotation SummarizationSetBy = Automatic
+
+	column leyenda_svg
+		dataType: string
+		dataCategory: ImageUrl
+		isHidden
+		lineageTag: 78c5cc11-fcf1-536f-8f05-959d2087081c
+		summarizeBy: none
+		sourceColumn: leyenda_svg
+
+		annotation SummarizationSetBy = Automatic
+
+	partition capa_mapa = m
+		mode: import
+		source =
+				let
+				    Origen_capa_mapa = Csv.Document(File.Contents(CarpetaDatos & "capa_mapa.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Enc_capa_mapa = Table.PromoteHeaders(Origen_capa_mapa, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Enc_capa_mapa, {{"capa", type text}, {"orden", Int64.Type}, {"descripcion", type text}, {"leyenda_svg", type text}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

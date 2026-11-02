@@ -1,0 +1,149 @@
+table prospectos
+	lineageTag: 927f6a20-00ec-52db-b1f8-abf0191c8311
+
+	column cod_indec
+		dataType: string
+		isHidden
+		lineageTag: 0de5899c-1fa5-57de-b66e-e4e44a2126ae
+		summarizeBy: none
+		sourceColumn: cod_indec
+
+		annotation SummarizationSetBy = Automatic
+
+	column municipio
+		dataType: string
+		lineageTag: 1d878415-e60e-531c-989d-eae6b9b7d5ed
+		summarizeBy: none
+		sourceColumn: municipio
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre
+		dataType: string
+		lineageTag: 53c22bf8-0d42-552e-a6e2-0d69d6631e53
+		summarizeBy: none
+		sourceColumn: nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column espacio
+		dataType: string
+		lineageTag: cfd36721-47c8-5af7-bd22-e62c682b4799
+		summarizeBy: none
+		sourceColumn: espacio
+
+		annotation SummarizationSetBy = Automatic
+
+	column fuerza_familia
+		dataType: string
+		lineageTag: 3d3d7150-be6d-52de-b1d3-3503c695206c
+		summarizeBy: none
+		sourceColumn: fuerza_familia
+
+		annotation SummarizationSetBy = Automatic
+
+	column rol
+		dataType: string
+		lineageTag: 50143f0d-7ee5-5dc2-8817-095001a70ed6
+		summarizeBy: none
+		sourceColumn: rol
+
+		annotation SummarizationSetBy = Automatic
+
+	column por_que
+		dataType: string
+		lineageTag: 5dbdf33f-a87a-5075-9e31-8ddc7f065fb2
+		summarizeBy: none
+		sourceColumn: por_que
+
+		annotation SummarizationSetBy = Automatic
+
+	column detalle
+		dataType: string
+		lineageTag: 190bbec7-8665-5494-81c5-bccae3d66d80
+		summarizeBy: none
+		sourceColumn: detalle
+
+		annotation SummarizationSetBy = Automatic
+
+	column prioridad
+		dataType: string
+		lineageTag: bfb9eb65-75d2-5e95-b963-65f92877e9f9
+		summarizeBy: none
+		sourceColumn: prioridad
+		sortByColumn: orden_prioridad
+
+		annotation SummarizationSetBy = Automatic
+
+	column fuente
+		dataType: string
+		lineageTag: f8c12b8c-0eec-52f1-9fce-9bf3b94afd0b
+		summarizeBy: none
+		sourceColumn: fuente
+
+		annotation SummarizationSetBy = Automatic
+
+	column estado
+		dataType: string
+		lineageTag: 41966429-78a1-5211-aec9-e199a54a286a
+		summarizeBy: none
+		sourceColumn: estado
+
+		annotation SummarizationSetBy = Automatic
+
+	column notas
+		dataType: double
+		formatString: #,0.0
+		lineageTag: df336c82-c0a9-54ee-8139-66272fc8ef23
+		summarizeBy: none
+		sourceColumn: notas
+
+		annotation SummarizationSetBy = Automatic
+
+	column proximo_paso
+		dataType: double
+		formatString: #,0.0
+		lineageTag: af5a09c5-b17d-5db0-aafa-5336c743d04f
+		summarizeBy: none
+		sourceColumn: proximo_paso
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_proximo_paso
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 18d13ca7-5a08-5499-94c0-afe5b2e35460
+		summarizeBy: none
+		sourceColumn: fecha_proximo_paso
+
+		annotation SummarizationSetBy = Automatic
+
+	column orden_prioridad
+		dataType: int64
+		isHidden
+		lineageTag: 9bc92d0e-97d6-5a9b-9029-adae8a5d79bd
+		summarizeBy: none
+		sourceColumn: orden_prioridad
+
+		annotation SummarizationSetBy = Automatic
+
+	column clave
+		dataType: int64
+		isHidden
+		lineageTag: cb17abb8-78ab-5f8a-a8f6-b60b74a20b51
+		summarizeBy: none
+		sourceColumn: clave
+
+		annotation SummarizationSetBy = Automatic
+
+	partition prospectos = m
+		mode: import
+		source =
+				let
+				    Origen_prospectos = Csv.Document(File.Contents(CarpetaPrivada & "prospectos.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Enc_prospectos = Table.PromoteHeaders(Origen_prospectos, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Enc_prospectos, {{"cod_indec", type text}, {"municipio", type text}, {"nombre", type text}, {"espacio", type text}, {"fuerza_familia", type text}, {"rol", type text}, {"por_que", type text}, {"detalle", type text}, {"prioridad", type text}, {"fuente", type text}, {"estado", type text}, {"notas", type number}, {"proximo_paso", type number}, {"fecha_proximo_paso", type number}, {"orden_prioridad", Int64.Type}, {"clave", Int64.Type}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

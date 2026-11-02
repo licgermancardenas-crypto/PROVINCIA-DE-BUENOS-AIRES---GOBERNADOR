@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.3.0/schema.json",
   "name": "elecciones_nav_elecciones",
   "position": {
-    "x": 696,
-    "y": 14,
-    "z": 1030,
-    "width": 130,
-    "height": 34,
-    "tabOrder": 1030
+    "x": 1016,
+    "y": 12,
+    "z": 1080,
+    "width": 126,
+    "height": 32,
+    "tabOrder": 1080
   },
   "visual": {
     "visualType": "actionButton",
@@ -38,7 +38,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Elecciones'"
+                  "Value": "'ELECCIONES'"
                 }
               }
             },
@@ -56,7 +56,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "11D"
+                  "Value": "9D"
                 }
               }
             },
@@ -70,6 +70,24 @@
           },
           "selector": {
             "id": "default"
+          }
+        },
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#12042E'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "hover"
           }
         }
       ],
@@ -88,7 +106,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#C40BFF'"
+                      "Value": "'#F2A65A'"
                     }
                   }
                 }
@@ -104,6 +122,38 @@
           },
           "selector": {
             "id": "default"
+          }
+        },
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E9B6FF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "hover"
           }
         }
       ],
@@ -131,7 +181,7 @@
             "roundEdge": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "10D"
                 }
               }
             }

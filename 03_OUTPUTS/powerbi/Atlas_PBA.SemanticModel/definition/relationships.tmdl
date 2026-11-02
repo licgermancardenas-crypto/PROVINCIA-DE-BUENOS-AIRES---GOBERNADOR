@@ -25,3 +25,11 @@ relationship a5496a7b-37a9-59be-8713-96953b511689
 relationship b989b808-47e7-5322-8a42-c6f5c1348097
 	fromColumn: dim_municipio.fuerza_intendente
 	toColumn: dim_fuerza.fuerza_intendente
+
+relationship 8016eecf-2e65-5b10-8b6e-f7d41af945eb
+	fromColumn: prospectos.cod_indec
+	toColumn: dim_municipio.cod_indec
+
+relationship afa547ff-4baa-5077-b5b2-d1b795b51a99
+	fromColumn: noticias.cod_indec
+	toColumn: dim_municipio.cod_indec

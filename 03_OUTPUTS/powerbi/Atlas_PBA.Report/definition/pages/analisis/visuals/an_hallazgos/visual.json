@@ -1,0 +1,142 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.3.0/schema.json",
+  "name": "an_hallazgos",
+  "position": {
+    "x": 10,
+    "y": 174,
+    "z": 1110,
+    "width": 232,
+    "height": 538,
+    "tabOrder": 1110
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Lo que encontramos",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "fontWeight": "bold",
+                      "color": "#E9B6FF"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• Si se repite octubre 2025, empate: el peronismo gana el 59 % de las simulaciones (+0,3 pts).",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#DCD2EA"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• Con la derecha dividida, el peronismo gana el 99-100 % aunque el PRO sea el 15 % de ella.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#DCD2EA"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• Quién se suma a votar mueve 9 puntos (de −3,7 a +5,4). Más participación pareja no mueve nada.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#DCD2EA"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• El voto perdido de Kicillof en 2025 se abstuvo (12,6 %, ~513.000); ninguno pasó a LLA-PRO.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#DCD2EA"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• Ganar la intendencia no arrastra votos al gobernador (−0,2 pts).",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#DCD2EA"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• LLA-PRO avanzó relativamente en barrios populares 2023-2025, más allá del NBI.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#DCD2EA"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• Diputados 2027: el peronismo queda en 41-44 de 92; el Senado lo retiene salvo que se repita octubre.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#DCD2EA"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
