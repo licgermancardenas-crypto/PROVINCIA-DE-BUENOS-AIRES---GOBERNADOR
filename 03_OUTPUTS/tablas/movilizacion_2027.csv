@@ -1,21 +1,21 @@
 base,derecha,perfil,participacion_base,participacion_2027,pct_peronismo,pct_rival_principal,margen_p50,margen_p10,margen_p90,p_gana_peronismo,municipios_peronismo,diputados_peronismo,senadores_peronismo,p_mayoria_senado
-octubre,unida,Parejo (como el promedio provincial),0.675,0.76,41.468,41.349,0.234,-1.901,2.089,0.57,39.0,41.0,23.0,0.108
-octubre,dividida (PRO 25 %),Parejo (como el promedio provincial),0.675,0.76,41.462,31.154,10.327,7.74,12.788,1.0,87.0,42.0,27.0,1.0
-octubre,unida,Retorno 2023 (vuelven los que se abstuvieron en 2025),0.675,0.76,41.986,42.175,-0.069,-2.285,1.855,0.472,38.0,41.0,23.0,0.102
-octubre,dividida (PRO 25 %),Retorno 2023 (vuelven los que se abstuvieron en 2025),0.675,0.76,41.979,31.777,10.23,7.566,12.753,1.0,85.0,42.0,27.0,1.0
-octubre,unida,Como 2017-2019,0.675,0.76,43.516,40.947,2.687,0.514,4.575,0.932,46.0,42.0,23.0,0.388
-octubre,dividida (PRO 25 %),Como 2017-2019,0.675,0.76,43.51,30.852,12.685,10.089,15.159,1.0,96.0,43.0,27.0,1.0
-octubre,unida,Como 2021-2023,0.675,0.76,40.402,44.096,-3.576,-5.745,-1.693,0.025,29.0,39.0,23.0,0.02
-octubre,dividida (PRO 25 %),Como 2021-2023,0.675,0.76,40.396,33.223,7.173,4.485,9.762,0.995,72.0,40.0,26.0,0.992
-octubre,unida,Como 2023-2025,0.675,0.76,44.322,38.906,5.533,3.36,7.421,0.99,56.0,44.0,25.0,0.875
-octubre,dividida (PRO 25 %),Como 2023-2025,0.675,0.76,44.315,29.316,14.991,12.534,17.464,1.0,105.0,44.0,28.0,1.0
-septiembre,unida,Parejo (como el promedio provincial),0.635,0.76,47.132,33.971,13.271,11.265,15.017,1.0,105.0,45.0,27.0,1.0
-septiembre,dividida (PRO 25 %),Parejo (como el promedio provincial),0.635,0.76,47.126,25.598,21.518,19.306,23.773,1.0,123.0,44.0,29.0,1.0
-septiembre,unida,Retorno 2023 (vuelven los que se abstuvieron en 2025),0.635,0.76,47.242,36.07,11.287,9.169,13.131,1.0,96.0,44.0,27.0,0.995
-septiembre,dividida (PRO 25 %),Retorno 2023 (vuelven los que se abstuvieron en 2025),0.635,0.76,47.236,27.18,20.044,17.701,22.432,1.0,118.0,44.0,29.0,1.0
-septiembre,unida,Como 2017-2019,0.635,0.76,49.36,34.424,15.049,12.99,16.84,1.0,109.0,45.0,27.0,1.0
-septiembre,dividida (PRO 25 %),Como 2017-2019,0.635,0.76,49.354,25.94,23.401,21.152,25.707,1.0,126.0,44.0,29.0,1.0
-septiembre,unida,Como 2021-2023,0.635,0.76,44.733,39.105,5.74,3.688,7.526,0.992,78.0,42.0,25.0,0.855
-septiembre,dividida (PRO 25 %),Como 2021-2023,0.635,0.76,44.727,29.464,15.288,12.817,17.631,1.0,110.0,44.0,28.0,1.0
-septiembre,unida,Como 2023-2025,0.635,0.76,50.552,31.402,19.263,17.204,21.054,1.0,117.0,47.0,27.0,1.0
-septiembre,dividida (PRO 25 %),Como 2023-2025,0.635,0.76,50.546,23.666,26.882,24.739,29.091,1.0,130.0,46.0,30.0,1.0
+octubre,unida,Parejo (como el promedio provincial),0.675,0.76,41.494,41.323,0.086,-1.846,2.1,0.538,39.0,41.0,23.0,0.198
+octubre,dividida (PRO 25 %),Parejo (como el promedio provincial),0.675,0.76,41.504,30.9,10.631,8.316,12.922,1.0,89.0,42.0,27.0,0.998
+octubre,unida,Retorno 2023 (vuelven los que se abstuvieron en 2025),0.675,0.76,42.012,42.148,-0.223,-2.228,1.866,0.448,38.0,41.0,23.0,0.168
+octubre,dividida (PRO 25 %),Retorno 2023 (vuelven los que se abstuvieron en 2025),0.675,0.76,42.023,31.517,10.52,8.172,12.888,1.0,87.0,42.0,27.0,0.998
+octubre,unida,Como 2017-2019,0.675,0.76,43.542,40.921,2.536,0.569,4.585,0.94,46.0,42.0,23.0,0.478
+octubre,dividida (PRO 25 %),Como 2017-2019,0.675,0.76,43.553,30.599,12.957,10.661,15.28,1.0,99.0,43.0,27.0,1.0
+octubre,unida,Como 2021-2023,0.675,0.76,40.428,44.07,-3.727,-5.689,-1.682,0.025,29.0,39.0,23.0,0.03
+octubre,dividida (PRO 25 %),Como 2021-2023,0.675,0.76,40.439,32.953,7.508,5.071,9.946,0.995,75.0,40.0,26.0,0.995
+octubre,unida,Como 2023-2025,0.675,0.76,44.348,38.88,5.382,3.416,7.431,0.992,56.0,44.0,25.0,0.888
+octubre,dividida (PRO 25 %),Como 2023-2025,0.675,0.76,44.358,29.073,15.277,12.975,17.579,1.0,107.0,44.0,28.0,1.0
+septiembre,unida,Parejo (como el promedio provincial),0.635,0.76,47.156,33.947,13.132,11.314,15.022,1.0,105.0,45.0,27.0,0.998
+septiembre,dividida (PRO 25 %),Parejo (como el promedio provincial),0.635,0.76,47.165,25.385,21.759,19.729,23.844,1.0,124.0,44.0,29.0,1.0
+septiembre,unida,Retorno 2023 (vuelven los que se abstuvieron en 2025),0.635,0.76,47.267,36.045,11.141,9.221,13.136,1.0,97.0,44.0,27.0,0.995
+septiembre,dividida (PRO 25 %),Retorno 2023 (vuelven los que se abstuvieron en 2025),0.635,0.76,47.277,26.954,20.297,18.146,22.503,1.0,118.0,44.0,29.0,1.0
+septiembre,unida,Como 2017-2019,0.635,0.76,49.385,34.399,14.906,13.041,16.845,1.0,109.0,45.0,27.0,1.0
+septiembre,dividida (PRO 25 %),Como 2017-2019,0.635,0.76,49.394,25.723,23.65,21.582,25.781,1.0,127.0,44.0,29.0,1.0
+septiembre,unida,Como 2021-2023,0.635,0.76,44.758,39.08,5.598,3.739,7.531,0.992,79.0,42.0,25.0,0.875
+septiembre,dividida (PRO 25 %),Como 2021-2023,0.635,0.76,44.767,29.223,15.558,13.382,17.753,1.0,111.0,44.0,28.0,1.0
+septiembre,unida,Como 2023-2025,0.635,0.76,50.577,31.377,19.12,17.255,21.059,1.0,117.0,47.0,27.0,1.0
+septiembre,dividida (PRO 25 %),Como 2023-2025,0.635,0.76,50.587,23.465,27.096,25.162,29.111,1.0,130.0,46.0,30.0,1.0

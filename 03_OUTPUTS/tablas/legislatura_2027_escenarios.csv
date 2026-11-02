@@ -1,33 +1,33 @@
 escenario,bloque,diputados_2027_p50,diputados_2027_p10,diputados_2027_p90,senadores_2027_p50,senadores_2027_p10,senadores_2027_p90,diputados_siguen_2025,senadores_siguen_2025,p_mayoria_diputados,p_mayoria_senado
-"A · Octubre 2025, derecha unida",PERONISMO,19.0,18.0,21.0,10.0,10.0,11.0,21.0,13.0,,
-"A · Octubre 2025, derecha unida",DERECHA,27.0,25.0,28.0,13.0,12.0,13.0,18.0,8.0,,
+"A · Octubre 2025, derecha unida",PERONISMO,20.0,18.0,21.0,10.0,10.0,11.0,21.0,13.0,,
+"A · Octubre 2025, derecha unida",DERECHA,26.0,25.0,28.0,13.0,12.0,13.0,18.0,8.0,,
 "A · Octubre 2025, derecha unida",TERCERA,0.0,0.0,0.0,0.0,0.0,0.0,2.0,2.0,,
 "A · Octubre 2025, derecha unida",IZQUIERDA,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,,
 "A · Octubre 2025, derecha unida",RESTO,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,
-"A · Octubre 2025, derecha unida",PERONISMO · cámara completa,40.0,39.0,42.0,23.0,23.0,24.0,,,0.0,0.146
+"A · Octubre 2025, derecha unida",PERONISMO · cámara completa,41.0,39.0,42.0,23.0,23.0,24.0,,,0.0,0.252
 "B · Septiembre 2025, derecha unida",PERONISMO,23.0,22.0,24.0,14.0,13.0,14.0,21.0,13.0,,
-"B · Septiembre 2025, derecha unida",DERECHA,18.0,18.0,19.0,9.0,9.0,10.0,18.0,8.0,,
+"B · Septiembre 2025, derecha unida",DERECHA,18.0,17.9,19.0,9.0,9.0,10.0,18.0,8.0,,
 "B · Septiembre 2025, derecha unida",TERCERA,4.0,4.0,5.0,0.0,0.0,0.0,2.0,2.0,,
 "B · Septiembre 2025, derecha unida",IZQUIERDA,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,,
 "B · Septiembre 2025, derecha unida",RESTO,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,
-"B · Septiembre 2025, derecha unida",PERONISMO · cámara completa,44.0,43.0,45.0,27.0,26.0,27.0,,,0.002,0.998
-"C · Punto medio, derecha unida",PERONISMO,22.0,22.0,23.0,12.0,11.0,13.0,21.0,13.0,,
-"C · Punto medio, derecha unida",DERECHA,23.0,22.0,24.0,11.0,10.0,12.0,18.0,8.0,,
+"B · Septiembre 2025, derecha unida",PERONISMO · cámara completa,44.0,43.0,45.0,27.0,26.0,27.0,,,0.0,1.0
+"C · Punto medio, derecha unida",PERONISMO,22.0,21.0,23.0,12.0,11.0,13.0,21.0,13.0,,
+"C · Punto medio, derecha unida",DERECHA,23.0,22.0,25.0,11.0,10.0,12.0,18.0,8.0,,
 "C · Punto medio, derecha unida",TERCERA,1.0,0.0,2.0,0.0,0.0,0.0,2.0,2.0,,
 "C · Punto medio, derecha unida",IZQUIERDA,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,,
 "C · Punto medio, derecha unida",RESTO,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,
-"C · Punto medio, derecha unida",PERONISMO · cámara completa,43.0,43.0,44.0,25.0,24.0,26.0,,,0.0,0.986
-"A · Octubre 2025, derecha dividida (PRO 25 %)",PERONISMO,20.0,19.0,22.0,14.0,13.0,14.0,21.0,13.0,,
+"C · Punto medio, derecha unida",PERONISMO · cámara completa,43.0,42.0,44.0,25.0,24.0,26.0,,,0.0,0.976
+"A · Octubre 2025, derecha dividida (PRO 25 %)",PERONISMO,21.0,19.0,22.0,14.0,13.0,14.0,21.0,13.0,,
 "A · Octubre 2025, derecha dividida (PRO 25 %)",LLA,19.0,17.0,21.0,9.0,9.0,10.0,0.0,0.0,,
 "A · Octubre 2025, derecha dividida (PRO 25 %)",PRO,6.0,6.0,7.0,0.0,0.0,0.0,0.0,0.0,,
 "A · Octubre 2025, derecha dividida (PRO 25 %)",TERCERA,0.0,0.0,0.0,0.0,0.0,0.0,2.0,2.0,,
 "A · Octubre 2025, derecha dividida (PRO 25 %)",IZQUIERDA,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,,
 "A · Octubre 2025, derecha dividida (PRO 25 %)",RESTO,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,
-"A · Octubre 2025, derecha dividida (PRO 25 %)",PERONISMO · cámara completa,41.0,40.0,43.0,27.0,26.0,27.0,,,0.0,1.0
+"A · Octubre 2025, derecha dividida (PRO 25 %)",PERONISMO · cámara completa,42.0,40.0,43.0,27.0,26.0,27.0,,,0.0,0.998
 "A · Octubre 2025, derecha dividida (PRO 52 %)",PERONISMO,20.0,19.0,22.0,12.0,12.0,13.0,21.0,13.0,,
-"A · Octubre 2025, derecha dividida (PRO 52 %)",LLA,12.0,11.0,13.0,5.0,4.0,6.0,0.0,0.0,,
+"A · Octubre 2025, derecha dividida (PRO 52 %)",LLA,11.0,11.0,13.0,5.0,4.0,6.0,0.0,0.0,,
 "A · Octubre 2025, derecha dividida (PRO 52 %)",PRO,14.0,12.0,15.0,6.0,5.0,6.0,0.0,0.0,,
 "A · Octubre 2025, derecha dividida (PRO 52 %)",TERCERA,0.0,0.0,0.0,0.0,0.0,0.0,2.0,2.0,,
 "A · Octubre 2025, derecha dividida (PRO 52 %)",IZQUIERDA,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,,
 "A · Octubre 2025, derecha dividida (PRO 52 %)",RESTO,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,
-"A · Octubre 2025, derecha dividida (PRO 52 %)",PERONISMO · cámara completa,41.0,40.0,43.0,25.0,25.0,26.0,,,0.0,1.0
+"A · Octubre 2025, derecha dividida (PRO 52 %)",PERONISMO · cámara completa,41.0,40.0,43.0,25.0,25.0,26.0,,,0.0,0.998

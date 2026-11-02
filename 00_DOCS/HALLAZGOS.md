@@ -28,7 +28,7 @@ produjo y la tabla donde está el número.
 
 | Hallazgo | Magnitud | Estado | Script | Tabla |
 |---|---|---|---|---|
-| Con la misma composición social, el Conurbano vota más peronista | +5,6 a +6,6 pp según la elección (brecha bruta +8,0 a +10,2); +4,0 a +4,9 controlando además la urbanización. Sacando cualquier municipio, nunca baja de +5,1 | PROBADO (6 elecciones, q < 0,01, fragilidad) | `101` | `conurbano_interior_brecha.csv` |
+| Con la misma composición social, el Conurbano vota más peronista | +5,6 a +6,6 pp según la elección (brecha bruta +8,0 a +10,2); +4,0 a +4,9 controlando además la urbanización. Sacando cualquier municipio, nunca baja de +5,1. Con modelo de error espacial: +3,4 a +5,9 | PROBADO (6 elecciones, q < 0,01, fragilidad, robusto a autocorrelación espacial) | `101` | `conurbano_interior_brecha.csv` |
 | La composición explica cerca de un tercio de la brecha; la urbanización, otro quinto | De +10,2 a +6,0 y a +4,2 pp (Diputados 2019) | DESCRIPTIVO | `101` | ídem |
 | Para predecir, la zona casi no agrega si se tiene el perfil censal | R² fuera de muestra (por municipio) 0,60-0,86; sumar la zona lo mejora 0,01-0,03 con modelo lineal y nada con árboles | PROBADO (GroupKFold) | `101` | `conurbano_interior_oos.csv` |
 | Los cambios de voto son provinciales: el Conurbano y el interior se mueven igual | Con composición controlada, ninguna brecha en el cambio pasa Benjamini-Hochberg con urbanización (máximo 0,9 pp) | REFUTADO (la «dinámica propia» del Conurbano) | `101` | `conurbano_interior_brecha.csv` |
@@ -60,7 +60,7 @@ nativos» descontando la parte extranjera estimada.
 | LLA-PRO creció con los que en septiembre votaron a terceros | 64 % (56-69) de Provincias Unidas, 51 % (43-56) de otros y 49 % (41-59) de blanco y nulo fueron a LLA-PRO; además 10 % (7-14) de Fuerza Patria | PROBADO (fuera de muestra: 0,90 pp contra 2,07 de la ingenua) | `103` | `desdoblamiento_matriz.csv` |
 | Fuerza Patria cayó donde gobierna un intendente peronista | Cambio en su voto: −1,8 pp del padrón con intendente peronista, +1,2 sin él. Spearman parcial −0,34 controlando composición y zona | PROBADO (q < 0,001, sobrevive sacando los 3 más influyentes) | `103` | `desdoblamiento_correlatos.csv` |
 | LLA-PRO creció más en el interior | Spearman parcial −0,49 con Conurbano (+5,3 pp del padrón en el Conurbano, +9 a +11 en el interior) | PROBADO | `103` | ídem |
-| Donde había voto vecinal en septiembre, en octubre ganaron los dos grandes | Spearman parcial +0,23 (LLA-PRO) y +0,32 (Fuerza Patria) con el voto vecinal a concejales | PROBADO | `103` | ídem |
+| Donde había voto vecinal en septiembre, en octubre ganaron los dos grandes | Spearman parcial +0,23 (LLA-PRO) y +0,32 (Fuerza Patria) con el voto vecinal a concejales. Con modelo de error espacial, el de LLA-PRO queda en el borde (q = 0,052) | PROBADO para Fuerza Patria; en el borde para LLA-PRO | `103` | ídem |
 | La mayor participación de octubre no fue a LLA-PRO | Cambio de participación contra cambio de LLA-PRO: −0,09 (no pasa); contra Fuerza Patria: +0,31 | PROBADO (la segunda); REFUTADO («los que no votaron en septiembre fueron a Milei») | `103` | ídem |
 
 ## 5 · Lo que el territorio predice y lo que no
@@ -75,7 +75,7 @@ por municipio.
 | El cambio de voto es sobre todo proporcional al nivel de partida | Peronismo 2023-2025: nivel inicial 0,16, + censo 0,19. Captura de LLA-PRO: 0,50 y 0,56. Gobernador 2019-2023: 0,45 y 0,59 | PROBADO | `104` | ídem |
 | A diferencia de CABA, el cambio no es impredecible: es proporcional | En CABA la retención del PRO dio R² validado negativo; acá el nivel de partida solo explica entre 0,16 y 0,50 | DESCRIPTIVO (comparación entre proyectos) | `104` | ídem |
 | Más allá del nivel, el territorio dice poco del cambio de voto | 81 de 202 pruebas pasan los tres filtros, pero en los cambios de voto ninguna supera \|ρ\| = 0,28 | PROBADO | `104` | `territorio_bateria.csv` |
-| 2011-2023: el peronismo cayó más donde más se extendieron el gas y el agua de red | Spearman parcial −0,24 (gas) y −0,18 (agua) en Gobernador, con el nivel de 2011 y la composición de 2010 controlados | PROBADO | `104` | ídem |
+| 2011-2023: el peronismo cayó más donde más se extendió el gas de red | Spearman parcial −0,24 (gas) en Gobernador y −0,28 en Diputados, con el nivel de 2011 y la composición de 2010 controlados; sobrevive al modelo de error espacial. El agua de red sólo sobrevive en Gobernador | PROBADO (gas); el agua, débil | `104` | ídem |
 | 2023-2025: la caída de la participación fue rural y de baja educación | Densidad +0,38, viviendas rurales −0,34, secundario incompleto −0,30 (con la participación de 2023 controlada) | PROBADO | `104` | ídem |
 | 2023-2025: LLA-PRO avanzó relativamente en barrios populares con migrantes; el peronismo resistió en lo rural y entre jubilados | Captura de LLA-PRO: NBI de vivienda +0,17, hogares migrantes +0,16, jubilados −0,15. Peronismo: rural +0,17, jubilados +0,15 | PROBADO (efectos chicos) | `104` | ídem |
 
@@ -84,9 +84,9 @@ por municipio.
 | Hallazgo | Magnitud | Estado | Script | Tabla |
 |---|---|---|---|---|
 | Dado el nivel provincial, el mapa se reproduce bien | Error medio por municipio 2,7 pp con la regla mezcla, contra 12,4 sin traslado; 89 % de ganadores municipales y 97 % de secciones | PROBADO (13 pares, 2011-2025) | `105` | `motor_backtest.csv` |
-| El ruido territorial depende del tamaño del municipio y de si entra una fuerza nueva | Desvío del cociente peronismo/derecha: 0,22 en un municipio de 10.000 votos, 0,07 en uno de 500.000; con oferta nueva, ~0,28 en todos | PROBADO (calibración dejando un par afuera: 52/79/90/95 % de cobertura para 50/80/90/95 %) | `105` | `motor_ruido_modelo.csv`, `motor_calibracion.csv` |
+| El ruido territorial depende del tamaño del municipio, de si entra una fuerza nueva y de la sección | Desvío del cociente peronismo/derecha: 0,22 en un municipio de 10.000 votos, 0,07 en uno de 500.000; con oferta nueva, ~0,28 en todos | PROBADO (calibración dejando un par afuera: 52/79/90/95 % de cobertura para 50/80/90/95 %) | `105` | `motor_ruido_modelo.csv`, `motor_calibracion.csv` |
 | El nivel provincial de 2027 no se puede anticipar con el pasado | De la legislativa a la de Gobernador siguiente el margen se movió +19,8 pp (2017→2019) y +2,5 (2021→2023) | DESCRIPTIVO | `105` | — |
-| Si se repite octubre 2025, es un empate | Peronismo 41,5, derecha 41,3; margen +0,3 (−2,0 a +2,5); el peronismo gana el 57 % de las simulaciones y 39 municipios | DESCRIPTIVO (escenario) | `106` | `motor_2027_escenarios.csv` |
+| Si se repite octubre 2025, es un empate | Peronismo 41,6, derecha 41,3; margen +0,3 (−1,8 a +2,4); el peronismo gana el 59 % de las simulaciones y 39 municipios | DESCRIPTIVO (escenario) | `106` | `motor_2027_escenarios.csv` |
 | Si se repite septiembre 2025, el peronismo gana cómodo | Margen +13,4 (+11,1 a +15,6), primero en 95 municipios | DESCRIPTIVO (escenario) | `106` | ídem |
 | Padrón 2027 y extranjeros le suman al peronismo menos de un punto | El padrón 2027 con los extranjeros lleva el margen de octubre de −0,6 a +0,3; extranjeros al 45 % en vez de 29 %: +0,2 | DESCRIPTIVO | `106` | ídem |
 | La participación pareja casi no mueve el margen | De 64 % a 80 % con el mismo patrón territorial: ±0,1 pp. Lo que mueve es quién se suma (`109`) | DESCRIPTIVO | `106` | ídem |
@@ -97,7 +97,16 @@ por municipio.
 | El reparto PRO / LLA de cada municipio es más inestable que el de peronismo / derecha | 2021 → 2023: error medio 5 pp por municipio, correlación 0,72; ruido logarítmico 0,29 (contra ~0,10) | DESCRIPTIVO (un solo par) | `107` | — |
 | La regla del cociente reproduce las bancas de 2025 | Diputados: Fuerza Patria 21, LLA 18, FIT 2 (más Espacio Abierto 3 y Somos 2); Senado: Fuerza Patria 13, LLA 8, Somos 2. Coincide con el escrutinio publicado | PROBADO (contra el resultado real) | `108` | `legislatura_validacion.csv` |
 | En 2027 el peronismo no alcanza la mayoría de Diputados en los escenarios base | Mediana de 40 (octubre) a 44 (septiembre) de 92; hacen falta 47 (sólo la alcanza con septiembre más una movilización peronista fuerte, `109`). En 2027 eligen diputados la 1ª, 4ª, 5ª y 7ª, las más disputadas o favorables a la derecha | DESCRIPTIVO (escenario) | `108` | `legislatura_2027_escenarios.csv` |
-| El Senado 2027 queda casi siempre peronista | Renueva la 3ª: mayoría propia (24 de 46) en el 99-100 % de las simulaciones salvo si se repite octubre (23 de 46; 15 %), donde el vicegobernador desempata | DESCRIPTIVO (escenario) | `108` | ídem |
+| El Senado 2027 queda casi siempre peronista | Renueva la 3ª: mayoría propia (24 de 46) en el 98-100 % de las simulaciones salvo si se repite octubre (23 de 46; 25 %), donde el vicegobernador desempata | DESCRIPTIVO (escenario) | `108` | ídem |
 | El votante marginal cambia de una elección a otra | Entre los que se sumaron: 2017→2019, 53 % peronista y 31 % derecha; 2021→2023, 28 % y 66 %. Entre los que dejaron de votar 2023→2025: 57 % y 12 % (por circuito) o 30 % y 33 % (por la matriz del `102`) | DESCRIPTIVO (ecológico; 2019→2021 no separable) | `109` | `movilizacion_marginal.csv` |
-| Quién se moviliza mueve 9 puntos de margen | Desde octubre y con la derecha unida, de −3,6 (movilización como 2021→2023) a +5,5 (vuelven los peronistas que se abstuvieron en 2025); P(gana el peronismo) de 3 % a 99 %. Que vuelvan los abstencionistas de 2025 con su voto de 2023 es neutro (−0,1) | DESCRIPTIVO (escenario) | `109` | `movilizacion_2027.csv` |
-| Desde septiembre ningún perfil de movilización da vuelta la elección | Margen de +5,7 a +19,3 con la derecha unida | DESCRIPTIVO (escenario) | `109` | ídem |
+| Quién se moviliza mueve 9 puntos de margen | Desde octubre y con la derecha unida, de −3,7 (movilización como 2021→2023) a +5,4 (vuelven los peronistas que se abstuvieron en 2025); P(gana el peronismo) de 3 % a 99 %. Que vuelvan los abstencionistas de 2025 con su voto de 2023 es neutro (−0,2) | DESCRIPTIVO (escenario) | `109` | `movilizacion_2027.csv` |
+| Desde septiembre ningún perfil de movilización da vuelta la elección | Margen de +5,6 a +19,1 con la derecha unida | DESCRIPTIVO (escenario) | `109` | ídem |
+
+## 7 · Robustez espacial
+
+| Hallazgo | Magnitud | Estado | Script | Tabla |
+|---|---|---|---|---|
+| Los errores del motor están correlacionados en el espacio, sobre todo por sección | Moran de los residuos municipales hasta 0,41 (2013-2015); sin el componente de sección baja a −0,04 a 0,14. El motor ahora sortea un shock común por sección (desvío 0,08 con oferta estable, 0,20 con oferta nueva) | PROBADO | `110`, `105` | `espacial_motor.csv`, `motor_ruido_modelo.csv` |
+| Con el ruido por sección, la provincia no cambia y las secciones son más inciertas | Octubre se repite: P(gana el peronismo) 59 % (antes 57 %); la 1ª sección con empate provincial pasa de 92 % a 72 % peronista; Senado peronista con octubre: 25 % (antes 15 %) | DESCRIPTIVO | `106`, `108` | `motor_2027_*.csv`, `legislatura_2027_escenarios.csv` |
+| Los hallazgos por circuito tienen residuos autocorrelacionados, pero casi todos sobreviven | Moran mediano de los residuos 0,21 (`104`), 0,28 (`101`); con modelo de error espacial sobreviven 61 de 81 pruebas del `104` (efectos más o menos a la mitad), las 3 del `101` y 7 de 8 del `103` | PROBADO | `110` | `espacial_hallazgos.csv` |
+| Lo que no sobrevive a la corrección espacial | `104`: cambio en vivienda propia y en computadora (2011-2023), agua de red en Diputados, y varias correlaciones débiles (cuentapropia, obra social, hacinamiento crítico con el cambio 2019-2023). `103`: voto vecinal → LLA-PRO (q = 0,052) | REFUTADO (o en el borde) | `110` | ídem |

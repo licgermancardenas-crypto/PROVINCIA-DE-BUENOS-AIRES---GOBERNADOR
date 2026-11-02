@@ -26,9 +26,11 @@ CÓMO FUNCIONA
 5. **Monte Carlo**: en cada simulación,
    - un shock provincial en el margen peronismo − derecha, t de 5 grados con desvío `sd_provincial`
      (parámetro: cuánto se confía en el nivel del escenario);
-   - ruido municipal en el cociente peronismo / derecha, con el modelo calibrado del `105`
-     (desvío según tamaño, t de 5 grados con oferta estable); luego se reajusta para que la
-     provincia dé lo que dio el shock: el ruido redistribuye el territorio, no cambia el nivel.
+   - ruido territorial en el cociente peronismo / derecha, con el modelo calibrado del `105`
+     (desvío según tamaño, t de 5 grados con oferta estable), en dos partes: un shock común a cada
+     sección y uno propio de cada municipio (el `110` mostró que la autocorrelación espacial es de
+     sección); luego se reajusta para que la provincia dé lo que dio el shock: el ruido
+     redistribuye el territorio, no cambia el nivel.
 
 LO QUE SE REPORTA
 -----------------
@@ -238,6 +240,10 @@ class Motor:
         sec_de_muni = np.array([sec_ids.index(self.seccion[self.m_idx[m][0]]) for m in self.munis])
         w_m = np.bincount(cm, weights=self.w)
         sig_m = r.escala * np.exp(r.a + r.b * np.log(w_m))
+        # Parte común por sección (el `110` mostró que la autocorrelación espacial de los residuos es
+        # de sección): hasta el 80 % de la varianza de cada municipio; la varianza total no cambia.
+        c_sec = np.minimum(r.sd_seccion, np.sqrt(0.8) * sig_m)
+        sig_propio = np.sqrt(np.maximum(sig_m ** 2 - c_sec ** 2, 0))
         sig_pi = RUIDO_PI["escala"] * np.exp(RUIDO_PI["a"] + RUIDO_PI["b"] * np.log(w_m))
         lg = np.log(self.pi23 / (1 - self.pi23))
         res, primero_m, sh_m, primero_s, sh_s, sec_votos = [], [], [], [], [], []
@@ -251,7 +257,8 @@ class Motor:
             S /= S.sum()
             s = bt.mezcla(s_esc, self.w, S) if sd_provincial > 0 else s_esc.copy()
             # Ruido municipal en el cociente peronismo / derecha.
-            e = (rng.standard_t(GL, len(self.munis)) * np.sqrt((GL - 2) / GL) if gl else rng.standard_normal(len(self.munis))) * sig_m
+            u = (lambda k: rng.standard_t(GL, k) * np.sqrt((GL - 2) / GL)) if gl else rng.standard_normal
+            e = c_sec * u(len(sec_ids))[sec_de_muni] + sig_propio * u(len(self.munis))
             fac = e[cm]
             s[:, 0] *= np.exp(fac / 2)
             s[:, 1] *= np.exp(-fac / 2)

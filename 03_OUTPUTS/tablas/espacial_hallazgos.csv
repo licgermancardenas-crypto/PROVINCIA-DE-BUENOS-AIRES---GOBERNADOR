@@ -1,0 +1,93 @@
+analisis,objetivo,variable,n,beta,p_ols,moran_residuos,p_moran,beta_sem,p_sem,lambda_sem,p_cluster_municipio,q_p_ols,q_p_cluster_municipio,q_p_sem,sobrevive_sem
+101,peronismo_dip_2025,"Conurbano (pp, sin ponderar)",995,4.70265,0.0,0.27762,0.002,3.35151,0.01085,0.56173,,0.0,,0.01752,True
+101,peronismo_gob_2023,"Conurbano (pp, sin ponderar)",991,6.475,0.0,0.28195,0.002,5.86777,0.0,0.5741,,0.0,,2e-05,True
+101,derecha_dip_2025,"Conurbano (pp, sin ponderar)",995,-6.0796,0.0,0.24398,0.002,-5.38641,1e-05,0.52888,,0.0,,5e-05,True
+104,Cambio participación 2023-2025,pct_mujeres,997,0.41829,0.0,0.16234,0.002,0.33301,0.0,0.41153,0.0,0.0,0.0,0.0,True
+104,Cambio participación 2023-2025,pct_hasta_sec_incompleto,997,-0.52282,0.0,0.18721,0.002,-0.45379,0.0,0.42937,0.0,0.0,0.0,0.0,True
+104,Cambio participación 2023-2025,tasa_desocupacion,997,0.29422,0.0,0.16171,0.002,0.1997,0.0,0.42098,0.0,0.0,0.0,0.0,True
+104,Cambio participación 2023-2025,tasa_empleo,997,-0.15962,0.0,0.18976,0.002,-0.07627,0.02779,0.48149,0.00107,0.0,0.00235,0.0376,True
+104,Cambio participación 2023-2025,pct_sin_obra_social,997,-0.13542,0.00206,0.20978,0.002,-0.11644,0.00929,0.49999,0.05559,0.00231,0.0589,0.01554,True
+104,Cambio participación 2023-2025,pct_nac_otro_pais,997,0.14713,4e-05,0.19622,0.002,0.03106,0.44544,0.49161,0.00761,7e-05,0.01093,0.46568,False
+104,Cambio participación 2023-2025,pct_migrante_reciente,997,-0.15747,0.0,0.19401,0.002,-0.10249,0.00239,0.4882,1e-05,0.0,3e-05,0.00512,True
+104,Cambio participación 2023-2025,pct_sin_aporte,997,-0.13598,0.00068,0.20702,0.002,-0.09645,0.01559,0.49559,0.01412,0.00081,0.01796,0.02313,True
+104,Cambio participación 2023-2025,pct_domestico,997,-0.13504,8e-05,0.2087,0.002,-0.10178,0.0026,0.49114,0.00406,0.00013,0.00634,0.00532,True
+104,Cambio participación 2023-2025,pct_patron,997,-0.1676,0.0,0.18679,0.002,-0.08137,0.0096,0.47445,0.00038,0.0,0.00117,0.01577,True
+104,Cambio participación 2023-2025,pct_hog_nbi_san,997,0.17356,0.0,0.19646,0.002,0.09954,0.00491,0.48803,0.0004,1e-05,0.0012,0.00886,True
+104,Cambio participación 2023-2025,pct_hog_clima_edu_bajo,997,-0.5193,0.0,0.18272,0.002,-0.4348,0.0,0.4271,0.0,0.0,0.0,0.0,True
+104,Cambio participación 2023-2025,pct_hog_clima_edu_alto,997,0.30735,0.00031,0.20799,0.002,0.19995,0.01408,0.49052,0.00682,0.00042,0.00995,0.02158,True
+104,Cambio participación 2023-2025,pct_hog_agua_red,997,0.29885,0.0,0.18136,0.002,0.25576,0.0,0.44793,0.0,0.0,0.0,0.0,True
+104,Cambio participación 2023-2025,pct_hog_cloaca,997,0.30568,0.0,0.18434,0.002,0.25194,0.0,0.45813,0.0,0.0,0.0,0.0,True
+104,Cambio participación 2023-2025,pct_hog_gas_red,997,0.32715,0.0,0.18672,0.002,0.26613,0.0,0.45768,0.0,0.0,0.0,0.0,True
+104,Cambio participación 2023-2025,pct_hog_garrafa_lena,997,-0.30956,0.0,0.19454,0.002,-0.26216,0.0,0.47132,0.0,0.0,0.0,0.0,True
+104,Cambio participación 2023-2025,pct_hog_hacinamiento,997,-0.20372,0.00042,0.20098,0.002,-0.08904,0.09945,0.49293,0.01376,0.00053,0.01774,0.1173,False
+104,Cambio participación 2023-2025,pct_hog_propietario,997,0.17914,0.0,0.19315,0.002,0.11941,0.00028,0.48032,0.0001,0.0,0.00037,0.00081,True
+104,Cambio participación 2023-2025,pct_hog_internet,997,0.3201,0.0,0.20841,0.002,0.30979,0.0,0.46695,0.0,0.0,0.0,0.0,True
+104,Cambio participación 2023-2025,pct_hog_computadora,997,0.41046,0.0,0.20737,0.002,0.37532,0.0,0.46572,0.0,0.0,0.0,0.0,True
+104,Cambio participación 2023-2025,pct_hog_materiales_malos,997,0.17219,7e-05,0.19972,0.002,0.09699,0.03246,0.4902,0.0013,0.00011,0.00251,0.04206,True
+104,Cambio participación 2023-2025,pct_hog_migrante,997,0.17241,0.0,0.19104,0.002,0.04908,0.24769,0.4845,0.00133,1e-05,0.00252,0.26497,False
+104,Cambio participación 2023-2025,pct_viv_rural,997,-0.43003,0.0,0.15828,0.002,-0.39046,0.0,0.37518,0.0,0.0,0.0,0.0,True
+104,Cambio participación 2023-2025,pct_viv_desocupadas,997,-0.34542,0.0,0.15032,0.002,-0.24995,0.0,0.41311,0.0,0.0,0.0,0.0,True
+104,Cambio participación 2023-2025,log_densidad,997,0.48037,0.0,0.15209,0.002,0.46003,0.0,0.34786,0.0,0.0,0.0,0.0,True
+104,Cambio peronismo · Diputados 2023-2025,tasa_desocupacion,989,-0.11221,0.00252,0.17821,0.002,-0.04993,0.21858,0.38539,0.03457,0.0028,0.03944,0.23658,False
+104,Cambio peronismo · Diputados 2023-2025,pct_jubilados,989,0.3003,0.0,0.18245,0.002,0.25818,0.0001,0.38336,0.00205,1e-05,0.00366,0.00036,True
+104,Cambio peronismo · Diputados 2023-2025,pct_nac_otro_pais,989,-0.12434,0.00039,0.18769,0.002,-0.11943,0.00203,0.38911,0.01036,0.00049,0.01419,0.00456,True
+104,Cambio peronismo · Diputados 2023-2025,pct_cuenta_propia,989,-0.15499,0.0,0.17522,0.002,-0.12604,7e-05,0.37293,0.00047,0.0,0.00131,0.00025,True
+104,Cambio peronismo · Diputados 2023-2025,pct_hog_clima_edu_bajo,989,0.17505,0.00196,0.17801,0.002,0.08228,0.16172,0.38503,0.05875,0.00222,0.06151,0.17713,False
+104,Cambio peronismo · Diputados 2023-2025,pct_hog_cloaca,989,-0.12646,0.00069,0.17467,0.002,-0.05675,0.15143,0.38289,0.02147,0.00082,0.02482,0.1699,False
+104,Cambio peronismo · Diputados 2023-2025,pct_hog_gas_red,989,-0.17463,2e-05,0.17782,0.002,-0.13331,0.00177,0.38052,0.00307,3e-05,0.00515,0.00408,True
+104,Cambio peronismo · Diputados 2023-2025,pct_hog_garrafa_lena,989,0.18784,1e-05,0.18185,0.002,0.16498,0.00017,0.38528,0.00108,1e-05,0.00235,0.0005,True
+104,Cambio peronismo · Diputados 2023-2025,pct_hog_migrante,989,-0.16319,1e-05,0.18279,0.002,-0.15143,0.00017,0.38208,0.00098,1e-05,0.0023,0.0005,True
+104,Cambio peronismo · Diputados 2023-2025,pct_viv_rural,989,0.22115,0.0,0.16867,0.002,0.17902,0.00013,0.36635,0.00053,0.0,0.00142,0.00042,True
+104,Cambio peronismo · Diputados 2023-2025,pct_viv_desocupadas,989,0.10787,0.00276,0.18543,0.002,0.07975,0.0402,0.38599,0.04435,0.00302,0.04934,0.05137,False
+104,Cambio peronismo · Diputados 2023-2025,log_densidad,989,-0.20132,0.0,0.16867,0.002,-0.14333,0.0039,0.37058,0.00323,1e-05,0.00532,0.00748,True
+104,Cambio peronismo · Gobernador 2019-2023,pct_mujeres,991,0.15871,0.0001,0.22142,0.002,0.04599,0.26003,0.50259,0.00907,0.00015,0.01282,0.27498,False
+104,Cambio peronismo · Gobernador 2019-2023,pct_hasta_sec_incompleto,991,-0.20992,0.00011,0.23445,0.002,-0.14286,0.01137,0.49625,0.01185,0.00015,0.01598,0.01804,True
+104,Cambio peronismo · Gobernador 2019-2023,tasa_desocupacion,991,0.17518,0.0,0.23424,0.002,0.14694,0.00017,0.4909,0.00062,0.0,0.00156,0.0005,True
+104,Cambio peronismo · Gobernador 2019-2023,pct_sin_obra_social,991,-0.15691,0.00038,0.22773,0.002,-0.07877,0.08094,0.50304,0.01733,0.00049,0.02113,0.09929,False
+104,Cambio peronismo · Gobernador 2019-2023,pct_nac_otro_pais,991,0.1673,0.0,0.2214,0.002,0.08931,0.01931,0.48804,0.00102,0.0,0.00232,0.02804,True
+104,Cambio peronismo · Gobernador 2019-2023,pct_sin_aporte,991,-0.13929,0.00044,0.22759,0.002,-0.05612,0.15736,0.50256,0.01328,0.00054,0.01738,0.17442,False
+104,Cambio peronismo · Gobernador 2019-2023,pct_cuenta_propia,991,-0.10686,0.00031,0.2254,0.002,-0.05373,0.08314,0.50424,0.05136,0.00042,0.05507,0.10065,False
+104,Cambio peronismo · Gobernador 2019-2023,pct_domestico,991,-0.17116,0.0,0.2363,0.002,-0.14268,1e-05,0.49517,4e-05,0.0,0.00017,4e-05,True
+104,Cambio peronismo · Gobernador 2019-2023,pct_patron,991,-0.18733,0.0,0.21437,0.002,-0.12417,3e-05,0.48194,0.00013,0.0,0.0005,0.00013,True
+104,Cambio peronismo · Gobernador 2019-2023,pct_hog_nbi_hac,991,-0.14786,0.00526,0.23267,0.002,-0.07016,0.15101,0.50669,0.06573,0.00537,0.06648,0.1699,False
+104,Cambio peronismo · Gobernador 2019-2023,pct_hog_nbi_viv,991,0.13581,0.00448,0.2369,0.002,0.1021,0.02847,0.5071,0.0633,0.00469,0.06551,0.03796,True
+104,Cambio peronismo · Gobernador 2019-2023,pct_hog_clima_edu_bajo,991,-0.21401,0.0001,0.229,0.002,-0.10019,0.07852,0.49683,0.0184,0.00015,0.02213,0.09762,False
+104,Cambio peronismo · Gobernador 2019-2023,pct_hog_hacinamiento_critico,991,-0.14786,0.00526,0.23267,0.002,-0.07016,0.15101,0.50669,0.06573,0.00537,0.06648,0.1699,False
+104,Cambio peronismo · Gobernador 2019-2023,pct_hog_migrante,991,0.15296,1e-05,0.2268,0.002,0.08689,0.03025,0.49264,0.00329,2e-05,0.00533,0.03975,True
+104,Cambio peronismo · Gobernador 2019-2023,pct_viv_rural,991,-0.16895,2e-05,0.235,0.002,-0.13976,0.00314,0.49261,0.00359,4e-05,0.00571,0.00627,True
+104,Cambio peronismo · Gobernador 2019-2023,log_densidad,991,0.20406,0.0,0.22986,0.002,0.15397,0.00214,0.48302,0.00125,0.0,0.00251,0.0047,True
+104,Captura de LLA-PRO · Diputados 2023-2025,tasa_empleo,989,0.0977,0.00143,0.1495,0.002,0.07913,0.01533,0.34454,0.01888,0.00167,0.02218,0.02312,True
+104,Captura de LLA-PRO · Diputados 2023-2025,pct_jubilados,989,-0.29001,0.0,0.14566,0.002,-0.24957,7e-05,0.33648,0.00255,1e-05,0.00437,0.00026,True
+104,Captura de LLA-PRO · Diputados 2023-2025,pct_nac_otro_pais,989,0.15634,0.0,0.15293,0.002,0.15966,1e-05,0.34477,0.00183,1e-05,0.00339,5e-05,True
+104,Captura de LLA-PRO · Diputados 2023-2025,pct_hog_nbi_viv,989,0.24429,0.0,0.16421,0.002,0.26513,0.0,0.362,0.00044,0.0,0.00127,0.0,True
+104,Captura de LLA-PRO · Diputados 2023-2025,pct_hog_privacion,989,-0.14819,0.00579,0.15753,0.002,-0.1578,0.00341,0.35824,0.04679,0.00585,0.05079,0.00667,True
+104,Captura de LLA-PRO · Diputados 2023-2025,pct_hog_clima_edu_bajo,989,-0.15935,0.00333,0.15571,0.002,-0.15269,0.00655,0.3493,0.04536,0.00361,0.04983,0.01115,True
+104,Captura de LLA-PRO · Diputados 2023-2025,pct_hog_migrante,989,0.17097,0.0,0.15011,0.002,0.16938,1e-05,0.33832,0.00126,0.0,0.00251,4e-05,True
+104,Captura de LLA-PRO · Diputados 2023-2025,pct_viv_rural,989,-0.15722,8e-05,0.15119,0.002,-0.15307,0.00066,0.34158,0.00565,0.00012,0.00838,0.00174,True
+104,Cambio peronismo · Diputados 2011-2023,d_pct_30_44,907,-0.12286,5e-05,0.35283,0.002,-0.0876,0.0003,0.65509,0.00125,8e-05,0.00251,0.00085,True
+104,Cambio peronismo · Diputados 2011-2023,d_pct_hog_hacinamiento_critico,907,0.14428,6e-05,0.34911,0.002,0.09613,0.00116,0.65534,0.00129,9e-05,0.00251,0.00273,True
+104,Cambio peronismo · Diputados 2011-2023,d_pct_hog_propietario,907,-0.1641,0.0,0.31982,0.002,0.00136,0.96547,0.65888,0.00022,0.0,0.00075,0.96547,False
+104,Cambio peronismo · Diputados 2011-2023,d_pct_hog_computadora,907,-0.09794,0.00046,0.33733,0.002,-0.00125,0.95976,0.65831,0.01596,0.00056,0.02001,0.96547,False
+104,Cambio peronismo · Diputados 2011-2023,d_pct_materiales_malos,907,0.11882,3e-05,0.34872,0.002,0.0686,0.00567,0.65032,0.00216,5e-05,0.00376,0.01004,True
+104,Cambio peronismo · Diputados 2011-2023,d_tasa_desocupacion,907,0.13438,0.0,0.34492,0.002,0.07386,0.00437,0.64771,0.00083,0.0,0.00205,0.00804,True
+104,Cambio peronismo · Diputados 2011-2023,d_pct_hog_agua_red,907,-0.14782,0.0,0.32973,0.002,-0.04214,0.11614,0.65009,0.00056,0.0,0.00146,0.13526,False
+104,Cambio peronismo · Diputados 2011-2023,d_pct_hog_gas_red,907,-0.2751,0.0,0.31146,0.002,-0.14102,1e-05,0.6205,0.0,0.0,0.0,3e-05,True
+104,Cambio peronismo · Diputados 2011-2023,d_pct_viv_rural,907,0.17006,0.0,0.31707,0.002,0.05422,0.02116,0.64399,0.0,0.0,0.0,0.02995,True
+104,Cambio peronismo · Gobernador 2011-2023,d_pct_15_29,907,0.09298,0.00388,0.36088,0.002,0.06202,0.02408,0.64835,0.01894,0.00415,0.02218,0.03306,True
+104,Cambio peronismo · Gobernador 2011-2023,d_pct_30_44,907,-0.10576,0.00063,0.36381,0.002,-0.08375,0.00074,0.64963,0.00533,0.00076,0.00804,0.00184,True
+104,Cambio peronismo · Gobernador 2011-2023,d_pct_hog_hacinamiento_critico,907,0.13613,0.0002,0.35761,0.002,0.08715,0.00405,0.64787,0.00423,0.00028,0.0065,0.0076,True
+104,Cambio peronismo · Gobernador 2011-2023,d_pct_hog_propietario,907,-0.14702,3e-05,0.3383,0.002,-0.01096,0.73388,0.64913,0.00089,5e-05,0.00214,0.75019,False
+104,Cambio peronismo · Gobernador 2011-2023,d_pct_hog_computadora,907,-0.08907,0.00186,0.35111,0.002,-0.0105,0.67813,0.64933,0.03769,0.00214,0.04246,0.70099,False
+104,Cambio peronismo · Gobernador 2011-2023,d_pct_materiales_malos,907,0.12067,3e-05,0.35641,0.002,0.06982,0.00592,0.64312,0.0019,5e-05,0.00345,0.01028,True
+104,Cambio peronismo · Gobernador 2011-2023,d_tasa_desocupacion,907,0.10559,0.00027,0.35858,0.002,0.06195,0.0195,0.64435,0.01016,0.00038,0.01413,0.02804,True
+104,Cambio peronismo · Gobernador 2011-2023,d_pct_hog_agua_red,907,-0.16369,0.0,0.33895,0.002,-0.06732,0.01395,0.63921,0.00014,0.0,0.00051,0.02158,True
+104,Cambio peronismo · Gobernador 2011-2023,d_pct_hog_gas_red,907,-0.24659,0.0,0.33365,0.002,-0.1324,3e-05,0.62162,0.0,0.0,0.0,0.00013,True
+104,Cambio peronismo · Gobernador 2011-2023,d_pct_viv_rural,907,0.14259,0.0,0.33612,0.002,0.04115,0.0865,0.64167,5e-05,0.0,0.0002,0.10335,False
+103,Cambio LLA-PRO sep -> oct (pp del padrón),Conurbano,135,-0.4949,0.0,0.08528,0.06,-0.44715,0.0,0.22271,0.0,0.0,0.0,0.0,True
+103,Cambio LLA-PRO sep -> oct (pp del padrón),Intendente peronista (2023),135,-0.24943,0.00409,0.27429,0.002,-0.16133,0.02251,0.55663,0.00023,0.00432,0.00075,0.03138,True
+103,Cambio LLA-PRO sep -> oct (pp del padrón),Voto vecinal en concejales de septiembre (%),135,0.21971,0.00775,0.27648,0.002,0.14657,0.04135,0.55731,0.08698,0.00775,0.08698,0.05212,False
+103,Cambio LLA-PRO sep -> oct (pp del padrón),Nacidos en otro país (%),135,-0.57613,0.0,0.1428,0.014,-0.40341,0.00086,0.35484,0.01732,0.0,0.02113,0.00207,True
+103,Cambio LLA-PRO sep -> oct (pp del padrón),Extranjeros en el padrón de septiembre (%),135,-0.5149,0.0,0.13595,0.016,-0.34161,0.00249,0.35668,0.01318,0.0,0.01738,0.00521,True
+103,Cambio Fuerza Patria sep -> oct (pp del padrón),Cambio de participación (pp),135,0.34424,0.00037,0.12924,0.008,0.31398,0.00066,0.31596,1e-05,0.00048,4e-05,0.00174,True
+103,Cambio Fuerza Patria sep -> oct (pp del padrón),Intendente peronista (2023),135,-0.359,8e-05,0.13443,0.012,-0.32047,9e-05,0.32188,5e-05,0.00012,0.0002,0.00032,True
+103,Cambio Fuerza Patria sep -> oct (pp del padrón),Voto vecinal en concejales de septiembre (%),135,0.32513,0.00017,0.09749,0.022,0.27849,0.00073,0.25577,0.00038,0.00024,0.00117,0.00184,True

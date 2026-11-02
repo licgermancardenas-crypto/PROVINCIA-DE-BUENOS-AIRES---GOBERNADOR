@@ -38,7 +38,10 @@ que aparecieron al calibrarlo:
 - depende del **tamaño**: un municipio chico se aparta mucho más (σ ∝ votos^b, b ≈ −0,29);
 - depende del **régimen de oferta**: cuando entra una fuerza grande nueva (2013-2015) el ruido es
   2-3 veces mayor;
-- con oferta estable tiene **colas pesadas** (t de 5 grados).
+- con oferta estable tiene **colas pesadas** (t de 5 grados);
+- tiene **un componente común por sección** (`110`: la autocorrelación espacial de los residuos
+  se explica casi toda por la sección). El motor lo sortea aparte: shock de sección + ruido propio
+  de cada municipio, con la varianza total del municipio sin cambiar.
 Calibración: dejando un par afuera y reestimando todo sin él, ¿los intervalos cubren lo que dicen?
 
 Salidas (03_OUTPUTS/tablas/)
@@ -200,7 +203,11 @@ def main() -> None:
         r = rm[rm.regimen == reg]
         coef = np.polyfit(np.log(r.w), np.log(np.abs(r.e) + 1e-4), 1)
         esc = float(np.sqrt(np.mean((r.e / sigma_tamano(r.w.to_numpy(), coef)) ** 2)))
-        modelo.append({"regimen": reg, "a": coef[1], "b": coef[0], "escala": esc, "gl_t": df,
+        # Shock común por sección: la media ponderada del residuo de cada sección, en cada par.
+        sec = (r.assign(ew=r.e * r.w).groupby(["par", "seccion"])[["ew", "w"]].sum())
+        sec = sec.ew / sec.w
+        sd_sec = float(np.sqrt(np.mean(sec ** 2)))
+        modelo.append({"regimen": reg, "a": coef[1], "b": coef[0], "escala": esc, "gl_t": df, "sd_seccion": sd_sec,
                        "sd_10mil_votos": float(esc * sigma_tamano(np.array([1e4]), coef)[0]),
                        "sd_500mil_votos": float(esc * sigma_tamano(np.array([5e5]), coef)[0])})
         # Calibración dejando un par afuera, con todo reestimado sin ese par.
@@ -211,8 +218,16 @@ def main() -> None:
             z = np.abs(x.e / sigma_tamano(x.w.to_numpy(), cf)) / sc
             for nivel in (0.5, 0.8, 0.9, 0.95):
                 q = stats.norm.ppf(0.5 + nivel / 2) if df is None else stats.t.ppf(0.5 + nivel / 2, df) * np.sqrt((df - 2) / df)
-                cal.append({"regimen": reg, "par": par, "nivel": nivel, "cobertura": float(np.mean(z <= q)),
+                cal.append({"regimen": reg, "par": par, "nivel": nivel, "escala_cal": "municipio", "cobertura": float(np.mean(z <= q)),
                             "cobertura_ponderada": float(np.average(z <= q, weights=x.w))})
+        # Calibración del shock de sección dejando un par afuera.
+        for par in r.par.unique():
+            sd_o = float(np.sqrt(np.mean(sec.drop(index=par, level=0) ** 2)))
+            z = np.abs(sec.loc[par].to_numpy()) / sd_o
+            for nivel in (0.5, 0.8, 0.9, 0.95):
+                q = stats.norm.ppf(0.5 + nivel / 2) if df is None else stats.t.ppf(0.5 + nivel / 2, df) * np.sqrt((df - 2) / df)
+                cal.append({"regimen": reg, "par": par, "nivel": nivel, "escala_cal": "sección",
+                            "cobertura": float(np.mean(z <= q)), "cobertura_ponderada": np.nan})
     pd.DataFrame(modelo).round(5).to_csv(TABLAS / "motor_ruido_modelo.csv", index=False, encoding="utf-8")
     cal = pd.DataFrame(cal)
     cal.round(4).to_csv(TABLAS / "motor_calibracion.csv", index=False, encoding="utf-8")
@@ -223,7 +238,7 @@ def main() -> None:
     print("\nResumen por regla\n", bt.groupby(["escala", "regla"])[["mae_pp", "mae_margen_pp", "acierto_ganador"]].mean().round(3).to_string())
     print("\nRuido por par\n", rd.round(3).to_string(index=False))
     print("\nModelo de ruido\n", pd.DataFrame(modelo).round(3).to_string(index=False))
-    print("\nCalibración dejando un par afuera\n", cal.groupby(["regimen", "nivel"])[["cobertura", "cobertura_ponderada"]].mean().round(3).to_string())
+    print("\nCalibración dejando un par afuera\n", cal.groupby(["escala_cal", "regimen", "nivel"])[["cobertura", "cobertura_ponderada"]].mean().round(3).to_string())
 
 
 if __name__ == "__main__":

@@ -1039,3 +1039,70 @@ negativos chicos se llevan a cero). Perfiles: parejo (como el promedio provincia
   interior.
 - Es la palanca menos medible: es un parámetro de campaña, no un dato. La encuesta con recuerdo de
   voto y probabilidad de ir a votar es lo que la puede acotar.
+
+---
+
+## 02-11-2026 · Autocorrelación espacial (`analisis/110`)
+
+**La pregunta.** Circuitos y municipios vecinos se parecen. Si los residuos de un análisis están
+correlacionados en el espacio, los valores p que suponen independencia son optimistas, y un motor
+que sortea ruido independiente por municipio subestima la incertidumbre de las secciones (y de las
+bancas). Hasta acá nada lo tenía en cuenta, salvo el error agrupado por municipio del `101`.
+
+**Vecindad.** Polígonos que se tocan con 200 m de tolerancia: la contigüidad estricta dejaba 29
+partidos «isla» por grietas entre polígonos de la capa.
+
+### El motor
+
+Índice de Moran de los residuos municipales del backtest (`105`):
+
+| | Moran en bruto | Sin el componente de sección |
+|---|---|---|
+| Pares con oferta nueva (2011-2015) | 0,19 a 0,41 | 0,06 a 0,13 |
+| Pares con oferta estable | 0,01 a 0,22 | −0,04 a 0,14 |
+
+**La sección se lleva la mayor parte de la autocorrelación.** Queda algo entre municipios vecinos
+en los pares de Gobernador 2015 → 2019 y 2019 → 2023 (~0,13), que el modelo no captura del todo.
+
+**Cambio en el motor.** El ruido de cada municipio es ahora un shock común a su sección (desvío
+0,08 con oferta estable, 0,20 con oferta nueva; hasta el 80 % de la varianza del municipio) más un
+ruido propio, con la varianza total del municipio sin cambiar. Calibración de la parte de sección
+dejando un par afuera: 58 / 82 / 85 / 90 % de cobertura para 50 / 80 / 90 / 95 % con oferta
+estable, algo corta en las colas.
+
+**Lo que cambió en los resultados** (se volvieron a correr `106`-`109`):
+
+- La provincia no cambia (el ruido redistribuye, no mueve el total): octubre se repite, 59 %
+  (antes 57 %); el resto de los escenarios, ±1 punto de probabilidad.
+- Las secciones son más inciertas: con empate provincial la 1ª es peronista en el 72 % de las
+  simulaciones (antes 92 %); la 8ª en el 11 % (antes 8 %), y llega al 55 % con +4 de margen.
+  Municipios peronistas con empate: 40, rango 35-46 (antes 36-44).
+- Legislatura: con octubre, el peronismo tiene mayoría propia en el Senado en el 25 % de las
+  simulaciones (antes 15 %); en Diputados 41 de 92 (antes 40). Las conclusiones no cambian.
+
+### Los hallazgos
+
+Cada prueba se rehízo como regresión en rangos (equivalente al Spearman parcial) con dos
+correcciones: error agrupado por municipio y **modelo de error espacial** (SEM, máxima
+verosimilitud). Benjamini-Hochberg sobre las 92 pruebas.
+
+| Análisis | Pruebas | Moran mediano de los residuos | Sobreviven al SEM |
+|---|---|---|---|
+| `101` Conurbano (por circuito) | 3 | 0,28 | 3 |
+| `104` territorio y cambio (por circuito) | 81 | 0,21 | 61 |
+| `103` desdoblamiento (por municipio) | 8 | 0,14 | 7 |
+
+- **`101`**: el efecto Conurbano sigue en pie: +3,4 a +5,9 pp con SEM, contra +4,7 a +6,5 sin
+  corregir (λ ≈ 0,55).
+- **`104`**: sobreviven las lecturas principales (el gas de red y el peronismo 2011-2023; la
+  participación 2023-2025 por ruralidad y educación; jubilados y ruralidad en el peronismo
+  2023-2025; todo lo de la captura de LLA-PRO). Caen el cambio en vivienda propia y computadora
+  2011-2023, el agua de red en Diputados y varias correlaciones débiles. Los efectos con SEM son,
+  en general, la mitad.
+- **`103`**: se sostiene todo salvo voto vecinal → LLA-PRO, que queda en el borde (q = 0,052).
+
+`HALLAZGOS.md` tiene la sección 7 nueva y las filas corregidas.
+
+Movilización (`109`) con el ruido nuevo: desde octubre y derecha unida, de −3,7 (como 2021 → 2023)
+a +5,4 (vuelven los que se fueron en 2023 → 2025); retorno 2023, −0,2. Diferencias de ±0,2 con la
+corrida anterior.

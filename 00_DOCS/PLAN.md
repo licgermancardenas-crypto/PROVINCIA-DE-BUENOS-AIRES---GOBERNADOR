@@ -69,6 +69,7 @@ entran como parámetro. Legislatura por sección electoral con cociente.
 | 4.3 | Derecha dividida (LLA y PRO por separado, patrón de 2023) | ✅ `analisis/107` |
 | 4.4 | Legislatura 2027 por sección (cociente y renovación por mitades) | ✅ `analisis/108` |
 | 4.5 | Movilización diferencial: quién va a votar, no sólo cuántos (perfil del votante marginal como parámetro) | ✅ `analisis/109` |
+| 4.6 | Autocorrelación espacial: ruido por sección en el motor y hallazgos con modelo de error espacial | ✅ `analisis/110` |
 
 ## Etapa 5 · Productos
 

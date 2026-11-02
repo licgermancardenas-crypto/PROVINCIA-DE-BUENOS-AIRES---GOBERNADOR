@@ -78,6 +78,8 @@ def main() -> None:
         pd.DataFrame(filas).round(3).to_csv(TABLAS / "motor_2027_dividida_escenarios.csv", index=False, encoding="utf-8")
         pd.DataFrame(muni).round(3).to_csv(TABLAS / "motor_2027_dividida_municipio.csv", index=False, encoding="utf-8")
 
+    if "--sin-grilla" in sys.argv:
+        return
     # Grilla: margen del peronismo sobre la derecha unida (base octubre) × parte del PRO.
     grilla = []
     tot = S_oct[0] + S_oct[1]
