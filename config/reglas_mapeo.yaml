@@ -70,8 +70,9 @@ reglas:
      motivo: "Sabbatella 2011: lista propia a gobernador, colectora de Cristina a presidente"}
 
   # ============ tercera vía =======================================================================
-  - {patron: "UNION PARA EL DESARROLLO SOCIAL", cargos: "GOBERNADOR|DIPUTADO.*PROVINCIAL|SENADOR.*PROVINCIAL", espacio: TERCERA_VIA,
-     ambiguo: true, alternativas: [CENTRO_UCR], motivo: "D6 · UDESO 2011: De Narváez a gobernador, Alfonsín (UCR) a presidente"}
+  - {patron: "UNION PARA EL DESARROLLO SOCIAL", cargos: "GOBERNADOR|DIPUTADO.*PROVINCIAL|SENADOR.*PROVINCIAL|INTENDENTE|CONCEJAL|CONSEJERO",
+     espacio: TERCERA_VIA, ambiguo: true, alternativas: [CENTRO_UCR],
+     motivo: "D6 · UDESO 2011: De Narváez a gobernador, Alfonsín (UCR) a presidente. Lo municipal va con la boleta provincial"}
   - {patron: "UNION PARA EL DESARROLLO SOCIAL", espacio: CENTRO_UCR, ambiguo: true, alternativas: [TERCERA_VIA],
      motivo: "D6 · UDESO 2011 en categorías nacionales: la encabeza la UCR"}
   - {patron: "FRENTE RENOVADOR|UNIDOS POR UNA NUEVA ALTERNATIVA|^1 ?PAIS$|CONSENSO FEDERAL|HACEMOS POR NUESTRO PAIS|VAMOS CON VOS|COMPROMISO FEDERAL|^(ALIANZA )?FRENTE POPULAR$|UNIDOS POR LA LIBERTAD Y EL TRABAJO|PARTIDO RENOVADOR FEDERAL|^RENOVADOR FEDERAL$",

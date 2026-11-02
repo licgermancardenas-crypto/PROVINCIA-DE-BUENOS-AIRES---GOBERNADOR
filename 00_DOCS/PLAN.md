@@ -40,9 +40,10 @@ desdoblada de septiembre 2025 y la nacional de octubre 2025.
 
 Cada pregunta con su batería, los tres filtros y su tabla. Primeras candidatas:
 
-- **Arrastre del intendente**: ¿cuánto mueve un intendente propio el voto a Gobernador? Hay
-  Intendente y Gobernador por mesa en 2011, 2015, 2019 y 2023: el corte de boleta es medible.
-- **Conurbano contra interior**: ¿es una sola elección o dos?
+- ✅ **Arrastre del intendente** (`analisis/100`): ganar la intendencia no mueve el voto a
+  Gobernador siguiente (efecto 0, IC ±4 pp) aunque sí el de Intendente (+7 pp). El arrastre va
+  de arriba hacia abajo. Ver bitácora y `HALLAZGOS.md`.
+- **Conurbano contra interior**: ¿es una sola elección o dos? ← próximo
 - **Retención y transferencia 2023 → 2025** (Kicillof → Fuerza Patria; JxC → LLA), con
   inferencia ecológica por circuito.
 - **Desdoblamiento**: septiembre contra octubre 2025, mismo año, dos padrones, dos resultados.

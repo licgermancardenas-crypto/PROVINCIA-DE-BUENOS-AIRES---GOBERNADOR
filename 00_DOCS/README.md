@@ -373,3 +373,88 @@ Lo que queda en 2011 es crecimiento real entre 2011 y 2022.
 `geo/circuitos_estables.gpkg` (una capa por ventana; 7 códigos sin polígono quedan dentro del CE
 pero no en el mapa), `03_OUTPUTS/tablas/circuitos_uniones_motivos.csv` (cada unión con su motivo)
 y `control_circuitos_estables.csv`.
+
+---
+
+## 01-11-2026 · Arrastre del intendente y corte de boleta (`analisis/100`)
+
+Primer análisis de la etapa 3. Intendente y Gobernador se votan el mismo día en 2007, 2011,
+2015, 2019 y 2023, con **boleta partidaria de papel**: votar distinto exige cortar la boleta con la
+mano, así que la diferencia es una decisión con costo, y todo lo que se mide es un piso (los
+cortes en direcciones opuestas se cancelan en el agregado).
+
+### La pregunta: ¿un intendente propio suma votos a Gobernador?
+
+**No se detecta.** Regresión discontinua: municipios donde un espacio ganó la intendencia por poco
+contra municipios donde la perdió por poco, y su voto a Gobernador en la elección siguiente
+(desvío respecto de su resultado provincial, efectos fijos de espacio × transición, error
+agrupado por municipio). Peronismo y PRO/JxC, transiciones 2007→2011 a 2019→2023.
+
+| Banda de margen | Casos | Efecto sobre Gobernador (pp) | IC 95 % | Placebo: Gobernador anterior | Referencia: Intendente siguiente |
+|---|---|---|---|---|---|
+| ±7,5 pp | 199 | +0,4 | −4,2 a +5,0 | −0,7 | **+9,1** (p < 0,01) |
+| ±10 pp | 267 | −0,2 | −4,4 a +4,0 | −1,0 | **+7,4** (p < 0,01) |
+| ±15 pp | 374 | −0,1 | −3,6 a +3,5 | −0,5 | **+6,6** (p = 0,01) |
+
+- **El diseño funciona:** el placebo no salta, ganadores y perdedores por poco están parejos (96
+  contra 103 en ±7,5 pp) y el mismo método sí detecta la ventaja del oficialismo en su propia
+  categoría.
+- **La ventaja del intendente se queda en el intendente.** Gobernar el municipio da +7 a +9 pp en
+  la elección siguiente de Intendente (peronismo +10,6, q = 0,002; PRO/JxC sin efecto medible) y
+  nada medible en Gobernador. Un efecto de más de 4 pp queda descartado.
+- Benjamini-Hochberg sobre las 60 pruebas (4 resultados × 5 bandas × 3 grupos): sólo sobreviven
+  los efectos en Intendente.
+
+### La brecha: el arrastre va de arriba hacia abajo
+
+Brecha media Intendente − Gobernador de cada espacio, donde compite en las dos (pp):
+
+| | Conurbano | Interior |
+|---|---|---|
+| 2007 Peronismo (Scioli) | −7,3 | −4,3 |
+| 2011 Peronismo (Scioli) | −8,2 | −6,7 |
+| 2015 Cambiemos (Vidal) | −5,7 | −7,1 |
+| 2015 Peronismo (Aníbal Fernández) | +1,7 | +6,4 |
+| 2023 LLA (Píparo) | −2,9 | −8,8 |
+| 2023 Peronismo (Kicillof) | +1,0 | +3,6 |
+| 2023 JxC (Santilli) | +1,7 | +5,0 |
+
+Cuando el candidato a gobernador es fuerte, sus intendentes sacan menos que él (Scioli, Vidal).
+Cuando es débil, o el espacio no tiene estructura local (LLA 2023), los intendentes retienen por
+encima. El intendente que gana saca más que su gobernador en el 87 % de los municipios en 2023
+(mediana +6,9 pp), contra el 54 % en 2011.
+
+### El corte de boleta, por circuito
+
+Índice 0,5 · Σ |%int − %gob|, **pareado**: sólo espacios con lista en las dos categorías del
+municipio, renormalizados. El bruto suma la oferta desigual, sobre todo vecinalismos sin
+candidato a gobernador. Mediana por circuito:
+
+| | 2011 | 2015 | 2019 | 2023 |
+|---|---|---|---|---|
+| Conurbano | 6,2 | 5,5 | 3,7 | 3,1 |
+| Interior | 7,6 | 9,5 | 4,5 | 8,8 |
+
+En el Conurbano el corte baja en todas las elecciones. En el interior sube con terceras fuerzas
+fuertes (Frente Renovador 2015, LLA 2023). En 25 municipios (2023) Intendente y Gobernador los
+ganó un espacio distinto; en 2015 fueron 51.
+
+### Dos trampas que casi se publican
+
+1. **UDESO 2011.** La regla D6 la mandaba a Tercera vía sólo en Gobernador y Legislatura; en
+   Intendente caía en Centro/UCR. Como iban en la misma boleta de papel, eso fabricaba un corte
+   de boleta de 12 puntos en 2011 (mediana 19,4 contra 7,3 corregido). D6 se amplió: lo municipal
+   va con la boleta provincial. **A validar por Germán.**
+2. **Ofertas con 0 votos.** El definitivo de la Provincia lista partidos con 0 votos en municipios
+   donde no compiten. Contados como oferta, escondían a los 25 intendentes vecinales ganadores de
+   2007 (Acción Marplatense, Nuevo Morón, San Isidro es Distinto…).
+
+### Lo que no dice
+
+- Mide el efecto de que **el espacio** gobierne el municipio, no el de un intendente con nombre
+  propio: no hay base de quién fue candidato a reelección.
+- Vale para municipios competitivos (margen de ±10 pp), no para los de 70 %.
+- PRO/JxC tiene pocos casos (92 en ±10 pp): su estimación es imprecisa.
+
+**Para el motor 2027:** el arrastre de la intendencia no entra como parámetro; sí la brecha
+intendente-gobernador, que depende de la fuerza relativa del candidato provincial.

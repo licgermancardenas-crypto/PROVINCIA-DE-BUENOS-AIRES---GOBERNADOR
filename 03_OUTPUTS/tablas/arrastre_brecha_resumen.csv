@@ -1,0 +1,16 @@
+anio,zona,municipios,ganador_vecinal_sin_gobernador,brecha_mediana_ganador,brecha_media_ganador,pct_ganador_saca_mas_que_su_gobernador,corte_que_cambia_ganador
+2007,Conurbano,24,7,-1.2,-2.0,41.2,7
+2007,Interior,110,18,5.7,4.9,69.6,38
+2007,Provincia,134,25,5.4,3.8,65.1,45
+2011,Conurbano,24,2,-3.4,-1.4,36.4,4
+2011,Interior,111,11,1.6,2.7,58.0,33
+2011,Provincia,135,13,1.1,2.0,54.1,37
+2015,Conurbano,24,0,2.8,3.0,75.0,6
+2015,Interior,111,7,2.1,4.6,58.7,45
+2015,Provincia,135,7,2.6,4.3,61.7,51
+2019,Conurbano,24,0,0.8,0.8,62.5,3
+2019,Interior,111,3,5.2,5.0,79.6,28
+2019,Provincia,135,3,4.5,4.3,76.5,31
+2023,Conurbano,24,0,1.9,3.4,66.7,2
+2023,Interior,111,4,7.5,8.4,91.6,23
+2023,Provincia,135,4,6.9,7.5,87.0,25

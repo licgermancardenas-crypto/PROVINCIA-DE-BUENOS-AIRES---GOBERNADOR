@@ -1,0 +1,13 @@
+anio,zona,circuitos,corte_bruto_mediana,corte_pareado_mediana,corte_pareado_ponderado,corte_pareado_p90
+2011,Conurbano,230,12.28,6.16,8.51,16.73
+2011,Interior,847,12.2,7.55,10.96,20.33
+2011,Provincia,1077,12.21,7.3,9.52,19.28
+2015,Conurbano,229,5.95,5.52,6.29,14.32
+2015,Interior,834,11.28,9.54,9.9,21.3
+2015,Provincia,1063,10.2,8.64,7.78,19.82
+2019,Conurbano,233,4.02,3.72,4.43,12.46
+2019,Interior,889,6.69,4.52,6.28,14.89
+2019,Provincia,1122,5.98,4.35,5.19,14.2
+2023,Conurbano,237,3.07,3.07,4.57,11.55
+2023,Interior,804,10.74,8.76,9.26,16.14
+2023,Provincia,1041,9.26,7.47,6.52,15.14
