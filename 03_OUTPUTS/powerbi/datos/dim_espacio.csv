@@ -1,10 +1,10 @@
-﻿espacio,espacio_nombre
-PERONISMO,Peronismo
-PRO_JXC,PRO / JxC
-LLA,La Libertad Avanza
-LLA_PRO,LLA + PRO
-CENTRO_UCR,UCR / centro
-TERCERA_VIA,Tercera vía
-IZQUIERDA,Izquierda
-VECINAL,Vecinalismo
-OTROS,Otros
+espacio,espacio_nombre,color,logo_url,orden
+PERONISMO,Peronismo,#29A3F0,https://commons.wikimedia.org/wiki/Special:FilePath/Logo_de_%22Fuerza_Patria%22.jpg?width=300,0
+PRO_JXC,PRO / JxC,#F5C518,https://commons.wikimedia.org/wiki/Special:FilePath/Juntos-Por-El-Cambio-Logo.svg?width=300,1
+LLA,La Libertad Avanza,#9B4DFF,https://commons.wikimedia.org/wiki/Special:FilePath/Logo_La_Libertad_Avanza_(sin_%C3%A1guila).svg?width=300,2
+LLA_PRO,LLA + PRO,#7E57FF,https://commons.wikimedia.org/wiki/Special:FilePath/Logo_La_Libertad_Avanza_(sin_%C3%A1guila).svg?width=300,3
+CENTRO_UCR,UCR / centro,#E94F4F,,4
+TERCERA_VIA,Tercera vía,#FF6FB5,https://commons.wikimedia.org/wiki/Special:FilePath/Logo_Somos_Buenos_Aires.jpg?width=300,5
+IZQUIERDA,Izquierda,#C2185B,https://commons.wikimedia.org/wiki/Special:FilePath/Logo_Frente_de_Izquierda_y_de_Trabajadores-Unidad.svg?width=300,6
+VECINAL,Vecinalismo,#2FC4A6,,7
+OTROS,Otros,#8D86A6,,8

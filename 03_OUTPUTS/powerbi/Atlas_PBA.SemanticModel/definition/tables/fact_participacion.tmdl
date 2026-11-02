@@ -1,0 +1,84 @@
+table fact_participacion
+	lineageTag: b8c8c3b3-5449-581a-a59a-283b4825c48e
+
+	column eleccion
+		dataType: string
+		isHidden
+		lineageTag: ce04e823-ab83-52ca-bce9-7f441834f52a
+		summarizeBy: none
+		sourceColumn: eleccion
+
+		annotation SummarizationSetBy = Automatic
+
+	column cod_indec
+		dataType: string
+		isHidden
+		lineageTag: 5ebcb8a6-f98b-5f17-b589-aa127c92a6ef
+		summarizeBy: none
+		sourceColumn: cod_indec
+
+		annotation SummarizationSetBy = Automatic
+
+	column votos_positivos
+		dataType: int64
+		formatString: #,0
+		lineageTag: e2e6958e-ac5a-5371-9ce3-4bd5048e87f3
+		summarizeBy: sum
+		sourceColumn: votos_positivos
+
+		annotation SummarizationSetBy = Automatic
+
+	column electores
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 02eb3aab-eb1b-5239-a88f-4d90f7107736
+		summarizeBy: sum
+		sourceColumn: electores
+
+		annotation SummarizationSetBy = Automatic
+
+	column participacion
+		dataType: double
+		formatString: #,0.0
+		lineageTag: b7b0e7df-3934-5dc9-9069-324318ef6a56
+		summarizeBy: none
+		sourceColumn: participacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column ganador
+		dataType: string
+		lineageTag: 10b6ecae-729e-5bd1-bac7-517a0ab6bed2
+		summarizeBy: none
+		sourceColumn: ganador
+
+		annotation SummarizationSetBy = Automatic
+
+	column margen
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 6a8ff48c-ea9b-5184-a159-24055898e543
+		summarizeBy: none
+		sourceColumn: margen
+
+		annotation SummarizationSetBy = Automatic
+
+	column ganador_nombre
+		dataType: string
+		lineageTag: 9e0d4ac4-5b1b-56bc-b44c-15dd2879d735
+		summarizeBy: none
+		sourceColumn: ganador_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_participacion = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(CarpetaDatos & "fact_participacion.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"eleccion", type text}, {"cod_indec", type text}, {"votos_positivos", Int64.Type}, {"electores", type number}, {"participacion", type number}, {"ganador", type text}, {"margen", type number}, {"ganador_nombre", type text}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

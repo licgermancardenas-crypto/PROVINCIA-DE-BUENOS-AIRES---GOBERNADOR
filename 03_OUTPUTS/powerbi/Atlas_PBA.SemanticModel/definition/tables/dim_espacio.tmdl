@@ -1,0 +1,58 @@
+table dim_espacio
+	lineageTag: fa1a0fa8-db56-5eb4-9bd9-61f8e29225da
+
+	column espacio
+		dataType: string
+		lineageTag: cdb54236-976f-5b18-ad11-01b631295d07
+		summarizeBy: none
+		sourceColumn: espacio
+
+		annotation SummarizationSetBy = Automatic
+
+	column espacio_nombre
+		dataType: string
+		lineageTag: b20358ca-4ecb-582c-b4b5-2a15b8fb5337
+		summarizeBy: none
+		sourceColumn: espacio_nombre
+		sortByColumn: orden
+
+		annotation SummarizationSetBy = Automatic
+
+	column color
+		dataType: string
+		isHidden
+		lineageTag: 1c7ee4fd-6284-58c2-881c-b5d31936a773
+		summarizeBy: none
+		sourceColumn: color
+
+		annotation SummarizationSetBy = Automatic
+
+	column logo_url
+		dataType: string
+		dataCategory: ImageUrl
+		lineageTag: fd7acff5-2806-5007-bad1-34c539e3b511
+		summarizeBy: none
+		sourceColumn: logo_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column orden
+		dataType: int64
+		isHidden
+		lineageTag: 6f0e8e29-af43-5c26-9cc5-1c70a9abc674
+		summarizeBy: none
+		sourceColumn: orden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_espacio = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_espacio.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"espacio", type text}, {"espacio_nombre", type text}, {"color", type text}, {"logo_url", type text}, {"orden", Int64.Type}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

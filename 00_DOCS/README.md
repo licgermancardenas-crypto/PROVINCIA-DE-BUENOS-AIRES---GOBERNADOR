@@ -1256,3 +1256,31 @@ margen por escenario), la lámina de escenarios, Legislatura, lo que no se sostu
 Escenarios y bancas se leen de las tablas del motor; el resto sigue a `HALLAZGOS.md`. El PDF se
 renderiza con Chrome headless desde %TEMP% (la lámina va incrustada) y el script controla que el PDF
 tenga tantas páginas como hojas el HTML.
+
+---
+
+## 02-11-2026 · Tablero electoral: web y Power BI (`etl/12`, `productos/p04`-`p06`)
+
+**Intendentes.** `etl/12` lee de Wikipedia la tabla de intendentes electos en 2023 (135; 84 UxP,
+47 JxC, 4 vecinales, igual al resumen del artículo) y baja de Wikimedia Commons las fotos con
+licencia libre (29) y los logos de las fuerzas (dominio público / CC0). El intendente **en
+ejercicio** sale de `municipios_ma` (octubre 2026, con titular / interino): en 18 municipios no
+coincide con el electo, y ahí no se muestra foto para no poner la cara de otro.
+
+**Datos (`p04`).** Una sola exportación para los dos productos: municipios (censo 2022 agregado,
+barrios populares, escuelas, salud, gestión fiscal, seguridad), 17 elecciones 2007-2025 por
+municipio (% por espacio, ganador, margen, participación), escenarios del motor 2027, 1.146
+circuitos con voto y censo, 21.000 escuelas y 3.000 centros de salud.
+
+**Web (`p05`, publicado como artefacto).** Cuatro páginas (Territorio político, Elecciones, Censo y
+gestión, Escenarios 2027); mapa con zoom por municipio o circuito, seis capas, escuelas y salud;
+filtros encadenados (sección, zona, fuerza del intendente, elección, fuerza a medir); ficha con
+foto, logo, situación y enlaces; KPIs y gráficos que filtran el mapa. Revisado en escritorio y en
+390 px.
+
+**Power BI (`p06`).** Proyecto PBIP: modelo TMDL (7 tablas desde los CSV con un parámetro de
+carpeta, 7 relaciones, 30 medidas DAX) y reporte PBIR de 4 páginas y 75 visuales con navegación
+por botones, tema Atlas Analytics, tablas con foto y logo, hipervínculos y mapas de formas sobre un
+TopoJSON propio de los 135 municipios. Los 84 JSON del reporte validan contra los esquemas públicos
+de Microsoft; el TMDL no tiene validador público. Pendiente: abrirlo en Power BI Desktop y cargar el
+TopoJSON en cada mapa de formas (`03_OUTPUTS/powerbi/LEEME_POWERBI.md`).

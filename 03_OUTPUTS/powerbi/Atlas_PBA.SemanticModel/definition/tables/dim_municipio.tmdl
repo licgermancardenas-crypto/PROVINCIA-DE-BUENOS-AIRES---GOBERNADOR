@@ -1,0 +1,459 @@
+table dim_municipio
+	lineageTag: ec7f6bc8-4546-5024-bcdb-3b3d3341acff
+
+	column cod_indec
+		dataType: string
+		lineageTag: d1e0c01a-c08c-5c26-a937-287f03048ec0
+		summarizeBy: none
+		sourceColumn: cod_indec
+
+		annotation SummarizationSetBy = Automatic
+
+	column municipio
+		dataType: string
+		lineageTag: 06ea34a5-dd82-5e60-9402-135987f0e424
+		summarizeBy: none
+		sourceColumn: municipio
+
+		annotation SummarizationSetBy = Automatic
+
+	column seccion
+		dataType: string
+		lineageTag: d3c6d557-0003-5cd0-ac4c-a080bcb18c24
+		summarizeBy: none
+		sourceColumn: seccion
+		sortByColumn: seccion_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column seccion_num
+		dataType: int64
+		lineageTag: bcb6bfd0-b4f3-5c66-86f0-2ac31640c6c3
+		summarizeBy: none
+		sourceColumn: seccion_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column zona
+		dataType: string
+		lineageTag: 968a1920-d5c6-58f0-b001-8873db035ef1
+		summarizeBy: none
+		sourceColumn: zona
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: 7791fb18-8b5b-5933-8a9c-de7ce1b2a638
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column pob
+		dataType: int64
+		formatString: #,0
+		lineageTag: 037af3c9-0ef4-597b-bcb4-fdf0867330e0
+		summarizeBy: sum
+		sourceColumn: pob
+
+		annotation SummarizationSetBy = Automatic
+
+	column pob26
+		dataType: int64
+		formatString: #,0
+		lineageTag: abd0b75b-d6fd-5155-9fe6-eedb22fb81ee
+		summarizeBy: sum
+		sourceColumn: pob26
+
+		annotation SummarizationSetBy = Automatic
+
+	column km2
+		dataType: double
+		formatString: #,0.0
+		lineageTag: ff657e65-21f5-5cc8-9201-7580910639a5
+		summarizeBy: sum
+		sourceColumn: km2
+
+		annotation SummarizationSetBy = Automatic
+
+	column dens
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 6f3a9cf7-0a64-581b-bde8-d9508f06d5c3
+		summarizeBy: none
+		sourceColumn: dens
+
+		annotation SummarizationSetBy = Automatic
+
+	column hogares
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 25129758-5b57-5a4c-8119-001bc475a29f
+		summarizeBy: sum
+		sourceColumn: hogares
+
+		annotation SummarizationSetBy = Automatic
+
+	column agua
+		dataType: double
+		formatString: #,0.0
+		lineageTag: de347302-cf0b-5587-a8ad-da35872e81e8
+		summarizeBy: none
+		sourceColumn: agua
+
+		annotation SummarizationSetBy = Automatic
+
+	column cloaca
+		dataType: double
+		formatString: #,0.0
+		lineageTag: fc498cad-7552-5d70-aaca-ae5cd9dc8f80
+		summarizeBy: none
+		sourceColumn: cloaca
+
+		annotation SummarizationSetBy = Automatic
+
+	column gas
+		dataType: double
+		formatString: #,0.0
+		lineageTag: ab4e945f-cdd1-54b3-9aab-2faad8beb1a2
+		summarizeBy: none
+		sourceColumn: gas
+
+		annotation SummarizationSetBy = Automatic
+
+	column nbi
+		dataType: double
+		formatString: #,0.0
+		lineageTag: d8d9b1d2-be25-5043-a0a0-f17f4fd9e66a
+		summarizeBy: none
+		sourceColumn: nbi
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_univ
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 1ea89543-4344-5724-8b2e-223f69c4eb2a
+		summarizeBy: none
+		sourceColumn: pct_univ
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_65
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 496c295f-88da-560e-9e13-be1a3fbdb3c2
+		summarizeBy: none
+		sourceColumn: pct_65
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_18_29
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 4515a7bf-28b4-50a1-bcd2-a5fee57ee8d2
+		summarizeBy: none
+		sourceColumn: pct_18_29
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_extranjeros
+		dataType: double
+		formatString: #,0.0
+		lineageTag: a7440e53-b4eb-57d5-8661-7af2dff28a53
+		summarizeBy: none
+		sourceColumn: pct_extranjeros
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_internet
+		dataType: double
+		formatString: #,0.0
+		lineageTag: f371af88-403b-58e9-98f5-d654558addd8
+		summarizeBy: none
+		sourceColumn: pct_internet
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_sin_obra_social
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 4bae0ee6-e71c-5846-a3a2-d63fe73b8e22
+		summarizeBy: none
+		sourceColumn: pct_sin_obra_social
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_barrio_popular
+		dataType: double
+		formatString: #,0.0
+		lineageTag: d26f5d5b-c0d0-5570-b630-121fe5baf5b0
+		summarizeBy: none
+		sourceColumn: pct_barrio_popular
+
+		annotation SummarizationSetBy = Automatic
+
+	column barrios_populares
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 7a9f3786-7fcf-5283-9e06-4810af91a0b4
+		summarizeBy: sum
+		sourceColumn: barrios_populares
+
+		annotation SummarizationSetBy = Automatic
+
+	column escuelas
+		dataType: double
+		formatString: #,0.0
+		lineageTag: c68802c5-41eb-5feb-b363-a47eda0eabf3
+		summarizeBy: sum
+		sourceColumn: escuelas
+
+		annotation SummarizationSetBy = Automatic
+
+	column matricula
+		dataType: double
+		formatString: #,0.0
+		lineageTag: db1e2907-4a3a-5efc-af4f-33a0534e7f98
+		summarizeBy: sum
+		sourceColumn: matricula
+
+		annotation SummarizationSetBy = Automatic
+
+	column centros_salud
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 09f87d49-510e-5b78-a816-172067fcc8dc
+		summarizeBy: sum
+		sourceColumn: centros_salud
+
+		annotation SummarizationSetBy = Automatic
+
+	column caps
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 4b0c20c7-0db4-5ad1-96d0-bf442ce4e76a
+		summarizeBy: sum
+		sourceColumn: caps
+
+		annotation SummarizationSetBy = Automatic
+
+	column transferencias_hab
+		dataType: int64
+		formatString: #,0
+		lineageTag: 3ea73f66-24a9-5935-b642-35223c0a4d99
+		summarizeBy: none
+		sourceColumn: transferencias_hab
+
+		annotation SummarizationSetBy = Automatic
+
+	column gasto_hab
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 6220082d-6ebe-5f63-b8b6-6fdb9a3fc122
+		summarizeBy: none
+		sourceColumn: gasto_hab
+
+		annotation SummarizationSetBy = Automatic
+
+	column transparencia_asap
+		dataType: int64
+		formatString: #,0
+		lineageTag: fd6dd45a-49fc-5dfb-96c2-fa48ef44cf95
+		summarizeBy: none
+		sourceColumn: transparencia_asap
+
+		annotation SummarizationSetBy = Automatic
+
+	column semaforo
+		dataType: string
+		lineageTag: 4422810e-3a69-5ea7-b00a-38e3b8cde6b6
+		summarizeBy: none
+		sourceColumn: semaforo
+
+		annotation SummarizationSetBy = Automatic
+
+	column tasa_homicidios
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 92bcad32-bbe6-5d87-bf45-40040e58def4
+		summarizeBy: none
+		sourceColumn: tasa_homicidios
+
+		annotation SummarizationSetBy = Automatic
+
+	column mortalidad_infantil
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 354e407d-f7ee-57d9-8fd1-a4aa06482f05
+		summarizeBy: none
+		sourceColumn: mortalidad_infantil
+
+		annotation SummarizationSetBy = Automatic
+
+	column intendente
+		dataType: string
+		lineageTag: 2f87dd67-f185-560d-9c11-9a72df806312
+		summarizeBy: none
+		sourceColumn: intendente
+
+		annotation SummarizationSetBy = Automatic
+
+	column intendente_espacio
+		dataType: string
+		lineageTag: 8679bceb-e5c3-5d84-8333-146b777a6784
+		summarizeBy: none
+		sourceColumn: intendente_espacio
+
+		annotation SummarizationSetBy = Automatic
+
+	column fuerza_intendente
+		dataType: string
+		lineageTag: 52e3358f-2cc7-54d1-a1b8-e7aa5ab0b8b8
+		summarizeBy: none
+		sourceColumn: fuerza_intendente
+		sortByColumn: orden_fuerza
+
+		annotation SummarizationSetBy = Automatic
+
+	column intendente_partido
+		dataType: string
+		lineageTag: 01918999-8f13-5bbc-8a8c-c2e998ae6a0a
+		summarizeBy: none
+		sourceColumn: intendente_partido
+
+		annotation SummarizationSetBy = Automatic
+
+	column intendente_situacion
+		dataType: string
+		lineageTag: 61bbcef7-e14c-531d-bc22-df55f1fa5f69
+		summarizeBy: none
+		sourceColumn: intendente_situacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column intendente_desde
+		dataType: string
+		lineageTag: 704f6ac2-6e92-5b45-9067-6f9a27844b85
+		summarizeBy: none
+		sourceColumn: intendente_desde
+
+		annotation SummarizationSetBy = Automatic
+
+	column electo_2023
+		dataType: string
+		lineageTag: c5236572-8a5e-5c3c-a600-32020d32f422
+		summarizeBy: none
+		sourceColumn: electo_2023
+
+		annotation SummarizationSetBy = Automatic
+
+	column electo_partido_2023
+		dataType: string
+		lineageTag: edff3c3a-bf8f-5ad9-9d93-58497628e518
+		summarizeBy: none
+		sourceColumn: electo_partido_2023
+
+		annotation SummarizationSetBy = Automatic
+
+	column electo_alianza_2023
+		dataType: string
+		lineageTag: 4f3f7df6-531f-5af4-b701-c8a01be284ad
+		summarizeBy: none
+		sourceColumn: electo_alianza_2023
+
+		annotation SummarizationSetBy = Automatic
+
+	column reelecto_2023
+		dataType: boolean
+		lineageTag: 887849dc-5ac2-567f-a07f-3a940d2966b8
+		summarizeBy: none
+		sourceColumn: reelecto_2023
+
+		annotation SummarizationSetBy = Automatic
+
+	column foto_url
+		dataType: string
+		dataCategory: ImageUrl
+		lineageTag: c3fd1af3-9f7b-5350-8a23-3678710b1a80
+		summarizeBy: none
+		sourceColumn: foto_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column foto_credito
+		dataType: string
+		lineageTag: f2ed74a1-0924-55d7-b344-788577979109
+		summarizeBy: none
+		sourceColumn: foto_credito
+
+		annotation SummarizationSetBy = Automatic
+
+	column wikipedia_url
+		dataType: string
+		dataCategory: WebUrl
+		lineageTag: 736d8e00-494d-5fdc-9de1-9ff3b854644c
+		summarizeBy: none
+		sourceColumn: wikipedia_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column ubicacion
+		dataType: string
+		dataCategory: Place
+		isHidden
+		lineageTag: 3288099d-baa1-5e24-9766-57aef27589a2
+		summarizeBy: none
+		sourceColumn: ubicacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column simulador_url
+		dataType: string
+		dataCategory: WebUrl
+		isHidden
+		lineageTag: 8c177d54-7fbc-5b75-9bcc-e37549754c37
+		summarizeBy: none
+		sourceColumn: simulador_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column color_fuerza
+		dataType: string
+		isHidden
+		lineageTag: ad9b4bff-5e72-56c2-908c-0d59c6f2526f
+		summarizeBy: none
+		sourceColumn: color_fuerza
+
+		annotation SummarizationSetBy = Automatic
+
+	column logo_url
+		dataType: string
+		dataCategory: ImageUrl
+		lineageTag: c06a8c4f-395f-5a02-b595-e1acc5de7d98
+		summarizeBy: none
+		sourceColumn: logo_url
+
+		annotation SummarizationSetBy = Automatic
+
+	column orden_fuerza
+		dataType: int64
+		isHidden
+		lineageTag: 15ef5ec9-bd02-5035-8528-ad33143321ae
+		summarizeBy: none
+		sourceColumn: orden_fuerza
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_municipio = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_municipio.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"cod_indec", type text}, {"municipio", type text}, {"seccion", type text}, {"seccion_num", Int64.Type}, {"zona", type text}, {"region", type text}, {"pob", Int64.Type}, {"pob26", Int64.Type}, {"km2", type number}, {"dens", type number}, {"hogares", type number}, {"agua", type number}, {"cloaca", type number}, {"gas", type number}, {"nbi", type number}, {"pct_univ", type number}, {"pct_65", type number}, {"pct_18_29", type number}, {"pct_extranjeros", type number}, {"pct_internet", type number}, {"pct_sin_obra_social", type number}, {"pct_barrio_popular", type number}, {"barrios_populares", type number}, {"escuelas", type number}, {"matricula", type number}, {"centros_salud", type number}, {"caps", type number}, {"transferencias_hab", Int64.Type}, {"gasto_hab", type number}, {"transparencia_asap", Int64.Type}, {"semaforo", type text}, {"tasa_homicidios", type number}, {"mortalidad_infantil", type number}, {"intendente", type text}, {"intendente_espacio", type text}, {"fuerza_intendente", type text}, {"intendente_partido", type text}, {"intendente_situacion", type text}, {"intendente_desde", type text}, {"electo_2023", type text}, {"electo_partido_2023", type text}, {"electo_alianza_2023", type text}, {"reelecto_2023", type logical}, {"foto_url", type text}, {"foto_credito", type text}, {"wikipedia_url", type text}, {"ubicacion", type text}, {"simulador_url", type text}, {"color_fuerza", type text}, {"logo_url", type text}, {"orden_fuerza", Int64.Type}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

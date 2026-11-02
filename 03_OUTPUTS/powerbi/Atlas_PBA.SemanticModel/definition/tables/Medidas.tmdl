@@ -1,0 +1,164 @@
+table Medidas
+	lineageTag: 8ef5d123-316d-59b2-99b7-c6749767b34e
+
+	measure 'Elección activa' = SELECTEDVALUE ( dim_eleccion[eleccion], "D2025" )
+		displayFolder: Elección
+		lineageTag: 37391657-73a0-5170-b2f2-9dfc207ae534
+
+	measure 'Elección seleccionada' = SELECTEDVALUE ( dim_eleccion[rotulo], "Diputados nacionales 2025" )
+		displayFolder: Elección
+		lineageTag: b7da83c9-40c8-5359-a575-562011ad6388
+
+	measure Votos = IF ( HASONEVALUE ( dim_eleccion[eleccion] ), SUM ( fact_votos[votos] ), CALCULATE ( SUM ( fact_votos[votos] ), dim_eleccion[eleccion] = "D2025" ) )
+		formatString: #,0
+		displayFolder: Votación
+		lineageTag: 88677444-eaec-5c24-8734-5959a4e37740
+
+	measure '% Voto' = DIVIDE ( [Votos], CALCULATE ( [Votos], REMOVEFILTERS ( dim_espacio ) ) )
+		formatString: 0.0%
+		displayFolder: Votación
+		lineageTag: 7421148f-e178-5b53-8828-0cbea36648e2
+
+	measure '% Peronismo' = CALCULATE ( [% Voto], dim_espacio[espacio] = "PERONISMO" )
+		formatString: 0.0%
+		displayFolder: Votación
+		lineageTag: 77b53d7a-175c-5ccd-8bbe-0ec87984a320
+
+	measure '% Derecha' = CALCULATE ( [% Voto], dim_espacio[espacio] IN { "LLA", "LLA_PRO", "PRO_JXC" } )
+		formatString: 0.0%
+		displayFolder: Votación
+		lineageTag: c3079855-c79d-5fb7-bc9b-ec352e1542ad
+
+	measure Ganador =
+			VAR t = ADDCOLUMNS ( VALUES ( dim_espacio[espacio_nombre] ), "@v", [Votos] )
+			RETURN MAXX ( TOPN ( 1, t, [@v], DESC ), dim_espacio[espacio_nombre] )
+		displayFolder: Votación
+		lineageTag: 086e56cc-21e9-55f9-a745-04be9e48af10
+
+	measure '% Ganador' = MAXX ( VALUES ( dim_espacio[espacio] ), [% Voto] )
+		formatString: 0.0%
+		displayFolder: Votación
+		lineageTag: 7b7a8221-5737-5f4d-9843-4eddf984924b
+
+	measure 'Margen (pts)' =
+			VAR t = ADDCOLUMNS ( VALUES ( dim_espacio[espacio] ), "@p", [% Voto] )
+			VAR p1 = MAXX ( t, [@p] )
+			VAR p2 = MAXX ( FILTER ( t, [@p] < p1 ), [@p] )
+			RETURN ( p1 - p2 ) * 100
+		formatString: 0.0
+		displayFolder: Votación
+		lineageTag: 37c1389d-d6bc-54b1-9763-3a53db032d4c
+
+	measure Electores = IF ( HASONEVALUE ( dim_eleccion[eleccion] ), SUM ( fact_participacion[electores] ), CALCULATE ( SUM ( fact_participacion[electores] ), dim_eleccion[eleccion] = "D2025" ) )
+		formatString: #,0
+		displayFolder: Participación
+		lineageTag: 862b0c43-9041-5dd1-b00b-b37077b01a69
+
+	measure Votantes =
+			VAR v = SUMX ( fact_participacion, fact_participacion[electores] * fact_participacion[participacion] / 100 )
+			RETURN IF ( HASONEVALUE ( dim_eleccion[eleccion] ), v, CALCULATE ( SUMX ( fact_participacion, fact_participacion[electores] * fact_participacion[participacion] / 100 ), dim_eleccion[eleccion] = "D2025" ) )
+		formatString: #,0
+		displayFolder: Participación
+		lineageTag: d6f8d9c3-589e-5f65-b64f-ef9739ae87d7
+
+	measure Participación = DIVIDE ( [Votantes], [Electores] )
+		formatString: 0.0%
+		displayFolder: Participación
+		lineageTag: 8e8e890c-fa44-5a31-97e4-7cc1c587011c
+
+	measure Municipios = DISTINCTCOUNT ( dim_municipio[cod_indec] )
+		formatString: #,0
+		displayFolder: Territorio
+		lineageTag: a84c6c21-7bf7-5d67-9724-2f2a45c46942
+
+	measure Población = SUM ( dim_municipio[pob] )
+		formatString: #,0
+		displayFolder: Territorio
+		lineageTag: e64c17fa-4280-5dc6-82d4-2778a9adfd3f
+
+	measure '% de la Provincia' = DIVIDE ( [Población], CALCULATE ( [Población], REMOVEFILTERS ( dim_municipio ) ) )
+		formatString: 0.0%
+		displayFolder: Territorio
+		lineageTag: 85884f00-fc4d-57f7-92c4-107a0d49ab12
+
+	measure 'Hogares con NBI %' = DIVIDE ( SUMX ( dim_municipio, dim_municipio[hogares] * dim_municipio[nbi] / 100 ), SUM ( dim_municipio[hogares] ) )
+		formatString: 0.0%
+		displayFolder: Censo
+		lineageTag: 5d2dfa60-9e31-5092-9b83-c1259a2e5a3d
+
+	measure 'Hogares en barrios populares %' = DIVIDE ( SUMX ( dim_municipio, dim_municipio[hogares] * dim_municipio[pct_barrio_popular] / 100 ), SUM ( dim_municipio[hogares] ) )
+		formatString: 0.0%
+		displayFolder: Censo
+		lineageTag: df1ae403-6d0b-5da9-ba93-68ed2a5f569a
+
+	measure 'Universitarios %' = DIVIDE ( SUMX ( dim_municipio, dim_municipio[pob] * dim_municipio[pct_univ] / 100 ), [Población] )
+		formatString: 0.0%
+		displayFolder: Censo
+		lineageTag: 5675338c-04f5-5a94-bad0-291ce5711d8a
+
+	measure Escuelas = SUM ( dim_municipio[escuelas] )
+		formatString: #,0
+		displayFolder: Censo
+		lineageTag: ff410eeb-12e7-5b51-b9fc-85a4ca1208e9
+
+	measure 'Transferencias por habitante' = DIVIDE ( SUMX ( dim_municipio, dim_municipio[transferencias_hab] * dim_municipio[pob] ), [Población] )
+		formatString: $ #,0
+		displayFolder: Gestión
+		lineageTag: a5a055ef-a6f3-52ae-8f08-0d05664635c4
+
+	measure Intendente = SELECTEDVALUE ( dim_municipio[intendente], "Elegí un municipio" )
+		displayFolder: Ficha
+		lineageTag: fc5383c3-a58f-5583-8adb-cb33b9aabe23
+
+	measure Municipio = SELECTEDVALUE ( dim_municipio[municipio], "Provincia de Buenos Aires" )
+		displayFolder: Ficha
+		lineageTag: 40473281-3b82-5d5a-9054-2200e196e473
+
+	measure 'Foto intendente' = SELECTEDVALUE ( dim_municipio[foto_url] )
+		dataCategory: ImageUrl
+		displayFolder: Ficha
+		lineageTag: 92cdd26a-24e2-5289-ad6e-698a60ed75ea
+
+	measure 'Título ficha' = [Municipio] & IF ( HASONEVALUE ( dim_municipio[cod_indec] ), " · " & SELECTEDVALUE ( dim_municipio[fuerza_intendente] ), "" )
+		displayFolder: Ficha
+		lineageTag: 88ccc316-eaf2-5ee7-8889-64bd2849928f
+
+	measure 'Título elección' = "Resultado · " & [Elección seleccionada]
+		displayFolder: Elección
+		lineageTag: a1841fca-d70f-5967-a56b-f4e60d98846c
+
+	measure 'P(peronismo) 2027' = AVERAGE ( fact_motor_2027[p_gana_peronismo] )
+		formatString: 0%
+		displayFolder: 2027
+		lineageTag: 0c523856-36c4-5c21-a317-97d8708359fd
+
+	measure 'Municipios peronistas esperados' = SUM ( fact_motor_2027[p_gana_peronismo] )
+		formatString: #,0.0
+		displayFolder: 2027
+		lineageTag: f9e85380-8251-58c8-961d-ae6863287f01
+
+	measure 'Municipios en disputa' = COUNTROWS ( FILTER ( fact_motor_2027, fact_motor_2027[p_gana_peronismo] >= 0.2 && fact_motor_2027[p_gana_peronismo] <= 0.8 ) )
+		formatString: #,0
+		displayFolder: 2027
+		lineageTag: b4b440ac-cffd-5027-a646-24eb1feb27f1
+
+	measure 'Color fuerza' = SELECTEDVALUE ( dim_municipio[color_fuerza] )
+		displayFolder: Formato
+		lineageTag: 078bfece-a165-5c9c-aec5-3e2c5e8155cc
+
+	measure 'Color espacio' = SELECTEDVALUE ( dim_espacio[color] )
+		displayFolder: Formato
+		lineageTag: c663432b-2b65-5887-876c-a19c40b726f1
+
+	column x
+		dataType: string
+		isHidden
+		lineageTag: 78c5cc11-fcf1-536f-8f05-959d2087081c
+		summarizeBy: none
+		sourceColumn: x
+
+	partition Medidas = m
+		mode: import
+		source = #table(type table [x = text], {})
+
+	annotation PBI_ResultType = Table

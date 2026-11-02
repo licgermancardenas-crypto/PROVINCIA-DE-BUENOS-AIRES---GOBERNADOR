@@ -1,0 +1,65 @@
+table fact_motor_2027
+	lineageTag: f13dfeda-bc52-5c3c-af02-44cf295243c9
+
+	column escenario
+		dataType: string
+		lineageTag: e3ce9588-406d-5ece-acf0-d53541024702
+		summarizeBy: none
+		sourceColumn: escenario
+
+		annotation SummarizationSetBy = Automatic
+
+	column escenario_clave
+		dataType: string
+		lineageTag: 28e94a4e-11ee-5151-ac1c-9b350f40587a
+		summarizeBy: none
+		sourceColumn: escenario_clave
+
+		annotation SummarizationSetBy = Automatic
+
+	column cod_indec
+		dataType: string
+		isHidden
+		lineageTag: 1fe797e4-dea1-5a3c-a902-44491cf4dea1
+		summarizeBy: none
+		sourceColumn: cod_indec
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_peronismo
+		dataType: double
+		formatString: #,0.0
+		lineageTag: b3565dd9-e92e-5d86-ac84-b50bb0d049ac
+		summarizeBy: none
+		sourceColumn: pct_peronismo
+
+		annotation SummarizationSetBy = Automatic
+
+	column p_gana_peronismo
+		dataType: double
+		formatString: #,0.0
+		lineageTag: fa3d5037-a47e-5a68-8c98-2e02244c796e
+		summarizeBy: none
+		sourceColumn: p_gana_peronismo
+
+		annotation SummarizationSetBy = Automatic
+
+	column rango_p
+		dataType: string
+		lineageTag: 7c965349-8d15-571c-ade1-29f2869da9c9
+		summarizeBy: none
+		sourceColumn: rango_p
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_motor_2027 = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(CarpetaDatos & "fact_motor_2027.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"escenario", type text}, {"escenario_clave", type text}, {"cod_indec", type text}, {"pct_peronismo", type number}, {"p_gana_peronismo", type number}, {"rango_p", type text}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

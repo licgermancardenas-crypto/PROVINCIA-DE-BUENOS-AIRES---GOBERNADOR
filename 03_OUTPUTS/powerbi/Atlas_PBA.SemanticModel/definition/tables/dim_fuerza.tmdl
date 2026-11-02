@@ -1,0 +1,41 @@
+table dim_fuerza
+	lineageTag: 6165eece-0597-53b3-989e-b72abb877acb
+
+	column fuerza_intendente
+		dataType: string
+		lineageTag: 107117c4-b5de-5648-b21f-80eee0fd4e4c
+		summarizeBy: none
+		sourceColumn: fuerza_intendente
+		sortByColumn: orden
+
+		annotation SummarizationSetBy = Automatic
+
+	column color
+		dataType: string
+		isHidden
+		lineageTag: 74146643-0232-528b-9b5d-d08094169d45
+		summarizeBy: none
+		sourceColumn: color
+
+		annotation SummarizationSetBy = Automatic
+
+	column orden
+		dataType: int64
+		isHidden
+		lineageTag: aa4b39d6-fa27-5207-bb9c-d83bfa5d6540
+		summarizeBy: none
+		sourceColumn: orden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_fuerza = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_fuerza.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"fuerza_intendente", type text}, {"color", type text}, {"orden", Int64.Type}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

@@ -286,7 +286,7 @@ def main() -> None:
     # ------------------------------------------------------------- Power BI: tablas planas
     dim = m.rename(columns={"municipio": "municipio_nombre"}).drop(columns=["electo_foto"])
     dim["foto_url"] = dim.electo_foto_fuente
-    dim.to_csv(PBI / "dim_municipio.csv", index=False, encoding="utf-8-sig")
+    dim.to_csv(PBI / "_base_municipio.csv", index=False, encoding="utf-8")  # p06 la enriquece en dim_municipio.csv
     pd.DataFrame([{"eleccion": k, "rotulo": r, "anio": a, "tipo": t, "cargo": " + ".join(c), "fuente": fu}
                   for k, r, fu, a, t, c in ELECCIONES]).to_csv(PBI / "dim_eleccion.csv", index=False, encoding="utf-8-sig")
     pd.DataFrame([{"espacio": k, "espacio_nombre": v} for k, v in ESPACIOS.items()]).to_csv(
