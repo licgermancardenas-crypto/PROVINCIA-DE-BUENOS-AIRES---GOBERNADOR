@@ -642,6 +642,21 @@ table Medidas
 		formatString: #,0
 		displayFolder: 08 · Dónde se decide
 
+	measure 'URL Wikipedia' =
+			VAR u = SELECTEDVALUE(dim_municipio[wikipedia_url]) RETURN IF(ISBLANK(u) || u = "", "https://es.wikipedia.org/wiki/Partido_de_" & SUBSTITUTE(SELECTEDVALUE(dim_municipio[municipio], "Buenos_Aires"), " ", "_"), u)
+		displayFolder: 04 · Textos y colores
+		dataCategory: WebUrl
+
+	measure 'URL Google Maps' =
+			"https://www.google.com/maps/search/Partido+de+" & SUBSTITUTE(SELECTEDVALUE(dim_municipio[municipio], "Buenos Aires"), " ", "+") & "+Buenos+Aires"
+		displayFolder: 04 · Textos y colores
+		dataCategory: WebUrl
+
+	measure 'URL Noticias' =
+			"https://news.google.com/search?q=%22" & SUBSTITUTE(SELECTEDVALUE(dim_municipio[municipio], "Provincia de Buenos Aires"), " ", "+") & "%22+intendente&hl=es-419&gl=AR"
+		displayFolder: 04 · Textos y colores
+		dataCategory: WebUrl
+
 	measure 'Margen absoluto (pts)' =
 			ABS([Margen P-D (pts)])
 		formatString: 0.0

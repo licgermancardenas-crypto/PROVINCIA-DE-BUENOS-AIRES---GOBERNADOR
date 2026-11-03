@@ -89,6 +89,21 @@
               "queryRef": "dim_municipio.reeleccion_2027",
               "nativeQueryRef": "2027",
               "displayName": "2027"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_municipio"
+                    }
+                  },
+                  "Property": "wikipedia_url"
+                }
+              },
+              "queryRef": "dim_municipio.wikipedia_url",
+              "nativeQueryRef": "Wiki",
+              "displayName": "Wiki"
             }
           ]
         }
@@ -184,6 +199,13 @@
                       "Value": "'#F8F6FC'"
                     }
                   }
+                }
+              }
+            },
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }

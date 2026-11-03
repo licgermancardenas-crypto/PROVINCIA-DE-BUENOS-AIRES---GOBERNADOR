@@ -428,8 +428,10 @@ def informe(t: dict) -> dict:
           ("Pronóstico rango", "Rango del 80 % (10 a 90)", INK), ("Pronóstico municipios", "Municipios peronistas esperados", PER)]
     for i, (m, et, c) in enumerate(kp):
         pg.tarjeta(X0 + i * 256, 312, 246, 100, Me(m), et, size=24, fg=c)
+        pg.boton(X0 + i * 256, 312, 246, 100, " ", "pronostico", fondo="#FFFFFF", fg=INK, size=1, hover=VIO, transp=100, transp_hover=90)
     caja(pg, 1242, 14, 348, 430, "Quién ganó cada municipio · Dip. 2025")
     pg.imagen(1250, 40, 332, 400, "SVG mapa provincia")
+    pg.boton(1242, 14, 348, 430, " ", "mapa_completo", fondo="#FFFFFF", fg=INK, size=1, hover=VIO, transp=100, transp_hover=92)
     pg.texto(X0, 424, 1010, 30, [[("EXPLORÁ EL TABLERO", {"size": 11, "bold": True, "color": VIO})]])
     tiles = [("mapa_completo", "▣  Mapa completo", "El mapa en pantalla grande, 13 métricas"), ("resumen", "◉  Resumen provincial", "Resultado, secciones y escenarios"),
              ("mapa", "▦  Mapa de municipios", "Ranking y tabla"), ("conurbano", "◎  Conurbano", "Los 24 partidos que definen la elección"),
@@ -445,6 +447,8 @@ def informe(t: dict) -> dict:
         [("▸ El voto que Kicillof perdió en 2025 se abstuvo (12,6 %, unas 513.000 personas); ninguno pasó a LLA-PRO.", {"size": 10.5})],
         [("▸ El Conurbano es el 64 % del padrón: la 1.ª sección define y la 3.ª es el bastión peronista.", {"size": 10.5})]],
         fondo="#FFFFFF", borde=True)
+    for i, (txt, url) in enumerate([("Simulador web  ↗", b.SIMULADOR), ("Tablero web  ↗", b.TABLERO_WEB), ("Repositorio  ↗", b.REPO)]):
+        pg.boton(1000 + i * 196, 846, 186, 34, txt, tipo="WebUrl", web=url, fondo="#FFFFFF", fg=VIO, size=10, hover=GRIS, borde=LINEA, alin="center")
     pags.append(pg)
 
     # =================================================================== RESUMEN PROVINCIAL
@@ -580,9 +584,11 @@ def informe(t: dict) -> dict:
     caja(pg, 1232, 224, 358, 330, "Dónde queda")
     pg.imagen(1238, 248, 346, 302, "SVG mapa provincia")
     kc = [(Me("Población"), "Población 2022"), (Me("Electores"), "Electores"), (Me("Hogares con NBI %"), "Hogares con NBI"),
-          (Me("Hogares en barrios populares %"), "En barrios populares"), (Me("Universitarios %"), "Universitarios")]
+          (Me("Hogares en barrios populares %"), "En barrios populares")]
     for i, (m, et) in enumerate(kc):
-        pg.tarjeta(X0 + (i % 1) * 0, 438 + i * 90, 230, 82, m, et, size=18)
+        pg.tarjeta(X0, 438 + i * 90, 230, 82, m, et, size=18)
+    for i, (txt, med_url) in enumerate([("Wikipedia  ↗", "URL Wikipedia"), ("Google Maps  ↗", "URL Google Maps"), ("Noticias  ↗", "URL Noticias")]):
+        pg.boton(X0, 800 + i * 31, 230, 27, txt, tipo="WebUrl", web_fx=med_url, fondo="#FFFFFF", fg=VIO, size=9.5, hover=GRIS, borde=LINEA, alin="center")
     hist = tabla(pg, 462, 564, 1128, 326, [(C("dim_eleccion", "rotulo"), "Elección"), (Me("Ganador"), "Ganó"), (Me("% Peronismo"), "Peronismo"),
                                            (Me("% Derecha"), "LLA + PRO"), (Me("Margen P-D (pts)"), "Margen (pts)"), (Me("Participación"), "Participación"),
                                            (Me("Electores"), "Electores")],

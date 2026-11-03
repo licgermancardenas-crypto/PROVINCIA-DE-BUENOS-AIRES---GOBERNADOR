@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "inicio_31_actionButton",
   "position": {
-    "x": 566,
-    "y": 458,
+    "x": 1242,
+    "y": 14,
     "z": 3100,
-    "width": 334,
-    "height": 82,
+    "width": 348,
+    "height": 430,
     "tabOrder": 3100
   },
   "visual": {
@@ -158,7 +158,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "88D"
+                  "Value": "92D"
                 }
               }
             }
@@ -223,7 +223,7 @@
             "navigationSection": {
               "expr": {
                 "Literal": {
-                  "Value": "'resumen'"
+                  "Value": "'mapa_completo'"
                 }
               }
             }

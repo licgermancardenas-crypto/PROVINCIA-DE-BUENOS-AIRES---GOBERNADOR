@@ -196,6 +196,13 @@ def medidas(meta) -> list:
         ("Municipios donde cayó el peronismo", "COUNTROWS(FILTER(VALUES(dim_municipio[cod_indec]), [Corrimiento peronismo (pts)] < 0))", "0", F["cor"]),
         # dónde se decide
         ("Tamaño por electores", "[Electores]", "#,0", F["dec"]),
+        # enlaces de la ficha
+        ("URL Wikipedia", 'VAR u = SELECTEDVALUE(dim_municipio[wikipedia_url]) RETURN IF(ISBLANK(u) || u = "", "https://es.wikipedia.org/wiki/Partido_de_" & SUBSTITUTE(SELECTEDVALUE(dim_municipio[municipio], "Buenos_Aires"), " ", "_"), u)',
+         None, F["txt"], {"dataCategory": "WebUrl"}),
+        ("URL Google Maps", '"https://www.google.com/maps/search/Partido+de+" & SUBSTITUTE(SELECTEDVALUE(dim_municipio[municipio], "Buenos Aires"), " ", "+") & "+Buenos+Aires"',
+         None, F["txt"], {"dataCategory": "WebUrl"}),
+        ("URL Noticias", '"https://news.google.com/search?q=%22" & SUBSTITUTE(SELECTEDVALUE(dim_municipio[municipio], "Provincia de Buenos Aires"), " ", "+") & "%22+intendente&hl=es-419&gl=AR"',
+         None, F["txt"], {"dataCategory": "WebUrl"}),
         ("Margen absoluto (pts)", "ABS([Margen P-D (pts)])", "0.0", F["dec"]),
         ("Votos para dar vuelta", "ABS([Diferencia de votos]) / 2", "#,0", F["dec"]),
         ("Municipios bisagra", "COUNTROWS(FILTER(VALUES(dim_municipio[cod_indec]), ABS([Margen P-D (pts)]) < 5))", "0", F["dec"]),
@@ -406,7 +413,7 @@ def paginas(t: dict) -> list:
                         "valueAxis": [{"properties": {"show": lit(False)}}], "categoryAxis": [{"properties": {"fontSize": lit(9), "showAxisTitle": lit(False)}}]},
                titulo="Municipios por fuerza del intendente", sort=[(Me("Municipios"), "Descending")])
     tabla(pg, 1092, 492, 498, 398, [(DM("foto_url"), "Foto"), (DM("municipio"), "Municipio"), (DM("intendente"), "Intendente"), (fz, "Fuerza"),
-                                     (DM("reeleccion_2027"), "2027")], "Intendentes", sort=[(DM("municipio"), "Ascending")], size=9, img=40,
+                                     (DM("reeleccion_2027"), "2027"), (DM("wikipedia_url"), "Wiki")], "Intendentes", sort=[(DM("municipio"), "Ascending")], size=9, img=40, links=True,
           fx=[(DM("reeleccion_2027"), "Color reelección")])
     pags.append(pg)
 
@@ -471,5 +478,9 @@ def paginas(t: dict) -> list:
     for i, (tit, items) in enumerate(txt):
         x, y = col_x[i % 2], 96 + (i // 2) * 268
         pg.texto(x, y, 674, 258, [[(tit, {"size": 12, "bold": True, "color": VIO})]] + [[("▸ " + it, {"size": 9.5})] for it in items], fondo="#FFFFFF", borde=True)
+    fuentes = [("DINE  ↗", "https://www.argentina.gob.ar/dine"), ("Junta Electoral PBA  ↗", "https://www.juntaelectoral.gba.gov.ar"),
+               ("Censo 2022 · INDEC  ↗", "https://censo.gob.ar"), ("RENABAP  ↗", "https://www.argentina.gob.ar/habitat/renabap")]
+    for i, (txt_, url) in enumerate(fuentes):
+        pg.boton(X0 + 14 + i * 162, 316, 154, 30, txt_, tipo="WebUrl", web=url, fondo="#FFFFFF", fg=VIO, size=9, hover=GRIS, borde="#E4DFEE", alin="center")
     pags.append(pg)
     return pags
