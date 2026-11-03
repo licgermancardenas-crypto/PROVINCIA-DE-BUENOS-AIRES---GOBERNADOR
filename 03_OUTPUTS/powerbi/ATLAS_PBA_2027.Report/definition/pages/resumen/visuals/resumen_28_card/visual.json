@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "resumen_28_card",
   "position": {
-    "x": 1372,
+    "x": 1142,
     "y": 156,
     "z": 2800,
     "width": 220,
@@ -23,12 +23,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Electores"
+                  "Property": "Participación"
                 }
               },
-              "queryRef": "Medidas.Electores",
-              "nativeQueryRef": "Electores",
-              "displayName": "Electores"
+              "queryRef": "Medidas.Participación",
+              "nativeQueryRef": "Participación",
+              "displayName": "Participación"
             }
           ]
         }
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1D1631'"
+                      "Value": "'#5B3F99'"
                     }
                   }
                 }

@@ -3,7 +3,7 @@
   "name": "ficha_34_card",
   "position": {
     "x": 222,
-    "y": 618,
+    "y": 528,
     "z": 3400,
     "width": 230,
     "height": 82,
@@ -23,12 +23,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Hogares con NBI %"
+                  "Property": "Electores"
                 }
               },
-              "queryRef": "Medidas.Hogares con NBI %",
-              "nativeQueryRef": "Hogares con NBI",
-              "displayName": "Hogares con NBI"
+              "queryRef": "Medidas.Electores",
+              "nativeQueryRef": "Electores",
+              "displayName": "Electores"
             }
           ]
         }

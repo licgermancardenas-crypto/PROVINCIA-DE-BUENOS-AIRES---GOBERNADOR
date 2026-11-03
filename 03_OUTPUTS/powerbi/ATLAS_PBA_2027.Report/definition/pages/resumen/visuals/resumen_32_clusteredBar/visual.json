@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "resumen_32_clusteredBar",
   "position": {
-    "x": 1172,
+    "x": 752,
     "y": 252,
     "z": 3200,
-    "width": 418,
+    "width": 410,
     "height": 300,
     "tabOrder": 3200
   },
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dim_municipio"
+                      "Entity": "dim_espacio"
                     }
                   },
-                  "Property": "seccion"
+                  "Property": "espacio_nombre"
                 }
               },
-              "queryRef": "dim_municipio.seccion",
-              "nativeQueryRef": "seccion"
+              "queryRef": "dim_espacio.espacio_nombre",
+              "nativeQueryRef": "espacio_nombre"
             }
           ]
         },
@@ -41,12 +41,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Diferencia de votos"
+                  "Property": "% Voto"
                 }
               },
-              "queryRef": "Medidas.Diferencia de votos",
-              "nativeQueryRef": "Diferencia",
-              "displayName": "Diferencia"
+              "queryRef": "Medidas.% Voto",
+              "nativeQueryRef": "% de los votos",
+              "displayName": "% de los votos"
             }
           ]
         }
@@ -55,16 +55,16 @@
         "sort": [
           {
             "field": {
-              "Column": {
+              "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "dim_municipio"
+                    "Entity": "Medidas"
                   }
                 },
-                "Property": "seccion"
+                "Property": "% Voto"
               }
             },
-            "direction": "Ascending"
+            "direction": "Descending"
           }
         ],
         "isDefaultSort": false
@@ -193,7 +193,7 @@
                           "Entity": "Medidas"
                         }
                       },
-                      "Property": "Color diferencia"
+                      "Property": "Color espacio"
                     }
                   }
                 }
@@ -226,7 +226,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Diferencia de votos por sección (peronismo − LLA/PRO)'"
+                  "Value": "'% por fuerza'"
                 }
               }
             }

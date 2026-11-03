@@ -47,13 +47,13 @@
   },
   "visualInteractions": [
     {
-      "source": "ficha_20_slicer",
-      "target": "ficha_29_lineChart",
+      "source": "ficha_21_slicer",
+      "target": "ficha_30_lineChart",
       "type": "NoFilter"
     },
     {
-      "source": "ficha_20_slicer",
-      "target": "ficha_37_tableEx",
+      "source": "ficha_21_slicer",
+      "target": "ficha_38_tableEx",
       "type": "NoFilter"
     }
   ]

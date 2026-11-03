@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "inicio_23_card",
   "position": {
-    "x": 990,
+    "x": 734,
     "y": 312,
     "z": 2300,
     "width": 246,
@@ -23,12 +23,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Pronóstico municipios"
+                  "Property": "Pronóstico rango"
                 }
               },
-              "queryRef": "Medidas.Pronóstico municipios",
-              "nativeQueryRef": "Municipios peronistas esperados",
-              "displayName": "Municipios peronistas esperados"
+              "queryRef": "Medidas.Pronóstico rango",
+              "nativeQueryRef": "Rango del 80 % (10 a 90)",
+              "displayName": "Rango del 80 % (10 a 90)"
             }
           ]
         }
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#2F80ED'"
+                      "Value": "'#1D1631'"
                     }
                   }
                 }

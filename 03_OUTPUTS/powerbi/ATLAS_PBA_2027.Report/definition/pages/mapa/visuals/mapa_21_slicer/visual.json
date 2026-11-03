@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "mapa_21_slicer",
   "position": {
-    "x": 702,
+    "x": 222,
     "y": 88,
     "z": 2100,
-    "width": 340,
+    "width": 470,
     "height": 58,
     "tabOrder": 2100
   },
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dim_eleccion"
+                      "Entity": "metrica_mapa"
                     }
                   },
-                  "Property": "rotulo"
+                  "Property": "metrica"
                 }
               },
-              "queryRef": "dim_eleccion.rotulo",
-              "nativeQueryRef": "rotulo"
+              "queryRef": "metrica_mapa.metrica",
+              "nativeQueryRef": "metrica"
             }
           ]
         }
@@ -60,7 +60,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Elección'"
+                  "Value": "'Métrica del mapa'"
                 }
               }
             },
@@ -138,7 +138,7 @@
                 "From": [
                   {
                     "Name": "t",
-                    "Entity": "dim_eleccion",
+                    "Entity": "metrica_mapa",
                     "Type": 0
                   }
                 ],
@@ -154,7 +154,7 @@
                                   "Source": "t"
                                 }
                               },
-                              "Property": "rotulo"
+                              "Property": "metrica"
                             }
                           }
                         ],
@@ -162,7 +162,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'Diputados nacionales 2025'"
+                                "Value": "'Ganador de la elección'"
                               }
                             }
                           ]
@@ -193,7 +193,7 @@
       ]
     },
     "syncGroup": {
-      "groupName": "eleccion",
+      "groupName": "metrica",
       "fieldChanges": true,
       "filterChanges": true
     }

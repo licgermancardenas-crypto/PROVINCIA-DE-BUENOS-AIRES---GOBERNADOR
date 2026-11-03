@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "resumen_33_clusteredBar",
   "position": {
-    "x": 752,
-    "y": 562,
+    "x": 1172,
+    "y": 252,
     "z": 3300,
-    "width": 838,
-    "height": 328,
+    "width": 418,
+    "height": 300,
     "tabOrder": 3300
   },
   "visual": {
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "escenarios_2027"
+                      "Entity": "dim_municipio"
                     }
                   },
-                  "Property": "escenario"
+                  "Property": "seccion"
                 }
               },
-              "queryRef": "escenarios_2027.escenario",
-              "nativeQueryRef": "escenario"
+              "queryRef": "dim_municipio.seccion",
+              "nativeQueryRef": "seccion"
             }
           ]
         },
@@ -41,12 +41,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Margen escenario"
+                  "Property": "Diferencia de votos"
                 }
               },
-              "queryRef": "Medidas.Margen escenario",
-              "nativeQueryRef": "Margen",
-              "displayName": "Margen"
+              "queryRef": "Medidas.Diferencia de votos",
+              "nativeQueryRef": "Diferencia",
+              "displayName": "Diferencia"
             }
           ]
         }
@@ -55,16 +55,16 @@
         "sort": [
           {
             "field": {
-              "Measure": {
+              "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Medidas"
+                    "Entity": "dim_municipio"
                   }
                 },
-                "Property": "Margen escenario"
+                "Property": "seccion"
               }
             },
-            "direction": "Descending"
+            "direction": "Ascending"
           }
         ],
         "isDefaultSort": false
@@ -193,7 +193,7 @@
                           "Entity": "Medidas"
                         }
                       },
-                      "Property": "Color escenario"
+                      "Property": "Color diferencia"
                     }
                   }
                 }
@@ -226,7 +226,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Pronóstico 2027: margen del peronismo por escenario (mediana de 1.000 simulaciones, pts)'"
+                  "Value": "'Diferencia de votos por sección (peronismo − LLA/PRO)'"
                 }
               }
             }

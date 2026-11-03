@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "inicio_17_textbox",
   "position": {
-    "x": 222,
-    "y": 14,
+    "x": 10,
+    "y": 640,
     "z": 1700,
-    "width": 1000,
-    "height": 130,
+    "width": 180,
+    "height": 254,
     "tabOrder": 1700
   },
   "visual": {
@@ -19,11 +19,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "PROVINCIA DE BUENOS AIRES · ELECCIÓN DE GOBERNADOR 2027",
+                    "value": "Cómo navegar",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "10.5pt",
-                      "color": "#5B3F99",
+                      "fontSize": "9pt",
+                      "color": "#E0A526",
                       "fontWeight": "bold"
                     }
                   }
@@ -32,12 +32,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "El mapa del voto bonaerense",
+                    "value": "• Botones: saltan de página (en Desktop, Ctrl+clic)",
                     "textStyle": {
-                      "fontFamily": "Segoe UI Black",
-                      "fontSize": "32pt",
-                      "color": "#1D1631",
-                      "fontWeight": "bold"
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "8.5pt",
+                      "color": "#CFC7E2"
                     }
                   }
                 ]
@@ -45,11 +44,59 @@
               {
                 "textRuns": [
                   {
-                    "value": "135 municipios · 8 secciones electorales · 1.146 circuitos · 17 elecciones de 2007 a 2025 · censo 2022 · motor de pronóstico de 1.000 simulaciones",
+                    "value": "• Clic en una barra o una fila: el municipio se resalta en el mapa",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "11pt",
-                      "color": "#6B6480"
+                      "fontSize": "8.5pt",
+                      "color": "#CFC7E2"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• Clic derecho › Obtener detalles: ficha del municipio",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "8.5pt",
+                      "color": "#CFC7E2"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• Pasá el mouse: resultado del municipio",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "8.5pt",
+                      "color": "#CFC7E2"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• Elección, sección y zona se sincronizan entre páginas",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "8.5pt",
+                      "color": "#CFC7E2"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "En gris: páginas de la próxima entrega",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "8pt",
+                      "color": "#6F6790"
                     }
                   }
                 ]

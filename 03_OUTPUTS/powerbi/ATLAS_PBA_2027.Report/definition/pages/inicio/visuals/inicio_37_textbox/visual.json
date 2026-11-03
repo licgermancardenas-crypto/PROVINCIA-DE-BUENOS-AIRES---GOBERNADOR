@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "inicio_37_textbox",
   "position": {
-    "x": 1254,
+    "x": 566,
     "y": 550,
     "z": 3700,
     "width": 334,
@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "★  Intendentes 2027",
+                    "value": "▩  Mapa fino",
                     "textStyle": {
                       "fontFamily": "Segoe UI Semibold",
                       "fontSize": "12pt",
@@ -32,7 +32,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Próxima entrega",
+                    "value": "Próxima entrega · 1.146 circuitos",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",

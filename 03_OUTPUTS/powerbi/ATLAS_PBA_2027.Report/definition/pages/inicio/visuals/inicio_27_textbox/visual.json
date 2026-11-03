@@ -3,10 +3,10 @@
   "name": "inicio_27_textbox",
   "position": {
     "x": 222,
-    "y": 458,
+    "y": 424,
     "z": 2700,
-    "width": 334,
-    "height": 82,
+    "width": 1010,
+    "height": 30,
     "tabOrder": 2700
   },
   "visual": {
@@ -19,24 +19,12 @@
               {
                 "textRuns": [
                   {
-                    "value": "◉  Resumen provincial",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI Semibold",
-                      "fontSize": "12pt",
-                      "color": "#1D1631",
-                      "fontWeight": "bold"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Resultado, secciones y escenarios",
+                    "value": "EXPLORÁ EL TABLERO",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "9pt",
-                      "color": "#6B6480"
+                      "fontSize": "11pt",
+                      "color": "#5B3F99",
+                      "fontWeight": "bold"
                     }
                   }
                 ]
@@ -53,25 +41,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#FFFFFF'"
-                    }
-                  }
-                }
-              }
-            },
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
+                  "Value": "false"
                 }
               }
             }
@@ -84,7 +54,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             }

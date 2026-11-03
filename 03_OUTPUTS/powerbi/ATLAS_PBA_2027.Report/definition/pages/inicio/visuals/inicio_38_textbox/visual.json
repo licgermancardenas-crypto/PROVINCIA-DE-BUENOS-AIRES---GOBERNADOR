@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "inicio_38_textbox",
   "position": {
-    "x": 222,
-    "y": 650,
+    "x": 910,
+    "y": 550,
     "z": 3800,
-    "width": 1368,
-    "height": 240,
+    "width": 334,
+    "height": 82,
     "tabOrder": 3800
   },
   "visual": {
@@ -19,11 +19,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "LO QUE HAY QUE SABER",
+                    "value": "≋  Historia 2007-2025",
                     "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "11pt",
-                      "color": "#5B3F99",
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "12pt",
+                      "color": "#1D1631",
                       "fontWeight": "bold"
                     }
                   }
@@ -32,59 +32,11 @@
               {
                 "textRuns": [
                   {
-                    "value": "▸ Si se repite octubre 2025, es un empate: el peronismo gana el 59 % de las simulaciones, con +0,3 puntos de margen esperado.",
+                    "value": "Animación ▶ elección por elección",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "10.5pt",
-                      "color": "#1D1631"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "▸ Con la derecha dividida, el peronismo gana el 99-100 % de las simulaciones aunque el PRO sea sólo el 15 % de ese voto.",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "10.5pt",
-                      "color": "#1D1631"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "▸ Quién se suma a votar mueve 9 puntos (de −3,7 a +5,4). Más participación pareja no mueve nada.",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "10.5pt",
-                      "color": "#1D1631"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "▸ El voto que Kicillof perdió en 2025 se abstuvo (12,6 %, unas 513.000 personas); ninguno pasó a LLA-PRO.",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "10.5pt",
-                      "color": "#1D1631"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "▸ El Conurbano es el 64 % del padrón: la 1.ª sección define y la 3.ª es el bastión peronista.",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "10.5pt",
-                      "color": "#1D1631"
+                      "fontSize": "9pt",
+                      "color": "#6B6480"
                     }
                   }
                 ]

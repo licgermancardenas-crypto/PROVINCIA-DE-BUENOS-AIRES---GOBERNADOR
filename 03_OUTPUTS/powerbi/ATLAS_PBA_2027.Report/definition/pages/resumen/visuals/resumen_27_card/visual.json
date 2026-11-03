@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "resumen_27_card",
   "position": {
-    "x": 1142,
+    "x": 912,
     "y": 156,
     "z": 2700,
     "width": 220,
@@ -23,12 +23,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Participación"
+                  "Property": "Diferencia de votos"
                 }
               },
-              "queryRef": "Medidas.Participación",
-              "nativeQueryRef": "Participación",
-              "displayName": "Participación"
+              "queryRef": "Medidas.Diferencia de votos",
+              "nativeQueryRef": "Diferencia peronismo − LLA/PRO",
+              "displayName": "Diferencia peronismo − LLA/PRO"
             }
           ]
         }
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5B3F99'"
+                      "Value": "'#1D1631'"
                     }
                   }
                 }

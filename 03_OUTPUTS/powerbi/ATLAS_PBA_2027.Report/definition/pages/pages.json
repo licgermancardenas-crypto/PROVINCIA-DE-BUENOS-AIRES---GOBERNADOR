@@ -3,8 +3,10 @@
   "pageOrder": [
     "inicio",
     "resumen",
+    "mapa_completo",
     "mapa",
     "conurbano",
+    "historia",
     "ficha",
     "tt_municipio"
   ],

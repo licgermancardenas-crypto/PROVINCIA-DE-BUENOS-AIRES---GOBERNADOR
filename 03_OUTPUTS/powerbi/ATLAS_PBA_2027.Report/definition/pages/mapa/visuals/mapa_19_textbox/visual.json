@@ -3,10 +3,10 @@
   "name": "mapa_19_textbox",
   "position": {
     "x": 10,
-    "y": 604,
+    "y": 596,
     "z": 1900,
     "width": 180,
-    "height": 290,
+    "height": 31,
     "tabOrder": 1900
   },
   "visual": {
@@ -19,83 +19,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "Cómo navegar",
+                    "value": "ℹ   Metodología",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",
-                      "color": "#E0A526",
-                      "fontWeight": "bold"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "• Botones: saltan de página (en Desktop, Ctrl+clic)",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "8.5pt",
-                      "color": "#CFC7E2"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "• Clic en una barra o una fila: el municipio se resalta en el mapa",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "8.5pt",
-                      "color": "#CFC7E2"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "• Clic derecho › Obtener detalles: ficha del municipio",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "8.5pt",
-                      "color": "#CFC7E2"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "• Pasá el mouse: resultado del municipio",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "8.5pt",
-                      "color": "#CFC7E2"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "• Elección, sección y zona se sincronizan entre páginas",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "8.5pt",
-                      "color": "#CFC7E2"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "En gris: páginas de la próxima entrega",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "8pt",
                       "color": "#6F6790"
                     }
                   }

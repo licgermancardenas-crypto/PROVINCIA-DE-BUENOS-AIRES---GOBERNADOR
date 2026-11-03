@@ -3,10 +3,10 @@
   "name": "ficha_18_card",
   "position": {
     "x": 222,
-    "y": 56,
+    "y": 8,
     "z": 1800,
-    "width": 940,
-    "height": 28,
+    "width": 1000,
+    "height": 50,
     "tabOrder": 1800
   },
   "visual": {
@@ -23,11 +23,11 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Subtítulo ficha"
+                  "Property": "Título ficha"
                 }
               },
-              "queryRef": "Medidas.Subtítulo ficha",
-              "nativeQueryRef": "Subtítulo ficha",
+              "queryRef": "Medidas.Título ficha",
+              "nativeQueryRef": "Título ficha",
               "displayName": " "
             }
           ]
@@ -41,7 +41,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "10D"
+                  "Value": "24D"
                 }
               }
             },
@@ -50,7 +50,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#6B6480'"
+                      "Value": "'#1D1631'"
                     }
                   }
                 }
@@ -59,7 +59,7 @@
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'Segoe UI'"
+                  "Value": "'Segoe UI Black'"
                 }
               }
             }

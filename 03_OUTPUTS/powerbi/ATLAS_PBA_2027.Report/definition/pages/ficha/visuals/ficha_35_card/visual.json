@@ -3,7 +3,7 @@
   "name": "ficha_35_card",
   "position": {
     "x": 222,
-    "y": 708,
+    "y": 618,
     "z": 3500,
     "width": 230,
     "height": 82,
@@ -23,12 +23,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Hogares en barrios populares %"
+                  "Property": "Hogares con NBI %"
                 }
               },
-              "queryRef": "Medidas.Hogares en barrios populares %",
-              "nativeQueryRef": "En barrios populares",
-              "displayName": "En barrios populares"
+              "queryRef": "Medidas.Hogares con NBI %",
+              "nativeQueryRef": "Hogares con NBI",
+              "displayName": "Hogares con NBI"
             }
           ]
         }

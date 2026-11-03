@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "inicio_34_textbox",
   "position": {
-    "x": 222,
-    "y": 550,
+    "x": 1254,
+    "y": 458,
     "z": 3400,
     "width": 334,
     "height": 82,
@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "▩  Mapa fino",
+                    "value": "◎  Conurbano",
                     "textStyle": {
                       "fontFamily": "Segoe UI Semibold",
                       "fontSize": "12pt",
@@ -32,7 +32,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Próxima entrega · 1.146 circuitos",
+                    "value": "Los 24 partidos que definen la elección",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",

@@ -56,7 +56,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'◎   Conurbano'"
+                  "Value": "'▦   Mapa de municipios'"
                 }
               }
             },
@@ -223,7 +223,7 @@
             "navigationSection": {
               "expr": {
                 "Literal": {
-                  "Value": "'conurbano'"
+                  "Value": "'mapa'"
                 }
               }
             }

@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "conurbano_25_card",
   "position": {
-    "x": 774,
+    "x": 498,
     "y": 156,
     "z": 2500,
     "width": 266,
@@ -23,12 +23,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "% Derecha"
+                  "Property": "% Peronismo"
                 }
               },
-              "queryRef": "Medidas.% Derecha",
-              "nativeQueryRef": "LLA + PRO",
-              "displayName": "LLA + PRO"
+              "queryRef": "Medidas.% Peronismo",
+              "nativeQueryRef": "Peronismo",
+              "displayName": "Peronismo"
             }
           ]
         }
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#6A1B9A'"
+                      "Value": "'#2F80ED'"
                     }
                   }
                 }

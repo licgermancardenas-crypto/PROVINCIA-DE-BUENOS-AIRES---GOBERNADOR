@@ -3,7 +3,7 @@
   "name": "ficha_33_card",
   "position": {
     "x": 222,
-    "y": 528,
+    "y": 438,
     "z": 3300,
     "width": 230,
     "height": 82,
@@ -23,12 +23,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Electores"
+                  "Property": "Población"
                 }
               },
-              "queryRef": "Medidas.Electores",
-              "nativeQueryRef": "Electores",
-              "displayName": "Electores"
+              "queryRef": "Medidas.Población",
+              "nativeQueryRef": "Población 2022",
+              "displayName": "Población 2022"
             }
           ]
         }

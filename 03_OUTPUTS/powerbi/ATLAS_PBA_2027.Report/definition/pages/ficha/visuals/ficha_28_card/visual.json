@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "ficha_28_card",
   "position": {
-    "x": 1358,
+    "x": 1134,
     "y": 128,
     "z": 2800,
     "width": 214,
@@ -23,12 +23,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Participación"
+                  "Property": "Margen P-D (pts)"
                 }
               },
-              "queryRef": "Medidas.Participación",
-              "nativeQueryRef": "Participación",
-              "displayName": "Participación"
+              "queryRef": "Medidas.Margen P-D (pts)",
+              "nativeQueryRef": "Margen (pts)",
+              "displayName": "Margen (pts)"
             }
           ]
         }
@@ -43,7 +43,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#5B3F99'"
+                      "Value": "'#1D1631'"
                     }
                   }
                 }

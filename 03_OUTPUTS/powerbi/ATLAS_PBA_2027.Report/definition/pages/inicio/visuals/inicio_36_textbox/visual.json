@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "inicio_36_textbox",
   "position": {
-    "x": 910,
+    "x": 222,
     "y": 550,
     "z": 3600,
     "width": 334,
@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "⚙  Simulador",
+                    "value": "▤  Secciones electorales",
                     "textStyle": {
                       "fontFamily": "Segoe UI Semibold",
                       "fontSize": "12pt",

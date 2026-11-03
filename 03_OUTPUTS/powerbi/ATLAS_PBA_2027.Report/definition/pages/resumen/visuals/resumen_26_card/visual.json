@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "resumen_26_card",
   "position": {
-    "x": 912,
+    "x": 682,
     "y": 156,
     "z": 2600,
     "width": 220,
@@ -23,12 +23,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Diferencia de votos"
+                  "Property": "Ganador"
                 }
               },
-              "queryRef": "Medidas.Diferencia de votos",
-              "nativeQueryRef": "Diferencia peronismo − LLA/PRO",
-              "displayName": "Diferencia peronismo − LLA/PRO"
+              "queryRef": "Medidas.Ganador",
+              "nativeQueryRef": "Ganador",
+              "displayName": "Ganador"
             }
           ]
         }

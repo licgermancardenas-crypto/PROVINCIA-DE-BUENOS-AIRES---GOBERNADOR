@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "resumen_22_slicer",
   "position": {
-    "x": 1182,
+    "x": 752,
     "y": 88,
     "z": 2200,
-    "width": 408,
+    "width": 420,
     "height": 58,
     "tabOrder": 2200
   },
@@ -23,11 +23,11 @@
                       "Entity": "dim_municipio"
                     }
                   },
-                  "Property": "zona"
+                  "Property": "seccion"
                 }
               },
-              "queryRef": "dim_municipio.zona",
-              "nativeQueryRef": "zona"
+              "queryRef": "dim_municipio.seccion",
+              "nativeQueryRef": "seccion"
             }
           ]
         }
@@ -60,7 +60,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Zona'"
+                  "Value": "'Sección electoral'"
                 }
               }
             },
@@ -139,7 +139,7 @@
       ]
     },
     "syncGroup": {
-      "groupName": "zona",
+      "groupName": "seccion",
       "fieldChanges": true,
       "filterChanges": true
     }

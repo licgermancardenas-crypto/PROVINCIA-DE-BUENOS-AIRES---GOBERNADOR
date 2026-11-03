@@ -3,7 +3,7 @@
   "name": "ficha_36_card",
   "position": {
     "x": 222,
-    "y": 798,
+    "y": 708,
     "z": 3600,
     "width": 230,
     "height": 82,
@@ -23,12 +23,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Universitarios %"
+                  "Property": "Hogares en barrios populares %"
                 }
               },
-              "queryRef": "Medidas.Universitarios %",
-              "nativeQueryRef": "Universitarios",
-              "displayName": "Universitarios"
+              "queryRef": "Medidas.Hogares en barrios populares %",
+              "nativeQueryRef": "En barrios populares",
+              "displayName": "En barrios populares"
             }
           ]
         }
