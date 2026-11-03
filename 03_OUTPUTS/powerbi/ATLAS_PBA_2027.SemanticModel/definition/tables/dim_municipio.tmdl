@@ -1,0 +1,343 @@
+table dim_municipio
+
+	column cod_indec
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: cod_indec
+		isKey
+
+	column municipio
+		dataType: string
+		summarizeBy: none
+		sourceColumn: municipio
+
+	column seccion
+		dataType: string
+		summarizeBy: none
+		sourceColumn: seccion
+		sortByColumn: seccion_num
+
+	column seccion_num
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: seccion_num
+		isHidden
+
+	column zona
+		dataType: string
+		summarizeBy: none
+		sourceColumn: zona
+
+	column region
+		dataType: string
+		summarizeBy: none
+		sourceColumn: region
+
+	column pob
+		dataType: int64
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: pob
+
+	column pob26
+		dataType: int64
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: pob26
+
+	column km2
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: km2
+
+	column dens
+		dataType: double
+		summarizeBy: none
+		sourceColumn: dens
+
+	column hogares
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: hogares
+
+	column agua
+		dataType: double
+		summarizeBy: none
+		sourceColumn: agua
+
+	column cloaca
+		dataType: double
+		summarizeBy: none
+		sourceColumn: cloaca
+
+	column gas
+		dataType: double
+		summarizeBy: none
+		sourceColumn: gas
+
+	column nbi
+		dataType: double
+		summarizeBy: none
+		sourceColumn: nbi
+
+	column pct_univ
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pct_univ
+
+	column pct_65
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pct_65
+
+	column pct_18_29
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pct_18_29
+
+	column pct_extranjeros
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pct_extranjeros
+
+	column pct_internet
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pct_internet
+
+	column pct_sin_obra_social
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pct_sin_obra_social
+
+	column pct_barrio_popular
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pct_barrio_popular
+
+	column barrios_populares
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: barrios_populares
+
+	column escuelas
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: escuelas
+
+	column matricula
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: matricula
+
+	column centros_salud
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: centros_salud
+
+	column caps
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: caps
+
+	column transferencias_hab
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: transferencias_hab
+
+	column gasto_hab
+		dataType: double
+		summarizeBy: none
+		sourceColumn: gasto_hab
+
+	column transparencia_asap
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: transparencia_asap
+
+	column semaforo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: semaforo
+
+	column tasa_homicidios
+		dataType: double
+		summarizeBy: none
+		sourceColumn: tasa_homicidios
+
+	column mortalidad_infantil
+		dataType: double
+		summarizeBy: none
+		sourceColumn: mortalidad_infantil
+
+	column intendente
+		dataType: string
+		summarizeBy: none
+		sourceColumn: intendente
+
+	column intendente_espacio
+		dataType: string
+		summarizeBy: none
+		sourceColumn: intendente_espacio
+
+	column fuerza_intendente
+		dataType: string
+		summarizeBy: none
+		sourceColumn: fuerza_intendente
+
+	column intendente_partido
+		dataType: string
+		summarizeBy: none
+		sourceColumn: intendente_partido
+
+	column intendente_situacion
+		dataType: string
+		summarizeBy: none
+		sourceColumn: intendente_situacion
+
+	column intendente_desde
+		dataType: string
+		summarizeBy: none
+		sourceColumn: intendente_desde
+
+	column electo_2023
+		dataType: string
+		summarizeBy: none
+		sourceColumn: electo_2023
+
+	column electo_partido_2023
+		dataType: string
+		summarizeBy: none
+		sourceColumn: electo_partido_2023
+
+	column electo_alianza_2023
+		dataType: string
+		summarizeBy: none
+		sourceColumn: electo_alianza_2023
+
+	column reelecto_2023
+		dataType: string
+		summarizeBy: none
+		sourceColumn: reelecto_2023
+
+	column foto_url
+		dataType: string
+		summarizeBy: none
+		sourceColumn: foto_url
+		dataCategory: ImageUrl
+
+	column foto_credito
+		dataType: string
+		summarizeBy: none
+		sourceColumn: foto_credito
+		isHidden
+
+	column wikipedia_url
+		dataType: string
+		summarizeBy: none
+		sourceColumn: wikipedia_url
+		dataCategory: WebUrl
+
+	column ubicacion
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ubicacion
+		isHidden
+
+	column simulador_url
+		dataType: string
+		summarizeBy: none
+		sourceColumn: simulador_url
+		isHidden
+
+	column color_fuerza
+		dataType: string
+		summarizeBy: none
+		sourceColumn: color_fuerza
+		isHidden
+
+	column logo_url
+		dataType: string
+		summarizeBy: none
+		sourceColumn: logo_url
+		dataCategory: ImageUrl
+
+	column orden_fuerza
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: orden_fuerza
+		isHidden
+
+	column cx_p
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: cx_p
+		isHidden
+
+	column cy_p
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: cy_p
+		isHidden
+
+	column cx_c
+		dataType: double
+		summarizeBy: none
+		sourceColumn: cx_c
+		isHidden
+
+	column cy_c
+		dataType: double
+		summarizeBy: none
+		sourceColumn: cy_c
+		isHidden
+
+	column svg_prov
+		dataType: string
+		summarizeBy: none
+		sourceColumn: svg_prov
+		isHidden
+
+	column svg_conu
+		dataType: string
+		summarizeBy: none
+		sourceColumn: svg_conu
+		isHidden
+
+	column nombre_corto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: nombre_corto
+		isHidden
+
+	column rotulo_p
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: rotulo_p
+		isHidden
+
+	column rotulo_c
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: rotulo_c
+		isHidden
+
+	partition dim_municipio = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_municipio.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"cod_indec", Int64.Type}, {"municipio", type text}, {"seccion", type text}, {"seccion_num", Int64.Type}, {"zona", type text}, {"region", type text}, {"pob", Int64.Type}, {"pob26", Int64.Type}, {"km2", type number}, {"dens", type number}, {"hogares", type number}, {"agua", type number}, {"cloaca", type number}, {"gas", type number}, {"nbi", type number}, {"pct_univ", type number}, {"pct_65", type number}, {"pct_18_29", type number}, {"pct_extranjeros", type number}, {"pct_internet", type number}, {"pct_sin_obra_social", type number}, {"pct_barrio_popular", type number}, {"barrios_populares", type number}, {"escuelas", type number}, {"matricula", type number}, {"centros_salud", type number}, {"caps", type number}, {"transferencias_hab", Int64.Type}, {"gasto_hab", type number}, {"transparencia_asap", Int64.Type}, {"semaforo", type text}, {"tasa_homicidios", type number}, {"mortalidad_infantil", type number}, {"intendente", type text}, {"intendente_espacio", type text}, {"fuerza_intendente", type text}, {"intendente_partido", type text}, {"intendente_situacion", type text}, {"intendente_desde", type text}, {"electo_2023", type text}, {"electo_partido_2023", type text}, {"electo_alianza_2023", type text}, {"reelecto_2023", type text}, {"foto_url", type text}, {"foto_credito", type text}, {"wikipedia_url", type text}, {"ubicacion", type text}, {"simulador_url", type text}, {"color_fuerza", type text}, {"logo_url", type text}, {"orden_fuerza", Int64.Type}, {"cx_p", Int64.Type}, {"cy_p", Int64.Type}, {"cx_c", type number}, {"cy_c", type number}, {"svg_prov", type text}, {"svg_conu", type text}, {"nombre_corto", type text}, {"rotulo_p", Int64.Type}, {"rotulo_c", Int64.Type}}, "en-US")
+				in
+				    Tipos
+

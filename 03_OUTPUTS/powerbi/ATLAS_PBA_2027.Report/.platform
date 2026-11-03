@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "ATLAS_PBA_2027"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "17ccc1a0-ca90-4a17-bf58-4907d64f1c93"
+  }
+}

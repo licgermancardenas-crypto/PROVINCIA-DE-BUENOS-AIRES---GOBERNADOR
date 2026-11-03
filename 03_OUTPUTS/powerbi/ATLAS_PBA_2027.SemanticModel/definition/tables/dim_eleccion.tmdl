@@ -1,0 +1,64 @@
+table dim_eleccion
+
+	column eleccion
+		dataType: string
+		summarizeBy: none
+		sourceColumn: eleccion
+		isKey
+
+	column rotulo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: rotulo
+		sortByColumn: orden
+
+	column anio
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: anio
+
+	column tipo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: tipo
+
+	column cargo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: cargo
+
+	column fuente
+		dataType: string
+		summarizeBy: none
+		sourceColumn: fuente
+		isHidden
+
+	column grupo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: grupo
+
+	column etiqueta
+		dataType: string
+		summarizeBy: none
+		sourceColumn: etiqueta
+		sortByColumn: orden
+
+	column orden
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: orden
+		isHidden
+
+	partition dim_eleccion = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_eleccion.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"eleccion", type text}, {"rotulo", type text}, {"anio", Int64.Type}, {"tipo", type text}, {"cargo", type text}, {"fuente", type text}, {"grupo", type text}, {"etiqueta", type text}, {"orden", Int64.Type}}, "en-US")
+				in
+				    Tipos
+

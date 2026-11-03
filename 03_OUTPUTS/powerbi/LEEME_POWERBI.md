@@ -53,3 +53,14 @@ detalles) · información emergente al pasar el mouse.
 Antes de abrirlo, una sola vez: *Archivo > Opciones y configuración > Opciones > Características en
 versión preliminar > «Objeto visual de mapa de formas»*, y reiniciar Power BI. Al abrirlo, *Inicio >
 Actualizar* para cargar los datos.
+
+## Tablero «ATLAS PBA 2027» (`ATLAS_PBA_2027.pbip`) · sistema de diseño ATLAS
+
+Mismo diseño que los tableros de Brasil 2026 y CABA 2027 (barra lateral, fondo claro, tarjetas
+blancas). Datos públicos en `datos_2027/`. Se genera con
+`python 02_SCRIPTS/productos/p09_powerbi_pba2027.py` (usa `pbi_atlas.py`, copia de la biblioteca del
+tablero de CABA).
+
+Entrega 1: Inicio · Resumen provincial · Mapa de municipios (10 métricas) · Conurbano · Ficha del
+municipio (clic derecho > Obtener detalles) · tooltip. El mapa es una imagen SVG calculada con DAX:
+no necesita activar ninguna versión preliminar y se ve igual en Power BI web.

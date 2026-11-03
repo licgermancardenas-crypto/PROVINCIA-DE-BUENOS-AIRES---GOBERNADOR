@@ -1,0 +1,41 @@
+table fact_votos
+
+	column eleccion
+		dataType: string
+		summarizeBy: none
+		sourceColumn: eleccion
+		isHidden
+
+	column cod_indec
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: cod_indec
+		isHidden
+
+	column espacio
+		dataType: string
+		summarizeBy: none
+		sourceColumn: espacio
+		isHidden
+
+	column pct
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pct
+
+	column votos
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: votos
+
+	partition fact_votos = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(CarpetaDatos & "fact_votos.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"eleccion", type text}, {"cod_indec", Int64.Type}, {"espacio", type text}, {"pct", type number}, {"votos", type number}}, "en-US")
+				in
+				    Tipos
+

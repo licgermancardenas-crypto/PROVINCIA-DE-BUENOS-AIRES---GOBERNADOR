@@ -1,0 +1,18 @@
+eleccion,rotulo,anio,tipo,cargo,fuente,grupo,etiqueta,orden
+D2025,Diputados nacionales 2025,2025,GENERALES,DIPUTADOS NACIONALES,dine_mesa,Diputados nacionales,Dip. 2025,20256
+S2025,Legislativa provincial sep. 2025,2025,PROVINCIAL,DIPUTADOS PROVINCIALES + SENADORES PROVINCIALES,jep_definitivo,Legislativa provincial,Prov. 2025,20255
+G2023,Gobernador 2023,2023,GENERALES,GOBERNADOR,gba_definitivo,Gobernador,Gob. 2023,20231
+I2023,Intendente 2023,2023,GENERALES,INTENDENTE,gba_definitivo,Intendente,Int. 2023,20232
+P2023,Presidente 2023,2023,GENERALES,PRESIDENTE,dine_mesa,Presidente,Pres. 2023,20233
+B2023,"Presidente 2023, segunda vuelta",2023,SEGUNDA VUELTA,PRESIDENTE,dine_mesa,Presidente,Bal. 2023,20234
+D2021,Diputados nacionales 2021,2021,GENERALES,DIPUTADOS NACIONALES,dine_mesa,Diputados nacionales,Dip. 2021,20216
+G2019,Gobernador 2019,2019,GENERALES,GOBERNADOR,gba_definitivo,Gobernador,Gob. 2019,20191
+I2019,Intendente 2019,2019,GENERALES,INTENDENTE,gba_definitivo,Intendente,Int. 2019,20192
+P2019,Presidente 2019,2019,GENERALES,PRESIDENTE,dine_mesa,Presidente,Pres. 2019,20193
+D2017,Diputados nacionales 2017,2017,GENERALES,DIPUTADOS NACIONALES,dine_mesa,Diputados nacionales,Dip. 2017,20176
+G2015,Gobernador 2015,2015,GENERALES,GOBERNADOR,gba_definitivo,Gobernador,Gob. 2015,20151
+I2015,Intendente 2015,2015,GENERALES,INTENDENTE,gba_definitivo,Intendente,Int. 2015,20152
+P2015,Presidente 2015,2015,GENERALES,PRESIDENTE,dine_mesa,Presidente,Pres. 2015,20153
+D2013,Diputados nacionales 2013,2013,GENERALES,DIPUTADOS NACIONALES,dine_mesa,Diputados nacionales,Dip. 2013,20136
+G2011,Gobernador 2011,2011,GENERALES,GOBERNADOR,gba_definitivo,Gobernador,Gob. 2011,20111
+G2007,Gobernador 2007,2007,GENERALES,GOBERNADOR,gba_definitivo,Gobernador,Gob. 2007,20071

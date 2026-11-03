@@ -1,0 +1,22 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: es-AR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["CarpetaDatos", "dim_municipio", "dim_eleccion", "dim_espacio", "fact_votos", "fact_participacion", "fact_motor_2027", "escenarios_2027", "metrica_mapa", "Medidas"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+ref table dim_municipio
+ref table dim_eleccion
+ref table dim_espacio
+ref table fact_votos
+ref table fact_participacion
+ref table fact_motor_2027
+ref table escenarios_2027
+ref table metrica_mapa
+ref table Medidas

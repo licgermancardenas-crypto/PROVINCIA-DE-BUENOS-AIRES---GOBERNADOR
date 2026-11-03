@@ -1,0 +1,46 @@
+table fact_motor_2027
+
+	column escenario
+		dataType: string
+		summarizeBy: none
+		sourceColumn: escenario
+
+	column escenario_clave
+		dataType: string
+		summarizeBy: none
+		sourceColumn: escenario_clave
+		isHidden
+
+	column cod_indec
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: cod_indec
+		isHidden
+
+	column pct_peronismo
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pct_peronismo
+
+	column p_gana_peronismo
+		dataType: double
+		formatString: 0%
+		summarizeBy: none
+		sourceColumn: p_gana_peronismo
+
+	column rango_p
+		dataType: string
+		summarizeBy: none
+		sourceColumn: rango_p
+
+	partition fact_motor_2027 = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(CarpetaDatos & "fact_motor_2027.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"escenario", type text}, {"escenario_clave", type text}, {"cod_indec", Int64.Type}, {"pct_peronismo", type number}, {"p_gana_peronismo", type number}, {"rango_p", type text}}, "en-US")
+				in
+				    Tipos
+

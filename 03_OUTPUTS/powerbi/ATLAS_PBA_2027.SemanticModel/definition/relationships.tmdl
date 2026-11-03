@@ -1,0 +1,23 @@
+relationship rel_00
+	fromColumn: fact_votos.cod_indec
+	toColumn: dim_municipio.cod_indec
+
+relationship rel_01
+	fromColumn: fact_votos.eleccion
+	toColumn: dim_eleccion.eleccion
+
+relationship rel_02
+	fromColumn: fact_votos.espacio
+	toColumn: dim_espacio.espacio
+
+relationship rel_03
+	fromColumn: fact_participacion.cod_indec
+	toColumn: dim_municipio.cod_indec
+
+relationship rel_04
+	fromColumn: fact_participacion.eleccion
+	toColumn: dim_eleccion.eleccion
+
+relationship rel_05
+	fromColumn: fact_motor_2027.cod_indec
+	toColumn: dim_municipio.cod_indec

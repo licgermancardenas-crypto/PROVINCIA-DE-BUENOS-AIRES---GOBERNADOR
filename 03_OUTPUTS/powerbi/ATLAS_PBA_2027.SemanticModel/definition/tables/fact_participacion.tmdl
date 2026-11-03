@@ -1,0 +1,106 @@
+table fact_participacion
+
+	column eleccion
+		dataType: string
+		summarizeBy: none
+		sourceColumn: eleccion
+		isHidden
+
+	column cod_indec
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: cod_indec
+		isHidden
+
+	column votos_positivos
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: votos_positivos
+
+	column electores
+		dataType: double
+		summarizeBy: none
+		sourceColumn: electores
+
+	column participacion
+		dataType: double
+		summarizeBy: none
+		sourceColumn: participacion
+
+	column ganador
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ganador
+		isHidden
+
+	column margen
+		dataType: double
+		summarizeBy: none
+		sourceColumn: margen
+
+	column ganador_nombre
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ganador_nombre
+
+	column pct_peronismo
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pct_peronismo
+
+	column rango_peronismo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: rango_peronismo
+		sortByColumn: orden_rango_peronismo
+
+	column rango_participacion
+		dataType: string
+		summarizeBy: none
+		sourceColumn: rango_participacion
+		sortByColumn: orden_rango_participacion
+
+	column competencia
+		dataType: string
+		summarizeBy: none
+		sourceColumn: competencia
+		sortByColumn: orden_competencia
+
+	column orden_rango_peronismo
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: orden_rango_peronismo
+		isHidden
+
+	column orden_rango_participacion
+		dataType: double
+		summarizeBy: none
+		sourceColumn: orden_rango_participacion
+		isHidden
+
+	column orden_competencia
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: orden_competencia
+		isHidden
+
+	column clave
+		dataType: string
+		summarizeBy: none
+		sourceColumn: clave
+		isHidden
+
+	partition fact_participacion = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(CarpetaDatos & "fact_participacion.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"eleccion", type text}, {"cod_indec", Int64.Type}, {"votos_positivos", Int64.Type}, {"electores", type number}, {"participacion", type number}, {"ganador", type text}, {"margen", type number}, {"ganador_nombre", type text}, {"pct_peronismo", type number}, {"rango_peronismo", type text}, {"rango_participacion", type text}, {"competencia", type text}, {"orden_rango_peronismo", Int64.Type}, {"orden_rango_participacion", type number}, {"orden_competencia", Int64.Type}, {"clave", type text}}, "en-US")
+				in
+				    Tipos
+

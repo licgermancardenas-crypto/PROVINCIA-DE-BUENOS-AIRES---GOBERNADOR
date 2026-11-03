@@ -1,0 +1,2 @@
+expression CarpetaDatos = "E:\PROVINCIA DE BUENOS AIRES ELECCIONES\03_OUTPUTS\powerbi\datos_2027\" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	annotation PBI_ResultType = Text

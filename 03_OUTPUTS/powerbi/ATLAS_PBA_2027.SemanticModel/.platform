@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "ATLAS_PBA_2027"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "9e7fe868-d475-4212-a138-b4223d19a58f"
+  }
+}

@@ -1,0 +1,48 @@
+table escenarios_2027
+
+	column escenario
+		dataType: string
+		summarizeBy: none
+		sourceColumn: escenario
+
+	column grupo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: grupo
+
+	column margen_p10
+		dataType: double
+		summarizeBy: none
+		sourceColumn: margen_p10
+
+	column margen
+		dataType: double
+		summarizeBy: none
+		sourceColumn: margen
+
+	column margen_p90
+		dataType: double
+		summarizeBy: none
+		sourceColumn: margen_p90
+
+	column p_gana_peronismo
+		dataType: double
+		formatString: 0%
+		summarizeBy: none
+		sourceColumn: p_gana_peronismo
+
+	column municipios_peronistas
+		dataType: double
+		summarizeBy: none
+		sourceColumn: municipios_peronistas
+
+	partition escenarios_2027 = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(CarpetaDatos & "escenarios_2027.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"escenario", type text}, {"grupo", type text}, {"margen_p10", type number}, {"margen", type number}, {"margen_p90", type number}, {"p_gana_peronismo", type number}, {"municipios_peronistas", type number}}, "en-US")
+				in
+				    Tipos
+

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "ficha",
+  "displayName": "Ficha del municipio",
+  "displayOption": "FitToPage",
+  "height": 900,
+  "width": 1600,
+  "type": "Drillthrough",
+  "pageBinding": {
+    "name": "pb_ficha",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "par_municipio",
+        "boundFilter": "dt_municipio",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_municipio"
+              }
+            },
+            "Property": "municipio"
+          }
+        }
+      }
+    ]
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "dt_municipio",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_municipio"
+              }
+            },
+            "Property": "municipio"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "ficha_20_slicer",
+      "target": "ficha_29_lineChart",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ficha_20_slicer",
+      "target": "ficha_37_tableEx",
+      "type": "NoFilter"
+    }
+  ]
+}
