@@ -637,6 +637,11 @@ table Medidas
 		formatString: 0
 		displayFolder: 07 · Corrimientos
 
+	measure 'Tamaño por electores' =
+			[Electores]
+		formatString: #,0
+		displayFolder: 08 · Dónde se decide
+
 	measure 'Margen absoluto (pts)' =
 			ABS([Margen P-D (pts)])
 		formatString: 0.0

@@ -685,9 +685,24 @@ def generar(esquemas: Path | None = None) -> Path:
         "$schema": "https://developer.microsoft.com/json-schemas/fabric/pbip/pbipProperties/1.0.0/schema.json",
         "version": "1.0", "artifacts": [{"report": {"path": f"{NOMBRE}.Report"}}], "settings": {"enableAutoRecovery": True}}, indent=2))
     print(f"proyecto: {PBI / (NOMBRE + '.pbip')} · {sum(1 for _ in rp.rglob('visual.json'))} visuales")
+    revisar_nombres(rp)
     if esquemas:
         b.validar(rp, esquemas)
     return PBI / f"{NOMBRE}.pbip"
+
+
+def revisar_nombres(rp: Path) -> None:
+    """Power BI no abre el informe si un mismo campo aparece dos veces en un visual con nombres distintos."""
+    errores = []
+    for f in rp.rglob("visual.json"):
+        qs = json.loads(f.read_text(encoding="utf-8")).get("visual", {}).get("query", {}).get("queryState", {})
+        nombres: dict = {}
+        for r in qs.values():
+            for pr in r.get("projections", []):
+                nombres.setdefault(pr["queryRef"], set()).add(pr.get("displayName", ""))
+        errores += [f"{f.parent.name}: {k} {sorted(v)}" for k, v in nombres.items() if len(v) > 1]
+    if errores:
+        sys.exit("Campo repetido con distinto nombre en un visual: " + " | ".join(errores))
 
 
 if __name__ == "__main__":

@@ -97,12 +97,12 @@
                       "Entity": "Medidas"
                     }
                   },
-                  "Property": "Electores"
+                  "Property": "Tamaño por electores"
                 }
               },
-              "queryRef": "Medidas.Electores",
-              "nativeQueryRef": "Electores",
-              "displayName": "Electores "
+              "queryRef": "Medidas.Tamaño por electores",
+              "nativeQueryRef": "Tamaño: electores",
+              "displayName": "Tamaño: electores"
             }
           ]
         }

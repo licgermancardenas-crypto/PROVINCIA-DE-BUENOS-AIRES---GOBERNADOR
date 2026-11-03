@@ -195,6 +195,7 @@ def medidas(meta) -> list:
         ("Municipios donde creció el peronismo", "COUNTROWS(FILTER(VALUES(dim_municipio[cod_indec]), [Corrimiento peronismo (pts)] > 0))", "0", F["cor"]),
         ("Municipios donde cayó el peronismo", "COUNTROWS(FILTER(VALUES(dim_municipio[cod_indec]), [Corrimiento peronismo (pts)] < 0))", "0", F["cor"]),
         # dónde se decide
+        ("Tamaño por electores", "[Electores]", "#,0", F["dec"]),
         ("Margen absoluto (pts)", "ABS([Margen P-D (pts)])", "0.0", F["dec"]),
         ("Votos para dar vuelta", "ABS([Diferencia de votos]) / 2", "#,0", F["dec"]),
         ("Municipios bisagra", "COUNTROWS(FILTER(VALUES(dim_municipio[cod_indec]), ABS([Margen P-D (pts)]) < 5))", "0", F["dec"]),
@@ -374,7 +375,7 @@ def paginas(t: dict) -> list:
         pg.tarjeta(X0 + i * 345, 156, 335, 86, m, et, size=22, fg=c)
     sc = pg.add("scatterChart", X0, 252, 760, 638,
                 query={"Category": [proj(DM("municipio"))], "Series": [proj(DM("zona"))], "X": [proj(Me("Margen P-D (pts)"), "Margen (pts)")],
-                       "Y": [proj(Me("Electores"), "Electores")], "Size": [proj(Me("Electores"), "Electores ")]},
+                       "Y": [proj(Me("Electores"), "Electores")], "Size": [proj(Me("Tamaño por electores"), "Tamaño: electores")]},
                 objects={"dataPoint": p.colores_serie("dim_municipio", "zona", {"Conurbano": PER, "Interior": ORO}),
                          "legend": [{"properties": {"show": lit(True), "position": lit("Top")}}],
                          "categoryAxis": [{"properties": {"showAxisTitle": lit(True), "fontSize": lit(9)}}],
