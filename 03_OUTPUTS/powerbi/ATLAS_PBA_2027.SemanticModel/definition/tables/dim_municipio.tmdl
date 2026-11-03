@@ -331,13 +331,32 @@ table dim_municipio
 		sourceColumn: rotulo_c
 		isHidden
 
+	column reeleccion_2027
+		dataType: string
+		summarizeBy: none
+		sourceColumn: reeleccion_2027
+		sortByColumn: orden_reeleccion
+
+	column color_reeleccion
+		dataType: string
+		summarizeBy: none
+		sourceColumn: color_reeleccion
+		isHidden
+
+	column orden_reeleccion
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: orden_reeleccion
+		isHidden
+
 	partition dim_municipio = m
 		mode: import
 		source =
 				let
 				    Origen = Csv.Document(File.Contents(CarpetaDatos & "dim_municipio.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
 				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
-				    Tipos = Table.TransformColumnTypes(Encabezados, {{"cod_indec", Int64.Type}, {"municipio", type text}, {"seccion", type text}, {"seccion_num", Int64.Type}, {"zona", type text}, {"region", type text}, {"pob", Int64.Type}, {"pob26", Int64.Type}, {"km2", type number}, {"dens", type number}, {"hogares", type number}, {"agua", type number}, {"cloaca", type number}, {"gas", type number}, {"nbi", type number}, {"pct_univ", type number}, {"pct_65", type number}, {"pct_18_29", type number}, {"pct_extranjeros", type number}, {"pct_internet", type number}, {"pct_sin_obra_social", type number}, {"pct_barrio_popular", type number}, {"barrios_populares", type number}, {"escuelas", type number}, {"matricula", type number}, {"centros_salud", type number}, {"caps", type number}, {"transferencias_hab", Int64.Type}, {"gasto_hab", type number}, {"transparencia_asap", Int64.Type}, {"semaforo", type text}, {"tasa_homicidios", type number}, {"mortalidad_infantil", type number}, {"intendente", type text}, {"intendente_espacio", type text}, {"fuerza_intendente", type text}, {"intendente_partido", type text}, {"intendente_situacion", type text}, {"intendente_desde", type text}, {"electo_2023", type text}, {"electo_partido_2023", type text}, {"electo_alianza_2023", type text}, {"reelecto_2023", type text}, {"foto_url", type text}, {"foto_credito", type text}, {"wikipedia_url", type text}, {"ubicacion", type text}, {"simulador_url", type text}, {"color_fuerza", type text}, {"logo_url", type text}, {"orden_fuerza", Int64.Type}, {"cx_p", Int64.Type}, {"cy_p", Int64.Type}, {"cx_c", type number}, {"cy_c", type number}, {"svg_prov", type text}, {"svg_conu", type text}, {"nombre_corto", type text}, {"rotulo_p", Int64.Type}, {"rotulo_c", Int64.Type}}, "en-US")
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"cod_indec", Int64.Type}, {"municipio", type text}, {"seccion", type text}, {"seccion_num", Int64.Type}, {"zona", type text}, {"region", type text}, {"pob", Int64.Type}, {"pob26", Int64.Type}, {"km2", type number}, {"dens", type number}, {"hogares", type number}, {"agua", type number}, {"cloaca", type number}, {"gas", type number}, {"nbi", type number}, {"pct_univ", type number}, {"pct_65", type number}, {"pct_18_29", type number}, {"pct_extranjeros", type number}, {"pct_internet", type number}, {"pct_sin_obra_social", type number}, {"pct_barrio_popular", type number}, {"barrios_populares", type number}, {"escuelas", type number}, {"matricula", type number}, {"centros_salud", type number}, {"caps", type number}, {"transferencias_hab", Int64.Type}, {"gasto_hab", type number}, {"transparencia_asap", Int64.Type}, {"semaforo", type text}, {"tasa_homicidios", type number}, {"mortalidad_infantil", type number}, {"intendente", type text}, {"intendente_espacio", type text}, {"fuerza_intendente", type text}, {"intendente_partido", type text}, {"intendente_situacion", type text}, {"intendente_desde", type text}, {"electo_2023", type text}, {"electo_partido_2023", type text}, {"electo_alianza_2023", type text}, {"reelecto_2023", type text}, {"foto_url", type text}, {"foto_credito", type text}, {"wikipedia_url", type text}, {"ubicacion", type text}, {"simulador_url", type text}, {"color_fuerza", type text}, {"logo_url", type text}, {"orden_fuerza", Int64.Type}, {"cx_p", Int64.Type}, {"cy_p", Int64.Type}, {"cx_c", type number}, {"cy_c", type number}, {"svg_prov", type text}, {"svg_conu", type text}, {"nombre_corto", type text}, {"rotulo_p", Int64.Type}, {"rotulo_c", Int64.Type}, {"reeleccion_2027", type text}, {"color_reeleccion", type text}, {"orden_reeleccion", Int64.Type}}, "en-US")
 				in
 				    Tipos
 

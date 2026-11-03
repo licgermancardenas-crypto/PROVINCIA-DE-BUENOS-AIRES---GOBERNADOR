@@ -88,18 +88,6 @@
                     }
                   }
                 ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "En gris: páginas de la próxima entrega",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "8pt",
-                      "color": "#6F6790"
-                    }
-                  }
-                ]
               }
             ]
           }

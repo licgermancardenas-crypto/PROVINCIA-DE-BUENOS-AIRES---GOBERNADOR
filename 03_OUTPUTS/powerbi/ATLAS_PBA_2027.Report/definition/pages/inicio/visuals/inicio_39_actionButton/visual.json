@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "inicio_39_actionButton",
   "position": {
-    "x": 910,
+    "x": 566,
     "y": 550,
     "z": 3900,
     "width": 334,
@@ -223,7 +223,7 @@
             "navigationSection": {
               "expr": {
                 "Literal": {
-                  "Value": "'historia'"
+                  "Value": "'decide'"
                 }
               }
             }

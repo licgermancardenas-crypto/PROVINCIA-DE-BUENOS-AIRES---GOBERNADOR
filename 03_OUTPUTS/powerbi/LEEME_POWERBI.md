@@ -61,6 +61,8 @@ blancas). Datos públicos en `datos_2027/`. Se genera con
 `python 02_SCRIPTS/productos/p09_powerbi_pba2027.py` (usa `pbi_atlas.py`, copia de la biblioteca del
 tablero de CABA).
 
-Entrega 1: Inicio · Resumen provincial · Mapa de municipios (10 métricas) · Conurbano · Ficha del
-municipio (clic derecho > Obtener detalles) · tooltip. El mapa es una imagen SVG calculada con DAX:
+Páginas: Inicio · Mapa completo · Resumen provincial · Mapa de municipios (13 métricas) · Conurbano ·
+Secciones electorales · Mapa fino (1.146 circuitos) · Explorador · Corrimientos · Dónde se decide ·
+Intendentes 2027 · Pronóstico 2027 · Simulador · Historia 2007-2025 (animada) · Metodología · Ficha del
+municipio (clic derecho > Obtener detalles) · tooltip. La entrega 2 está en `p09_entrega2.py`. El mapa es una imagen SVG calculada con DAX:
 no necesita activar ninguna versión preliminar y se ve igual en Power BI web.

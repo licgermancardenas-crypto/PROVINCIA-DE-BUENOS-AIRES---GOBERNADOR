@@ -1,0 +1,84 @@
+table secciones
+
+	column seccion
+		dataType: string
+		summarizeBy: none
+		sourceColumn: seccion
+		isKey
+		sortByColumn: seccion_num
+
+	column seccion_num
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: seccion_num
+		isHidden
+
+	column region
+		dataType: string
+		summarizeBy: none
+		sourceColumn: region
+
+	column diputados
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: diputados
+
+	column senadores
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: senadores
+
+	column path_p
+		dataType: string
+		summarizeBy: none
+		sourceColumn: path_p
+		isHidden
+
+	column cx
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: cx
+		isHidden
+
+	column cy
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: cy
+		isHidden
+
+	column lx
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: lx
+		isHidden
+
+	column ly
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: ly
+		isHidden
+
+	column fuera
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: fuera
+		isHidden
+
+	partition secciones = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(CarpetaDatos & "secciones.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"seccion", type text}, {"seccion_num", Int64.Type}, {"region", type text}, {"diputados", Int64.Type}, {"senadores", Int64.Type}, {"path_p", type text}, {"cx", Int64.Type}, {"cy", Int64.Type}, {"lx", Int64.Type}, {"ly", Int64.Type}, {"fuera", Int64.Type}}, "en-US")
+				in
+				    Tipos
+

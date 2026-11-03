@@ -1,0 +1,13 @@
+table sim_swing
+
+	column 'Corrimiento uniforme (pts)'
+		dataType: double
+		formatString: +0;-0;0
+		summarizeBy: none
+		sourceColumn: [Value]
+
+	partition sim_swing = calculated
+		mode: import
+		source =
+				GENERATESERIES(-10, 10, 1)
+

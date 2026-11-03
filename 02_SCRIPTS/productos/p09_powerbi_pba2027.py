@@ -71,12 +71,15 @@ METRICAS = [
     (8, "Hogares con NBI (censo 2022)", "[Hogares con NBI %]", 1, f'"{ROJO}"', None, "0.0%", None, None),
     (9, "Hogares en barrios populares", "[Hogares en barrios populares %]", 1, f'"{ORO}"', None, "0.0%", None, None),
     (10, "Electores", "[Electores]", 1, f'"{INK}"', None, "#,0", None, None),
+    (11, "Fuerza del intendente (oct. 2026)", "[Uno]", 2, None, None, ";;;", "[Color intendente]", "[Fuerza del intendente]"),
+    (12, "Corrimiento del peronismo vs. elección base (pts)", "[Corrimiento peronismo (pts)]", 3, f'"{PER}"', f'"{ROJO}"', "+0;-0;0", None, None),
+    (13, "Reelección del intendente en 2027", "[Uno]", 2, None, None, ";;;", "[Color reelección]", "[Reelección 2027]"),
 ]
 
 NAV = [("inicio", "Inicio", "⌂"), ("mapa_completo", "Mapa completo", "▣"), ("resumen", "Resumen provincial", "◉"), ("mapa", "Mapa de municipios", "▦"),
-       ("conurbano", "Conurbano", "◎"), (None, "Secciones electorales", "▤"), (None, "Mapa fino · circuitos", "▩"),
-       (None, "Explorador", "✛"), (None, "Corrimientos", "↗"), (None, "Dónde se decide", "⚑"), (None, "Intendentes 2027", "★"),
-       (None, "Pronóstico 2027", "◔"), (None, "Simulador", "⚙"), ("historia", "Historia 2007-2025", "≋"), (None, "Metodología", "ℹ")]
+       ("conurbano", "Conurbano", "◎"), ("secciones", "Secciones electorales", "▤"), ("mapa_fino", "Mapa fino · circuitos", "▩"),
+       ("explorador", "Explorador", "✛"), ("corrimientos", "Corrimientos", "↗"), ("decide", "Dónde se decide", "⚑"), ("intendentes", "Intendentes 2027", "★"),
+       ("pronostico", "Pronóstico 2027", "◔"), ("simulador", "Simulador", "⚙"), ("historia", "Historia 2007-2025", "≋"), ("metodologia", "Metodología", "ℹ")]
 TT = "tt_municipio"
 DM = lambda c: C("dim_municipio", c)  # noqa: E731
 
@@ -133,6 +136,8 @@ def datos() -> dict:
     t["dim_espacio"] = e
     t["escenarios_2027"] = pd.read_csv(b.DATOS / "escenarios_2027.csv")
     t["meta"] = meta
+    import p09_entrega2 as e2
+    e2.datos(t)
     return t
 
 
@@ -256,7 +261,7 @@ def medidas(meta) -> list:
         ("Margen P-D (pts)", "([% Peronismo] - [% Derecha]) * 100", "+0.0;-0.0;0", F["vot"]),
         ("Cambio peronismo vs 2023 (pts)", '([% Peronismo] - CALCULATE([% Peronismo], REMOVEFILTERS(dim_eleccion), dim_eleccion[eleccion] = "G2023")) * 100',
          "+0.0;-0.0;0", F["vot"]),
-        ("P(peronismo) 2027 base", 'CALCULATE(AVERAGE(fact_motor_2027[p_gana_peronismo]), fact_motor_2027[escenario_clave] = "A")', "0%", F["pro"]),
+        ("P(peronismo) 2027 base", 'IF(ISFILTERED(fact_motor_2027[escenario]), AVERAGE(fact_motor_2027[p_gana_peronismo]), CALCULATE(AVERAGE(fact_motor_2027[p_gana_peronismo]), fact_motor_2027[escenario_clave] = "A"))', "0%", F["pro"]),
         ("Electores provincia", "CALCULATE([Electores], REMOVEFILTERS(dim_municipio))", "#,0", F["vot"]),
         ("% del padrón provincial", "DIVIDE([Electores], [Electores provincia])", "0.0%", F["vot"]),
         ("Color diferencia", f'IF([Diferencia de votos] >= 0, "{PER}", "{DER}")', None, F["txt"]),
@@ -272,7 +277,8 @@ def medidas(meta) -> list:
          None, F["map"]),
         ("Color métrica", f"{cabecera()}\nVAR v = [Valor métrica]\nRETURN SWITCH(TRUE(), modo = 2, [Color ganador], modo = 3 && v < 0, neg, base)", None, F["txt"]),
         ("Título del mapa", 'VAR m = SELECTEDVALUE(metrica_mapa[metrica], "Ganador de la elección")\nVAR idm = [Métrica]\n'
-                            'RETURN m & IF(idm <= 6, "  ·  " & [Elección seleccionada], IF(idm = 7, "  ·  escenario: se repite octubre 2025", "  ·  censo 2022"))',
+                            'RETURN m & SWITCH(TRUE(), idm <= 6 || idm = 10, "  ·  " & [Elección seleccionada], idm = 7, "  ·  " & SELECTEDVALUE(fact_motor_2027[escenario], "escenario: se repite octubre 2025"), '
+                            'idm = 12, "  ·  " & [Elección seleccionada] & " vs. " & [Elección base elegida], idm = 11 || idm = 13, "  ·  intendentes en ejercicio", "  ·  censo 2022")',
          None, F["map"]),
         ("Corte", '"Elección: " & [Elección seleccionada] & "  ·  datos DINE, Junta Electoral PBA, INDEC 2022  ·  motor ATLAS (1.000 simulaciones)"', None, F["txt"]),
         ("Título ficha", 'IF(HASONEVALUE(dim_municipio[cod_indec]), SELECTEDVALUE(dim_municipio[municipio]), "Elegí un municipio")', None, F["txt"]),
@@ -287,7 +293,8 @@ def medidas(meta) -> list:
         ("SVG barra pronóstico", barra_dos(f"(50 + {esc('margen')} / 2)", f"(50 - {esc('margen')} / 2)", ""), None, F["pro"], {"dataCategory": "ImageUrl"}),
         ("SVG barra elección", barra_dos("[% Peronismo]", "[% Derecha]", ""), None, F["vot"], {"dataCategory": "ImageUrl"}),
     ]
-    return base + nuevas
+    import p09_entrega2 as e2
+    return base + nuevas + e2.medidas(meta)
 
 
 def modelo(t: dict) -> dict:
@@ -295,9 +302,9 @@ def modelo(t: dict) -> dict:
     T = {}
     oc_m = ("svg_prov", "svg_conu", "cx_p", "cy_p", "cx_c", "cy_c", "rotulo_p", "rotulo_c", "nombre_corto", "seccion_num", "orden",
             "color_fuerza", "ubicacion", "simulador_url", "foto_credito", "electo_foto_licencia", "electo_foto_autor", "electo_foto_fuente",
-            "misma_persona", "orden_fuerza")
+            "misma_persona", "orden_fuerza", "color_reeleccion", "orden_reeleccion")
     T["dim_municipio"] = tabla_csv("dim_municipio", DATOS, "dim_municipio.csv", sumar=tuple(c for c in b.SUMA if c in t["dim_municipio"].columns),
-                                   ocultas=oc_m, extra_col={"cod_indec": {"isKey": ""}, "seccion": {"sortByColumn": "seccion_num"},
+                                   ocultas=oc_m, extra_col={"cod_indec": {"isKey": ""}, "seccion": {"sortByColumn": "seccion_num"}, "reeleccion_2027": {"sortByColumn": "orden_reeleccion"},
                                                             "foto_url": {"dataCategory": "ImageUrl"}, "logo_url": {"dataCategory": "ImageUrl"},
                                                             "wikipedia_url": {"dataCategory": "WebUrl"}})
     T["dim_eleccion"] = tabla_csv("dim_eleccion", DATOS, "dim_eleccion.csv", ocultas=("orden", "fuente"),
@@ -315,6 +322,8 @@ def modelo(t: dict) -> dict:
     filas = ",\n".join(f'    {{{m[0]}, "{m[1]}"}}' for m in METRICAS)
     T["metrica_mapa"] = tabla_calculada("metrica_mapa", f'DATATABLE("id", INTEGER, "metrica", STRING, {{\n{filas}\n}})',
                                         [("id", "int64", None, {"isHidden": True}), ("metrica", "string", None, {"sortByColumn": "id"})])
+    import p09_entrega2 as e2
+    T.update(e2.tablas(t))
     T["Medidas"] = tabla_calculada("Medidas", "{BLANK()}", [("Valor", "string", None, {"isHidden": True}, "[Value]")], medidas(t["meta"]))
     A = {f"definition/tables/{n}.tmdl": s for n, s in T.items()}
     A["definition/expressions.tmdl"] = (f'expression CarpetaDatos = "{DATOS}\\" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]\n'
@@ -322,7 +331,7 @@ def modelo(t: dict) -> dict:
     A["definition/relationships.tmdl"] = relaciones([
         (("fact_votos", "cod_indec"), ("dim_municipio", "cod_indec")), (("fact_votos", "eleccion"), ("dim_eleccion", "eleccion")),
         (("fact_votos", "espacio"), ("dim_espacio", "espacio")), (("fact_participacion", "cod_indec"), ("dim_municipio", "cod_indec")),
-        (("fact_participacion", "eleccion"), ("dim_eleccion", "eleccion")), (("fact_motor_2027", "cod_indec"), ("dim_municipio", "cod_indec"))])
+        (("fact_participacion", "eleccion"), ("dim_eleccion", "eleccion")), (("fact_motor_2027", "cod_indec"), ("dim_municipio", "cod_indec"))] + e2.RELACIONES)
     A["definition/database.tmdl"] = "database\n\tcompatibilityLevel: 1601\n"
     A["definition/model.tmdl"] = (
         "model Model\n\tculture: es-ES\n\tdefaultPowerBIDataSourceVersion: powerBI_V3\n\tdiscourageImplicitMeasures\n"
@@ -358,8 +367,7 @@ def barra_nav(pg: Pagina, activa: str):
                                  [("• Clic en una barra o una fila: el municipio se resalta en el mapa", {"size": 8.5, "color": "#CFC7E2"})],
                                  [("• Clic derecho › Obtener detalles: ficha del municipio", {"size": 8.5, "color": "#CFC7E2"})],
                                  [("• Pasá el mouse: resultado del municipio", {"size": 8.5, "color": "#CFC7E2"})],
-                                 [("• Elección, sección y zona se sincronizan entre páginas", {"size": 8.5, "color": "#CFC7E2"})],
-                                 [("En gris: páginas de la próxima entrega", {"size": 8, "color": "#6F6790"})]])
+                                 [("• Elección, sección y zona se sincronizan entre páginas", {"size": 8.5, "color": "#CFC7E2"})]])
 
 
 def pagina(nombre, titulo, sub):
@@ -423,10 +431,10 @@ def informe(t: dict) -> dict:
     caja(pg, 1242, 14, 348, 430, "Quién ganó cada municipio · Dip. 2025")
     pg.imagen(1250, 40, 332, 400, "SVG mapa provincia")
     pg.texto(X0, 424, 1010, 30, [[("EXPLORÁ EL TABLERO", {"size": 11, "bold": True, "color": VIO})]])
-    tiles = [("mapa_completo", "▣  Mapa completo", "El mapa en pantalla grande, 10 métricas"), ("resumen", "◉  Resumen provincial", "Resultado, secciones y escenarios"), ("mapa", "▦  Mapa de municipios", "10 métricas, ranking y tabla"),
-             ("conurbano", "◎  Conurbano", "Los 24 partidos que definen la elección"), (None, "▤  Secciones electorales", "Próxima entrega"),
-             (None, "▩  Mapa fino", "Próxima entrega · 1.146 circuitos"), ("historia", "≋  Historia 2007-2025", "Animación ▶ elección por elección"),
-             (None, "⚙  Simulador", "Próxima entrega")]
+    tiles = [("mapa_completo", "▣  Mapa completo", "El mapa en pantalla grande, 13 métricas"), ("resumen", "◉  Resumen provincial", "Resultado, secciones y escenarios"),
+             ("mapa", "▦  Mapa de municipios", "Ranking y tabla"), ("conurbano", "◎  Conurbano", "Los 24 partidos que definen la elección"),
+             ("mapa_fino", "▩  Mapa fino", "1.146 circuitos electorales"), ("decide", "⚑  Dónde se decide", "Los municipios bisagra"),
+             ("pronostico", "◔  Pronóstico 2027", "1.000 simulaciones por escenario"), ("simulador", "⚙  Simulador", "Mové los supuestos")]
     for i, (dest, tt, d) in enumerate(tiles):
         tile(pg, X0 + (i % 4) * 344, 458 + (i // 4) * 92, 334, 82, dest, tt, d)
     pg.texto(X0, 650, 1368, 240, [
@@ -513,6 +521,9 @@ def informe(t: dict) -> dict:
                                              (Me("Margen P-D (pts)"), "Margen"), (Me("Electores"), "Electores")],
                   "Partido por partido", sort=[(Me("Electores"), "Descending")], size=9))
     pags.append(pg)
+
+    import p09_entrega2 as e2
+    pags += e2.paginas(t)
 
     # =================================================================== HISTORIA 2007-2025 (animada)
     pg = pagina("historia", "Historia 2007-2025", "Tocá ▶ en el gráfico grande: cada burbuja es un municipio que se mueve elección por elección")
@@ -654,7 +665,7 @@ def tema() -> dict:
 def generar(esquemas: Path | None = None) -> Path:
     t = datos()
     DATOS.mkdir(parents=True, exist_ok=True)
-    for n in ["dim_municipio", "dim_eleccion", "dim_espacio", "fact_votos", "fact_participacion", "fact_motor_2027", "escenarios_2027"]:
+    for n in ["dim_municipio", "dim_eleccion", "dim_espacio", "fact_votos", "fact_participacion", "fact_motor_2027", "escenarios_2027", "secciones", "circuitos"]:
         t[n].to_csv(DATOS / f"{n}.csv", index=False, encoding="utf-8")
     sm, rp = PBI / f"{NOMBRE}.SemanticModel", PBI / f"{NOMBRE}.Report"
     for d in (rp / "definition", sm / "definition"):

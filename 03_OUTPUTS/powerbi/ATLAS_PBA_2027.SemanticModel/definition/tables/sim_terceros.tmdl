@@ -1,0 +1,13 @@
+table sim_terceros
+
+	column 'Terceros que van al peronismo (%)'
+		dataType: double
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: [Value]
+
+	partition sim_terceros = calculated
+		mode: import
+		source =
+				GENERATESERIES(0, 100, 10)
+

@@ -198,7 +198,7 @@ table Medidas
 		displayFolder: 01 · Votos
 
 	measure 'P(peronismo) 2027 base' =
-			CALCULATE(AVERAGE(fact_motor_2027[p_gana_peronismo]), fact_motor_2027[escenario_clave] = "A")
+			IF(ISFILTERED(fact_motor_2027[escenario]), AVERAGE(fact_motor_2027[p_gana_peronismo]), CALCULATE(AVERAGE(fact_motor_2027[p_gana_peronismo]), fact_motor_2027[escenario_clave] = "A"))
 		formatString: 0%
 		displayFolder: 03 · Pronóstico 2027
 
@@ -250,20 +250,20 @@ table Medidas
 		displayFolder: 02 · Mapa
 
 	measure 'Valor métrica' =
-			VAR idm = [Métrica] RETURN SWITCH(idm, 1, [% Ganador], 2, [% Peronismo], 3, [% Derecha], 4, [Margen P-D (pts)], 5, [Participación], 6, [Cambio peronismo vs 2023 (pts)], 7, [P(peronismo) 2027 base], 8, [Hogares con NBI %], 9, [Hogares en barrios populares %], 10, [Electores], BLANK())
+			VAR idm = [Métrica] RETURN SWITCH(idm, 1, [% Ganador], 2, [% Peronismo], 3, [% Derecha], 4, [Margen P-D (pts)], 5, [Participación], 6, [Cambio peronismo vs 2023 (pts)], 7, [P(peronismo) 2027 base], 8, [Hogares con NBI %], 9, [Hogares en barrios populares %], 10, [Electores], 11, [Uno], 12, [Corrimiento peronismo (pts)], 13, [Uno], BLANK())
 		displayFolder: 02 · Mapa
-		formatStringDefinition = VAR idm = [Métrica] RETURN SWITCH(idm, 1, "0%", 2, "0%", 3, "0%", 4, "+0;-0;0", 5, "0%", 6, "+0;-0;0", 7, "0%", 8, "0.0%", 9, "0.0%", 10, "#,0", BLANK())
+		formatStringDefinition = VAR idm = [Métrica] RETURN SWITCH(idm, 1, "0%", 2, "0%", 3, "0%", 4, "+0;-0;0", 5, "0%", 6, "+0;-0;0", 7, "0%", 8, "0.0%", 9, "0.0%", 10, "#,0", 11, ";;;", 12, "+0;-0;0", 13, ";;;", BLANK())
 
 	measure 'Valor métrica (texto)' =
-			VAR idm = [Métrica] VAR v = [Valor métrica] RETURN IF(ISBLANK(v), "—", FORMAT(v, SWITCH(idm, 1, "0%", 2, "0%", 3, "0%", 4, "+0;-0;0", 5, "0%", 6, "+0;-0;0", 7, "0%", 8, "0.0%", 9, "0.0%", 10, "#,0", BLANK())) & IF(idm = 1, " · " & [Ganador], ""))
+			VAR idm = [Métrica] VAR v = [Valor métrica] RETURN IF(ISBLANK(v), "—", FORMAT(v, SWITCH(idm, 1, "0%", 2, "0%", 3, "0%", 4, "+0;-0;0", 5, "0%", 6, "+0;-0;0", 7, "0%", 8, "0.0%", 9, "0.0%", 10, "#,0", 11, ";;;", 12, "+0;-0;0", 13, ";;;", BLANK())) & IF(idm = 1, " · " & [Ganador], ""))
 		displayFolder: 02 · Mapa
 
 	measure 'Color métrica' =
 			VAR idm = [Métrica]
-			VAR modo = SWITCH(idm, 1, 2, 2, 1, 3, 1, 4, 3, 5, 1, 6, 3, 7, 1, 8, 1, 9, 1, 10, 1, BLANK())
-			VAR base = SWITCH(idm, 2, "#2F80ED", 3, "#6A1B9A", 4, "#2F80ED", 5, "#5B3F99", 6, "#2F80ED", 7, "#2F80ED", 8, "#C62828", 9, "#E0A526", 10, "#1D1631", BLANK())
-			VAR neg = SWITCH(idm, 4, "#6A1B9A", 6, "#C62828", BLANK())
-			VAR fmtv = SWITCH(idm, 1, "0%", 2, "0%", 3, "0%", 4, "+0;-0;0", 5, "0%", 6, "+0;-0;0", 7, "0%", 8, "0.0%", 9, "0.0%", 10, "#,0", BLANK())
+			VAR modo = SWITCH(idm, 1, 2, 2, 1, 3, 1, 4, 3, 5, 1, 6, 3, 7, 1, 8, 1, 9, 1, 10, 1, 11, 2, 12, 3, 13, 2, BLANK())
+			VAR base = SWITCH(idm, 2, "#2F80ED", 3, "#6A1B9A", 4, "#2F80ED", 5, "#5B3F99", 6, "#2F80ED", 7, "#2F80ED", 8, "#C62828", 9, "#E0A526", 10, "#1D1631", 12, "#2F80ED", BLANK())
+			VAR neg = SWITCH(idm, 4, "#6A1B9A", 6, "#C62828", 12, "#C62828", BLANK())
+			VAR fmtv = SWITCH(idm, 1, "0%", 2, "0%", 3, "0%", 4, "+0;-0;0", 5, "0%", 6, "+0;-0;0", 7, "0%", 8, "0.0%", 9, "0.0%", 10, "#,0", 11, ";;;", 12, "+0;-0;0", 13, ";;;", BLANK())
 			VAR v = [Valor métrica]
 			RETURN SWITCH(TRUE(), modo = 2, [Color ganador], modo = 3 && v < 0, neg, base)
 		displayFolder: 04 · Textos y colores
@@ -271,7 +271,7 @@ table Medidas
 	measure 'Título del mapa' =
 			VAR m = SELECTEDVALUE(metrica_mapa[metrica], "Ganador de la elección")
 			VAR idm = [Métrica]
-			RETURN m & IF(idm <= 6, "  ·  " & [Elección seleccionada], IF(idm = 7, "  ·  escenario: se repite octubre 2025", "  ·  censo 2022"))
+			RETURN m & SWITCH(TRUE(), idm <= 6 || idm = 10, "  ·  " & [Elección seleccionada], idm = 7, "  ·  " & SELECTEDVALUE(fact_motor_2027[escenario], "escenario: se repite octubre 2025"), idm = 12, "  ·  " & [Elección seleccionada] & " vs. " & [Elección base elegida], idm = 11 || idm = 13, "  ·  intendentes en ejercicio", "  ·  censo 2022")
 		displayFolder: 02 · Mapa
 
 	measure Corte =
@@ -288,10 +288,10 @@ table Medidas
 
 	measure 'SVG mapa provincia' =
 			VAR idm = [Métrica]
-			VAR modo = SWITCH(idm, 1, 2, 2, 1, 3, 1, 4, 3, 5, 1, 6, 3, 7, 1, 8, 1, 9, 1, 10, 1, BLANK())
-			VAR base = SWITCH(idm, 2, "#2F80ED", 3, "#6A1B9A", 4, "#2F80ED", 5, "#5B3F99", 6, "#2F80ED", 7, "#2F80ED", 8, "#C62828", 9, "#E0A526", 10, "#1D1631", BLANK())
-			VAR neg = SWITCH(idm, 4, "#6A1B9A", 6, "#C62828", BLANK())
-			VAR fmtv = SWITCH(idm, 1, "0%", 2, "0%", 3, "0%", 4, "+0;-0;0", 5, "0%", 6, "+0;-0;0", 7, "0%", 8, "0.0%", 9, "0.0%", 10, "#,0", BLANK())
+			VAR modo = SWITCH(idm, 1, 2, 2, 1, 3, 1, 4, 3, 5, 1, 6, 3, 7, 1, 8, 1, 9, 1, 10, 1, 11, 2, 12, 3, 13, 2, BLANK())
+			VAR base = SWITCH(idm, 2, "#2F80ED", 3, "#6A1B9A", 4, "#2F80ED", 5, "#5B3F99", 6, "#2F80ED", 7, "#2F80ED", 8, "#C62828", 9, "#E0A526", 10, "#1D1631", 12, "#2F80ED", BLANK())
+			VAR neg = SWITCH(idm, 4, "#6A1B9A", 6, "#C62828", 12, "#C62828", BLANK())
+			VAR fmtv = SWITCH(idm, 1, "0%", 2, "0%", 3, "0%", 4, "+0;-0;0", 5, "0%", 6, "+0;-0;0", 7, "0%", 8, "0.0%", 9, "0.0%", 10, "#,0", 11, ";;;", 12, "+0;-0;0", 13, ";;;", BLANK())
 			VAR x_ley = 392
 			VAR y_ley = 640
 			VAR mostrar_ley = TRUE()
@@ -299,8 +299,8 @@ table Medidas
 			VAR sel = VALUES(dim_municipio[cod_indec])
 			VAR filas = ADDCOLUMNS(FILTER(ALL(dim_municipio[cod_indec], dim_municipio[svg_prov], dim_municipio[cx_p], dim_municipio[cy_p], dim_municipio[nombre_corto], dim_municipio[rotulo_p]), dim_municipio[svg_prov] <> ""),
 			    "v", IF(dim_municipio[cod_indec] IN sel, [Valor métrica]),
-			    "cc", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Color ganador], BLANK())),
-			    "nn", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Ganador], BLANK())))
+			    "cc", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Color ganador], 11, [Color intendente], 13, [Color reelección], BLANK())),
+			    "nn", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Ganador], 11, [Fuerza del intendente], 13, [Reelección 2027], BLANK())))
 			VAR lo = MINX(filas, [v])
 			VAR hi = MAXX(filas, [v])
 			VAR ma = MAXX(filas, ABS([v]))
@@ -335,10 +335,10 @@ table Medidas
 
 	measure 'SVG mapa conurbano' =
 			VAR idm = [Métrica]
-			VAR modo = SWITCH(idm, 1, 2, 2, 1, 3, 1, 4, 3, 5, 1, 6, 3, 7, 1, 8, 1, 9, 1, 10, 1, BLANK())
-			VAR base = SWITCH(idm, 2, "#2F80ED", 3, "#6A1B9A", 4, "#2F80ED", 5, "#5B3F99", 6, "#2F80ED", 7, "#2F80ED", 8, "#C62828", 9, "#E0A526", 10, "#1D1631", BLANK())
-			VAR neg = SWITCH(idm, 4, "#6A1B9A", 6, "#C62828", BLANK())
-			VAR fmtv = SWITCH(idm, 1, "0%", 2, "0%", 3, "0%", 4, "+0;-0;0", 5, "0%", 6, "+0;-0;0", 7, "0%", 8, "0.0%", 9, "0.0%", 10, "#,0", BLANK())
+			VAR modo = SWITCH(idm, 1, 2, 2, 1, 3, 1, 4, 3, 5, 1, 6, 3, 7, 1, 8, 1, 9, 1, 10, 1, 11, 2, 12, 3, 13, 2, BLANK())
+			VAR base = SWITCH(idm, 2, "#2F80ED", 3, "#6A1B9A", 4, "#2F80ED", 5, "#5B3F99", 6, "#2F80ED", 7, "#2F80ED", 8, "#C62828", 9, "#E0A526", 10, "#1D1631", 12, "#2F80ED", BLANK())
+			VAR neg = SWITCH(idm, 4, "#6A1B9A", 6, "#C62828", 12, "#C62828", BLANK())
+			VAR fmtv = SWITCH(idm, 1, "0%", 2, "0%", 3, "0%", 4, "+0;-0;0", 5, "0%", 6, "+0;-0;0", 7, "0%", 8, "0.0%", 9, "0.0%", 10, "#,0", 11, ";;;", 12, "+0;-0;0", 13, ";;;", BLANK())
 			VAR x_ley = 0
 			VAR y_ley = 0
 			VAR mostrar_ley = FALSE()
@@ -346,8 +346,8 @@ table Medidas
 			VAR sel = VALUES(dim_municipio[cod_indec])
 			VAR filas = ADDCOLUMNS(FILTER(ALL(dim_municipio[cod_indec], dim_municipio[svg_conu], dim_municipio[cx_c], dim_municipio[cy_c], dim_municipio[nombre_corto], dim_municipio[rotulo_c]), dim_municipio[svg_conu] <> ""),
 			    "v", IF(dim_municipio[cod_indec] IN sel, [Valor métrica]),
-			    "cc", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Color ganador], BLANK())),
-			    "nn", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Ganador], BLANK())))
+			    "cc", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Color ganador], 11, [Color intendente], 13, [Color reelección], BLANK())),
+			    "nn", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Ganador], 11, [Fuerza del intendente], 13, [Reelección 2027], BLANK())))
 			VAR lo = MINX(filas, [v])
 			VAR hi = MAXX(filas, [v])
 			VAR ma = MAXX(filas, ABS([v]))
@@ -382,10 +382,10 @@ table Medidas
 
 	measure 'SVG mapa completo' =
 			VAR idm = [Métrica]
-			VAR modo = SWITCH(idm, 1, 2, 2, 1, 3, 1, 4, 3, 5, 1, 6, 3, 7, 1, 8, 1, 9, 1, 10, 1, BLANK())
-			VAR base = SWITCH(idm, 2, "#2F80ED", 3, "#6A1B9A", 4, "#2F80ED", 5, "#5B3F99", 6, "#2F80ED", 7, "#2F80ED", 8, "#C62828", 9, "#E0A526", 10, "#1D1631", BLANK())
-			VAR neg = SWITCH(idm, 4, "#6A1B9A", 6, "#C62828", BLANK())
-			VAR fmtv = SWITCH(idm, 1, "0%", 2, "0%", 3, "0%", 4, "+0;-0;0", 5, "0%", 6, "+0;-0;0", 7, "0%", 8, "0.0%", 9, "0.0%", 10, "#,0", BLANK())
+			VAR modo = SWITCH(idm, 1, 2, 2, 1, 3, 1, 4, 3, 5, 1, 6, 3, 7, 1, 8, 1, 9, 1, 10, 1, 11, 2, 12, 3, 13, 2, BLANK())
+			VAR base = SWITCH(idm, 2, "#2F80ED", 3, "#6A1B9A", 4, "#2F80ED", 5, "#5B3F99", 6, "#2F80ED", 7, "#2F80ED", 8, "#C62828", 9, "#E0A526", 10, "#1D1631", 12, "#2F80ED", BLANK())
+			VAR neg = SWITCH(idm, 4, "#6A1B9A", 6, "#C62828", 12, "#C62828", BLANK())
+			VAR fmtv = SWITCH(idm, 1, "0%", 2, "0%", 3, "0%", 4, "+0;-0;0", 5, "0%", 6, "+0;-0;0", 7, "0%", 8, "0.0%", 9, "0.0%", 10, "#,0", 11, ";;;", 12, "+0;-0;0", 13, ";;;", BLANK())
 			VAR selg = VALUES(dim_municipio[cod_indec])
 			VAR todos = ADDCOLUMNS(ALL(dim_municipio[cod_indec]), "v", IF(dim_municipio[cod_indec] IN selg, [Valor métrica]))
 			VAR lo_g = MINX(todos, [v])
@@ -398,8 +398,8 @@ table Medidas
 			VAR sel = VALUES(dim_municipio[cod_indec])
 			VAR filas = ADDCOLUMNS(FILTER(ALL(dim_municipio[cod_indec], dim_municipio[svg_prov], dim_municipio[cx_p], dim_municipio[cy_p], dim_municipio[nombre_corto], dim_municipio[rotulo_p]), dim_municipio[svg_prov] <> ""),
 			    "v", IF(dim_municipio[cod_indec] IN sel, [Valor métrica]),
-			    "cc", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Color ganador], BLANK())),
-			    "nn", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Ganador], BLANK())))
+			    "cc", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Color ganador], 11, [Color intendente], 13, [Color reelección], BLANK())),
+			    "nn", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Ganador], 11, [Fuerza del intendente], 13, [Reelección 2027], BLANK())))
 			VAR lo = lo_g
 			VAR hi = hi_g
 			VAR ma = ma_g
@@ -431,8 +431,8 @@ table Medidas
 			VAR sel = VALUES(dim_municipio[cod_indec])
 			VAR filas = ADDCOLUMNS(FILTER(ALL(dim_municipio[cod_indec], dim_municipio[svg_conu], dim_municipio[cx_c], dim_municipio[cy_c], dim_municipio[nombre_corto], dim_municipio[rotulo_c]), dim_municipio[svg_conu] <> ""),
 			    "v", IF(dim_municipio[cod_indec] IN sel, [Valor métrica]),
-			    "cc", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Color ganador], BLANK())),
-			    "nn", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Ganador], BLANK())))
+			    "cc", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Color ganador], 11, [Color intendente], 13, [Color reelección], BLANK())),
+			    "nn", IF(modo = 2 && dim_municipio[cod_indec] IN sel, SWITCH(idm, 1, [Ganador], 11, [Fuerza del intendente], 13, [Reelección 2027], BLANK())))
 			VAR lo = lo_g
 			VAR hi = hi_g
 			VAR ma = ma_g
@@ -497,6 +497,279 @@ table Medidas
 			    & "</svg>"
 			RETURN "data:image/svg+xml;utf8," & SUBSTITUTE(SUBSTITUTE(svg, "%", "%25"), "#", "%23")
 		displayFolder: 01 · Votos
+		dataCategory: ImageUrl
+
+	measure Diputados =
+			SUM(secciones[diputados])
+		formatString: 0
+		displayFolder: 05 · Secciones
+
+	measure Senadores =
+			SUM(secciones[senadores])
+		formatString: 0
+		displayFolder: 05 · Secciones
+
+	measure 'SVG mapa secciones' =
+			VAR filas = ADDCOLUMNS(ALL(secciones[seccion], secciones[path_p], secciones[cx], secciones[cy], secciones[lx], secciones[ly], secciones[fuera]),
+			    "c", [Color ganador], "p", [% Peronismo], "d", [% Derecha])
+			VAR formas = CONCATENATEX(filas, "<path d='" & secciones[path_p] & "' fill='" & [c] & "' fill-opacity='0.88' stroke='#FFFFFF' stroke-width='2.5' stroke-linejoin='round'/>", "")
+			VAR bordes = "<g fill='none' stroke='#FFFFFF' stroke-width='0.5' stroke-opacity='0.75'>" & CONCATENATEX(FILTER(ALL(dim_municipio[svg_prov]), dim_municipio[svg_prov] <> ""), "<path d='" & dim_municipio[svg_prov] & "'/>", "") & "</g>"
+			VAR rot = CONCATENATEX(filas,
+			    IF(secciones[fuera] = 1, "<line x1='" & secciones[cx] & "' y1='" & secciones[cy] & "' x2='" & (secciones[lx] - 30) & "' y2='" & (secciones[ly] - 6) & "' stroke='#1D1631' stroke-width='1'/>", "")
+			    & "<text x='" & secciones[lx] & "' y='" & secciones[ly] & "' text-anchor='middle' font-family='Segoe UI' font-size='20' font-weight='800' fill='#1D1631' stroke='#FFFFFF' stroke-width='3' stroke-opacity='0.9' paint-order='stroke' stroke-linejoin='round'>" & secciones[seccion] & "</text>"
+			    & "<text x='" & secciones[lx] & "' y='" & (secciones[ly] + 17) & "' text-anchor='middle' font-family='Segoe UI' font-size='12' font-weight='600' fill='#1D1631' stroke='#FFFFFF' stroke-width='3' stroke-opacity='0.9' paint-order='stroke' stroke-linejoin='round'>P " & FORMAT([p], "0%") & " · L " & FORMAT([d], "0%") & "</text>", "")
+			VAR svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 894'><g><animate attributeName='opacity' values='0;1' dur='0.8s' fill='freeze'/>" & formas & bordes & "</g><g><animate attributeName='opacity' values='0;0;1' keyTimes='0;0.5;1' dur='1.4s' fill='freeze'/>" & rot & "</g>"
+			    & "<text x='392' y='700' font-family='Segoe UI' font-size='13' fill='#6B6480'>P = peronismo · L = LLA + PRO</text>"
+			    & "<text x='392' y='718' font-family='Segoe UI' font-size='13' fill='#6B6480'>Color: quién ganó la sección</text></svg>"
+			RETURN "data:image/svg+xml;utf8," & SUBSTITUTE(SUBSTITUTE(svg, "%", "%25"), "#", "%23")
+		displayFolder: 05 · Secciones
+		dataCategory: ImageUrl
+
+	measure 'Circuitos con datos' =
+			COUNTROWS(FILTER(circuitos, NOT ISBLANK(circuitos[per_D2025])))
+		formatString: #,0
+		displayFolder: 06 · Circuitos
+
+	measure 'Votos circuitos' =
+			SUM(circuitos[votos_D2025])
+		formatString: #,0
+		displayFolder: 06 · Circuitos
+
+	measure '% peronismo circuitos' =
+			DIVIDE(SUMX(circuitos, circuitos[per_D2025] * circuitos[votos_D2025]), SUM(circuitos[votos_D2025])) / 100
+		formatString: 0.0%
+		displayFolder: 06 · Circuitos
+
+	measure '% LLA+PRO circuitos' =
+			DIVIDE(SUMX(circuitos, circuitos[der_D2025] * circuitos[votos_D2025]), SUM(circuitos[votos_D2025])) / 100
+		formatString: 0.0%
+		displayFolder: 06 · Circuitos
+
+	measure Lon =
+			AVERAGE(circuitos[lon])
+		formatString: 0.000
+		displayFolder: 06 · Circuitos
+
+	measure Lat =
+			AVERAGE(circuitos[lat])
+		formatString: 0.000
+		displayFolder: 06 · Circuitos
+
+	measure 'Título mapa fino' =
+			SELECTEDVALUE(metrica_circuito[metrica], "Ganador 2025") & "  ·  circuito por circuito (1.146 circuitos electorales)"
+		displayFolder: 06 · Circuitos
+
+	measure 'SVG mapa fino' =
+			VAR idc = SELECTEDVALUE(metrica_circuito[id], 1)
+			VAR modo = SWITCH(idc, 1, 4, 2, 1, 3, 1, 4, 3, 5, 3, 6, 1, 7, 1, 8, 1, BLANK())
+			VAR base = SWITCH(idc, 1, "#2F80ED", 2, "#2F80ED", 3, "#6A1B9A", 4, "#2F80ED", 5, "#2F80ED", 6, "#5B3F99", 7, "#C62828", 8, "#E0A526", BLANK())
+			VAR neg = SWITCH(idc, 1, "#6A1B9A", 4, "#6A1B9A", 5, "#C62828", BLANK())
+			VAR fmtc = SWITCH(idc, 1, "+0;-0;0", 2, "0%", 3, "0%", 4, "+0;-0;0", 5, "+0;-0;0", 6, "0%", 7, "0.0%", 8, "0.0%", BLANK())
+			VAR selc = VALUES(circuitos[circuito])
+			VAR todos = ADDCOLUMNS(ALL(circuitos[circuito], circuitos[per_D2025], circuitos[der_D2025], circuitos[part_D2025], circuitos[per_G2023],
+			        circuitos[nbi], circuitos[bp]), "v", IF(circuitos[circuito] IN selc, SWITCH(idc, 1, circuitos[per_D2025] - circuitos[der_D2025], 2, circuitos[per_D2025] / 100, 3, circuitos[der_D2025] / 100, 4, circuitos[per_D2025] - circuitos[der_D2025], 5, IF(ISBLANK(circuitos[per_G2023]) || ISBLANK(circuitos[per_D2025]), BLANK(), circuitos[per_D2025] - circuitos[per_G2023]), 6, circuitos[part_D2025] / 100, 7, circuitos[nbi] / 100, 8, circuitos[bp] / 100)))
+			VAR lo = MINX(todos, [v])
+			VAR hi = MAXX(todos, [v])
+			VAR ma = MAXX(todos, ABS([v]))
+			VAR prov =
+			VAR filas = ADDCOLUMNS(FILTER(ALL(circuitos[circuito], circuitos[path_p], circuitos[per_D2025], circuitos[der_D2025], circuitos[part_D2025],
+			        circuitos[per_G2023], circuitos[nbi], circuitos[bp]), circuitos[path_p] <> ""), "v", IF(circuitos[circuito] IN selc, SWITCH(idc, 1, circuitos[per_D2025] - circuitos[der_D2025], 2, circuitos[per_D2025] / 100, 3, circuitos[der_D2025] / 100, 4, circuitos[per_D2025] - circuitos[der_D2025], 5, IF(ISBLANK(circuitos[per_G2023]) || ISBLANK(circuitos[per_D2025]), BLANK(), circuitos[per_D2025] - circuitos[per_G2023]), 6, circuitos[part_D2025] / 100, 7, circuitos[nbi] / 100, 8, circuitos[bp] / 100)))
+			RETURN "<g stroke='#FFFFFF' stroke-width='0.25' stroke-linejoin='round'><animate attributeName='opacity' values='0;1' dur='0.8s' fill='freeze'/>" & CONCATENATEX(filas,
+			    VAR v = [v]
+			    VAR t = IF(modo = 3, DIVIDE(ABS(v), ma), DIVIDE(v - lo, hi - lo, 1))
+			    VAR col = SWITCH(TRUE(), ISBLANK(v), "#E4DFEE", modo = 4, IF(v >= 0, base, neg), modo = 3 && v < 0, neg, base)
+			    VAR o = IF(ISBLANK(v) || modo = 4, 92, INT(14 + 85 * t))
+			    RETURN "<path d='" & circuitos[path_p] & "' fill='" & col & "' fill-opacity='0." & FORMAT(o, "00") & "'/>", "") & "</g>"
+			VAR conu =
+			VAR filas = ADDCOLUMNS(FILTER(ALL(circuitos[circuito], circuitos[path_c], circuitos[per_D2025], circuitos[der_D2025], circuitos[part_D2025],
+			        circuitos[per_G2023], circuitos[nbi], circuitos[bp]), circuitos[path_c] <> ""), "v", IF(circuitos[circuito] IN selc, SWITCH(idc, 1, circuitos[per_D2025] - circuitos[der_D2025], 2, circuitos[per_D2025] / 100, 3, circuitos[der_D2025] / 100, 4, circuitos[per_D2025] - circuitos[der_D2025], 5, IF(ISBLANK(circuitos[per_G2023]) || ISBLANK(circuitos[per_D2025]), BLANK(), circuitos[per_D2025] - circuitos[per_G2023]), 6, circuitos[part_D2025] / 100, 7, circuitos[nbi] / 100, 8, circuitos[bp] / 100)))
+			RETURN "<g stroke='#FFFFFF' stroke-width='0.5' stroke-linejoin='round'><animate attributeName='opacity' values='0;1' dur='0.8s' fill='freeze'/>" & CONCATENATEX(filas,
+			    VAR v = [v]
+			    VAR t = IF(modo = 3, DIVIDE(ABS(v), ma), DIVIDE(v - lo, hi - lo, 1))
+			    VAR col = SWITCH(TRUE(), ISBLANK(v), "#E4DFEE", modo = 4, IF(v >= 0, base, neg), modo = 3 && v < 0, neg, base)
+			    VAR o = IF(ISBLANK(v) || modo = 4, 92, INT(14 + 85 * t))
+			    RETURN "<path d='" & circuitos[path_c] & "' fill='" & col & "' fill-opacity='0." & FORMAT(o, "00") & "'/>", "") & "</g>"
+			VAR bordes = "<g fill='none' stroke='#1D1631' stroke-opacity='0.45' stroke-width='0.7'>" & CONCATENATEX(FILTER(ALL(dim_municipio[svg_prov]), dim_municipio[svg_prov] <> ""), "<path d='" & dim_municipio[svg_prov] & "'/>", "") & "</g>"
+			VAR bordes_c = "<g fill='none' stroke='#1D1631' stroke-opacity='0.55' stroke-width='1.2'>" & CONCATENATEX(FILTER(ALL(dim_municipio[svg_conu]), dim_municipio[svg_conu] <> ""), "<path d='" & dim_municipio[svg_conu] & "'/>", "") & "</g>"
+			VAR svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1240 894'>" & prov & bordes
+			    & "<g transform='translate(0 640)'>" & IF(modo = 4, "<rect x='392' y='4' width='20' height='16' rx='3' fill='#2F80ED'/><text x='420' y='17' font-family='Segoe UI' font-size='13' fill='#1D1631'>Ganó el peronismo</text><rect x='392' y='28' width='20' height='16' rx='3' fill='#6A1B9A'/><text x='420' y='41' font-family='Segoe UI' font-size='13' fill='#1D1631'>Ganó LLA + PRO</text>", "<rect x='392' y='4' width='170' height='16' fill='" & IF(modo = 3, neg, base) & "' fill-opacity='0.25'/><rect x='477' y='4' width='85' height='16' fill='" & base & "'/><text x='392' y='38' font-family='Segoe UI' font-size='13' fill='#1D1631'>" & FORMAT(IF(modo = 3, -ma, lo), fmtc) & "</text><text x='562' y='38' text-anchor='end' font-family='Segoe UI' font-size='13' fill='#1D1631'>" & FORMAT(IF(modo = 3, ma, hi), fmtc) & "</text>") & "</g>"
+			    & "<g transform='translate(640 44)'><rect x='0' y='0' width='600' height='759' rx='10' fill='#FFFFFF' stroke='#E4DFEE' stroke-width='2'/>" & conu & bordes_c & "</g>"
+			    & "<text x='640' y='30' font-family='Segoe UI' font-size='18' font-weight='700' fill='#5B3F99'>Conurbano y Gran La Plata · circuito por circuito</text></svg>"
+			RETURN "data:image/svg+xml;utf8," & SUBSTITUTE(SUBSTITUTE(svg, "%", "%25"), "#", "%23")
+		displayFolder: 06 · Circuitos
+		dataCategory: ImageUrl
+
+	measure 'Elección base elegida' =
+			SELECTEDVALUE(eleccion_base[Elección base], "Gobernador 2023")
+		displayFolder: 07 · Corrimientos
+
+	measure '% Peronismo base' =
+			VAR e = SELECTEDVALUE(eleccion_base[eleccion], "G2023") RETURN CALCULATE([% Peronismo], REMOVEFILTERS(dim_eleccion), dim_eleccion[eleccion] = e)
+		formatString: 0.0%
+		displayFolder: 07 · Corrimientos
+
+	measure '% Derecha base' =
+			VAR e = SELECTEDVALUE(eleccion_base[eleccion], "G2023") RETURN CALCULATE([% Derecha], REMOVEFILTERS(dim_eleccion), dim_eleccion[eleccion] = e)
+		formatString: 0.0%
+		displayFolder: 07 · Corrimientos
+
+	measure 'Corrimiento peronismo (pts)' =
+			([% Peronismo] - [% Peronismo base]) * 100
+		formatString: +0.0;-0.0;0
+		displayFolder: 07 · Corrimientos
+
+	measure 'Corrimiento LLA/PRO (pts)' =
+			([% Derecha] - [% Derecha base]) * 100
+		formatString: +0.0;-0.0;0
+		displayFolder: 07 · Corrimientos
+
+	measure 'Color corrimiento' =
+			IF([Corrimiento peronismo (pts)] >= 0, "#2F80ED", "#C62828")
+		displayFolder: 04 · Textos y colores
+
+	measure 'Municipios donde creció el peronismo' =
+			COUNTROWS(FILTER(VALUES(dim_municipio[cod_indec]), [Corrimiento peronismo (pts)] > 0))
+		formatString: 0
+		displayFolder: 07 · Corrimientos
+
+	measure 'Municipios donde cayó el peronismo' =
+			COUNTROWS(FILTER(VALUES(dim_municipio[cod_indec]), [Corrimiento peronismo (pts)] < 0))
+		formatString: 0
+		displayFolder: 07 · Corrimientos
+
+	measure 'Margen absoluto (pts)' =
+			ABS([Margen P-D (pts)])
+		formatString: 0.0
+		displayFolder: 08 · Dónde se decide
+
+	measure 'Votos para dar vuelta' =
+			ABS([Diferencia de votos]) / 2
+		formatString: #,0
+		displayFolder: 08 · Dónde se decide
+
+	measure 'Municipios bisagra' =
+			COUNTROWS(FILTER(VALUES(dim_municipio[cod_indec]), ABS([Margen P-D (pts)]) < 5))
+		formatString: 0
+		displayFolder: 08 · Dónde se decide
+
+	measure 'Electores en bisagras' =
+			SUMX(FILTER(VALUES(dim_municipio[cod_indec]), ABS([Margen P-D (pts)]) < 5), [Electores])
+		formatString: #,0
+		displayFolder: 08 · Dónde se decide
+
+	measure '% del padrón en bisagras' =
+			DIVIDE([Electores en bisagras], [Electores provincia])
+		formatString: 0.0%
+		displayFolder: 08 · Dónde se decide
+
+	measure 'Color intendente' =
+			SELECTEDVALUE(dim_municipio[color_fuerza], "#9A93AD")
+		displayFolder: 04 · Textos y colores
+
+	measure 'Fuerza del intendente' =
+			SELECTEDVALUE(dim_municipio[fuerza_intendente], "—")
+		displayFolder: 09 · Intendentes
+
+	measure 'Color reelección' =
+			SELECTEDVALUE(dim_municipio[color_reeleccion], "#9A93AD")
+		displayFolder: 04 · Textos y colores
+
+	measure 'Reelección 2027' =
+			SELECTEDVALUE(dim_municipio[reeleccion_2027], "—")
+		displayFolder: 09 · Intendentes
+
+	measure Uno =
+			IF(HASONEVALUE(dim_municipio[cod_indec]), 1)
+		formatString: 0
+		displayFolder: 09 · Intendentes
+
+	measure 'Intendentes de Fuerza Patria' =
+			CALCULATE([Municipios], dim_municipio[fuerza_intendente] = "Fuerza Patria")
+		formatString: 0
+		displayFolder: 09 · Intendentes
+
+	measure 'Pueden reelegir' =
+			CALCULATE([Municipios], dim_municipio[reeleccion_2027] = "Puede ir por la reelección")
+		formatString: 0
+		displayFolder: 09 · Intendentes
+
+	measure 'No pueden reelegir' =
+			CALCULATE([Municipios], dim_municipio[reeleccion_2027] = "No puede: cumple su segundo mandato")
+		formatString: 0
+		displayFolder: 09 · Intendentes
+
+	measure Interinos =
+			CALCULATE([Municipios], dim_municipio[reeleccion_2027] = "Intendente interino")
+		formatString: 0
+		displayFolder: 09 · Intendentes
+
+	measure '% peronismo esperado 2027' =
+			IF(ISFILTERED(fact_motor_2027[escenario]), AVERAGE(fact_motor_2027[pct_peronismo]), CALCULATE(AVERAGE(fact_motor_2027[pct_peronismo]), fact_motor_2027[escenario_clave] = "A")) / 100
+		formatString: 0.0%
+		displayFolder: 03 · Pronóstico 2027
+
+	measure 'Sim votos peronismo' =
+			SUMX(VALUES(dim_municipio[cod_indec]), VAR T = CALCULATE([Votos], REMOVEFILTERS(dim_espacio)) VAR P = [Votos peronismo] VAR D = [Votos derecha] RETURN MAX(0, P + T * (SELECTEDVALUE(sim_swing[Corrimiento uniforme (pts)], 0) / 100) + (T - P - D) * (SELECTEDVALUE(sim_terceros[Terceros que van al peronismo (%)], 0) / 100)))
+		formatString: #,0
+		displayFolder: 10 · Simulador
+
+	measure 'Sim votos LLA+PRO' =
+			SUMX(VALUES(dim_municipio[cod_indec]), VAR T = CALCULATE([Votos], REMOVEFILTERS(dim_espacio)) VAR D = [Votos derecha] RETURN MAX(0, D * (1 - (SELECTEDVALUE(sim_division[LLA + PRO que se va a otra lista (%)], 0) / 100)) - T * (SELECTEDVALUE(sim_swing[Corrimiento uniforme (pts)], 0) / 100)))
+		formatString: #,0
+		displayFolder: 10 · Simulador
+
+	measure 'Sim votos total' =
+			SUMX(VALUES(dim_municipio[cod_indec]), CALCULATE([Votos], REMOVEFILTERS(dim_espacio)))
+		formatString: #,0
+		displayFolder: 10 · Simulador
+
+	measure 'Sim % peronismo' =
+			DIVIDE([Sim votos peronismo], [Sim votos total])
+		formatString: 0.0%
+		displayFolder: 10 · Simulador
+
+	measure 'Sim % LLA+PRO' =
+			DIVIDE([Sim votos LLA+PRO], [Sim votos total])
+		formatString: 0.0%
+		displayFolder: 10 · Simulador
+
+	measure 'Sim margen (pts)' =
+			DIVIDE([Sim votos peronismo] - [Sim votos LLA+PRO], [Sim votos total]) * 100
+		formatString: +0.0;-0.0;0
+		displayFolder: 10 · Simulador
+
+	measure 'Sim ganador' =
+			IF([Sim votos peronismo] >= [Sim votos LLA+PRO], "Peronismo", "LLA + PRO")
+		displayFolder: 10 · Simulador
+
+	measure 'Sim municipios peronistas' =
+			COUNTROWS(FILTER(VALUES(dim_municipio[cod_indec]), [Sim votos peronismo] > [Sim votos LLA+PRO]))
+		formatString: 0
+		displayFolder: 10 · Simulador
+
+	measure 'Sim municipios que cambian' =
+			COUNTROWS(FILTER(VALUES(dim_municipio[cod_indec]), ([Sim votos peronismo] > [Sim votos LLA+PRO]) <> ([Votos peronismo] > [Votos derecha])))
+		formatString: 0
+		displayFolder: 10 · Simulador
+
+	measure 'Color sim' =
+			IF([Sim margen (pts)] >= 0, "#2F80ED", "#6A1B9A")
+		displayFolder: 04 · Textos y colores
+
+	measure 'SVG barra simulación' =
+			VAR p = [Sim votos peronismo]
+			VAR d = [Sim votos LLA+PRO]
+			VAR w = INT(1000 * DIVIDE(p, p + d))
+			VAR svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 120'>"
+			    & "<text x='500' y='18' text-anchor='middle' font-family='Segoe UI' font-size='15' fill='#1D1631'>50 %</text>"
+			    & "<rect x='0' y='30' width='" & w & "' height='70' fill='#2F80ED'><animate attributeName='width' from='500' to='" & w & "' dur='1.2s' calcMode='spline' keySplines='0.2 0.8 0.2 1' keyTimes='0;1'/></rect>"
+			    & "<rect x='" & w & "' y='30' width='" & (1000 - w) & "' height='70' fill='#6A1B9A'><animate attributeName='x' from='500' to='" & w & "' dur='1.2s' calcMode='spline' keySplines='0.2 0.8 0.2 1' keyTimes='0;1'/><animate attributeName='width' from='500' to='" & (1000 - w) & "' dur='1.2s' calcMode='spline' keySplines='0.2 0.8 0.2 1' keyTimes='0;1'/></rect>"
+			    & "<line x1='500' y1='24' x2='500' y2='108' stroke='#1D1631' stroke-width='3' stroke-dasharray='7 5'/>"
+			    & "<text x='18' y='76' font-family='Segoe UI' font-size='30' font-weight='700' fill='#FFFFFF'>PERONISMO " & FORMAT(DIVIDE(p, p + d), "0.0%") & "</text>"
+			    & "<text x='982' y='76' text-anchor='end' font-family='Segoe UI' font-size='30' font-weight='700' fill='#FFFFFF'>LLA + PRO " & FORMAT(DIVIDE(d, p + d), "0.0%") & "</text>"
+			    & "</svg>"
+			RETURN "data:image/svg+xml;utf8," & SUBSTITUTE(SUBSTITUTE(svg, "%", "%25"), "#", "%23")
+		displayFolder: 10 · Simulador
 		dataCategory: ImageUrl
 
 	column Valor

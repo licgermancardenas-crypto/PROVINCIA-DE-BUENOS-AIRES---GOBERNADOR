@@ -1,0 +1,13 @@
+table sim_division
+
+	column 'LLA + PRO que se va a otra lista (%)'
+		dataType: double
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: [Value]
+
+	partition sim_division = calculated
+		mode: import
+		source =
+				GENERATESERIES(0, 50, 5)
+

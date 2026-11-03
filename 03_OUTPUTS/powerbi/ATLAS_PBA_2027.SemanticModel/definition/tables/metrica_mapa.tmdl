@@ -25,6 +25,9 @@ table metrica_mapa
 				    {7, "Pronóstico 2027 · probabilidad de que gane el peronismo"},
 				    {8, "Hogares con NBI (censo 2022)"},
 				    {9, "Hogares en barrios populares"},
-				    {10, "Electores"}
+				    {10, "Electores"},
+				    {11, "Fuerza del intendente (oct. 2026)"},
+				    {12, "Corrimiento del peronismo vs. elección base (pts)"},
+				    {13, "Reelección del intendente en 2027"}
 				})
 

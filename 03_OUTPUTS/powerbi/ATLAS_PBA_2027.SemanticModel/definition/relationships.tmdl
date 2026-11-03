@@ -21,3 +21,11 @@ relationship rel_04
 relationship rel_05
 	fromColumn: fact_motor_2027.cod_indec
 	toColumn: dim_municipio.cod_indec
+
+relationship rel_06
+	fromColumn: circuitos.cod_indec
+	toColumn: dim_municipio.cod_indec
+
+relationship rel_07
+	fromColumn: dim_municipio.seccion
+	toColumn: secciones.seccion

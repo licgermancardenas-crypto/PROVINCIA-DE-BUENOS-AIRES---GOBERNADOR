@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "▤  Secciones electorales",
+                    "value": "▩  Mapa fino",
                     "textStyle": {
                       "fontFamily": "Segoe UI Semibold",
                       "fontSize": "12pt",
@@ -32,7 +32,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Próxima entrega",
+                    "value": "1.146 circuitos electorales",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",

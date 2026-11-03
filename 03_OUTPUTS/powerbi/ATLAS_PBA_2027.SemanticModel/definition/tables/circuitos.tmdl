@@ -1,0 +1,124 @@
+table circuitos
+
+	column circuito
+		dataType: string
+		summarizeBy: none
+		sourceColumn: circuito
+		isKey
+
+	column cod_indec
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: cod_indec
+		isHidden
+
+	column lon
+		dataType: double
+		summarizeBy: none
+		sourceColumn: lon
+		isHidden
+
+	column lat
+		dataType: double
+		summarizeBy: none
+		sourceColumn: lat
+		isHidden
+
+	column path_p
+		dataType: string
+		summarizeBy: none
+		sourceColumn: path_p
+		isHidden
+
+	column path_c
+		dataType: string
+		summarizeBy: none
+		sourceColumn: path_c
+		isHidden
+
+	column cabecera
+		dataType: string
+		summarizeBy: none
+		sourceColumn: cabecera
+
+	column per_D2025
+		dataType: double
+		summarizeBy: none
+		sourceColumn: per_D2025
+
+	column der_D2025
+		dataType: double
+		summarizeBy: none
+		sourceColumn: der_D2025
+
+	column part_D2025
+		dataType: double
+		summarizeBy: none
+		sourceColumn: part_D2025
+
+	column votos_D2025
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: votos_D2025
+
+	column per_G2023
+		dataType: double
+		summarizeBy: none
+		sourceColumn: per_G2023
+
+	column der_G2023
+		dataType: double
+		summarizeBy: none
+		sourceColumn: der_G2023
+
+	column nbi
+		dataType: double
+		summarizeBy: none
+		sourceColumn: nbi
+
+	column univ
+		dataType: double
+		summarizeBy: none
+		sourceColumn: univ
+
+	column pob
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: pob
+
+	column bp
+		dataType: double
+		summarizeBy: none
+		sourceColumn: bp
+
+	column ganador_2025
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ganador_2025
+
+	column margen_2025
+		dataType: double
+		summarizeBy: none
+		sourceColumn: margen_2025
+
+	column cambio_peronismo
+		dataType: double
+		summarizeBy: none
+		sourceColumn: cambio_peronismo
+
+	column circuito_n
+		dataType: string
+		summarizeBy: none
+		sourceColumn: circuito_n
+
+	partition circuitos = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(CarpetaDatos & "circuitos.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"circuito", type text}, {"cod_indec", Int64.Type}, {"lon", type number}, {"lat", type number}, {"path_p", type text}, {"path_c", type text}, {"cabecera", type text}, {"per_D2025", type number}, {"der_D2025", type number}, {"part_D2025", type number}, {"votos_D2025", type number}, {"per_G2023", type number}, {"der_G2023", type number}, {"nbi", type number}, {"univ", type number}, {"pob", type number}, {"bp", type number}, {"ganador_2025", type text}, {"margen_2025", type number}, {"cambio_peronismo", type number}, {"circuito_n", type text}}, "en-US")
+				in
+				    Tipos
+
