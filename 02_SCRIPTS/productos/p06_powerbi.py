@@ -137,7 +137,12 @@ def topojson(dim: pd.DataFrame) -> None:
         out = []
         for p in polys:
             rings = []
-            for ring in p:
+            for k, ring in enumerate(p):
+                # El mapa de formas (d3) exige anillo exterior en sentido horario y huecos antihorarios;
+                # al revés, el polígono se interpreta como "todo el planeta menos el municipio".
+                area = sum(x1 * y2 - x2 * y1 for (x1, y1), (x2, y2) in zip(ring, ring[1:] + ring[:1]))
+                if (area > 0) == (k == 0):
+                    ring = ring[::-1]
                 arcs.append(ring)
                 rings.append([len(arcs) - 1])
             out.append(rings)

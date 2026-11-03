@@ -362,15 +362,25 @@ def boton(p, nombre, x, y, w, h, texto, destino=None, url=None, atras=False, rel
         link |= {"type": lit("PageNavigation"), "navigationSection": lit(destino)}
     else:
         link |= {"type": lit("WebUrl"), "webUrl": lit(url)}
-    est = lambda f, t: [  # noqa: E731
-        {"properties": {"show": lit(True), "text": lit(texto), "fontColor": color(t), "fontSize": lit(tam), "bold": lit(True)}, "selector": {"id": "default"}},
-        {"properties": {"fontColor": color("#12042E")}, "selector": {"id": "hover"}}]
+    # El rótulo y el color van en un cuadro de texto (se dibuja siempre); encima, un botón transparente
+    # hace la navegación. Así no dependemos de cómo cada versión de Power BI lee el texto de los botones.
+    lineas = [[(texto, {"fontSize": f"{tam}pt", "fontWeight": "bold", "color": tinta})]]
+    b.texto(p, f"{nombre}_rotulo", x, y, w, h, lineas)
+    v = p.visuales[-1]["visual"]
+    for par in v["objects"]["general"][0]["properties"]["paragraphs"]:
+        par["horizontalTextAlignment"] = "center"
+    v["visualContainerObjects"] = {
+        "background": [{"properties": {"show": lit(True), "color": color(relleno), "transparency": lit(0)}}],
+        "border": [{"properties": {"show": lit(True), "color": color("#3D2A63"), "radius": lit(10)}}],
+        "padding": [{"properties": {"top": lit(int(max(2, (h - tam * 1.9) // 2))), "bottom": lit(0), "left": lit(4), "right": lit(4)}}]}
     p.add(nombre, "actionButton", x, y, w, h,
-          objetos={"icon": [{"properties": {"show": lit(False)}}], "text": est(relleno, tinta),
-                   "fill": [{"properties": {"show": lit(True), "fillColor": color(relleno), "transparency": lit(0)}, "selector": {"id": "default"}},
-                            {"properties": {"show": lit(True), "fillColor": color("#E9B6FF"), "transparency": lit(0)}, "selector": {"id": "hover"}}],
-                   "outline": [{"properties": {"show": lit(True), "lineColor": color("#3D2A63"), "roundEdge": lit(10)}, "selector": {"id": "default"}}]},
-          contenedor={"visualLink": [{"properties": link}]})
+          objetos={"icon": [{"properties": {"shapeType": lit("blank")}, "selector": {"id": "default"}}],
+                   "text": [{"properties": {"show": lit(False)}, "selector": {"id": "default"}}],
+                   "fill": [{"properties": {"show": lit(True), "fillColor": color("#FFFFFF"), "transparency": lit(100)}, "selector": {"id": "default"}},
+                            {"properties": {"show": lit(True), "fillColor": color("#FFFFFF"), "transparency": lit(75)}, "selector": {"id": "hover"}}],
+                   "outline": [{"properties": {"show": lit(False)}, "selector": {"id": "default"}}]},
+          contenedor={"visualLink": [{"properties": link}], "background": [{"properties": {"show": lit(False)}}],
+                      "border": [{"properties": {"show": lit(False)}}], "dropShadow": [{"properties": {"show": lit(False)}}]})
 
 
 def encabezado(p, activa):

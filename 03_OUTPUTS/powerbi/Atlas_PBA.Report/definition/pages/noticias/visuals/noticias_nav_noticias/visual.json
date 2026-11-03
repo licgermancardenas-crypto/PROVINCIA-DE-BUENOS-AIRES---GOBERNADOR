@@ -4,10 +4,10 @@
   "position": {
     "x": 886,
     "y": 12,
-    "z": 1070,
+    "z": 1130,
     "width": 126,
     "height": 32,
-    "tabOrder": 1070
+    "tabOrder": 1130
   },
   "visual": {
     "visualType": "actionButton",
@@ -15,13 +15,16 @@
       "icon": [
         {
           "properties": {
-            "show": {
+            "shapeType": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "'blank'"
                 }
               }
             }
+          },
+          "selector": {
+            "id": "default"
           }
         }
       ],
@@ -31,63 +34,13 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'NOTICIAS'"
-                }
-              }
-            },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#12042E'"
-                    }
-                  }
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "9D"
-                }
-              }
-            },
-            "bold": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             }
           },
           "selector": {
             "id": "default"
-          }
-        },
-        {
-          "properties": {
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#12042E'"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "hover"
           }
         }
       ],
@@ -106,7 +59,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#F2A65A'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -115,7 +68,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "100D"
                 }
               }
             }
@@ -138,7 +91,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#E9B6FF'"
+                      "Value": "'#FFFFFF'"
                     }
                   }
                 }
@@ -147,7 +100,7 @@
             "transparency": {
               "expr": {
                 "Literal": {
-                  "Value": "0D"
+                  "Value": "75D"
                 }
               }
             }
@@ -163,25 +116,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "lineColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#3D2A63'"
-                    }
-                  }
-                }
-              }
-            },
-            "roundEdge": {
-              "expr": {
-                "Literal": {
-                  "Value": "10D"
+                  "Value": "false"
                 }
               }
             }
@@ -214,6 +149,45 @@
               "expr": {
                 "Literal": {
                   "Value": "'noticias'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
